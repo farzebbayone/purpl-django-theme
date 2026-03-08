@@ -1,0 +1,301 @@
+{% extends "demo/base.html" %}
+
+{% block title %}Settings — Synth{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-header__title">Settings</h1>
+  <p class="page-header__subtitle">Manage your account, preferences, and integrations.</p>
+</div>
+
+<!-- Tab Navigation -->
+<nav class="nav nav-tabs-minimal mb-4">
+  <a class="nav-link active" data-bs-toggle="tab" href="#tab-profile" role="tab">
+    <i data-lucide="user" class="icon-xs me-1"></i> Profile
+  </a>
+  <a class="nav-link" data-bs-toggle="tab" href="#tab-appearance" role="tab">
+    <i data-lucide="palette" class="icon-xs me-1"></i> Appearance
+  </a>
+  <a class="nav-link" data-bs-toggle="tab" href="#tab-notifications" role="tab">
+    <i data-lucide="bell" class="icon-xs me-1"></i> Notifications
+  </a>
+  <a class="nav-link" data-bs-toggle="tab" href="#tab-api-keys" role="tab">
+    <i data-lucide="key" class="icon-xs me-1"></i> API Keys
+  </a>
+</nav>
+
+<div class="tab-content">
+
+<!-- ═══════════════════════════════════════════
+     PROFILE TAB
+     ═══════════════════════════════════════════ -->
+<div class="tab-pane fade show active" id="tab-profile" role="tabpanel">
+  <div class="row g-4">
+    <!-- Avatar -->
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-body text-center py-5">
+          <div class="avatar avatar--xl avatar--primary mx-auto mb-3">
+            <span>{{ user_profile.initials }}</span>
+          </div>
+          <h5 class="mb-1">{{ user_profile.name }}</h5>
+          <p class="text-secondary fs-7 mb-3">{{ user_profile.role }}</p>
+          <button class="btn btn-sm btn-outline-secondary">
+            <i data-lucide="camera" class="icon-xs me-1"></i> Change Avatar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Form -->
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Profile Information</h5>
+          <form>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="fullName" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="fullName" value="{{ user_profile.name }}">
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" value="{{ user_profile.email }}">
+              </div>
+              <div class="col-12">
+                <label for="bio" class="form-label">Bio</label>
+                <textarea class="form-control" id="bio" rows="3">{{ user_profile.bio }}</textarea>
+              </div>
+              <div class="col-md-6">
+                <label for="timezone" class="form-label">Timezone</label>
+                <select class="form-select" id="timezone">
+                  {% for tz in timezones %}
+                    <option value="{{ tz.value }}" {% if tz.selected %}selected{% endif %}>{{ tz.label }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="language" class="form-label">Language</label>
+                <select class="form-select" id="language">
+                  {% for lang in languages %}
+                    <option value="{{ lang.value }}" {% if lang.selected %}selected{% endif %}>{{ lang.label }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="d-flex gap-2 mt-4">
+              <button type="button" class="btn btn-primary">Save Changes</button>
+              <button type="button" class="btn btn-outline-secondary">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     APPEARANCE TAB
+     ═══════════════════════════════════════════ -->
+<div class="tab-pane fade" id="tab-appearance" role="tabpanel">
+  <div class="row g-4">
+
+    <!-- Theme Selection -->
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-1">Theme</h5>
+          <p class="text-secondary fs-7 mb-3">Choose your preferred color scheme.</p>
+          <div class="row g-3">
+            {% for theme in theme_options %}
+            <div class="col-4">
+              <label class="d-block cursor-pointer">
+                <input type="radio" name="theme" value="{{ theme.value }}" class="d-none peer" {% if theme.selected %}checked{% endif %}>
+                <div class="card border {% if theme.selected %}border-primary{% endif %} text-center p-3"
+                     style="cursor:pointer;"
+                     onclick="this.parentElement.querySelector('input').checked=true; document.querySelectorAll('[name=theme]').forEach(r=>{r.closest('label').querySelector('.card').classList.remove('border-primary')}); this.classList.add('border-primary');">
+                  <i data-lucide="{{ theme.icon }}" class="icon-lg {% if theme.selected %}icon-primary{% else %}icon-muted{% endif %} d-block mx-auto mb-2"></i>
+                  <span class="fw-medium fs-7">{{ theme.label }}</span>
+                </div>
+              </label>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar & Layout -->
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-1">Layout</h5>
+          <p class="text-secondary fs-7 mb-3">Customize the interface layout.</p>
+
+          <div class="d-flex align-items-center justify-content-between py-3 border-bottom">
+            <div>
+              <div class="fw-medium">Default collapsed sidebar</div>
+              <div class="text-secondary fs-7">Sidebar starts collapsed on page load.</div>
+            </div>
+            <div class="form-check form-switch mb-0">
+              <input class="form-check-input" type="checkbox" id="sidebarCollapsed" checked>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-between py-3">
+            <div>
+              <div class="fw-medium">Compact mode</div>
+              <div class="text-secondary fs-7">Reduce spacing for data-dense views.</div>
+            </div>
+            <div class="form-check form-switch mb-0">
+              <input class="form-check-input" type="checkbox" id="compactMode">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accent Color -->
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-1">Accent Color</h5>
+          <p class="text-secondary fs-7 mb-3">Personalize the interface accent color.</p>
+          <div class="d-flex flex-wrap gap-3">
+            {% for color in accent_colors %}
+            <label class="position-relative" style="cursor:pointer;" title="{{ color.name }}">
+              <input type="radio" name="accent" value="{{ color.value }}" class="d-none" {% if color.selected %}checked{% endif %}>
+              <span class="d-inline-block rounded-circle {% if color.selected %}ring-2{% endif %}"
+                    style="width:36px; height:36px; background-color:{{ color.hex }}; border: 3px solid {% if color.selected %}var(--text-primary){% else %}transparent{% endif %}; cursor:pointer;"
+                    onclick="document.querySelectorAll('[name=accent]').forEach(r=>{r.closest('label').querySelector('span').style.borderColor='transparent'}); this.style.borderColor='var(--text-primary)'; this.closest('label').querySelector('input').checked=true;">
+              </span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Font Size -->
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-1">Font Size</h5>
+          <p class="text-secondary fs-7 mb-3">Adjust the base font size for the interface.</p>
+          <div class="d-flex flex-column gap-2">
+            {% for fs in font_sizes %}
+            <label class="d-flex align-items-center gap-3 p-2 rounded {% if fs.selected %}bg-primary bg-opacity-10{% endif %}" style="cursor:pointer;">
+              <input type="radio" name="fontSize" value="{{ fs.value }}" class="form-check-input mt-0" {% if fs.selected %}checked{% endif %}>
+              <div>
+                <div class="fw-medium">{{ fs.label }}</div>
+                <div class="text-secondary fs-8">{{ fs.description }}</div>
+              </div>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     NOTIFICATIONS TAB
+     ═══════════════════════════════════════════ -->
+<div class="tab-pane fade" id="tab-notifications" role="tabpanel">
+  <div class="row g-4">
+
+    {% for group in notification_groups %}
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title mb-0">
+            <i data-lucide="{{ group.icon }}" class="icon-sm me-2 icon-{{ group.color }}"></i>
+            {{ group.title }}
+          </h6>
+        </div>
+        <div class="card-body p-0">
+          {% for item in group.items %}
+          <div class="d-flex align-items-center justify-content-between px-3 py-3 {% if not forloop.last %}border-bottom{% endif %}">
+            <div>
+              <div class="fw-medium">{{ item.label }}</div>
+              <div class="text-secondary fs-7">{{ item.description }}</div>
+            </div>
+            <div class="form-check form-switch mb-0">
+              <input class="form-check-input" type="checkbox" {% if item.enabled %}checked{% endif %}>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     API KEYS TAB
+     ═══════════════════════════════════════════ -->
+<div class="tab-pane fade" id="tab-api-keys" role="tabpanel">
+  <div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between">
+      <h6 class="card-title mb-0">
+        <i data-lucide="key" class="icon-sm me-2 icon-primary"></i>
+        API Keys
+      </h6>
+      <button class="btn btn-sm btn-primary">
+        <i data-lucide="plus" class="icon-xs me-1"></i> Generate New Key
+      </button>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th class="ps-3">Name</th>
+              <th>Key</th>
+              <th>Created</th>
+              <th>Last Used</th>
+              <th class="text-end pe-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for key in api_keys %}
+            <tr>
+              <td class="ps-3">
+                <div class="fw-medium">{{ key.name }}</div>
+              </td>
+              <td>
+                <code class="text-secondary fs-7">{{ key.masked_key }}</code>
+              </td>
+              <td class="text-secondary fs-7">{{ key.created }}</td>
+              <td class="text-secondary fs-7">{{ key.last_used }}</td>
+              <td class="text-end pe-3">
+                <button class="btn btn-sm btn-outline-danger">
+                  <i data-lucide="trash-2" class="icon-xs me-1"></i> Revoke
+                </button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-4">
+    <div class="card-body">
+      <h6 class="card-title mb-1">API Documentation</h6>
+      <p class="text-secondary fs-7 mb-0">
+        Learn how to authenticate and use the API in our
+        <a href="/docs/" class="text-primary">documentation</a>.
+        All API keys have full access by default. Use scoped tokens for production workloads.
+      </p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /.tab-content -->
+{% endblock %}

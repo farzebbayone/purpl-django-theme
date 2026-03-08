@@ -1,0 +1,114 @@
+// CSS animation utility classes
+
+// Keyframes
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(0.5rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-down {
+  from { opacity: 0; transform: translateY(-0.5rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(1rem); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+// Animation classes
+.animate-fade-in      { animation: fade-in 0.3s ease-out; }
+.animate-fade-in-up   { animation: fade-in-up 0.3s ease-out; }
+.animate-fade-in-down { animation: fade-in-down 0.3s ease-out; }
+.animate-slide-in-right { animation: slide-in-right 0.3s ease-out; }
+.animate-scale-in     { animation: scale-in 0.2s ease-out; }
+.animate-spin         { animation: spin 1s linear infinite; }
+
+// Hover animations (apply to parent)
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $box-shadow;
+  }
+}
+
+.hover-shadow {
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: $box-shadow-lg;
+  }
+}
+
+.hover-border-primary {
+  transition: border-color 0.2s ease;
+  border: 1px solid transparent;
+
+  &:hover {
+    border-color: $primary;
+  }
+}
+
+.hover-glow {
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 0 0 3px rgba($primary, 0.15);
+  }
+}
+
+// Skeleton / placeholder loading
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: $border-radius-sm;
+  color: transparent !important;
+
+  * { visibility: hidden; }
+}
+
+// Stagger children animations — use .stagger-animate to trigger
+// Add .stagger-animate via JS when element becomes visible
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(0.5rem);
+}
+
+.stagger-children.stagger-animate > * {
+  animation: fade-in-up 0.35s ease-out forwards;
+
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.06}s;
+    }
+  }
+}
+
+// Ensure stagger animations play even with reduced motion (they're user-triggered)
+@media (prefers-reduced-motion: reduce) {
+  .stagger-children.stagger-animate > * {
+    animation-duration: 0.2s !important;
+  }
+}

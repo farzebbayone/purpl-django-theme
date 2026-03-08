@@ -1,0 +1,273 @@
+// Fixed top bar
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $topbar-height;
+  background-color: var(--topbar-bg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: $zindex-topbar;
+  backdrop-filter: blur(8px);
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  &__btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: $border-radius-sm;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: $transition-base;
+
+    &:hover {
+      background-color: var(--surface-2);
+      color: var(--text-primary);
+    }
+  }
+
+  // Notification badge on bell
+  &__badge {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.15rem;
+    min-width: 0.875rem;
+    height: 0.875rem;
+    padding: 0 0.2rem;
+    font-size: 0.5625rem;
+    font-weight: 700;
+    line-height: 0.875rem;
+    text-align: center;
+    color: #fff;
+    background-color: $danger;
+    border-radius: 999px;
+  }
+
+  // Dropdown wrapper
+  &__dropdown {
+    position: relative;
+  }
+
+  &__dropdown-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: 22rem;
+    background-color: var(--surface-1);
+    border: 1px solid var(--border-color);
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-lg;
+    z-index: $zindex-picker-dropdown;
+    overflow: hidden;
+
+    &.is-open {
+      display: block;
+      animation: fade-in-down 0.15s ease-out;
+    }
+  }
+
+  &__dropdown-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: $font-size-sm;
+  }
+
+  &__dropdown-body {
+    max-height: 20rem;
+    overflow-y: auto;
+  }
+
+  &__dropdown-footer {
+    padding: 0.5rem 1rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+  }
+
+  // Individual notification row
+  &__notification {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: var(--surface-2);
+    }
+
+    &--unread {
+      background-color: rgba($primary, 0.04);
+
+      [data-bs-theme="dark"] & {
+        background-color: rgba($primary, 0.08);
+      }
+    }
+
+    & + & {
+      border-top: 1px solid var(--border-color);
+    }
+  }
+
+  &__notification-icon {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface-2);
+    color: var(--text-muted);
+
+    i, svg {
+      width: 0.8rem;
+      height: 0.8rem;
+    }
+
+    @each $color, $value in (
+      "primary": $primary,
+      "success": $success,
+      "danger": $danger,
+      "warning": $warning,
+      "info": $info,
+      "ai": $ai,
+      "accent": $accent
+    ) {
+      &--#{$color} {
+        background-color: rgba($value, 0.12);
+        color: $value;
+      }
+    }
+  }
+
+  &__notification-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__notification-text {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+  }
+
+  &__notification-time {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    margin-top: 0.125rem;
+  }
+
+  &__avatar {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background-color: $primary;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  &__avatar-btn {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: box-shadow 0.15s ease;
+
+    &:hover {
+      box-shadow: 0 0 0 2px var(--surface-3);
+    }
+  }
+
+  // User dropdown panel (narrower than notifications)
+  &__dropdown-panel--user {
+    width: 14rem;
+  }
+
+  &__user-header {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  &__user-menu {
+    padding: 0.375rem 0;
+  }
+
+  &__user-item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: var(--surface-2);
+      color: var(--text-primary);
+    }
+
+    kbd {
+      font-size: 0.625rem;
+      padding: 0.125rem 0.375rem;
+      background-color: var(--surface-2);
+      border: 1px solid var(--border-color);
+      border-radius: $border-radius-sm;
+      color: var(--text-muted);
+    }
+
+    &--danger {
+      color: $danger;
+
+      &:hover {
+        background-color: rgba($danger, 0.06);
+        color: $danger;
+      }
+    }
+  }
+
+  &__user-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 0.375rem 0;
+  }
+}

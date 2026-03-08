@@ -1,0 +1,92 @@
+// Modal and drawer enhancements
+
+.modal-content {
+  border: 1px solid var(--border-color);
+  box-shadow: $box-shadow-lg;
+}
+
+.modal-header {
+  border-bottom-color: var(--border-color);
+  padding: 1rem 1.25rem;
+}
+
+.modal-footer {
+  border-top-color: var(--border-color);
+  padding: 0.75rem 1.25rem;
+}
+
+// Right drawer (slides in from right)
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 28rem;
+  max-width: 90vw;
+  background-color: var(--surface-0);
+  border-left: 1px solid var(--border-color);
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1);
+  z-index: $zindex-drawer;
+  transform: translateX(100%);
+  transition: transform 0.25s ease-in-out;
+  display: flex;
+  flex-direction: column;
+
+  &--open {
+    transform: translateX(0);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.25rem;
+
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+
+  &__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem;
+  }
+
+  &__footer {
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--border-color);
+    flex-shrink: 0;
+  }
+}
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: $zindex-drawer-backdrop;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+  pointer-events: none;
+
+  &--visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

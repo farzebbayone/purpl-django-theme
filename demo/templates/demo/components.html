@@ -1,0 +1,1026 @@
+{% extends "demo/base.html" %}
+{% load static %}
+
+{% block title %}Components — Bootstrap Theme{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-header__title">Component Library</h1>
+  <p class="page-header__subtitle">All theme components with variants and states.</p>
+</div>
+
+<!-- Navigation tabs for sections -->
+<nav class="nav nav-tabs-minimal mb-4">
+  <a class="nav-link active" href="#buttons" data-bs-toggle="tab" data-bs-target="#sec-buttons">Buttons</a>
+  <a class="nav-link" href="#cards" data-bs-toggle="tab" data-bs-target="#sec-cards">Cards</a>
+  <a class="nav-link" href="#alerts" data-bs-toggle="tab" data-bs-target="#sec-alerts">Alerts</a>
+  <a class="nav-link" href="#badges" data-bs-toggle="tab" data-bs-target="#sec-badges">Badges</a>
+  <a class="nav-link" href="#nav" data-bs-toggle="tab" data-bs-target="#sec-nav">Navigation</a>
+  <a class="nav-link" href="#modals" data-bs-toggle="tab" data-bs-target="#sec-modals">Modals & Drawers</a>
+  <a class="nav-link" href="#empty" data-bs-toggle="tab" data-bs-target="#sec-empty">Empty States</a>
+  <a class="nav-link" href="#accordion" data-bs-toggle="tab" data-bs-target="#sec-accordion">Accordion</a>
+  <a class="nav-link" href="#list-group" data-bs-toggle="tab" data-bs-target="#sec-list-group">List Group</a>
+  <a class="nav-link" href="#dropdown" data-bs-toggle="tab" data-bs-target="#sec-dropdown">Dropdowns</a>
+  <a class="nav-link" href="#carousel" data-bs-toggle="tab" data-bs-target="#sec-carousel">Carousel</a>
+</nav>
+
+<div class="tab-content">
+
+  <!-- BUTTONS -->
+  <div class="tab-pane fade show active" id="sec-buttons">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Standard Buttons</h5>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-success">Success</button>
+          <button class="btn btn-danger">Danger</button>
+          <button class="btn btn-warning">Warning</button>
+          <button class="btn btn-info">Info</button>
+          <button class="btn btn-tertiary">Tertiary</button>
+          <button class="btn btn-accent">Accent</button>
+          <button class="btn btn-ai">AI</button>
+          <button class="btn btn-dark">Dark</button>
+          <button class="btn btn-light">Light</button>
+        </div>
+
+        <h5 class="card-title mb-3">Outline Buttons</h5>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <button class="btn btn-outline-primary">Primary</button>
+          <button class="btn btn-outline-secondary">Secondary</button>
+          <button class="btn btn-outline-success">Success</button>
+          <button class="btn btn-outline-danger">Danger</button>
+          <button class="btn btn-outline-warning">Warning</button>
+          <button class="btn btn-outline-info">Info</button>
+          <button class="btn btn-outline-tertiary">Tertiary</button>
+          <button class="btn btn-outline-accent">Accent</button>
+          <button class="btn btn-outline-ai">AI</button>
+        </div>
+
+        <h5 class="card-title mb-3">Soft Buttons</h5>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <button class="btn btn-soft-primary">Primary</button>
+          <button class="btn btn-soft-secondary">Secondary</button>
+          <button class="btn btn-soft-success">Success</button>
+          <button class="btn btn-soft-danger">Danger</button>
+          <button class="btn btn-soft-warning">Warning</button>
+          <button class="btn btn-soft-info">Info</button>
+          <button class="btn btn-soft-tertiary">Tertiary</button>
+          <button class="btn btn-soft-accent">Accent</button>
+          <button class="btn btn-soft-ai">AI</button>
+        </div>
+
+        <h5 class="card-title mb-3">Sizes</h5>
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary">Default</button>
+          <button class="btn btn-primary btn-lg">Large</button>
+        </div>
+
+        <h5 class="card-title mb-3">Special Buttons</h5>
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+          <button class="btn btn-primary btn-cta">
+            <i data-lucide="rocket" class="icon-xs me-1"></i>
+            CTA Button
+          </button>
+          <button class="btn btn-gradient">
+            <i data-lucide="sparkles" class="icon-xs me-1"></i>
+            AI Gradient
+          </button>
+          <button class="btn btn-gradient btn-lg">
+            <i data-lucide="wand-2" class="icon-sm me-2"></i>
+            Generate with AI
+          </button>
+          <button class="btn btn-icon btn-soft-primary" title="Icon button">
+            <i data-lucide="plus" class="icon-sm"></i>
+          </button>
+          <button class="btn btn-icon btn-sm btn-soft-secondary" title="Small icon">
+            <i data-lucide="search" class="icon-xs"></i>
+          </button>
+          <button class="btn btn-primary btn-loading">
+            <span class="btn-loading__spinner"></span>
+            Loading...
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="tab-pane fade" id="sec-cards">
+    <div class="row g-3 mb-4">
+      {% for stat in stats %}
+      <div class="col-sm-6 col-xl-3">
+        <div class="card card-stat h-100">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <span class="card-stat__label">{{ stat.title }}</span>
+              <div class="card-stat__icon text-primary" style="background-color: rgba(var(--bs-primary-rgb), 0.1);">
+                <i data-lucide="{{ stat.icon }}" class="icon-sm"></i>
+              </div>
+            </div>
+            <div class="card-stat__value">{{ stat.value }}</div>
+            <span class="card-stat__trend card-stat__trend--{{ stat.trend }}">{{ stat.change }}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="card card-tint-primary h-100">
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i data-lucide="zap" class="icon-xs card-tint__icon"></i>
+              <h6 class="card-tint__title mb-0">Primary Tint</h6>
+            </div>
+            <p class="text-secondary fs-7 mb-0">Subtle colored background for categorization.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-tint-success h-100">
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i data-lucide="check-circle" class="icon-xs card-tint__icon"></i>
+              <h6 class="card-tint__title mb-0">Success Tint</h6>
+            </div>
+            <p class="text-secondary fs-7 mb-0">Positive states and confirmations.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-tint-danger h-100">
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i data-lucide="alert-circle" class="icon-xs card-tint__icon"></i>
+              <h6 class="card-tint__title mb-0">Danger Tint</h6>
+            </div>
+            <p class="text-secondary fs-7 mb-0">Errors and destructive action warnings.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="card card-tint-warning h-100">
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i data-lucide="alert-triangle" class="icon-xs card-tint__icon"></i>
+              <h6 class="card-tint__title mb-0">Warning Tint</h6>
+            </div>
+            <p class="text-secondary fs-7 mb-0">Caution states and pending actions.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-tint-info h-100">
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i data-lucide="info" class="icon-xs card-tint__icon"></i>
+              <h6 class="card-tint__title mb-0">Info Tint</h6>
+            </div>
+            <p class="text-secondary fs-7 mb-0">Contextual information and tips.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-tint-ai h-100">
+          <div class="card-body">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i data-lucide="sparkles" class="icon-xs card-tint__icon"></i>
+              <h6 class="card-tint__title mb-0">AI Tint</h6>
+            </div>
+            <p class="text-secondary fs-7 mb-0">Highlight AI-powered features and content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="card-chart__header">
+          <h6 class="card-chart__title">Chart Container</h6>
+          <div class="nav nav-pills-soft">
+            <a class="nav-link active" href="#">7D</a>
+            <a class="nav-link" href="#">30D</a>
+            <a class="nav-link" href="#">90D</a>
+          </div>
+        </div>
+        <div id="card-demo-chart" class="chart-container" style="height:250px;"></div>
+      </div>
+    </div>
+
+    <!-- Image Cards -->
+    <h5 class="mb-3">Image Cards</h5>
+    <div class="row g-3 mb-4">
+      <!-- Image Top -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <img src="https://picsum.photos/seed/synth1/600/300" class="card-img-top" alt="Card image">
+          <div class="card-body">
+            <h6 class="card-title">Image Top</h6>
+            <p class="fs-7 text-secondary mb-2">Standard Bootstrap card with image on top. Image fixed height with object-fit cover.</p>
+            <code class="fs-8">.card-img-top</code>
+          </div>
+        </div>
+      </div>
+      <!-- Image Bottom -->
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h6 class="card-title">Image Bottom</h6>
+            <p class="fs-7 text-secondary mb-2">Image placed below content. Useful for previews and thumbnails.</p>
+            <code class="fs-8">.card-img-bottom</code>
+          </div>
+          <img src="https://picsum.photos/seed/synth2/600/300" class="card-img-bottom" alt="Card image">
+        </div>
+      </div>
+      <!-- Image Overlay -->
+      <div class="col-md-4">
+        <div class="card h-100 text-white">
+          <img src="https://picsum.photos/seed/synth3/600/400" class="card-img" alt="Card image" style="height:100%;object-fit:cover;">
+          <div class="card-img-overlay d-flex flex-column justify-content-end" style="background:linear-gradient(transparent 40%,rgba(0,0,0,.65));">
+            <h6 class="card-title text-white">Image Overlay</h6>
+            <p class="fs-7 mb-0 opacity-75">Content overlaid on image with gradient scrim.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Horizontal Image Cards -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <div class="card card-horizontal h-100">
+          <img src="https://picsum.photos/seed/synth4/400/300" class="card-horizontal__img" alt="Card image">
+          <div class="card-horizontal__body">
+            <h6 class="mb-1">Image Left</h6>
+            <p class="fs-7 text-secondary mb-2">Horizontal layout with image taking ~35% width. Great for list items, product cards, or article previews.</p>
+            <code class="fs-8">.card-horizontal</code>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card card-horizontal card-horizontal--right h-100">
+          <img src="https://picsum.photos/seed/synth5/400/300" class="card-horizontal__img" alt="Card image">
+          <div class="card-horizontal__body">
+            <h6 class="mb-1">Image Right</h6>
+            <p class="fs-7 text-secondary mb-2">Reversed horizontal layout. Alternating left/right creates a visually engaging feed.</p>
+            <code class="fs-8">.card-horizontal--right</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALERTS -->
+  <div class="tab-pane fade" id="sec-alerts">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Standard Alerts</h5>
+        <div class="alert alert-primary" role="alert">
+          <i data-lucide="info" class="icon-xs me-2"></i>
+          This is a primary alert with important information.
+        </div>
+        <div class="alert alert-success" role="alert">
+          <i data-lucide="check-circle" class="icon-xs me-2"></i>
+          Operation completed successfully!
+        </div>
+        <div class="alert alert-danger" role="alert">
+          <i data-lucide="alert-circle" class="icon-xs me-2"></i>
+          Something went wrong. Please try again.
+        </div>
+        <div class="alert alert-warning" role="alert">
+          <i data-lucide="alert-triangle" class="icon-xs me-2"></i>
+          Please review your input before proceeding.
+        </div>
+
+        <h5 class="card-title mb-3 mt-4">Soft Alerts</h5>
+        <div class="alert alert-primary alert-soft" role="alert">
+          <i data-lucide="info" class="icon-xs me-2"></i>
+          Soft primary alert — lighter, modern appearance.
+        </div>
+        <div class="alert alert-success alert-soft" role="alert">
+          <i data-lucide="check-circle" class="icon-xs me-2"></i>
+          Soft success alert — great for inline feedback.
+        </div>
+        <div class="alert alert-danger alert-soft" role="alert">
+          <i data-lucide="alert-circle" class="icon-xs me-2"></i>
+          Soft danger alert — less aggressive for validation errors.
+        </div>
+        <div class="alert alert-warning alert-soft" role="alert">
+          <i data-lucide="alert-triangle" class="icon-xs me-2"></i>
+          Soft warning alert — gentle caution indicator.
+        </div>
+        <div class="alert alert-info alert-soft" role="alert">
+          <i data-lucide="help-circle" class="icon-xs me-2"></i>
+          Soft info alert — contextual tips and hints.
+        </div>
+
+        <h5 class="card-title mb-3 mt-4">Notification Toasts</h5>
+        <div class="d-flex flex-column gap-3" style="max-width: 24rem;">
+          <div class="notification notification--success">
+            <i data-lucide="check-circle" class="notification__icon"></i>
+            <div class="notification__content">
+              <div class="notification__title">Changes saved</div>
+              <p class="notification__message">Your settings have been updated.</p>
+            </div>
+          </div>
+          <div class="notification notification--danger">
+            <i data-lucide="alert-circle" class="notification__icon"></i>
+            <div class="notification__content">
+              <div class="notification__title">Upload failed</div>
+              <p class="notification__message">File exceeds maximum size of 10MB.</p>
+            </div>
+          </div>
+          <div class="notification notification--warning">
+            <i data-lucide="alert-triangle" class="notification__icon"></i>
+            <div class="notification__content">
+              <div class="notification__title">Storage almost full</div>
+              <p class="notification__message">You've used 90% of your storage quota.</p>
+            </div>
+          </div>
+          <div class="notification notification--info">
+            <i data-lucide="info" class="notification__icon"></i>
+            <div class="notification__content">
+              <div class="notification__title">New update available</div>
+              <p class="notification__message">Version 2.4 is ready to install.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BADGES -->
+  <div class="tab-pane fade" id="sec-badges">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Standard Badges</h5>
+        <p class="text-muted small mb-2">Reduced rounding to distinguish from pill badges.</p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <span class="badge bg-primary">Primary</span>
+          <span class="badge bg-secondary">Secondary</span>
+          <span class="badge bg-success">Success</span>
+          <span class="badge bg-danger">Danger</span>
+          <span class="badge bg-warning text-dark">Warning</span>
+          <span class="badge bg-info">Info</span>
+          <span class="badge bg-tertiary">Tertiary</span>
+          <span class="badge bg-accent">Accent</span>
+          <span class="badge bg-ai">AI</span>
+        </div>
+
+        <h5 class="card-title mb-3">Pill Badges</h5>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <span class="badge rounded-pill bg-primary">Primary</span>
+          <span class="badge rounded-pill bg-secondary">Secondary</span>
+          <span class="badge rounded-pill bg-success">Success</span>
+          <span class="badge rounded-pill bg-danger">Danger</span>
+          <span class="badge rounded-pill bg-warning text-dark">Warning</span>
+          <span class="badge rounded-pill bg-info">Info</span>
+          <span class="badge rounded-pill bg-tertiary">Tertiary</span>
+          <span class="badge rounded-pill bg-accent">Accent</span>
+          <span class="badge rounded-pill bg-ai">AI</span>
+        </div>
+
+        <h5 class="card-title mb-3">Soft Badges</h5>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <span class="badge rounded-pill badge-soft-primary">Primary</span>
+          <span class="badge rounded-pill badge-soft-secondary">Secondary</span>
+          <span class="badge rounded-pill badge-soft-success">Success</span>
+          <span class="badge rounded-pill badge-soft-danger">Danger</span>
+          <span class="badge rounded-pill badge-soft-warning">Warning</span>
+          <span class="badge rounded-pill badge-soft-info">Info</span>
+          <span class="badge rounded-pill badge-soft-tertiary">Tertiary</span>
+          <span class="badge rounded-pill badge-soft-accent">Accent</span>
+          <span class="badge rounded-pill badge-soft-ai">AI</span>
+        </div>
+
+        <h5 class="card-title mb-3">Badges with Icons</h5>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <span class="badge badge-soft-primary d-inline-flex align-items-center gap-1">
+            <i data-lucide="star" class="icon-2xs"></i> Featured
+          </span>
+          <span class="badge badge-soft-success d-inline-flex align-items-center gap-1">
+            <i data-lucide="check" class="icon-2xs"></i> Verified
+          </span>
+          <span class="badge badge-soft-danger d-inline-flex align-items-center gap-1">
+            <i data-lucide="x" class="icon-2xs"></i> Rejected
+          </span>
+          <span class="badge badge-soft-ai d-inline-flex align-items-center gap-1">
+            <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+          </span>
+        </div>
+
+        <h5 class="card-title mb-3">Status Indicators</h5>
+        <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+          <span class="d-flex align-items-center gap-2">
+            <span class="status-dot status-dot--online status-dot--pulse"></span> Online
+          </span>
+          <span class="d-flex align-items-center gap-2">
+            <span class="status-dot status-dot--busy"></span> Busy
+          </span>
+          <span class="d-flex align-items-center gap-2">
+            <span class="status-dot status-dot--away"></span> Away
+          </span>
+          <span class="d-flex align-items-center gap-2">
+            <span class="status-dot status-dot--offline"></span> Offline
+          </span>
+        </div>
+
+        <h5 class="card-title mb-3">Status Badges</h5>
+        <div class="d-flex flex-wrap gap-2">
+          <span class="status-badge status-badge--success">
+            <span class="status-dot status-dot--online"></span> Active
+          </span>
+          <span class="status-badge status-badge--danger">
+            <span class="status-dot status-dot--busy"></span> Error
+          </span>
+          <span class="status-badge status-badge--warning">
+            <span class="status-dot status-dot--away"></span> Pending
+          </span>
+          <span class="status-badge">
+            <span class="status-dot status-dot--offline"></span> Inactive
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="tab-pane fade" id="sec-nav">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Breadcrumbs</h5>
+        <nav aria-label="breadcrumb" class="mb-4">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Components</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Navigation</li>
+          </ol>
+        </nav>
+
+        <h5 class="card-title mb-3">Minimal Tabs</h5>
+        <nav class="nav nav-tabs-minimal mb-4">
+          <a class="nav-link active" href="#">Overview</a>
+          <a class="nav-link" href="#">Activity</a>
+          <a class="nav-link" href="#">Settings</a>
+          <a class="nav-link" href="#">Members</a>
+        </nav>
+
+        <h5 class="card-title mb-3">Soft Pills</h5>
+        <nav class="nav nav-pills-soft">
+          <a class="nav-link active" href="#">All</a>
+          <a class="nav-link" href="#">Active</a>
+          <a class="nav-link" href="#">Archived</a>
+          <a class="nav-link" href="#">Draft</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS & DRAWERS -->
+  <div class="tab-pane fade" id="sec-modals">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Modal</h5>
+        <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#demoModal">
+          Open Modal
+        </button>
+
+        <h5 class="card-title mb-3">Drawer</h5>
+        <button class="btn btn-outline-primary" id="open-drawer">
+          Open Right Drawer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMPTY STATES -->
+  <div class="tab-pane fade" id="sec-empty">
+    <p class="text-secondary fs-7 mb-3">Use when a section has no data to display — empty inboxes, zero search results, first-time user states. Always include a constructive action.</p>
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="empty-state">
+          <i data-lucide="inbox" class="empty-state__icon"></i>
+          <h3 class="empty-state__title">No messages yet</h3>
+          <p class="empty-state__description">
+            When you receive messages, they'll appear here. Start a conversation to get going.
+          </p>
+          <button class="btn btn-primary btn-cta">
+            <i data-lucide="plus" class="icon-xs me-1"></i>
+            New Conversation
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="empty-state">
+          <i data-lucide="search" class="empty-state__icon"></i>
+          <h3 class="empty-state__title">No results found</h3>
+          <p class="empty-state__description">
+            Try adjusting your search or filter to find what you're looking for.
+          </p>
+          <button class="btn btn-outline-secondary">Clear Filters</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCORDION -->
+  <div class="tab-pane fade" id="sec-accordion">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <h5 class="mb-3">Default Accordion</h5>
+        <p class="text-secondary fs-7 mb-3">Use for collapsible content sections — FAQs, settings groups, documentation.</p>
+        <div class="accordion" id="demoAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#acc1" aria-expanded="true">
+                What is Synth?
+              </button>
+            </h2>
+            <div id="acc1" class="accordion-collapse collapse show" data-bs-parent="#demoAccordion">
+              <div class="accordion-body">A modern Bootstrap 5 theme built for data-rich, AI-first applications. It includes custom components, dark mode, and a comprehensive design system.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acc2">
+                How do I install it?
+              </button>
+            </h2>
+            <div id="acc2" class="accordion-collapse collapse" data-bs-parent="#demoAccordion">
+              <div class="accordion-body">Add <code>theme</code> to your Django <code>INSTALLED_APPS</code>, run <code>npm install</code> and <code>npm run scss</code> to compile the stylesheets.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acc3">
+                Does it support dark mode?
+              </button>
+            </h2>
+            <div id="acc3" class="accordion-collapse collapse" data-bs-parent="#demoAccordion">
+              <div class="accordion-body">Yes — uses Bootstrap 5.3 native <code>data-bs-theme</code> attribute. Toggle is in the topbar and persists via localStorage.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <h5 class="mb-3">Tinted Variants</h5>
+        <p class="text-secondary fs-7 mb-3">Add <code>.accordion--{color}</code> to tint the active header.</p>
+        <div class="accordion accordion--ai mb-4" id="demoAccordionAi">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accAi1" aria-expanded="true">
+                <i data-lucide="sparkles" class="icon-xs me-2"></i> AI-Powered Analysis
+              </button>
+            </h2>
+            <div id="accAi1" class="accordion-collapse collapse show" data-bs-parent="#demoAccordionAi">
+              <div class="accordion-body">Leverage machine learning models to extract insights from your data automatically.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accAi2">
+                <i data-lucide="brain" class="icon-xs me-2"></i> Smart Suggestions
+              </button>
+            </h2>
+            <div id="accAi2" class="accordion-collapse collapse" data-bs-parent="#demoAccordionAi">
+              <div class="accordion-body">Context-aware recommendations based on usage patterns and historical data.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion accordion--accent" id="demoAccordionAccent">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accAcc1" aria-expanded="true">
+                Account Settings
+              </button>
+            </h2>
+            <div id="accAcc1" class="accordion-collapse collapse show" data-bs-parent="#demoAccordionAccent">
+              <div class="accordion-body">Manage your profile, billing, and security preferences.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accAcc2">
+                Notification Preferences
+              </button>
+            </h2>
+            <div id="accAcc2" class="accordion-collapse collapse" data-bs-parent="#demoAccordionAccent">
+              <div class="accordion-body">Configure which events trigger email, push, or in-app notifications.</div>
+            </div>
+          </div>
+        </div>
+
+        <h5 class="mt-4 mb-3">Flush Variant</h5>
+        <p class="text-secondary fs-7 mb-3">Use <code>.accordion-flush</code> to remove outer borders — ideal inside cards.</p>
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="accordion accordion-flush accordion--success" id="demoAccordionFlush">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accFlush1">
+                    Deployment Status
+                  </button>
+                </h2>
+                <div id="accFlush1" class="accordion-collapse collapse" data-bs-parent="#demoAccordionFlush">
+                  <div class="accordion-body">All services running. Last deploy: 2 minutes ago.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accFlush2">
+                    Health Checks
+                  </button>
+                </h2>
+                <div id="accFlush2" class="accordion-collapse collapse" data-bs-parent="#demoAccordionFlush">
+                  <div class="accordion-body">API: 99.9% uptime. Database: healthy. Cache: connected.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIST GROUP -->
+  <div class="tab-pane fade" id="sec-list-group">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <h5 class="mb-3">Basic List</h5>
+        <p class="text-secondary fs-7 mb-3">Use for settings menus, navigation, or data display.</p>
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action active">
+            <div class="d-flex align-items-center gap-2">
+              <i data-lucide="home" class="icon-xs"></i> Dashboard
+            </div>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-2">
+              <i data-lucide="users" class="icon-xs"></i> Team Members
+            </div>
+            <span class="badge bg-primary rounded-pill">12</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-2">
+            <i data-lucide="settings" class="icon-xs"></i> Settings
+          </a>
+          <a href="#" class="list-group-item list-group-item-action disabled d-flex align-items-center gap-2">
+            <i data-lucide="lock" class="icon-xs"></i> Admin (restricted)
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <h5 class="mb-3">Soft Color Items</h5>
+        <p class="text-secondary fs-7 mb-3">Use <code>.list-group-item-soft-{color}</code> for status indicators or categorized lists.</p>
+        <div class="list-group">
+          <div class="list-group-item list-group-item-soft-success d-flex align-items-center gap-2">
+            <i data-lucide="check-circle" class="icon-xs"></i> Build passed
+          </div>
+          <div class="list-group-item list-group-item-soft-danger d-flex align-items-center gap-2">
+            <i data-lucide="alert-circle" class="icon-xs"></i> 3 failing tests
+          </div>
+          <div class="list-group-item list-group-item-soft-warning d-flex align-items-center gap-2">
+            <i data-lucide="alert-triangle" class="icon-xs"></i> Deprecated API usage
+          </div>
+          <div class="list-group-item list-group-item-soft-info d-flex align-items-center gap-2">
+            <i data-lucide="info" class="icon-xs"></i> New version available
+          </div>
+          <div class="list-group-item list-group-item-soft-ai d-flex align-items-center gap-2">
+            <i data-lucide="sparkles" class="icon-xs"></i> AI suggestion ready
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <h5 class="mb-3">Flush in Card</h5>
+        <p class="text-secondary fs-7 mb-3">Use <code>.list-group-flush</code> inside cards for clean settings panels.</p>
+        <div class="card">
+          <div class="card-header py-2">
+            <span class="fw-semibold">Integrations</span>
+          </div>
+          <div class="list-group list-group-flush">
+            <div class="list-group-item d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center gap-2">
+                <div class="avatar avatar--xs avatar--accent">S</div>
+                <div>
+                  <div class="fw-medium fs-7">Slack</div>
+                  <div class="fs-8 text-secondary">Connected</div>
+                </div>
+              </div>
+              <div class="form-check form-switch mb-0">
+                <input class="form-check-input" type="checkbox" checked>
+              </div>
+            </div>
+            <div class="list-group-item d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center gap-2">
+                <div class="avatar avatar--xs avatar--ai">G</div>
+                <div>
+                  <div class="fw-medium fs-7">GitHub</div>
+                  <div class="fs-8 text-secondary">Connected</div>
+                </div>
+              </div>
+              <div class="form-check form-switch mb-0">
+                <input class="form-check-input" type="checkbox" checked>
+              </div>
+            </div>
+            <div class="list-group-item d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center gap-2">
+                <div class="avatar avatar--xs avatar--secondary">J</div>
+                <div>
+                  <div class="fw-medium fs-7">Jira</div>
+                  <div class="fs-8 text-secondary">Not connected</div>
+                </div>
+              </div>
+              <div class="form-check form-switch mb-0">
+                <input class="form-check-input" type="checkbox">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DROPDOWNS -->
+  <div class="tab-pane fade" id="sec-dropdown">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <h5 class="mb-3">Standard Dropdown</h5>
+        <p class="text-secondary fs-7 mb-3">Use for action menus, context menus, and option selectors.</p>
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            Actions
+          </button>
+          <ul class="dropdown-menu">
+            <li><h6 class="dropdown-header">Manage</h6></li>
+            <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="edit" class="icon-xs text-secondary"></i> Edit</a></li>
+            <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="copy" class="icon-xs text-secondary"></i> Duplicate</a></li>
+            <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="archive" class="icon-xs text-secondary"></i> Archive</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item dropdown-item--danger d-flex align-items-center gap-2" href="#"><i data-lucide="trash-2" class="icon-xs"></i> Delete</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <h5 class="mb-3">With Keyboard Shortcuts</h5>
+        <p class="text-secondary fs-7 mb-3">Show shortcuts with <code>.dropdown-item__kbd</code> for power user menus.</p>
+        <div class="dropdown">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            File
+          </button>
+          <ul class="dropdown-menu" style="min-width:14rem;">
+            <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="#">New File <span class="dropdown-item__kbd">&#8984;N</span></a></li>
+            <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Open <span class="dropdown-item__kbd">&#8984;O</span></a></li>
+            <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Save <span class="dropdown-item__kbd">&#8984;S</span></a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Export <span class="dropdown-item__kbd">&#8984;E</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <h5 class="mb-3">Standalone Pagination</h5>
+        <p class="text-secondary fs-7 mb-3">Standard, soft, and minimal pagination variants.</p>
+        <div class="mb-3">
+          <span class="fs-7 text-secondary d-block mb-1">Default</span>
+          <nav>
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="mb-3">
+          <span class="fs-7 text-secondary d-block mb-1">Soft active</span>
+          <nav>
+            <ul class="pagination pagination--soft pagination-sm mb-0">
+              <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div>
+          <span class="fs-7 text-secondary d-block mb-1">Minimal (borderless)</span>
+          <nav>
+            <ul class="pagination pagination--minimal pagination-sm mb-0">
+              <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAROUSEL -->
+  <div class="tab-pane fade" id="sec-carousel">
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <h5 class="mb-3">Image Carousel</h5>
+        <p class="text-secondary fs-7 mb-3">Use for onboarding slides, feature tours, or image galleries. Controls appear on hover.</p>
+        <div id="demoCarousel" class="carousel slide carousel--fixed-height" data-bs-ride="false">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demoCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#demoCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#demoCarousel" data-bs-slide-to="2"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop" alt="Analytics dashboard">
+              <div class="carousel-caption">
+                <h5>Real-time Analytics</h5>
+                <p>Monitor your key metrics with live dashboards.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop" alt="AI assistant">
+              <div class="carousel-caption">
+                <h5>AI-Powered Insights</h5>
+                <p>Get intelligent recommendations from your data.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop" alt="Data visualization">
+              <div class="carousel-caption">
+                <h5>Beautiful Visualizations</h5>
+                <p>Present complex data with clarity and style.</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#demoCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#demoCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <h5 class="mb-3">Carousel in Card</h5>
+        <p class="text-secondary fs-7 mb-3">Nest inside a card for contained galleries or product showcases.</p>
+        <div class="card">
+          <div id="demoCarousel2" class="carousel slide" data-bs-ride="false">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#demoCarousel2" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#demoCarousel2" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#demoCarousel2" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=300&fit=crop" class="d-block w-100" style="height:12rem;object-fit:cover;" alt="Circuit board">
+              </div>
+              <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=300&fit=crop" class="d-block w-100" style="height:12rem;object-fit:cover;" alt="Technology">
+              </div>
+              <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&h=300&fit=crop" class="d-block w-100" style="height:12rem;object-fit:cover;" alt="Data center">
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Product Gallery</h6>
+            <p class="text-secondary fs-7 mb-0">Swipe or click to browse product images.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-content -->
+
+<!-- Demo Modal -->
+<div class="modal fade" id="demoModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Action</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to proceed with this action? This cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Demo Drawer -->
+<div id="drawer-backdrop" class="drawer-backdrop"></div>
+<div id="demo-drawer" class="drawer">
+  <div class="drawer__header">
+    <h5 class="drawer__title">Detail Panel</h5>
+    <button class="drawer__close" id="close-drawer">
+      <i data-lucide="x" class="icon-sm"></i>
+    </button>
+  </div>
+  <div class="drawer__body">
+    <p class="text-secondary">This is a right-side drawer panel. Useful for detail views, settings panels, or secondary navigation.</p>
+    <div class="mb-3">
+      <label class="form-label fs-7">Example Field</label>
+      <input type="text" class="form-control" placeholder="Type something...">
+    </div>
+    <div class="mb-3">
+      <label class="form-label fs-7">Status</label>
+      <div>
+        <span class="status-badge status-badge--success">
+          <span class="status-dot status-dot--online"></span> Active
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="drawer__footer">
+    <button class="btn btn-primary w-100">Save Changes</button>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="{% static 'theme/js/echarts-theme.js' %}"></script>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Chart demo in Cards tab
+  (function() {
+    var el = document.getElementById('card-demo-chart');
+    if (!el) return;
+
+    var tab = document.querySelector('[data-bs-target="#sec-cards"]');
+    var inited = false;
+
+    function initChart() {
+      if (inited) return;
+      inited = true;
+      ThemeCharts.create(el, {
+        tooltip: { trigger: 'axis' },
+        grid: { left: 40, right: 16, top: 16, bottom: 28 },
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: { type: 'value' },
+        series: [{
+          name: 'Views',
+          type: 'bar',
+          data: [820, 932, 1290, 1330, 1520, 1180, 950],
+          itemStyle: { color: ThemeCharts.palette[0], borderRadius: [4, 4, 0, 0] },
+          barWidth: '50%'
+        }]
+      });
+    }
+
+    if (tab) {
+      tab.addEventListener('shown.bs.tab', initChart);
+    }
+  })();
+
+  // Drawer toggle
+  (function() {
+    var drawer = document.getElementById('demo-drawer');
+    var backdrop = document.getElementById('drawer-backdrop');
+    var openBtn = document.getElementById('open-drawer');
+    var closeBtn = document.getElementById('close-drawer');
+
+    function open() {
+      drawer.classList.add('drawer--open');
+      backdrop.classList.add('drawer-backdrop--visible');
+    }
+    function close() {
+      drawer.classList.remove('drawer--open');
+      backdrop.classList.remove('drawer-backdrop--visible');
+    }
+
+    if (openBtn) openBtn.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (backdrop) backdrop.addEventListener('click', close);
+  })();
+
+</script>
+{% endblock %}

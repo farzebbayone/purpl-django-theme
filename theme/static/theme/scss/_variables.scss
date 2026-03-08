@@ -1,0 +1,61 @@
+// Bootstrap variable overrides — must be set BEFORE importing Bootstrap
+
+// Colors
+$primary:   #5E6AD2;
+$secondary: #64748B;
+$success:   #10B981;
+$danger:    #EF4444;
+$warning:   #F59E0B;
+$info:      #06B6D4;
+
+// Custom colors (not Bootstrap standard)
+$tertiary:  #8B5CF6;
+$accent:    #0EA5E9;
+$ai:        #D946EF;
+
+// Typography
+$font-family-sans-serif: "Inter", system-ui, -apple-system, sans-serif;
+$font-family-monospace:  "JetBrains Mono", ui-monospace, monospace;
+$font-size-base: 0.9375rem; // 15px
+$font-size-sm: 0.8125rem;
+$font-size-lg: 1.125rem;
+$line-height-base: 1.6;
+$headings-font-weight: 600;
+
+// Border radius
+$border-radius:    0.5rem;
+$border-radius-sm: 0.375rem;
+$border-radius-lg: 0.75rem;
+
+// Shadows
+$box-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$box-shadow:    0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+$box-shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+
+// Layout
+$topbar-height: 3.25rem;
+$sidebar-width: 16rem;
+$sidebar-collapsed-width: 3.5rem;
+
+// Cards
+$card-border-radius: $border-radius-lg;
+$card-spacer-y: 1.25rem;
+$card-spacer-x: 1.25rem;
+$card-border-color: rgba(0, 0, 0, 0.08);
+
+// Z-index scale (aligned with Bootstrap's z-index layers)
+$zindex-sidebar:          1020 !default;
+$zindex-topbar:           1030 !default;
+$zindex-drawer-backdrop:  1040 !default;
+$zindex-drawer:           1050 !default;
+$zindex-picker-dropdown:  1050 !default;
+$zindex-toast:            1090 !default;
+$zindex-cmd-palette:      1100 !default;
+$zindex-skip-link:        9999 !default;
+
+// Focus ring (consistent across forms, buttons, pickers)
+$focus-ring-width: 0.25rem !default;
+$focus-ring-opacity: 0.15 !default;
+
+// Transitions
+$transition-base: all 0.2s ease-in-out;

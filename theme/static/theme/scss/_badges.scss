@@ -1,0 +1,88 @@
+// Badge and status indicator enhancements
+
+// Reduce standard badge rounding (distinguish from pill badges)
+.badge:not(.rounded-pill) {
+  border-radius: $border-radius-sm;
+}
+
+// Solid badges for custom colors
+@each $name, $value in (
+  "tertiary": $tertiary,
+  "accent": $accent,
+  "ai": $ai
+) {
+  .badge.bg-#{$name} {
+    background-color: $value !important;
+    color: #fff;
+  }
+}
+
+// Soft badges
+@each $color, $value in (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "danger": $danger,
+  "warning": $warning,
+  "info": $info,
+  "tertiary": $tertiary,
+  "accent": $accent,
+  "ai": $ai
+) {
+  .badge-soft-#{$color} {
+    color: $value;
+    background-color: rgba($value, 0.1);
+    font-weight: 500;
+  }
+}
+
+// Status dot indicator
+.status-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--text-muted);
+
+  &--online   { background-color: $success; }
+  &--offline  { background-color: var(--text-muted); }
+  &--busy     { background-color: $danger; }
+  &--away     { background-color: $warning; }
+
+  &--pulse {
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+// Status badge with dot
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: var(--surface-2);
+  color: var(--text-secondary);
+
+  &--success {
+    background-color: rgba($success, 0.1);
+    color: $success;
+  }
+
+  &--danger {
+    background-color: rgba($danger, 0.1);
+    color: $danger;
+  }
+
+  &--warning {
+    background-color: rgba($warning, 0.1);
+    color: darken($warning, 15%);
+  }
+}

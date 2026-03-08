@@ -1,0 +1,78 @@
+{% extends "demo/base.html" %}
+
+{% block title %}Dashboard — Bootstrap Theme{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-header__title">Dashboard</h1>
+  <p class="page-header__subtitle">Welcome back. Here's what's happening today.</p>
+</div>
+
+<!-- Stat Cards -->
+<div class="row g-3 mb-4">
+  {% for stat in stats %}
+  <div class="col-sm-6 col-xl-3">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="text-secondary fs-7 fw-medium">{{ stat.title }}</span>
+          <i data-lucide="{{ stat.icon }}" style="width:1.125rem;height:1.125rem" class="text-secondary"></i>
+        </div>
+        <div class="fs-4 fw-bold mb-1">{{ stat.value }}</div>
+        <span class="fs-7 {% if stat.trend == 'up' %}text-success{% else %}text-danger{% endif %}">
+          {{ stat.change }}
+        </span>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Color Palette -->
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title mb-3">Color Palette</h5>
+    <div class="row g-2">
+      {% for color in colors %}
+      <div class="col-auto">
+        <div class="d-flex align-items-center gap-2 p-2 rounded" style="min-width: 140px;">
+          <div style="width:2.5rem;height:2.5rem;border-radius:0.5rem;background:{{ color.hex }};"></div>
+          <div>
+            <div class="fs-7 fw-medium">{{ color.name }}</div>
+            <div class="fs-8 text-mono text-secondary">{{ color.hex }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- Typography -->
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title mb-3">Typography</h5>
+    <h1>Heading 1 — Inter</h1>
+    <h2>Heading 2 — Inter</h2>
+    <h3>Heading 3 — Inter</h3>
+    <h4>Heading 4 — Inter</h4>
+    <h5>Heading 5 — Inter</h5>
+    <h6>Heading 6 — Inter</h6>
+    <p>Body text at 15px base. The quick brown fox jumps over the lazy dog. This paragraph demonstrates the default reading experience with Inter font.</p>
+    <p class="text-mono">Monospace: JetBrains Mono for code and data. 0123456789</p>
+    <p class="fs-7">Small text (fs-7) — 13px for secondary information and labels.</p>
+    <p class="fs-8">Extra small text (fs-8) — 11px for timestamps, badges, and captions.</p>
+  </div>
+</div>
+
+<!-- Dark Mode Callout -->
+<div class="card border-start border-primary border-4">
+  <div class="card-body">
+    <div class="d-flex align-items-center gap-2 mb-2">
+      <i data-lucide="moon" style="width:1.125rem;height:1.125rem" class="text-primary"></i>
+      <h6 class="card-title mb-0">Dark Mode</h6>
+    </div>
+    <p class="mb-0 text-secondary">Click the moon/sun icon in the top bar to toggle between light and dark themes. Your preference is saved to localStorage and persists across page reloads.</p>
+  </div>
+</div>
+{% endblock %}

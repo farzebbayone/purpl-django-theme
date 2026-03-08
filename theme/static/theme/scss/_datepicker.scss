@@ -1,0 +1,541 @@
+// Date Picker, Time Picker, DateTime Picker
+
+// --- Date Picker ---
+.datepicker {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.datepicker__input {
+  @extend .form-control;
+  padding-right: 2.5rem;
+  cursor: pointer;
+  background-image: none; // override any Bootstrap icon
+
+  &:read-only {
+    background-color: var(--surface-1);
+  }
+}
+
+.datepicker__input-icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.datepicker__dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.375rem);
+  left: 0;
+  z-index: $zindex-picker-dropdown;
+  min-width: 17rem;
+  background-color: var(--surface-1);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-lg;
+  padding: 0.75rem;
+
+  &.is-open {
+    display: block;
+    animation: fade-in-down 0.15s ease-out;
+  }
+}
+
+.datepicker__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.datepicker__month-label {
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: default;
+  user-select: none;
+}
+
+.datepicker__nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background-color: var(--surface-2);
+    color: var(--text-primary);
+  }
+}
+
+.datepicker__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  margin-bottom: 0.25rem;
+}
+
+.datepicker__weekday {
+  text-align: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0.25rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+.datepicker__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.125rem;
+}
+
+.datepicker__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0 auto;
+  font-size: $font-size-sm;
+  color: var(--text-primary);
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  user-select: none;
+
+  &:hover {
+    background-color: var(--surface-2);
+  }
+
+  &--today {
+    border-color: $primary;
+    font-weight: 600;
+  }
+
+  &--selected {
+    background-color: rgba($primary, 0.15);
+    color: $primary;
+    font-weight: 600;
+
+    &:hover {
+      background-color: rgba($primary, 0.25);
+    }
+  }
+
+  &--other-month {
+    color: var(--text-muted);
+    opacity: 0.4;
+  }
+
+  &--disabled {
+    opacity: 0.2;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  &--range-start,
+  &--range-end {
+    background-color: rgba($primary, 0.2);
+    color: $primary;
+    font-weight: 600;
+
+    &:hover {
+      background-color: rgba($primary, 0.3);
+    }
+  }
+
+  &--in-range {
+    background-color: rgba($primary, 0.08);
+    border-radius: 0;
+
+    &:hover {
+      background-color: rgba($primary, 0.16);
+    }
+  }
+}
+
+// --- Tint Variants ---
+@mixin datepicker-tint($color) {
+  .datepicker__day--today {
+    border-color: $color;
+  }
+
+  .datepicker__day--selected {
+    background-color: rgba($color, 0.15);
+    color: $color;
+
+    &:hover {
+      background-color: rgba($color, 0.25);
+    }
+  }
+
+  .datepicker__day--range-start,
+  .datepicker__day--range-end {
+    background-color: rgba($color, 0.2);
+    color: $color;
+
+    &:hover {
+      background-color: rgba($color, 0.3);
+    }
+  }
+
+  .datepicker__day--in-range {
+    background-color: rgba($color, 0.08);
+
+    &:hover {
+      background-color: rgba($color, 0.16);
+    }
+  }
+
+  .timepicker__option--selected,
+  .timepicker__ampm-btn--active {
+    background-color: rgba($color, 0.15);
+    color: $color;
+  }
+
+  .picker-segment:focus {
+    background-color: rgba($color, 0.15);
+  }
+
+  .datepicker__input-icon,
+  .timepicker__input-icon,
+  .datetimepicker__input-icon {
+    color: $color;
+  }
+
+  .datepicker__input,
+  .timepicker__input,
+  .datetimepicker__input,
+  .picker-segments {
+    &:focus,
+    &:focus-within {
+      border-color: $color;
+      box-shadow: 0 0 0 0.25rem rgba($color, 0.15);
+    }
+  }
+}
+
+.datepicker--accent,
+.timepicker--accent,
+.datetimepicker--accent {
+  @include datepicker-tint($accent);
+}
+
+.datepicker--ai,
+.timepicker--ai,
+.datetimepicker--ai {
+  @include datepicker-tint($ai);
+}
+
+.datepicker--info,
+.timepicker--info,
+.datetimepicker--info {
+  @include datepicker-tint($info);
+}
+
+// --- Time Picker ---
+.timepicker {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.timepicker__input {
+  @extend .form-control;
+  padding-right: 2.5rem;
+  cursor: pointer;
+
+  &:read-only {
+    background-color: var(--surface-1);
+  }
+}
+
+.timepicker__input-icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.timepicker__dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.375rem);
+  left: 0;
+  z-index: $zindex-picker-dropdown;
+  min-width: 14rem;
+  background-color: var(--surface-1);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-lg;
+  padding: 0.75rem;
+
+  &.is-open {
+    display: block;
+    animation: fade-in-down 0.15s ease-out;
+  }
+}
+
+.timepicker__selects {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.timepicker__select {
+  flex: 1;
+  max-height: 10rem;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-sm;
+  padding: 0.25rem;
+
+  // Thin scrollbar
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 2px;
+  }
+}
+
+.timepicker__option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0.5rem;
+  font-size: $font-size-sm;
+  color: var(--text-primary);
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  user-select: none;
+
+  &:hover {
+    background-color: var(--surface-2);
+  }
+
+  &--selected {
+    background-color: rgba($primary, 0.15);
+    color: $primary;
+    font-weight: 500;
+
+    &:hover {
+      background-color: rgba($primary, 0.25);
+    }
+  }
+}
+
+.timepicker__ampm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.timepicker__ampm-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0.625rem;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--surface-2);
+  }
+
+  &--active {
+    background-color: rgba($primary, 0.15);
+    color: $primary;
+    border-color: rgba($primary, 0.3);
+
+    &:hover {
+      background-color: rgba($primary, 0.25);
+    }
+  }
+}
+
+// --- Combined DateTime Picker ---
+.datetimepicker {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.datetimepicker__input {
+  @extend .form-control;
+  padding-right: 2.5rem;
+  cursor: pointer;
+
+  &:read-only {
+    background-color: var(--surface-1);
+  }
+}
+
+.datetimepicker__input-icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.datetimepicker__dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.375rem);
+  left: 0;
+  z-index: $zindex-picker-dropdown;
+  min-width: 28rem;
+  background-color: var(--surface-1);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-lg;
+
+  &.is-open {
+    display: flex;
+    animation: fade-in-down 0.15s ease-out;
+  }
+
+  @include media-breakpoint-down(sm) {
+    min-width: 17rem;
+    &.is-open { flex-direction: column; }
+
+    .datetimepicker__time-section {
+      border-left: none;
+      border-top: 1px solid var(--border-color);
+    }
+  }
+}
+
+.datetimepicker__date-section {
+  padding: 0.75rem;
+  flex: 1;
+}
+
+.datetimepicker__time-section {
+  padding: 0.75rem;
+  border-left: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 10rem;
+}
+
+// --- Dark Mode Overrides ---
+[data-bs-theme="dark"] {
+  .datepicker__day--in-range {
+    background-color: rgba($primary, 0.12);
+
+    &:hover {
+      background-color: rgba($primary, 0.2);
+    }
+  }
+
+  .datepicker--accent,
+  .datetimepicker--accent {
+    .datepicker__day--in-range {
+      background-color: rgba($accent, 0.12);
+      &:hover { background-color: rgba($accent, 0.2); }
+    }
+  }
+
+  .datepicker--ai,
+  .datetimepicker--ai {
+    .datepicker__day--in-range {
+      background-color: rgba($ai, 0.12);
+      &:hover { background-color: rgba($ai, 0.2); }
+    }
+  }
+
+  .datepicker--info,
+  .datetimepicker--info {
+    .datepicker__day--in-range {
+      background-color: rgba($info, 0.12);
+      &:hover { background-color: rgba($info, 0.2); }
+    }
+  }
+}
+
+// --- Typeable Picker ---
+.picker-segments {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  cursor: text;
+  font-variant-numeric: tabular-nums;
+}
+
+.picker-segment {
+  display: inline-block;
+  padding: 0.0625rem 0.1875rem;
+  border-radius: 3px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  outline: none;
+  transition: background-color 0.1s ease, color 0.1s ease;
+  user-select: none;
+  cursor: text;
+  letter-spacing: 0.02em;
+
+  &:focus {
+    background-color: rgba($primary, 0.15);
+    color: var(--text-primary);
+  }
+
+  &--filled {
+    color: var(--text-primary);
+  }
+}
+
+.picker-sep {
+  color: var(--text-muted);
+  user-select: none;
+  pointer-events: none;
+  padding: 0 0.0625rem;
+}
+
+// --- Select Label ---
+.timepicker__select-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: 0.25rem;
+  user-select: none;
+}

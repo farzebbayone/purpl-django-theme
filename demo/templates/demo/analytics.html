@@ -1,0 +1,390 @@
+{% extends "demo/base.html" %}
+{% load static theme_tags %}
+
+{% block title %}Analytics — Bootstrap Theme{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="{% static 'theme/js/echarts-theme.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-header__title">Analytics Dashboard</h1>
+  <p class="page-header__subtitle">Data visualization with ECharts, KPI cards, and dashboard layout patterns.</p>
+</div>
+
+<!-- KPI Cards Row -->
+<div class="row g-3 mb-4">
+  {% for kpi in kpis %}
+  <div class="col-sm-6 col-xl-3">
+    <div class="card">
+      <div class="kpi">
+        <div class="kpi__header">
+          <span class="kpi__label">{{ kpi.label }}</span>
+          <div class="kpi__icon kpi__icon--{{ kpi.color }}">
+            <i data-lucide="{{ kpi.icon }}" style="width:1rem;height:1rem"></i>
+          </div>
+        </div>
+        <div>
+          <span class="kpi__value">{{ kpi.value }}</span>
+          <span class="kpi__change kpi__change--{{ kpi.trend }}">
+            <i data-lucide="{% if kpi.trend == 'up' %}trending-up{% else %}trending-down{% endif %}" style="width:0.75rem;height:0.75rem"></i>
+            {{ kpi.change }}
+          </span>
+        </div>
+        {% if kpi.progress is not None %}
+        <div class="kpi__progress">
+          <div class="kpi__progress-bar">
+            <div class="kpi__progress-fill kpi__progress-fill--{{ kpi.color }}" style="width:{{ kpi.progress }}%"></div>
+          </div>
+          <div class="kpi__progress-label">
+            <span>{{ kpi.progress_label }}</span>
+            <span>{{ kpi.progress }}%</span>
+          </div>
+        </div>
+        {% endif %}
+        {% if kpi.sparkline %}
+        <div class="kpi__footer">
+          <span class="kpi__detail">{{ kpi.detail }}</span>
+          <div class="kpi__sparkline" id="sparkline-{{ forloop.counter }}"></div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Charts Row 1: Line + Bar -->
+<div class="row g-3 mb-4">
+  <!-- Revenue Trend -->
+  <div class="col-lg-8">
+    <div class="card chart-card">
+      <div class="chart-card__header">
+        <div>
+          <h3 class="chart-card__title">Revenue Trend</h3>
+          <p class="chart-card__subtitle">Monthly revenue over the last 12 months</p>
+        </div>
+        <div class="chart-card__actions">
+          <div class="chart-period">
+            <button class="chart-period__btn">1M</button>
+            <button class="chart-period__btn">3M</button>
+            <button class="chart-period__btn chart-period__btn--active">1Y</button>
+            <button class="chart-period__btn">All</button>
+          </div>
+        </div>
+      </div>
+      <div class="chart-card__body">
+        <div id="chart-revenue" class="chart-container"></div>
+      </div>
+      <div class="chart-card__footer">
+        <ul class="chart-legend">
+          <li class="chart-legend__item">
+            <span class="chart-legend__dot" style="background:#5E6AD2"></span>
+            Revenue
+            <span class="chart-legend__value">$584K total</span>
+          </li>
+          <li class="chart-legend__item">
+            <span class="chart-legend__dot" style="background:#0EA5E9"></span>
+            Expenses
+            <span class="chart-legend__value">$312K total</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Traffic Sources -->
+  <div class="col-lg-4">
+    <div class="card chart-card">
+      <div class="chart-card__header">
+        <div>
+          <h3 class="chart-card__title">Traffic Sources</h3>
+          <p class="chart-card__subtitle">Last 30 days</p>
+        </div>
+      </div>
+      <div class="chart-card__body">
+        <div id="chart-sources" class="chart-container chart-container--sm"></div>
+        <div class="mt-3">
+          {% for src in traffic_sources %}
+          <div class="metric-row">
+            <div class="metric-row__label">
+              <span class="metric-row__dot" style="background:{{ src.color }}"></span>
+              {{ src.name }}
+            </div>
+            <div class="metric-row__bar">
+              <div class="metric-row__bar-fill" style="width:{{ src.pct }}%;background:{{ src.color }}"></div>
+            </div>
+            <span class="metric-row__value">{{ src.pct }}%</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Charts Row 2: Bar + Area -->
+<div class="row g-3 mb-4">
+  <!-- User Activity -->
+  <div class="col-lg-6">
+    <div class="card chart-card">
+      <div class="chart-card__header">
+        <div>
+          <h3 class="chart-card__title">User Activity</h3>
+          <p class="chart-card__subtitle">Daily active users this week</p>
+        </div>
+      </div>
+      <div class="chart-card__body">
+        <div id="chart-activity" class="chart-container chart-container--sm"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Usage -->
+  <div class="col-lg-6">
+    <div class="card chart-card">
+      <div class="chart-card__header">
+        <div>
+          <h3 class="chart-card__title">AI Query Volume</h3>
+          <p class="chart-card__subtitle">Queries per hour (last 24h)</p>
+        </div>
+      </div>
+      <div class="chart-card__body">
+        <div id="chart-ai" class="chart-container chart-container--sm"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Row: Performance Metrics + Recent Activity -->
+<div class="row g-3 mb-4">
+  <!-- Performance Metrics -->
+  <div class="col-lg-4">
+    <div class="card chart-card">
+      <div class="chart-card__header">
+        <h3 class="chart-card__title">Performance</h3>
+      </div>
+      <div class="chart-card__body">
+        <div id="chart-gauge" class="chart-container chart-container--sm"></div>
+        <div class="mt-2">
+          {% for metric in perf_metrics %}
+          <div class="metric-row">
+            <div class="metric-row__label">
+              <span class="metric-row__dot" style="background:{{ metric.color }}"></span>
+              {{ metric.name }}
+            </div>
+            <span class="metric-row__value">{{ metric.value }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Pages -->
+  <div class="col-lg-8">
+    <div class="card chart-card">
+      <div class="chart-card__header">
+        <h3 class="chart-card__title">Top Pages</h3>
+        <div class="chart-card__actions">
+          <span class="fs-8 text-muted">Last 7 days</span>
+        </div>
+      </div>
+      <div class="chart-card__body p-0">
+        <div class="table-responsive">
+          <table class="table table-sm table-hover mb-0">
+            <thead>
+              <tr>
+                <th class="ps-3">Page</th>
+                <th>Visitors</th>
+                <th>Bounce Rate</th>
+                <th>Avg. Time</th>
+                <th class="pe-3">Trend</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for page in top_pages %}
+              <tr>
+                <td class="ps-3">
+                  <span class="fw-medium">{{ page.path }}</span>
+                </td>
+                <td>{{ page.visitors }}</td>
+                <td>
+                  <span class="{% if page.bounce > 60 %}text-danger{% elif page.bounce < 40 %}text-success{% endif %}">
+                    {{ page.bounce }}%
+                  </span>
+                </td>
+                <td>{{ page.avg_time }}</td>
+                <td class="pe-3">
+                  <span class="kpi__change kpi__change--{{ page.trend }}">
+                    <i data-lucide="{% if page.trend == 'up' %}trending-up{% else %}trending-down{% endif %}" style="width:0.75rem;height:0.75rem"></i>
+                    {{ page.change }}
+                  </span>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var C = ThemeCharts;
+  var months = {{ months|safe }};
+
+  // --- Revenue Trend (line + area) ---
+  C.create(document.getElementById("chart-revenue"), {
+    grid: { left: 48, right: 16, top: 24, bottom: 32 },
+    xAxis: { type: "category", data: months, boundaryGap: false },
+    yAxis: { type: "value", axisLabel: { formatter: "${value}k" } },
+    tooltip: { trigger: "axis" },
+    series: [
+      {
+        name: "Revenue",
+        type: "line",
+        data: {{ revenue_data|safe }},
+        smooth: true,
+        symbol: "none",
+        lineStyle: { width: 2.5 },
+        areaStyle: { opacity: 0.08 },
+        color: C.colors.primary,
+      },
+      {
+        name: "Expenses",
+        type: "line",
+        data: {{ expenses_data|safe }},
+        smooth: true,
+        symbol: "none",
+        lineStyle: { width: 2, type: "dashed" },
+        color: C.colors.accent,
+      }
+    ]
+  });
+
+  // --- Traffic Sources (doughnut) ---
+  C.create(document.getElementById("chart-sources"), {
+    tooltip: { trigger: "item", formatter: "{b}: {d}%" },
+    series: [{
+      type: "pie",
+      radius: ["50%", "75%"],
+      center: ["50%", "50%"],
+      avoidLabelOverlap: true,
+      label: { show: false },
+      emphasis: { label: { show: false } },
+      data: {{ sources_chart_data|safe }}
+    }]
+  });
+
+  // --- User Activity (bar) ---
+  C.create(document.getElementById("chart-activity"), {
+    grid: { left: 40, right: 16, top: 16, bottom: 32 },
+    xAxis: { type: "category", data: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] },
+    yAxis: { type: "value" },
+    tooltip: { trigger: "axis" },
+    series: [{
+      type: "bar",
+      data: {{ activity_data|safe }},
+      barWidth: "50%",
+      itemStyle: { borderRadius: [4, 4, 0, 0] },
+      color: C.colors.primary,
+    }]
+  });
+
+  // --- AI Queries (area) ---
+  C.create(document.getElementById("chart-ai"), {
+    grid: { left: 40, right: 16, top: 16, bottom: 32 },
+    xAxis: {
+      type: "category",
+      data: {{ ai_hours|safe }},
+      boundaryGap: false,
+    },
+    yAxis: { type: "value" },
+    tooltip: { trigger: "axis" },
+    series: [{
+      type: "line",
+      data: {{ ai_data|safe }},
+      smooth: true,
+      symbol: "none",
+      lineStyle: { width: 2 },
+      areaStyle: {
+        color: {
+          type: "linear", x: 0, y: 0, x2: 0, y2: 1,
+          colorStops: [
+            { offset: 0, color: "rgba(217,70,239,0.25)" },
+            { offset: 1, color: "rgba(217,70,239,0.02)" }
+          ]
+        }
+      },
+      color: C.colors.ai,
+    }]
+  });
+
+  // --- Performance Gauge ---
+  C.create(document.getElementById("chart-gauge"), {
+    series: [{
+      type: "gauge",
+      startAngle: 200,
+      endAngle: -20,
+      min: 0,
+      max: 100,
+      radius: "90%",
+      center: ["50%", "60%"],
+      pointer: { show: false },
+      progress: {
+        show: true,
+        width: 12,
+        roundCap: true,
+        itemStyle: { color: C.colors.success },
+      },
+      axisLine: {
+        lineStyle: {
+          width: 12,
+          color: [[1, C.isDark() ? "#1e293b" : "#f1f5f9"]],
+        },
+      },
+      axisTick: { show: false },
+      splitLine: { show: false },
+      axisLabel: { show: false },
+      detail: {
+        fontSize: 28,
+        fontWeight: 700,
+        fontFamily: "'Inter', sans-serif",
+        offsetCenter: [0, 0],
+        formatter: "{value}%",
+        color: "inherit",
+      },
+      data: [{ value: 94 }],
+    }]
+  });
+
+  // --- Sparklines ---
+  var sparkData = {{ sparkline_data|safe }};
+  for (var i = 0; i < sparkData.length; i++) {
+    var sparkEl = document.getElementById("sparkline-" + (i + 1));
+    if (!sparkEl) continue;
+    C.create(sparkEl, {
+      grid: { left: 0, right: 0, top: 0, bottom: 0 },
+      xAxis: { show: false, type: "category", data: sparkData[i].x },
+      yAxis: { show: false, type: "value", min: "dataMin", max: "dataMax" },
+      series: [{
+        type: "line",
+        data: sparkData[i].y,
+        smooth: true,
+        symbol: "none",
+        lineStyle: { width: 1.5, color: sparkData[i].color },
+        areaStyle: { opacity: 0.1, color: sparkData[i].color },
+      }]
+    });
+  }
+});
+</script>
+{% endblock %}

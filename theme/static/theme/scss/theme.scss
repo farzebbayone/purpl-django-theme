@@ -1,0 +1,49 @@
+// Theme main entry point
+// Import order is critical: variables before Bootstrap, everything else after
+
+// 1. Custom variables (Bootstrap overrides)
+@import "variables";
+
+// 2. Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// 3. Custom styles
+@import "colors";
+@import "typography";
+@import "dark-mode";
+@import "topbar";
+@import "sidebar";
+@import "layout";
+
+// 4. Components
+@import "buttons";
+@import "cards";
+@import "alerts";
+@import "badges";
+@import "modals";
+@import "navigation";
+@import "empty-states";
+@import "animations";
+@import "forms";
+@import "tables";
+@import "chat";
+@import "charts";
+@import "kpi";
+@import "accordion";
+@import "list-group";
+@import "dropdown";
+@import "carousel";
+@import "pagination";
+
+// 5. Phase 6 — UI Polish & Advanced
+@import "progress";
+@import "tooltips";
+@import "toasts";
+@import "glow";
+@import "skeleton";
+@import "avatars";
+@import "steps";
+@import "command-palette";
+@import "icons";
+@import "datepicker";
+@import "accessibility";

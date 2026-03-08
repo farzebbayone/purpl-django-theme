@@ -1,0 +1,197 @@
+{% extends "demo/base.html" %}
+
+{% block title %}Messages — Synth{% endblock %}
+
+{% block content %}
+<style>
+  .messages-pane {
+    height: calc(100vh - 200px);
+    min-height: 500px;
+  }
+  .messages-inbox {
+    overflow-y: auto;
+    height: calc(100% - 56px);
+  }
+  .messages-thread {
+    overflow-y: auto;
+    height: calc(100% - 56px - 120px);
+  }
+  .inbox-item {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.15s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .inbox-item:hover {
+    background-color: var(--surface-1);
+    color: inherit;
+  }
+  .inbox-item--active {
+    background-color: var(--surface-2);
+  }
+  .inbox-item__preview {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+  .inbox-item__unread-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--bs-primary);
+    flex-shrink: 0;
+  }
+  .message-bubble {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .message-bubble:last-child {
+    border-bottom: none;
+  }
+  .message-bubble--self {
+    background-color: rgba(94, 106, 210, 0.04);
+    border-radius: 0.375rem;
+    margin: 0.25rem -0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .reply-box textarea {
+    resize: none;
+  }
+</style>
+
+<div class="page-header">
+  <h1 class="page-header__title">Messages</h1>
+  <p class="page-header__subtitle">Your conversations and direct messages.</p>
+</div>
+
+<div class="row g-0 messages-pane border rounded overflow-hidden" style="background: var(--surface-0);">
+  <!-- Left Column: Inbox List -->
+  <div class="col-md-4 border-end" style="background: var(--surface-1);">
+    <!-- Search -->
+    <div class="p-3 border-bottom">
+      <div class="input-group input-group-sm">
+        <span class="input-group-text bg-transparent border-end-0">
+          <i data-lucide="search" class="icon-xs icon-muted"></i>
+        </span>
+        <input type="text" class="form-control border-start-0" placeholder="Search messages...">
+      </div>
+    </div>
+
+    <!-- Inbox Items -->
+    <div class="messages-inbox">
+      {% for thread in inbox %}
+      <a href="#" class="inbox-item{% if thread.active %} inbox-item--active{% endif %}" onclick="return false;">
+        <div class="d-flex align-items-start gap-2">
+          <div class="avatar-wrapper flex-shrink-0">
+            <div class="avatar avatar--sm avatar--{{ thread.color }}">{{ thread.initials }}</div>
+            {% if thread.status %}
+            <span class="avatar__status avatar__status--{{ thread.status }}"></span>
+            {% endif %}
+          </div>
+          <div class="flex-grow-1 min-width-0" style="min-width: 0;">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <span class="fw-semibold text-truncate{% if thread.unread %} text-body{% else %} text-body{% endif %}" style="font-size: 0.875rem;">{{ thread.name }}</span>
+              <span class="fs-8 text-muted flex-shrink-0 ms-2">{{ thread.time }}</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span class="inbox-item__preview fs-7 text-muted flex-grow-1">{{ thread.preview }}</span>
+              {% if thread.unread %}
+              <span class="inbox-item__unread-dot flex-shrink-0"></span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Right Column: Message Detail -->
+  <div class="col-md-8 d-flex flex-column">
+    <!-- Header -->
+    <div class="d-flex align-items-center justify-content-between p-3 border-bottom" style="background: var(--surface-1);">
+      <div class="d-flex align-items-center gap-2">
+        <div class="avatar-wrapper">
+          <div class="avatar avatar--sm avatar--{{ active_thread.color }}">{{ active_thread.initials }}</div>
+          <span class="avatar__status avatar__status--{{ active_thread.status }}"></span>
+        </div>
+        <div>
+          <div class="fw-semibold" style="font-size: 0.9rem;">{{ active_thread.name }}</div>
+          <div class="fs-8 text-muted">{{ active_thread.status_label }}</div>
+        </div>
+      </div>
+      <div class="d-flex gap-1">
+        <button class="btn btn-sm btn-ghost" title="Phone call">
+          <i data-lucide="phone" class="icon-xs icon-muted"></i>
+        </button>
+        <button class="btn btn-sm btn-ghost" title="Archive">
+          <i data-lucide="archive" class="icon-xs icon-muted"></i>
+        </button>
+        <button class="btn btn-sm btn-ghost" title="Delete">
+          <i data-lucide="trash-2" class="icon-xs icon-muted"></i>
+        </button>
+        <button class="btn btn-sm btn-ghost" title="More options">
+          <i data-lucide="more-vertical" class="icon-xs icon-muted"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Conversation Thread -->
+    <div class="messages-thread p-3">
+      {% for msg in conversation %}
+      <div class="message-bubble{% if msg.is_self %} message-bubble--self{% endif %}">
+        <div class="d-flex align-items-start gap-2">
+          <div class="avatar avatar--xs avatar--{{ msg.color }} flex-shrink-0 mt-1">{{ msg.initials }}</div>
+          <div class="flex-grow-1">
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <span class="fw-semibold" style="font-size: 0.875rem;">{% if msg.is_self %}You{% else %}{{ msg.author }}{% endif %}</span>
+              <span class="fs-8 text-muted">{{ msg.time }}</span>
+            </div>
+            <div class="text-body" style="font-size: 0.9rem; line-height: 1.5;">{{ msg.body }}</div>
+            {% if msg.attachments %}
+            <div class="d-flex gap-2 mt-2">
+              {% for att in msg.attachments %}
+              <div class="d-inline-flex align-items-center gap-1 border rounded px-2 py-1" style="font-size: 0.8rem; background: var(--surface-1);">
+                <i data-lucide="{{ att.icon }}" class="icon-2xs icon-muted"></i>
+                <span class="text-muted">{{ att.name }}</span>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Reply Box -->
+    <div class="reply-box border-top p-3 mt-auto" style="background: var(--surface-1);">
+      <div class="d-flex gap-2">
+        <textarea class="form-control form-control-sm" rows="2" placeholder="Type your message..."></textarea>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mt-2">
+        <div class="d-flex gap-1">
+          <button class="btn btn-sm btn-ghost" title="Attach file">
+            <i data-lucide="paperclip" class="icon-xs icon-muted"></i>
+          </button>
+          <button class="btn btn-sm btn-ghost" title="Emoji">
+            <i data-lucide="smile" class="icon-xs icon-muted"></i>
+          </button>
+          <button class="btn btn-sm btn-ghost" title="AI assist">
+            <i data-lucide="sparkles" class="icon-xs icon-ai"></i>
+          </button>
+        </div>
+        <button class="btn btn-sm btn-primary d-flex align-items-center gap-1">
+          <i data-lucide="send" class="icon-2xs"></i>
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

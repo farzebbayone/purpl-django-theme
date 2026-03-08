@@ -1,0 +1,157 @@
+// Animated borders, glow effects, shimmer
+
+// Gradient shimmer border — rotating conic gradient
+.border-shimmer {
+  position: relative;
+  border: none !important;
+  overflow: hidden;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1.5px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from var(--shimmer-angle, 0deg),
+      transparent 0%,
+      $primary 12.5%,
+      $accent 25%,
+      $ai 37.5%,
+      transparent 50%,
+      $primary 62.5%,
+      $accent 75%,
+      $ai 87.5%,
+      transparent 100%
+    );
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    animation: shimmer-rotate 3s linear infinite;
+    z-index: -1;
+  }
+}
+
+@property --shimmer-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes shimmer-rotate {
+  to { --shimmer-angle: 360deg; }
+}
+
+// AI glow border — soft pulsing ai-colored outline
+.border-glow-ai {
+  box-shadow:
+    0 0 0 1px rgba($ai, 0.3),
+    0 0 12px rgba($ai, 0.15),
+    0 0 24px rgba($ai, 0.05);
+  animation: glow-pulse-ai 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-ai {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba($ai, 0.3),
+      0 0 12px rgba($ai, 0.15),
+      0 0 24px rgba($ai, 0.05);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba($ai, 0.5),
+      0 0 20px rgba($ai, 0.25),
+      0 0 40px rgba($ai, 0.1);
+  }
+}
+
+// Accent glow
+.border-glow-accent {
+  box-shadow:
+    0 0 0 1px rgba($accent, 0.3),
+    0 0 12px rgba($accent, 0.15),
+    0 0 24px rgba($accent, 0.05);
+  animation: glow-pulse-accent 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-accent {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba($accent, 0.3),
+      0 0 12px rgba($accent, 0.15),
+      0 0 24px rgba($accent, 0.05);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba($accent, 0.5),
+      0 0 20px rgba($accent, 0.25),
+      0 0 40px rgba($accent, 0.1);
+  }
+}
+
+// Primary glow
+.border-glow-primary {
+  box-shadow:
+    0 0 0 1px rgba($primary, 0.3),
+    0 0 12px rgba($primary, 0.15),
+    0 0 24px rgba($primary, 0.05);
+  animation: glow-pulse-primary 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-primary {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba($primary, 0.3),
+      0 0 12px rgba($primary, 0.15),
+      0 0 24px rgba($primary, 0.05);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba($primary, 0.5),
+      0 0 20px rgba($primary, 0.25),
+      0 0 40px rgba($primary, 0.1);
+  }
+}
+
+// Gradient border (static) — use on cards, panels
+.border-gradient {
+  position: relative;
+  border: none !important;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, $primary, $accent, $ai);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    z-index: -1;
+  }
+}
+
+// Focus ring — accessible, themed
+.focus-ring-primary:focus-visible {
+  outline: 2px solid $primary;
+  outline-offset: 2px;
+}
+
+.focus-ring-ai:focus-visible {
+  outline: 2px solid $ai;
+  outline-offset: 2px;
+}
+
+// Reduced motion — disable all glow/shimmer animations
+@media (prefers-reduced-motion: reduce) {
+  .border-shimmer::before { animation: none; }
+  .border-glow-ai,
+  .border-glow-accent,
+  .border-glow-primary { animation: none; }
+}

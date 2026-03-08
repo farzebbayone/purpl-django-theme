@@ -1,0 +1,42 @@
+{% extends "demo/base.html" %}
+
+{% block title %}{{ doc_title }} — Docs — Bootstrap Theme{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-header__title">Documentation</h1>
+  <p class="page-header__subtitle">Theme reference — rendered from markdown source files in <code>theme/docs/</code>.</p>
+</div>
+
+<div class="row g-4">
+  <!-- Doc Sidebar -->
+  <div class="col-lg-3">
+    <div class="card" style="position: sticky; top: 4.75rem;">
+      <div class="card-body p-2">
+        <ul class="list-unstyled mb-0">
+          {% for page in docs_pages %}
+          <li>
+            <a href="/docs/{{ page.slug }}/"
+               class="d-flex align-items-center gap-2 px-3 py-2 rounded text-decoration-none fs-7 fw-medium
+                      {% if page.slug == doc_slug %}text-primary{% else %}text-secondary{% endif %}"
+               style="{% if page.slug == doc_slug %}background:rgba(94,106,210,0.08);{% endif %}">
+              <i data-lucide="{{ page.icon }}" style="width:0.875rem;height:0.875rem;flex-shrink:0;"></i>
+              {{ page.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Doc Content -->
+  <div class="col-lg-9">
+    <div class="card">
+      <div class="card-body doc-content">
+        {{ doc_html|safe }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

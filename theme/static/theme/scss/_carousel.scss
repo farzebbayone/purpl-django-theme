@@ -1,0 +1,90 @@
+// Carousel — theme overrides for Bootstrap carousel
+
+.carousel {
+  border-radius: $border-radius;
+  overflow: hidden;
+}
+
+.carousel-inner {
+  border-radius: $border-radius;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  width: 100%;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 3rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  .carousel:hover & {
+    opacity: 0.8;
+  }
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--surface-1);
+  border-radius: 50%;
+  padding: 1rem;
+  background-size: 50%;
+}
+
+.carousel-indicators {
+  margin-bottom: 0.75rem;
+
+  [data-bs-target] {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+
+    &.active {
+      background-color: #fff;
+      transform: scale(1.25);
+    }
+  }
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: $border-radius-sm;
+  padding: 0.75rem 1rem;
+  bottom: 1.5rem;
+
+  h5 {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    font-size: $font-size-sm;
+    margin-bottom: 0;
+    opacity: 0.9;
+  }
+}
+
+// Card variant — carousel inside a card
+.card > .carousel {
+  border-radius: 0;
+
+  &:first-child {
+    border-top-left-radius: $card-border-radius;
+    border-top-right-radius: $card-border-radius;
+  }
+}
+
+// Fixed height variant
+.carousel--fixed-height {
+  .carousel-item img {
+    height: 20rem;
+  }
+}

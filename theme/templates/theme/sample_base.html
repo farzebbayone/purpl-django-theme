@@ -1,0 +1,87 @@
+{# ------------------------------------------------------------------ #}
+{# SAMPLE BASE TEMPLATE                                               #}
+{#                                                                     #}
+{# Copy this file to your project as your app's base.html and         #}
+{# customize it. All your page templates should extend this file,     #}
+{# NOT theme/base.html directly.                                      #}
+{#                                                                     #}
+{#   myapp/templates/myapp/base.html    <-- copy this file here       #}
+{#   myapp/templates/myapp/index.html   <-- {% extends "myapp/base.html" %} #}
+{# ------------------------------------------------------------------ #}
+{% extends "theme/base.html" %}
+{% load theme_tags %}
+
+{# -- Branding ------------------------------------------------------ #}
+{% block brand_name %}MyApp{% endblock %}
+
+{# -- User identity (wire these to request.user in production) ------- #}
+{% block user_initials %}JD{% endblock %}
+{% block user_avatar_initials %}JD{% endblock %}
+{% block user_name %}Jane Doe{% endblock %}
+{% block user_email %}jane@example.com{% endblock %}
+
+{# -- Sidebar navigation -------------------------------------------- #}
+{# Use template tags: sidebar_section, sidebar_link, sidebar_divider  #}
+{# Icons: any Lucide icon name — https://lucide.dev/icons             #}
+{% block sidebar_nav %}
+  {% sidebar_section "Main" %}
+  <ul class="sidebar__nav">
+    {% sidebar_link "/" "home" "Dashboard" %}
+    {% sidebar_link "/products/" "package" "Products" %}
+    {% sidebar_link "/orders/" "shopping-cart" "Orders" %}
+    {% sidebar_link "/customers/" "users" "Customers" %}
+  </ul>
+
+  {% sidebar_divider %}
+  {% sidebar_section "Settings" %}
+  <ul class="sidebar__nav">
+    {% sidebar_link "/settings/" "settings" "Settings" %}
+    {% sidebar_link "/help/" "life-buoy" "Help" %}
+  </ul>
+{% endblock %}
+
+{# -- Custom topbar actions (appears before search/theme toggle) ----- #}
+{# Use this for app-specific buttons like "New Order", env badge, etc. #}
+{% block topbar_actions %}
+{# Example:
+  <button class="topbar__btn" title="New order">
+    <i data-lucide="plus" class="icon-sm"></i>
+  </button>
+#}
+{% endblock %}
+
+{# -- Notifications -------------------------------------------------- #}
+{% block notification_count %}0{% endblock %}
+{% block notifications %}
+  <div class="text-center text-muted fs-7 py-3">No new notifications</div>
+{% endblock %}
+
+{# -- User menu items ------------------------------------------------ #}
+{% block topbar_user_menu_items %}
+  <a href="/profile/" class="topbar__user-item">
+    <i data-lucide="user" class="icon-xs icon-muted"></i>
+    <span>Profile</span>
+  </a>
+  <a href="/settings/" class="topbar__user-item">
+    <i data-lucide="settings" class="icon-xs icon-muted"></i>
+    <span>Settings</span>
+  </a>
+  <div class="topbar__user-divider"></div>
+  <a href="/logout/" class="topbar__user-item topbar__user-item--danger">
+    <i data-lucide="log-out" class="icon-xs"></i>
+    <span>Sign out</span>
+  </a>
+{% endblock %}
+
+{# -- Command palette pages ----------------------------------------- #}
+{# Items appear in Cmd+K search. Use cmd_palette_item tag.            #}
+{% block command_palette_pages %}
+  <div class="cmd-palette__group">
+    <div class="cmd-palette__group-label">Pages</div>
+    {% cmd_palette_item "/" "home" "Dashboard" %}
+    {% cmd_palette_item "/products/" "package" "Products" %}
+    {% cmd_palette_item "/orders/" "shopping-cart" "Orders" %}
+    {% cmd_palette_item "/customers/" "users" "Customers" %}
+    {% cmd_palette_item "/settings/" "settings" "Settings" %}
+  </div>
+{% endblock %}

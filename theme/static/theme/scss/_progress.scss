@@ -1,0 +1,64 @@
+// Themed progress bars and spinners
+
+// Tinted progress bars
+@each $color, $value in (
+  "primary": $primary,
+  "success": $success,
+  "danger": $danger,
+  "warning": $warning,
+  "info": $info,
+  "ai": $ai,
+  "accent": $accent,
+  "tertiary": $tertiary
+) {
+  .progress-tint-#{$color} {
+    background-color: rgba($value, 0.12);
+
+    .progress-bar {
+      background-color: $value;
+    }
+  }
+}
+
+// Thin progress (2px, good for top-of-page loading)
+.progress-thin {
+  height: 2px;
+  border-radius: 0;
+}
+
+// Indeterminate progress (sliding animation)
+.progress-indeterminate {
+  .progress-bar {
+    width: 30%;
+    animation: progress-slide 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes progress-slide {
+  0%   { margin-left: -30%; }
+  100% { margin-left: 100%; }
+}
+
+// Spinner sizes
+.spinner-xs {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-width: 0.125rem;
+}
+
+.spinner-lg {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-width: 0.25rem;
+}
+
+// Tinted spinners
+@each $color, $value in (
+  "ai": $ai,
+  "accent": $accent,
+  "tertiary": $tertiary
+) {
+  .spinner-border-#{$color} {
+    color: $value;
+  }
+}

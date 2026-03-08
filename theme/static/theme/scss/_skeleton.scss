@@ -1,0 +1,82 @@
+// Skeleton / placeholder loading states
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-2) 25%,
+    var(--surface-3) 50%,
+    var(--surface-2) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: $border-radius-sm;
+  color: transparent !important;
+  user-select: none;
+  pointer-events: none;
+
+  * { visibility: hidden; }
+
+  // Shapes
+  &--text {
+    height: 0.875rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+
+    &:last-child { width: 60%; }
+  }
+
+  &--heading {
+    height: 1.25rem;
+    width: 40%;
+    margin-bottom: 0.75rem;
+    border-radius: 4px;
+  }
+
+  &--avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &--avatar-sm {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &--circle {
+    border-radius: 50%;
+  }
+
+  &--card {
+    height: 120px;
+    border-radius: $border-radius;
+  }
+
+  &--chart {
+    height: 200px;
+    border-radius: $border-radius;
+  }
+
+  &--btn {
+    height: 2.25rem;
+    width: 6rem;
+    border-radius: $border-radius;
+  }
+
+  &--image {
+    height: 160px;
+    border-radius: $border-radius;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; }
+}

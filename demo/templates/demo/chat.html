@@ -1,0 +1,286 @@
+{% extends "demo/base.html" %}
+{% load theme_tags %}
+
+{% block title %}Chat — Bootstrap Theme{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-header__title">Chat Interface</h1>
+  <p class="page-header__subtitle">Slack-style messaging with AI integration, threads, and reactions.</p>
+</div>
+
+<div class="row g-4">
+  <!-- Channel Sidebar -->
+  <div class="col-lg-3">
+    <div class="card" style="position: sticky; top: 4.75rem;">
+      <div class="channel-list__header">
+        <div class="d-flex align-items-center justify-content-between">
+          Channels
+          <button class="btn btn-icon btn-sm btn-soft-secondary" style="width:1.5rem;height:1.5rem;">
+            <i data-lucide="plus" style="width:0.75rem;height:0.75rem"></i>
+          </button>
+        </div>
+      </div>
+      <ul class="channel-list__items">
+        {% for ch in channels %}
+        <li class="channel-list__item{% if ch.active %} channel-list__item--active{% endif %}{% if ch.unread %} channel-list__item--unread{% endif %}">
+          <i data-lucide="{{ ch.icon }}" class="channel-list__icon"></i>
+          <span>{{ ch.name }}</span>
+          {% if ch.unread %}
+            <span class="channel-list__badge">{{ ch.unread }}</span>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+
+      <div class="channel-list__header" style="border-top: 1px solid var(--border-color);">
+        Direct Messages
+      </div>
+      <ul class="channel-list__items">
+        {% for dm in dms %}
+        <li class="channel-list__item{% if dm.unread %} channel-list__item--unread{% endif %}">
+          <span class="status-dot status-dot--{{ dm.status }}" style="flex-shrink:0;"></span>
+          <span>{{ dm.name }}</span>
+          {% if dm.unread %}
+            <span class="channel-list__badge">{{ dm.unread }}</span>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Chat Panel -->
+  <div class="col-lg-9">
+    <div class="card">
+      <!-- Channel Header -->
+      <div class="card-header d-flex align-items-center justify-content-between py-2">
+        <div class="d-flex align-items-center gap-2">
+          <i data-lucide="hash" style="width:1rem;height:1rem" class="text-secondary"></i>
+          <span class="fw-semibold">engineering</span>
+          <span class="fs-8 text-secondary">Building the future, one commit at a time</span>
+        </div>
+        <div class="d-flex gap-1">
+          <button class="topbar__btn" style="width:1.75rem;height:1.75rem;">
+            <i data-lucide="search" style="width:0.875rem;height:0.875rem"></i>
+          </button>
+          <button class="topbar__btn" style="width:1.75rem;height:1.75rem;">
+            <i data-lucide="pin" style="width:0.875rem;height:0.875rem"></i>
+          </button>
+          <button class="topbar__btn" style="width:1.75rem;height:1.75rem;">
+            <i data-lucide="users" style="width:0.875rem;height:0.875rem"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div class="chat__messages">
+        {% for msg in messages %}
+
+          {% if msg.type == "system" %}
+          <!-- System message -->
+          <div class="message message--system">
+            <div class="message__content">
+              <div class="message__body">
+                <i data-lucide="arrow-right" style="width:0.75rem;height:0.75rem" class="me-1"></i>
+                {{ msg.body }}
+              </div>
+            </div>
+          </div>
+
+          {% elif msg.type == "ai" %}
+          <!-- AI message -->
+          <div class="message message--ai">
+            <div class="message__row">
+              <div class="message__avatar">
+                <i data-lucide="sparkles" style="width:1rem;height:1rem"></i>
+              </div>
+              <div class="message__content">
+                <div class="message__header">
+                  <span class="message__author">{{ msg.author }}</span>
+                  <span class="badge badge-soft-ai message__badge">AI</span>
+                  <span class="message__timestamp">{{ msg.timestamp }}</span>
+                </div>
+
+                {% if msg.streaming %}
+                <!-- Typewriter / streaming message -->
+                <div class="message__body typewriter" data-typewriter data-typewriter-content="{{ msg.streaming_text }}" data-typewriter-speed="15">
+                  <span class="typewriter__text"></span><span class="typewriter__cursor"></span>
+                </div>
+                {% else %}
+                <div class="message__body">
+                  {{ msg.body|markdown }}
+                </div>
+                {% endif %}
+
+                {% if msg.embed %}
+                <div class="message__embed">
+                  <div class="message__embed-header">
+                    <i data-lucide="{{ msg.embed.icon }}" style="width:0.875rem;height:0.875rem"></i>
+                    {{ msg.embed.type }}
+                  </div>
+                  <div class="message__embed-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <span class="fw-medium fs-7">{{ msg.embed.title }}</span>
+                      <span class="status-badge status-badge--{{ msg.embed.status }}">
+                        <span class="status-dot status-dot--online"></span>
+                        {{ msg.embed.status_text }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+
+                {% if msg.reactions %}
+                <div class="reactions">
+                  {% for r in msg.reactions %}
+                  <button class="reaction{% if r.active %} reaction--active{% endif %}">
+                    <span class="reaction__emoji">{{ r.emoji }}</span>
+                    <span class="reaction__count">{{ r.count }}</span>
+                  </button>
+                  {% endfor %}
+                  <button class="reaction">
+                    <span class="reaction__emoji" style="opacity:0.5;">+</span>
+                  </button>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+
+            <!-- Hover actions -->
+            <div class="message__actions">
+              <button class="message__action-btn" title="Reply"><i data-lucide="reply" style="width:0.875rem;height:0.875rem"></i></button>
+              <button class="message__action-btn" title="React"><i data-lucide="smile-plus" style="width:0.875rem;height:0.875rem"></i></button>
+              <button class="message__action-btn" title="Pin"><i data-lucide="pin" style="width:0.875rem;height:0.875rem"></i></button>
+              <button class="message__action-btn" title="More"><i data-lucide="more-horizontal" style="width:0.875rem;height:0.875rem"></i></button>
+            </div>
+          </div>
+
+          {% else %}
+          <!-- User message -->
+          <div class="message{% if msg.is_self %} message--self{% endif %}">
+            <div class="message__row">
+              <div class="message__avatar">{{ msg.initials }}</div>
+              <div class="message__content">
+                <div class="message__header">
+                  <span class="message__author">{% if msg.is_self %}You{% else %}{{ msg.author }}{% endif %}</span>
+                  <span class="message__timestamp">{{ msg.timestamp }}</span>
+                </div>
+                <div class="message__body">
+                  {{ msg.body|markdown }}
+                </div>
+
+                {% if msg.attachments %}
+                <div class="message__attachments">
+                  {% for att in msg.attachments %}
+                  <a href="#" class="message__attachment">
+                    <i data-lucide="{{ att.icon }}" class="message__attachment-icon"></i>
+                    <span class="message__attachment-name">{{ att.name }}</span>
+                    <span class="message__attachment-size">{{ att.size }}</span>
+                  </a>
+                  {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if msg.reactions %}
+                <div class="reactions">
+                  {% for r in msg.reactions %}
+                  <button class="reaction{% if r.active %} reaction--active{% endif %}">
+                    <span class="reaction__emoji">{{ r.emoji }}</span>
+                    <span class="reaction__count">{{ r.count }}</span>
+                  </button>
+                  {% endfor %}
+                  <button class="reaction">
+                    <span class="reaction__emoji" style="opacity:0.5;">+</span>
+                  </button>
+                </div>
+                {% endif %}
+
+                {% if msg.thread_count %}
+                <div class="thread">
+                  <button class="thread__toggle" data-thread-toggle="thread-{{ msg.id }}">
+                    <i data-lucide="message-square" style="width:0.875rem;height:0.875rem"></i>
+                    <span class="thread__count">{{ msg.thread_count }} replies</span>
+                    <span class="thread__preview">{{ msg.thread_preview }}</span>
+                  </button>
+                  <div class="thread__replies" id="thread-{{ msg.id }}" style="display:none;">
+                    {% for reply in msg.thread_replies %}
+                    <div class="thread__reply">
+                      <div class="message__row">
+                        <div class="message__avatar" style="width:1.5rem;height:1.5rem;font-size:0.625rem;">{{ reply.initials }}</div>
+                        <div class="message__content">
+                          <div class="message__header">
+                            <span class="message__author">{{ reply.author }}</span>
+                            <span class="message__timestamp">{{ reply.timestamp }}</span>
+                          </div>
+                          <div class="message__body"><p>{{ reply.body }}</p></div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+
+            <!-- Hover actions -->
+            <div class="message__actions">
+              <button class="message__action-btn" title="Reply"><i data-lucide="reply" style="width:0.875rem;height:0.875rem"></i></button>
+              <button class="message__action-btn" title="React"><i data-lucide="smile-plus" style="width:0.875rem;height:0.875rem"></i></button>
+              <button class="message__action-btn" title="Pin"><i data-lucide="pin" style="width:0.875rem;height:0.875rem"></i></button>
+              <button class="message__action-btn" title="More"><i data-lucide="more-horizontal" style="width:0.875rem;height:0.875rem"></i></button>
+            </div>
+          </div>
+          {% endif %}
+
+        {% endfor %}
+
+        <!-- Typing indicator -->
+        <div class="typing-indicator">
+          <div class="typing-indicator__dots">
+            <span class="typing-indicator__dot"></span>
+            <span class="typing-indicator__dot"></span>
+            <span class="typing-indicator__dot"></span>
+          </div>
+          <span>AI Assistant is thinking...</span>
+        </div>
+      </div>
+
+      <!-- Composer -->
+      <div class="chat__composer">
+        <div class="composer">
+          <div class="composer__toolbar">
+            <button class="composer__tool-btn" data-format="bold" title="Bold (Ctrl+B)"><i data-lucide="bold" style="width:0.875rem;height:0.875rem"></i></button>
+            <button class="composer__tool-btn" data-format="italic" title="Italic (Ctrl+I)"><i data-lucide="italic" style="width:0.875rem;height:0.875rem"></i></button>
+            <button class="composer__tool-btn" data-format="strikethrough" title="Strikethrough"><i data-lucide="strikethrough" style="width:0.875rem;height:0.875rem"></i></button>
+            <button class="composer__tool-btn" data-format="code" title="Code (Ctrl+E)"><i data-lucide="code" style="width:0.875rem;height:0.875rem"></i></button>
+            <button class="composer__tool-btn" data-format="link" title="Link (Ctrl+K)"><i data-lucide="link" style="width:0.875rem;height:0.875rem"></i></button>
+            <div style="width:1px;height:1.25rem;background:var(--border-color);margin:0 0.25rem;"></div>
+            <button class="composer__tool-btn" data-format="list" title="Bullet list"><i data-lucide="list" style="width:0.875rem;height:0.875rem"></i></button>
+            <button class="composer__tool-btn" data-format="list-ordered" title="Ordered list"><i data-lucide="list-ordered" style="width:0.875rem;height:0.875rem"></i></button>
+            <button class="composer__tool-btn" data-format="blockquote" title="Quote"><i data-lucide="quote" style="width:0.875rem;height:0.875rem"></i></button>
+            <button class="composer__tool-btn" data-format="code-block" title="Code block"><i data-lucide="square-code" style="width:0.875rem;height:0.875rem"></i></button>
+          </div>
+          <div class="composer__input-row">
+            <textarea class="composer__input" placeholder="Message #engineering" rows="1"></textarea>
+            <button class="composer__tool-btn" title="Attach file">
+              <i data-lucide="paperclip" style="width:1rem;height:1rem"></i>
+            </button>
+            <button class="composer__tool-btn" title="Emoji">
+              <i data-lucide="smile" style="width:1rem;height:1rem"></i>
+            </button>
+            <button class="btn btn-primary btn-sm composer__send">
+              <i data-lucide="send" style="width:0.875rem;height:0.875rem"></i>
+            </button>
+          </div>
+          <div class="composer__hint">
+            <kbd style="font-size:0.625rem;padding:0.0625rem 0.25rem;border:1px solid var(--border-color);border-radius:3px;background:var(--surface-2);">Enter</kbd> to send,
+            <kbd style="font-size:0.625rem;padding:0.0625rem 0.25rem;border:1px solid var(--border-color);border-radius:3px;background:var(--surface-2);">Shift+Enter</kbd> for new line
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+// List Group — theme overrides for Bootstrap list-group
+
+.list-group-item {
+  background-color: var(--surface-1);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.list-group-item-action {
+  color: var(--text-primary);
+
+  &:hover,
+  &:focus {
+    background-color: var(--surface-2);
+    color: var(--text-primary);
+  }
+
+  &:active {
+    background-color: var(--surface-3);
+    color: var(--text-primary);
+  }
+}
+
+.list-group-item.active {
+  background-color: $primary;
+  border-color: $primary;
+}
+
+.list-group-item.disabled,
+.list-group-item:disabled {
+  color: var(--text-muted);
+  background-color: var(--surface-1);
+}
+
+// Flush variant
+.list-group-flush .list-group-item {
+  background-color: transparent;
+}
+
+// Soft color variants
+@each $name, $color in (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "danger": $danger,
+  "warning": $warning,
+  "info": $info,
+  "accent": $accent,
+  "ai": $ai
+) {
+  .list-group-item-soft-#{$name} {
+    background-color: rgba($color, 0.06);
+    color: $color;
+    border-color: rgba($color, 0.12);
+
+    &.list-group-item-action {
+      &:hover,
+      &:focus {
+        background-color: rgba($color, 0.12);
+        color: $color;
+      }
+    }
+  }
+}
+
+// List group with icons
+.list-group-item__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.list-group-item__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.list-group-item__trailing {
+  color: var(--text-muted);
+  font-size: $font-size-sm;
+  flex-shrink: 0;
+}

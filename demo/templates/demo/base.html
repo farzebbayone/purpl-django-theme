@@ -1,0 +1,134 @@
+{% extends "theme/base.html" %}
+{% load theme_tags %}
+
+{% block brand_name %}Synth{% endblock %}
+
+{% block user_initials %}AC{% endblock %}
+{% block user_avatar_initials %}AC{% endblock %}
+{% block user_name %}Alice Chen{% endblock %}
+{% block user_email %}alice@synth.io{% endblock %}
+
+{% block sidebar_nav %}
+  {% sidebar_section "Navigation" %}
+  <ul class="sidebar__nav">
+    {% sidebar_link "/" "home" "Dashboard" %}
+    {% sidebar_link "/analytics/" "bar-chart-3" "Analytics" %}
+    {% sidebar_link "/users/" "users" "Users" %}
+    {% sidebar_link "/messages/" "message-square" "Messages" %}
+  </ul>
+
+  {% sidebar_divider %}
+  {% sidebar_section "Demo Pages" %}
+  <ul class="sidebar__nav">
+    {% sidebar_link "/components/" "layout-grid" "Components" %}
+    {% sidebar_link "/forms/" "file-text" "Forms & Tables" %}
+    {% sidebar_link "/chat/" "message-square" "Chat" %}
+    {% sidebar_link "/ui/" "layers" "UI Components" %}
+    {% sidebar_link "/docs/" "book-open" "Docs" %}
+  </ul>
+
+  {% sidebar_divider %}
+  {% sidebar_section "AI Tools" %}
+  <ul class="sidebar__nav">
+    {% sidebar_link "/ai/" "sparkles" "AI Assistant" %}
+    {% sidebar_link "/settings/" "settings" "Settings" %}
+  </ul>
+{% endblock %}
+
+{% block notification_count %}3{% endblock %}
+{% block notifications %}
+  <a href="#" class="topbar__notification topbar__notification--unread">
+    <div class="topbar__notification-icon topbar__notification-icon--ai">
+      <i data-lucide="sparkles" class="icon-xs"></i>
+    </div>
+    <div class="topbar__notification-content">
+      <div class="topbar__notification-text">AI analysis complete — <strong>3 insights</strong> found in your dataset.</div>
+      <div class="topbar__notification-time">2 minutes ago</div>
+    </div>
+  </a>
+  <a href="#" class="topbar__notification topbar__notification--unread">
+    <div class="topbar__notification-icon topbar__notification-icon--success">
+      <i data-lucide="check-circle" class="icon-xs"></i>
+    </div>
+    <div class="topbar__notification-content">
+      <div class="topbar__notification-text">Deployment <strong>v2.1.0</strong> succeeded on production.</div>
+      <div class="topbar__notification-time">18 minutes ago</div>
+    </div>
+  </a>
+  <a href="#" class="topbar__notification topbar__notification--unread">
+    <div class="topbar__notification-icon topbar__notification-icon--warning">
+      <i data-lucide="alert-triangle" class="icon-xs"></i>
+    </div>
+    <div class="topbar__notification-content">
+      <div class="topbar__notification-text">API rate limit at <strong>85%</strong> — consider upgrading your plan.</div>
+      <div class="topbar__notification-time">1 hour ago</div>
+    </div>
+  </a>
+  <a href="#" class="topbar__notification">
+    <div class="topbar__notification-icon topbar__notification-icon--primary">
+      <i data-lucide="user-plus" class="icon-xs"></i>
+    </div>
+    <div class="topbar__notification-content">
+      <div class="topbar__notification-text"><strong>Sarah Connor</strong> joined the workspace.</div>
+      <div class="topbar__notification-time">3 hours ago</div>
+    </div>
+  </a>
+  <a href="#" class="topbar__notification">
+    <div class="topbar__notification-icon topbar__notification-icon--info">
+      <i data-lucide="download" class="icon-xs"></i>
+    </div>
+    <div class="topbar__notification-content">
+      <div class="topbar__notification-text">Export <strong>Q4 Report.csv</strong> is ready to download.</div>
+      <div class="topbar__notification-time">Yesterday</div>
+    </div>
+  </a>
+{% endblock %}
+
+{% block topbar_user_menu_items %}
+  <a href="/settings/" class="topbar__user-item">
+    <i data-lucide="user" class="icon-xs icon-muted"></i>
+    <span>Profile</span>
+  </a>
+  <a href="/settings/" class="topbar__user-item">
+    <i data-lucide="settings" class="icon-xs icon-muted"></i>
+    <span>Settings</span>
+  </a>
+  <a href="#" class="topbar__user-item">
+    <i data-lucide="credit-card" class="icon-xs icon-muted"></i>
+    <span>Billing</span>
+  </a>
+  <a href="#" class="topbar__user-item">
+    <i data-lucide="keyboard" class="icon-xs icon-muted"></i>
+    <span>Keyboard shortcuts</span>
+    <kbd class="ms-auto">⌘K</kbd>
+  </a>
+  <div class="topbar__user-divider"></div>
+  <a href="#" class="topbar__user-item">
+    <i data-lucide="life-buoy" class="icon-xs icon-muted"></i>
+    <span>Help & Support</span>
+  </a>
+  <a href="#" class="topbar__user-item topbar__user-item--danger">
+    <i data-lucide="log-out" class="icon-xs"></i>
+    <span>Sign out</span>
+  </a>
+{% endblock %}
+
+{% block command_palette_pages %}
+  <div class="cmd-palette__group">
+    <div class="cmd-palette__group-label">Pages</div>
+    {% cmd_palette_item "/" "home" "Dashboard" %}
+    {% cmd_palette_item "/analytics/" "bar-chart-3" "Analytics" %}
+    {% cmd_palette_item "/components/" "layout-grid" "Components" %}
+    {% cmd_palette_item "/forms/" "file-text" "Forms & Tables" %}
+    {% cmd_palette_item "/chat/" "message-square" "Chat" %}
+    {% cmd_palette_item "/docs/" "book-open" "Documentation" %}
+  </div>
+  <div class="cmd-palette__group">
+    <div class="cmd-palette__group-label">Documentation</div>
+    {% cmd_palette_item "/docs/STYLE_GUIDE/" "palette" "Style Guide" %}
+    {% cmd_palette_item "/docs/COMPONENTS/" "layout-grid" "Components docs" %}
+    {% cmd_palette_item "/docs/CHAT_INTERFACE/" "message-square" "Chat Interface docs" %}
+    {% cmd_palette_item "/docs/DATA_VIZ/" "bar-chart-3" "Data Visualization docs" %}
+    {% cmd_palette_item "/docs/MIGRATION/" "arrow-right-circle" "Migration Guide" %}
+  </div>
+{% endblock %}

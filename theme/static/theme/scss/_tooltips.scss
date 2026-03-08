@@ -1,0 +1,56 @@
+// Themed tooltips and popovers
+
+.tooltip-inner {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.375rem 0.625rem;
+  border-radius: $border-radius-sm;
+  max-width: 240px;
+}
+
+// Tinted tooltip variants
+@each $color, $value in (
+  "primary": $primary,
+  "success": $success,
+  "danger": $danger,
+  "warning": $warning,
+  "ai": $ai,
+  "accent": $accent
+) {
+  .tooltip-#{$color} {
+    .tooltip-inner {
+      background-color: $value;
+      color: #fff;
+    }
+    .tooltip-arrow::before {
+      border-top-color: $value;
+    }
+    &[data-popper-placement^="bottom"] .tooltip-arrow::before {
+      border-bottom-color: $value;
+    }
+    &[data-popper-placement^="left"] .tooltip-arrow::before {
+      border-left-color: $value;
+    }
+    &[data-popper-placement^="right"] .tooltip-arrow::before {
+      border-right-color: $value;
+    }
+  }
+}
+
+// Popover theme overrides
+.popover {
+  border-color: var(--border-color);
+  box-shadow: $box-shadow-lg;
+  font-size: $font-size-sm;
+
+  &-header {
+    background-color: var(--surface-2);
+    border-bottom-color: var(--border-color);
+    font-weight: 600;
+    font-size: $font-size-sm;
+  }
+
+  &-body {
+    color: var(--text-secondary);
+  }
+}

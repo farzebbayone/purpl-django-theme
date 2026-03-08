@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "bootstrap-theme-django"
+version = "0.1.0"
+description = "Modern Bootstrap 5 theme for Django"
+authors = []
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1"
+markdown = "^3.10.2"
+
+[tool.poetry.group.dev.dependencies]
+django-browser-reload = "^1.15"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

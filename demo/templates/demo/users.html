@@ -1,0 +1,113 @@
+{% extends "demo/base.html" %}
+
+{% block title %}Users — Synth{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-header__title">Users</h1>
+  <p class="page-header__subtitle">Manage team members, roles, and account status.</p>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <!-- Filters & Actions -->
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+      <div class="flex-grow-1" style="min-width: 200px; max-width: 320px;">
+        <div class="input-group input-group-sm">
+          <span class="input-group-text"><i data-lucide="search" class="icon-xs icon-muted"></i></span>
+          <input type="text" class="form-control" placeholder="Search users...">
+        </div>
+      </div>
+      <select class="form-select form-select-sm" style="width: auto;">
+        <option selected>All Roles</option>
+        <option>Admin</option>
+        <option>Editor</option>
+        <option>Viewer</option>
+      </select>
+      <select class="form-select form-select-sm" style="width: auto;">
+        <option selected>All Status</option>
+        <option>Active</option>
+        <option>Inactive</option>
+      </select>
+      <div class="ms-auto">
+        <button type="button" class="btn btn-primary btn-sm">
+          <i data-lucide="user-plus" class="icon-xs me-1"></i>
+          Add User
+        </button>
+      </div>
+    </div>
+
+    <!-- Users Table -->
+    <div class="table-responsive">
+      <table class="table table-theme">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Last Active</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>
+              <div class="d-flex align-items-center gap-3">
+                <div class="avatar-wrapper">
+                  <span class="avatar avatar--{{ user.avatar_color }}">{{ user.initials }}</span>
+                  <span class="avatar__status avatar__status--{{ user.presence }}"></span>
+                </div>
+                <div>
+                  <div class="fw-semibold">{{ user.name }}</div>
+                  <div class="fs-7 text-muted">{{ user.email }}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="badge badge-soft-{{ user.role_color }}">{{ user.role }}</span>
+            </td>
+            <td>
+              <span class="d-inline-flex align-items-center gap-2">
+                <span class="status-dot bg-{{ user.status_color }}"></span>
+                {{ user.status }}
+              </span>
+            </td>
+            <td class="text-muted fs-7">{{ user.last_active }}</td>
+            <td class="text-end">
+              <button class="btn btn-icon btn-ghost btn-sm" title="Edit user">
+                <i data-lucide="pencil" class="icon-xs icon-muted"></i>
+              </button>
+              <button class="btn btn-icon btn-ghost btn-sm" title="More options">
+                <i data-lucide="more-horizontal" class="icon-xs icon-muted"></i>
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Users pagination" class="mt-3">
+      <ul class="pagination pagination-sm justify-content-end mb-0">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+{% endblock %}

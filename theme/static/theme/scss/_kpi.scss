@@ -1,0 +1,162 @@
+// KPI / Metric cards — enhanced stat cards with sparklines and progress
+
+.kpi {
+  padding: $card-spacer-x;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    color: var(--text-muted);
+  }
+
+  &__icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: $border-radius;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface-2);
+    color: var(--text-secondary);
+
+    &--primary   { background-color: rgba($primary, 0.1);   color: $primary;   }
+    &--success   { background-color: rgba($success, 0.1);   color: $success;   }
+    &--danger    { background-color: rgba($danger, 0.1);    color: $danger;    }
+    &--warning   { background-color: rgba($warning, 0.1);   color: $warning;   }
+    &--info      { background-color: rgba($info, 0.1);      color: $info;      }
+    &--ai        { background-color: rgba($ai, 0.1);        color: $ai;        }
+    &--accent    { background-color: rgba($accent, 0.1);    color: $accent;    }
+    &--tertiary  { background-color: rgba($tertiary, 0.1);  color: $tertiary;  }
+  }
+
+  &__value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+  }
+
+  &__change {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+
+    &--up   { color: $success; }
+    &--down { color: $danger; }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color-light);
+  }
+
+  &__detail {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  // Sparkline container (inline mini chart)
+  &__sparkline {
+    width: 80px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  // Progress bar variant
+  &__progress {
+    margin-top: 0.75rem;
+  }
+
+  &__progress-bar {
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--surface-3);
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.6s ease;
+
+    &--primary   { background-color: $primary; }
+    &--success   { background-color: $success; }
+    &--danger    { background-color: $danger; }
+    &--warning   { background-color: $warning; }
+    &--info      { background-color: $info; }
+    &--ai        { background-color: $ai; }
+    &--accent    { background-color: $accent; }
+  }
+
+  &__progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.375rem;
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+  }
+}
+
+// Metric row — horizontal KPI for compact listing
+.metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid var(--border-color-light);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__value {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  &__bar {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--surface-3);
+    margin: 0 0.75rem;
+    max-width: 120px;
+  }
+
+  &__bar-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+}

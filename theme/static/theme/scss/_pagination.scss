@@ -1,0 +1,70 @@
+// Pagination — theme overrides for Bootstrap pagination
+
+.page-link {
+  color: var(--text-primary);
+  background-color: var(--surface-1);
+  border-color: var(--border-color);
+  font-size: $font-size-sm;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background-color: var(--surface-2);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgba($primary, 0.15);
+  }
+}
+
+.page-item.active .page-link {
+  background-color: $primary;
+  border-color: $primary;
+}
+
+.page-item.disabled .page-link {
+  color: var(--text-muted);
+  background-color: var(--surface-1);
+  border-color: var(--border-color);
+}
+
+// Soft active variant — tinted instead of solid
+.pagination--soft .page-item.active .page-link {
+  background-color: rgba($primary, 0.15);
+  border-color: rgba($primary, 0.15);
+  color: $primary;
+}
+
+// Minimal variant — no borders
+.pagination--minimal {
+  .page-link {
+    border: none;
+    border-radius: $border-radius-sm;
+    margin: 0 0.125rem;
+  }
+
+  .page-item.active .page-link {
+    background-color: rgba($primary, 0.15);
+    color: $primary;
+  }
+}
+
+// Tint variants
+@each $name, $color in (
+  "accent": $accent,
+  "ai": $ai,
+  "info": $info,
+  "success": $success
+) {
+  .pagination--#{$name} {
+    .page-item.active .page-link {
+      background-color: $color;
+      border-color: $color;
+    }
+
+    .page-link:focus {
+      box-shadow: 0 0 0 0.25rem rgba($color, 0.15);
+    }
+  }
+}

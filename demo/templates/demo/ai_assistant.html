@@ -1,0 +1,181 @@
+{% extends "demo/base.html" %}
+{% load static theme_tags %}
+
+{% block title %}AI Assistant — Synth{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-header__title">AI Assistant</h1>
+  <p class="page-header__subtitle">Conversational AI with context-aware analysis, code generation, and data insights.</p>
+</div>
+
+<div class="row g-4">
+  <!-- Left Column: Chat Area -->
+  <div class="col-md-8">
+    <div class="card">
+      <!-- Header Bar -->
+      <div class="card-header d-flex align-items-center justify-content-between py-2">
+        <div class="d-flex align-items-center gap-2">
+          <div class="avatar avatar--sm avatar--ai">
+            <i data-lucide="sparkles" class="icon-xs"></i>
+          </div>
+          <select class="form-select form-select-sm" style="width:auto;" aria-label="Select AI model">
+            {% for model in models %}
+            <option{% if model.name == selected_model %} selected{% endif %}>{{ model.name }}</option>
+            {% endfor %}
+          </select>
+          <span class="d-flex align-items-center gap-1 fs-7">
+            <span class="status-dot status-dot--online"></span>
+            <span class="text-secondary">Online</span>
+          </span>
+        </div>
+        <div class="d-flex gap-1">
+          <button class="topbar__btn" style="width:1.75rem;height:1.75rem;" title="New conversation">
+            <i data-lucide="plus" class="icon-xs"></i>
+          </button>
+          <button class="topbar__btn" style="width:1.75rem;height:1.75rem;" title="Clear chat">
+            <i data-lucide="trash-2" class="icon-xs"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div class="chat__messages">
+        {% for msg in messages %}
+
+          {% if msg.type == "ai" %}
+          <!-- AI message -->
+          <div class="message message--ai">
+            <div class="message__row">
+              <div class="message__avatar">
+                <i data-lucide="sparkles" class="icon-xs"></i>
+              </div>
+              <div class="message__content">
+                <div class="message__header">
+                  <span class="message__author">{{ msg.author }}</span>
+                  <span class="badge badge-soft-ai message__badge">AI</span>
+                  <span class="message__timestamp">{{ msg.timestamp }}</span>
+                </div>
+                <div class="message__body">
+                  {{ msg.body|markdown }}
+                </div>
+              </div>
+            </div>
+            <div class="message__actions">
+              <button class="message__action-btn" title="Copy"><i data-lucide="copy" class="icon-xs"></i></button>
+              <button class="message__action-btn" title="Regenerate"><i data-lucide="refresh-cw" class="icon-xs"></i></button>
+              <button class="message__action-btn" title="Thumbs up"><i data-lucide="thumbs-up" class="icon-xs"></i></button>
+              <button class="message__action-btn" title="Thumbs down"><i data-lucide="thumbs-down" class="icon-xs"></i></button>
+            </div>
+          </div>
+
+          {% else %}
+          <!-- User message -->
+          <div class="message message--self">
+            <div class="message__row">
+              <div class="message__avatar">{{ msg.initials }}</div>
+              <div class="message__content">
+                <div class="message__header">
+                  <span class="message__author">You</span>
+                  <span class="message__timestamp">{{ msg.timestamp }}</span>
+                </div>
+                <div class="message__body">
+                  {{ msg.body|markdown }}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+        {% endfor %}
+      </div>
+
+      <!-- Composer -->
+      <div class="chat__composer">
+        <div class="composer">
+          <div class="composer__input-row">
+            <textarea class="composer__input" placeholder="Ask the AI anything..." rows="1"></textarea>
+            <button class="composer__tool-btn" title="Attach file">
+              <i data-lucide="paperclip" class="icon-xs"></i>
+            </button>
+            <button class="btn btn-primary btn-sm composer__send">
+              <i data-lucide="send" class="icon-xs"></i>
+            </button>
+          </div>
+          <div class="composer__hint">
+            <kbd style="font-size:0.625rem;padding:0.0625rem 0.25rem;border:1px solid var(--border-color);border-radius:3px;background:var(--surface-2);">Enter</kbd> to send,
+            <kbd style="font-size:0.625rem;padding:0.0625rem 0.25rem;border:1px solid var(--border-color);border-radius:3px;background:var(--surface-2);">Shift+Enter</kbd> for new line
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column: Context Sidebar -->
+  <div class="col-md-4">
+    <!-- Suggested Prompts -->
+    <div class="card mb-4">
+      <div class="card-header py-2">
+        <div class="d-flex align-items-center gap-2">
+          <i data-lucide="lightbulb" class="icon-sm icon-ai"></i>
+          <span class="fw-semibold">Suggested Prompts</span>
+        </div>
+      </div>
+      <div class="card-body d-flex flex-column gap-2">
+        {% for prompt in suggested_prompts %}
+        <div class="card card-tint-ai border-shimmer p-2" role="button" style="cursor:pointer;">
+          <div class="d-flex align-items-center gap-2">
+            <i data-lucide="{{ prompt.icon }}" class="icon-sm icon-ai" style="flex-shrink:0;"></i>
+            <div>
+              <div class="fw-medium fs-7">{{ prompt.title }}</div>
+              <div class="fs-8 text-secondary">{{ prompt.desc }}</div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Capabilities -->
+    <div class="card mb-4">
+      <div class="card-header py-2">
+        <div class="d-flex align-items-center gap-2">
+          <i data-lucide="zap" class="icon-sm icon-primary"></i>
+          <span class="fw-semibold">Capabilities</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+          {% for cap in capabilities %}
+          <li class="d-flex align-items-center gap-2 fs-7">
+            <i data-lucide="{{ cap.icon }}" class="icon-xs icon-muted" style="flex-shrink:0;"></i>
+            <span>{{ cap.label }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Recent Conversations -->
+    <div class="card">
+      <div class="card-header py-2">
+        <div class="d-flex align-items-center gap-2">
+          <i data-lucide="clock" class="icon-sm icon-muted"></i>
+          <span class="fw-semibold">Recent Conversations</span>
+        </div>
+      </div>
+      <div class="card-body d-flex flex-column gap-2">
+        {% for conv in recent_conversations %}
+        <a href="#" class="d-flex align-items-start gap-2 text-decoration-none" style="color:var(--text-primary);">
+          <i data-lucide="message-square" class="icon-xs icon-muted" style="flex-shrink:0;margin-top:2px;"></i>
+          <div style="min-width:0;">
+            <div class="fw-medium fs-7 text-truncate">{{ conv.title }}</div>
+            <div class="fs-8 text-secondary">{{ conv.timestamp }}</div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

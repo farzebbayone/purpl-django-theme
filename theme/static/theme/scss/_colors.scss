@@ -1,0 +1,65 @@
+// CSS custom properties for theme colors
+
+:root {
+  // Surface colors
+  --surface-0: #f1f5f9;
+  --surface-1: #ffffff;
+  --surface-2: #f8fafc;
+  --surface-3: #e2e8f0;
+
+  // Text colors
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  // Border
+  --border-color: #e2e8f0;
+  --border-color-light: #f1f5f9;
+
+  // Theme colors as CSS vars
+  --primary: #{$primary};
+  --secondary: #{$secondary};
+  --success: #{$success};
+  --danger: #{$danger};
+  --warning: #{$warning};
+  --info: #{$info};
+  --tertiary: #{$tertiary};
+  --accent: #{$accent};
+  --ai: #{$ai};
+
+  // Semantic
+  --topbar-bg: var(--surface-1);
+  --sidebar-bg: var(--surface-1);
+}
+
+[data-bs-theme="dark"] {
+  // Surface colors
+  --surface-0: #0b1120;
+  --surface-1: #162032;
+  --surface-2: #1e293b;
+  --surface-3: #334155;
+
+  // Text colors
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  // Border
+  --border-color: #334155;
+  --border-color-light: #1e293b;
+
+  // Lightened theme colors for dark backgrounds
+  --primary: #{lighten($primary, 15%)};
+  --secondary: #{lighten($secondary, 15%)};
+  --success: #{lighten($success, 10%)};
+  --danger: #{lighten($danger, 10%)};
+  --warning: #{lighten($warning, 10%)};
+  --info: #{lighten($info, 10%)};
+  --tertiary: #{lighten($tertiary, 15%)};
+  --accent: #{lighten($accent, 10%)};
+  --ai: #{lighten($ai, 10%)};
+
+  // Semantic
+  --topbar-bg: var(--surface-1);
+  --sidebar-bg: var(--surface-1);
+}

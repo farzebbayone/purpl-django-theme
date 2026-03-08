@@ -1,0 +1,692 @@
+{% extends "demo/base.html" %}
+
+{% block title %}UI Components — Bootstrap Theme{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-header__title">UI Components</h1>
+  <p class="page-header__subtitle">Phase 6 — toasts, animated borders, skeletons, avatars, steps, timeline, and more.</p>
+</div>
+
+<!-- Nav Tabs -->
+<nav class="nav nav-tabs-minimal mb-4">
+  <a class="nav-link active" data-bs-toggle="tab" href="#tab-toasts" role="tab">Toasts</a>
+  <a class="nav-link" data-bs-toggle="tab" href="#tab-glow" role="tab">Animations</a>
+  <a class="nav-link" data-bs-toggle="tab" href="#tab-progress" role="tab">Progress & Spinners</a>
+  <a class="nav-link" data-bs-toggle="tab" href="#tab-skeleton" role="tab">Skeletons</a>
+  <a class="nav-link" data-bs-toggle="tab" href="#tab-avatars" role="tab">Avatars</a>
+  <a class="nav-link" data-bs-toggle="tab" href="#tab-steps" role="tab">Steps & Timeline</a>
+  <a class="nav-link" data-bs-toggle="tab" href="#tab-tooltips" role="tab">Tooltips & Popovers</a>
+  <a class="nav-link" data-bs-toggle="tab" href="#tab-cmd" role="tab">Command Palette</a>
+  <a class="nav-link" data-bs-toggle="tab" href="#tab-icons" role="tab">Icon Sizes</a>
+</nav>
+
+<div class="tab-content">
+
+<!-- Toasts Tab -->
+<div class="tab-pane fade show active" id="tab-toasts" role="tabpanel">
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title mb-3">Toast Notifications</h5>
+      <p class="text-secondary fs-7 mb-3">Use for non-blocking feedback after user actions — save confirmations, error alerts, background task completions.</p>
+      <p class="text-secondary fs-7 mb-3">Click to trigger toasts. Auto-dismiss with progress timer. JS API: <code>ThemeToast.success("message")</code></p>
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn btn-sm btn-success" onclick="ThemeToast.success('Changes saved successfully.', {title:'Success'})">Success Toast</button>
+        <button class="btn btn-sm btn-danger" onclick="ThemeToast.error('Failed to save changes.', {title:'Error'})">Error Toast</button>
+        <button class="btn btn-sm btn-warning" onclick="ThemeToast.warning('Your session expires in 5 minutes.', {title:'Warning'})">Warning Toast</button>
+        <button class="btn btn-sm btn-info" onclick="ThemeToast.info('New version available.', {title:'Info'})">Info Toast</button>
+        <button class="btn btn-sm btn-soft-ai" onclick="ThemeToast.ai('Analysis complete. 3 insights found.', {title:'AI Assistant'})">AI Toast</button>
+        <button class="btn btn-sm btn-primary" onclick="ThemeToast.show({message:'Custom toast with 10s duration.',title:'Custom',type:'primary',duration:10000})">10s Duration</button>
+        <button class="btn btn-sm btn-outline-secondary" onclick="ThemeToast.show({message:'This toast stays until dismissed.',title:'Persistent',type:'info',duration:0})">No Auto-Dismiss</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Animations Tab -->
+<div class="tab-pane fade" id="tab-glow" role="tabpanel">
+  <!-- Animated Borders & Glow -->
+  <h5 class="mb-3">Animated Borders & Glow</h5>
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <div class="card border-shimmer p-3">
+        <div class="card-body text-center">
+          <i data-lucide="sparkles" class="icon-lg text-ai mb-2"></i>
+          <h6>Shimmer Border</h6>
+          <p class="fs-7 text-secondary mb-0">Rotating conic gradient — perfect for AI-generated content cards.</p>
+          <code class="fs-8">.border-shimmer</code>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-glow-ai p-3">
+        <div class="card-body text-center">
+          <i data-lucide="wand-2" class="icon-lg text-ai mb-2"></i>
+          <h6>AI Glow</h6>
+          <p class="fs-7 text-secondary mb-0">Pulsing AI-colored glow — for active AI processes.</p>
+          <code class="fs-8">.border-glow-ai</code>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-glow-accent p-3">
+        <div class="card-body text-center">
+          <i data-lucide="zap" class="icon-lg text-accent mb-2"></i>
+          <h6>Accent Glow</h6>
+          <p class="fs-7 text-secondary mb-0">Pulsing accent glow — for highlighted or featured items.</p>
+          <code class="fs-8">.border-glow-accent</code>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-glow-primary p-3">
+        <div class="card-body text-center">
+          <i data-lucide="star" class="icon-lg text-primary mb-2"></i>
+          <h6>Primary Glow</h6>
+          <p class="fs-7 text-secondary mb-0">Pulsing primary glow — for focus or attention.</p>
+          <code class="fs-8">.border-glow-primary</code>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-gradient p-3">
+        <div class="card-body text-center">
+          <i data-lucide="palette" class="icon-lg text-tertiary mb-2"></i>
+          <h6>Gradient Border</h6>
+          <p class="fs-7 text-secondary mb-0">Static gradient border — primary to accent to AI.</p>
+          <code class="fs-8">.border-gradient</code>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-3">
+        <div class="card-body text-center">
+          <button class="btn btn-primary focus-ring-primary mb-2">Focus me (Tab)</button>
+          <p class="fs-7 text-secondary mb-0">Themed focus rings for keyboard navigation.</p>
+          <code class="fs-8">.focus-ring-primary</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hover Effects -->
+  <h5 class="mb-3">Hover Effects</h5>
+  <p class="text-secondary fs-7 mb-3">Use lift for interactive cards, shadow for content panels, border-primary for selectable items, glow for premium/featured elements.</p>
+  <div class="row g-3 mb-4">
+    <div class="col-md-3">
+      <div class="card hover-lift h-100">
+        <div class="card-body text-center">
+          <p class="fs-7 text-secondary mb-0">.hover-lift</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card hover-shadow h-100">
+        <div class="card-body text-center">
+          <p class="fs-7 text-secondary mb-0">.hover-shadow</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card hover-border-primary h-100">
+        <div class="card-body text-center">
+          <p class="fs-7 text-secondary mb-0">.hover-border-primary</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card hover-glow h-100">
+        <div class="card-body text-center">
+          <p class="fs-7 text-secondary mb-0">.hover-glow</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Staggered Entrance -->
+  <p class="text-secondary fs-7 mb-3">Apply to lists, grids, or card layouts that load dynamically — gives a polished cascading appearance.</p>
+  <div class="d-flex align-items-center gap-3 mb-3">
+    <h5 class="mb-0">Staggered Entrance</h5>
+    <button class="btn btn-sm btn-soft-primary" id="replay-stagger">
+      <i data-lucide="refresh-cw" class="icon-xs me-1"></i>
+      Replay
+    </button>
+  </div>
+  <div class="row g-3 mb-4 stagger-children" id="stagger-demo">
+    <div class="col-md-3">
+      <div class="card"><div class="card-body text-center fs-7">Item 1</div></div>
+    </div>
+    <div class="col-md-3">
+      <div class="card"><div class="card-body text-center fs-7">Item 2</div></div>
+    </div>
+    <div class="col-md-3">
+      <div class="card"><div class="card-body text-center fs-7">Item 3</div></div>
+    </div>
+    <div class="col-md-3">
+      <div class="card"><div class="card-body text-center fs-7">Item 4</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Progress & Spinners Tab -->
+<div class="tab-pane fade" id="tab-progress" role="tabpanel">
+  <p class="text-secondary fs-7 mb-3">Progress bars for determinate operations (file uploads, multi-step processes). Spinners for indeterminate loading states.</p>
+  <div class="row g-3 mb-4">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Tinted Progress Bars</h5>
+          {% for color in progress_colors %}
+          <div class="mb-3">
+            <div class="d-flex justify-content-between fs-7 mb-1">
+              <span>{{ color.label }}</span><span class="text-muted">{{ color.value }}%</span>
+            </div>
+            <div class="progress progress-tint-{{ color.name }}" style="height:6px;">
+              <div class="progress-bar" style="width:{{ color.value }}%" role="progressbar" aria-valuenow="{{ color.value }}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <h6 class="mt-4 mb-2">Thin (top-of-page style)</h6>
+          <div class="progress progress-thin progress-tint-primary mb-3">
+            <div class="progress-bar" style="width:65%"></div>
+          </div>
+
+          <h6 class="mb-2">Indeterminate</h6>
+          <div class="progress progress-tint-ai" style="height:4px;">
+            <div class="progress-bar progress-indeterminate" style="width:30%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Spinners</h5>
+          <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+            <div class="spinner-border spinner-xs text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+            <div class="spinner-border spinner-border-sm text-success" role="status"><span class="visually-hidden">Loading...</span></div>
+            <div class="spinner-border text-info" role="status"><span class="visually-hidden">Loading...</span></div>
+            <div class="spinner-border spinner-lg spinner-border-ai" role="status"><span class="visually-hidden">Loading...</span></div>
+          </div>
+          <h6 class="mb-2">Growing Spinners</h6>
+          <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+            <div class="spinner-grow spinner-grow-sm text-primary" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow spinner-border-accent" role="status"></div>
+          </div>
+          <h6 class="mb-2">Button Spinners</h6>
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-primary btn-sm" disabled>
+              <span class="spinner-border spinner-xs me-1"></span> Loading...
+            </button>
+            <button class="btn btn-soft-ai btn-sm" disabled>
+              <span class="spinner-grow spinner-xs me-1"></span> Processing...
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Skeletons Tab -->
+<div class="tab-pane fade" id="tab-skeleton" role="tabpanel">
+  <p class="text-secondary fs-7 mb-3">Use as loading placeholders while fetching data. Match skeleton shapes to the content they replace for smooth perceived performance.</p>
+  <div class="row g-3 mb-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Skeleton Loaders</h5>
+          <p class="text-secondary fs-7 mb-3">Add <code>.skeleton</code> class to any element. Shimmer animation with reduced-motion support.</p>
+
+          <h6 class="mb-2">Text Block</h6>
+          <div class="skeleton skeleton--heading"></div>
+          <div class="skeleton skeleton--text"></div>
+          <div class="skeleton skeleton--text"></div>
+          <div class="skeleton skeleton--text" style="width:75%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="mb-3">Card Skeleton</h6>
+          <div class="skeleton skeleton--image mb-3"></div>
+          <div class="skeleton skeleton--heading"></div>
+          <div class="skeleton skeleton--text"></div>
+          <div class="skeleton skeleton--text" style="width:60%"></div>
+          <div class="d-flex gap-2 mt-3">
+            <div class="skeleton skeleton--btn"></div>
+            <div class="skeleton skeleton--btn"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="mb-3">Message Skeleton</h6>
+          {% for i in "123" %}
+          <div class="d-flex gap-3 mb-3">
+            <div class="skeleton skeleton--avatar"></div>
+            <div class="flex-grow-1">
+              <div class="skeleton skeleton--text" style="width:30%"></div>
+              <div class="skeleton skeleton--text"></div>
+              <div class="skeleton skeleton--text" style="width:80%"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="mb-3">Chart Skeleton</h6>
+          <div class="skeleton skeleton--chart"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Avatars Tab -->
+<div class="tab-pane fade" id="tab-avatars" role="tabpanel">
+  <p class="text-secondary fs-7 mb-3">Use for user profiles, team member lists, and activity feeds. Avatar groups work well for showing collaborators or assignees.</p>
+  <div class="row g-3 mb-4">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Sizes & Colors</h5>
+          <div class="d-flex align-items-end gap-3 mb-4">
+            <span class="avatar avatar--xs">XS</span>
+            <span class="avatar avatar--sm">SM</span>
+            <span class="avatar">MD</span>
+            <span class="avatar avatar--lg">LG</span>
+            <span class="avatar avatar--xl">XL</span>
+          </div>
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <span class="avatar avatar--primary">AC</span>
+            <span class="avatar avatar--success">BM</span>
+            <span class="avatar avatar--danger">CW</span>
+            <span class="avatar avatar--warning">DK</span>
+            <span class="avatar avatar--info">EP</span>
+            <span class="avatar avatar--ai">AI</span>
+            <span class="avatar avatar--accent">FL</span>
+            <span class="avatar avatar--tertiary">GO</span>
+          </div>
+          <h6 class="mb-2">Round</h6>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="avatar avatar--round avatar--primary">AC</span>
+            <span class="avatar avatar--round avatar--success">BM</span>
+            <span class="avatar avatar--round avatar--ai">AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Avatar Groups & Status</h5>
+          <h6 class="mb-2">With Status</h6>
+          <div class="d-flex gap-3 mb-4">
+            <div class="avatar-wrapper">
+              <span class="avatar avatar--primary">AC</span>
+              <span class="avatar__status avatar__status--online"></span>
+            </div>
+            <div class="avatar-wrapper">
+              <span class="avatar avatar--success">BM</span>
+              <span class="avatar__status avatar__status--away"></span>
+            </div>
+            <div class="avatar-wrapper">
+              <span class="avatar avatar--danger">CW</span>
+              <span class="avatar__status avatar__status--busy"></span>
+            </div>
+            <div class="avatar-wrapper">
+              <span class="avatar avatar--secondary">DK</span>
+              <span class="avatar__status avatar__status--offline"></span>
+            </div>
+          </div>
+          <h6 class="mb-2">Stacked Group</h6>
+          <div class="avatar-group">
+            <span class="avatar avatar--primary">AC</span>
+            <span class="avatar avatar--success">BM</span>
+            <span class="avatar avatar--danger">CW</span>
+            <span class="avatar avatar--info">DK</span>
+            <span class="avatar-group__more">+5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Steps & Timeline Tab -->
+<div class="tab-pane fade" id="tab-steps" role="tabpanel">
+  <p class="text-secondary fs-7 mb-3">Steps for multi-step wizards (onboarding, checkout, setup flows). Timeline for activity logs, audit trails, and event history.</p>
+  <div class="row g-3 mb-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Wizard Steps</h5>
+          <div class="steps mb-4">
+            <div class="step step--completed">
+              <div class="step__indicator"></div>
+              <div class="step__label">Account</div>
+              <div class="step__desc">Create account</div>
+            </div>
+            <div class="step step--completed">
+              <div class="step__indicator"></div>
+              <div class="step__label">Profile</div>
+              <div class="step__desc">Set up profile</div>
+            </div>
+            <div class="step step--active">
+              <div class="step__indicator"></div>
+              <div class="step__label">Settings</div>
+              <div class="step__desc">Configure app</div>
+            </div>
+            <div class="step">
+              <div class="step__indicator"></div>
+              <div class="step__label">Review</div>
+              <div class="step__desc">Confirm details</div>
+            </div>
+            <div class="step">
+              <div class="step__indicator"></div>
+              <div class="step__label">Done</div>
+              <div class="step__desc">All set!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Activity Timeline</h5>
+          <div class="timeline">
+            {% for event in timeline_events %}
+            <div class="timeline-item">
+              <div class="timeline-item__dot timeline-item__dot--{{ event.color }}">
+                <i data-lucide="{{ event.icon }}"></i>
+              </div>
+              <div class="timeline-item__time">{{ event.time }}</div>
+              <div class="timeline-item__title">{{ event.title }}</div>
+              <div class="timeline-item__desc">{{ event.desc }}</div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Steps with Error</h5>
+          <div class="steps">
+            <div class="step step--completed">
+              <div class="step__indicator"></div>
+              <div class="step__label">Upload</div>
+            </div>
+            <div class="step step--completed">
+              <div class="step__indicator"></div>
+              <div class="step__label">Validate</div>
+            </div>
+            <div class="step step--error">
+              <div class="step__indicator"></div>
+              <div class="step__label">Process</div>
+            </div>
+            <div class="step">
+              <div class="step__indicator"></div>
+              <div class="step__label">Complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tooltips & Popovers Tab -->
+<div class="tab-pane fade" id="tab-tooltips" role="tabpanel">
+  <p class="text-secondary fs-7 mb-3">Tooltips for brief hover hints on icons or truncated text. Popovers for richer contextual content triggered by click or hover.</p>
+  <div class="row g-3 mb-4">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Tooltips</h5>
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" data-bs-title="Default tooltip">Default</button>
+            <button class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-title="Primary tooltip" data-bs-custom-class="tooltip-primary">Primary</button>
+            <button class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-title="Success tooltip" data-bs-custom-class="tooltip-success">Success</button>
+            <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-title="Danger tooltip" data-bs-custom-class="tooltip-danger">Danger</button>
+            <button class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-title="Warning tooltip" data-bs-custom-class="tooltip-warning">Warning</button>
+            <button class="btn btn-sm btn-soft-ai" data-bs-toggle="tooltip" data-bs-title="AI tooltip" data-bs-custom-class="tooltip-ai">AI</button>
+          </div>
+          <h6 class="mb-2">Placements</h6>
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Top">Top</button>
+            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Right">Right</button>
+            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Bottom">Bottom</button>
+            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Left">Left</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Popovers</h5>
+          <div class="d-flex flex-wrap gap-2">
+            <button class="btn btn-sm btn-primary" data-bs-toggle="popover" data-bs-title="Popover Title" data-bs-content="This is a themed popover with surface-aware styling for both light and dark modes.">Click me</button>
+            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-title="Hover Popover" data-bs-content="Appears on hover. Styled with theme surfaces and borders.">Hover me</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Command Palette Tab -->
+<div class="tab-pane fade" id="tab-cmd" role="tabpanel">
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title mb-2">Command Palette</h5>
+      <p class="text-secondary fs-7 mb-3">Press <kbd>⌘K</kbd> (Mac) or <kbd>Ctrl+K</kbd> (Windows/Linux) anywhere to open. Fuzzy search pages, actions, and docs. Arrow keys to navigate, Enter to select.</p>
+      <button class="btn btn-primary btn-sm" onclick="document.dispatchEvent(new KeyboardEvent('keydown',{key:'k',metaKey:true}))">
+        <i data-lucide="search" class="icon-xs me-1"></i>
+        Open Command Palette
+      </button>
+      <p class="text-muted fs-8 mt-2">Also accessible from the search icon in the topbar.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Icon Sizes Tab -->
+<div class="tab-pane fade" id="tab-icons" role="tabpanel">
+  <div class="row g-3 mb-4">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Size Scale</h5>
+          <p class="text-secondary fs-7 mb-3">Apply size classes directly to Lucide <code>&lt;i&gt;</code> elements. No inline styles needed.</p>
+          <div class="d-flex align-items-end gap-4 mb-4">
+            <div class="text-center">
+              <i data-lucide="star" class="icon-2xs text-muted"></i>
+              <div class="fs-8 text-muted mt-1">.icon-2xs</div>
+              <div class="fs-8 text-muted">12px</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="star" class="icon-xs text-muted"></i>
+              <div class="fs-8 text-muted mt-1">.icon-xs</div>
+              <div class="fs-8 text-muted">16px</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="star" class="icon-sm text-secondary"></i>
+              <div class="fs-8 text-muted mt-1">.icon-sm</div>
+              <div class="fs-8 text-muted">20px</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="star" class="icon-md"></i>
+              <div class="fs-8 text-muted mt-1">.icon-md</div>
+              <div class="fs-8 text-muted">24px</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="star" class="icon-lg"></i>
+              <div class="fs-8 text-muted mt-1">.icon-lg</div>
+              <div class="fs-8 text-muted">32px</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="star" class="icon-xl"></i>
+              <div class="fs-8 text-muted mt-1">.icon-xl</div>
+              <div class="fs-8 text-muted">40px</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="star" class="icon-2xl"></i>
+              <div class="fs-8 text-muted mt-1">.icon-2xl</div>
+              <div class="fs-8 text-muted">48px</div>
+            </div>
+          </div>
+          <h6 class="mb-2">Usage</h6>
+          <code class="fs-7">&lt;i data-lucide="home" class="icon-lg"&gt;&lt;/i&gt;</code>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Color Helpers</h5>
+          <p class="text-secondary fs-7 mb-3">Combine size and color classes for full control.</p>
+          <div class="d-flex flex-wrap gap-3 mb-4">
+            <div class="text-center">
+              <i data-lucide="circle" class="icon-lg icon-primary"></i>
+              <div class="fs-8 text-muted mt-1">.icon-primary</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="circle" class="icon-lg icon-success"></i>
+              <div class="fs-8 text-muted mt-1">.icon-success</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="circle" class="icon-lg icon-danger"></i>
+              <div class="fs-8 text-muted mt-1">.icon-danger</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="circle" class="icon-lg icon-warning"></i>
+              <div class="fs-8 text-muted mt-1">.icon-warning</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="circle" class="icon-lg icon-info"></i>
+              <div class="fs-8 text-muted mt-1">.icon-info</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="circle" class="icon-lg icon-ai"></i>
+              <div class="fs-8 text-muted mt-1">.icon-ai</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="circle" class="icon-lg icon-accent"></i>
+              <div class="fs-8 text-muted mt-1">.icon-accent</div>
+            </div>
+            <div class="text-center">
+              <i data-lucide="circle" class="icon-lg icon-muted"></i>
+              <div class="fs-8 text-muted mt-1">.icon-muted</div>
+            </div>
+          </div>
+          <h6 class="mb-2">Combined</h6>
+          <div class="d-flex align-items-center gap-3">
+            <i data-lucide="sparkles" class="icon-sm icon-ai"></i>
+            <i data-lucide="sparkles" class="icon-md icon-ai"></i>
+            <i data-lucide="sparkles" class="icon-lg icon-ai"></i>
+            <i data-lucide="sparkles" class="icon-xl icon-ai"></i>
+            <code class="fs-8 ms-2">.icon-xl .icon-ai</code>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Practical Examples</h5>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <h6 class="mb-2">Inline with text</h6>
+              <p class="d-flex align-items-center gap-2 mb-1">
+                <i data-lucide="check-circle" class="icon-xs icon-success"></i>
+                <span class="fs-7">Payment processed</span>
+              </p>
+              <p class="d-flex align-items-center gap-2 mb-1">
+                <i data-lucide="alert-triangle" class="icon-xs icon-warning"></i>
+                <span class="fs-7">Quota nearly exceeded</span>
+              </p>
+              <p class="d-flex align-items-center gap-2 mb-0">
+                <i data-lucide="x-circle" class="icon-xs icon-danger"></i>
+                <span class="fs-7">Connection failed</span>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <h6 class="mb-2">Feature highlight</h6>
+              <div class="d-flex gap-3 align-items-start">
+                <i data-lucide="shield-check" class="icon-xl icon-primary flex-shrink-0"></i>
+                <div>
+                  <div class="fw-semibold fs-7">Enterprise Security</div>
+                  <div class="fs-8 text-secondary">SOC 2 compliant with end-to-end encryption and role-based access.</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <h6 class="mb-2">Empty state icon</h6>
+              <div class="text-center py-3">
+                <i data-lucide="inbox" class="icon-2xl icon-muted"></i>
+                <div class="text-muted fs-7 mt-2">No messages yet</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tab-content -->
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Init Bootstrap tooltips and popovers
+document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function(el) {
+  new bootstrap.Tooltip(el);
+});
+document.querySelectorAll('[data-bs-toggle="popover"]').forEach(function(el) {
+  new bootstrap.Popover(el);
+});
+
+// Stagger animation
+(function() {
+  var el = document.getElementById('stagger-demo');
+  var btn = document.getElementById('replay-stagger');
+  if (!el || !btn) return;
+
+  function playStagger() {
+    el.classList.remove('stagger-animate');
+    void el.offsetWidth;
+    el.classList.add('stagger-animate');
+  }
+
+  // Trigger when Animations tab becomes visible
+  var tab = document.querySelector('[href="#tab-glow"]');
+  if (tab) {
+    tab.addEventListener('shown.bs.tab', function() {
+      setTimeout(playStagger, 50);
+    });
+  }
+
+  // Replay button
+  btn.addEventListener('click', playStagger);
+
+  // Also play if tab is already visible (e.g. direct link)
+  var pane = document.getElementById('tab-glow');
+  if (pane && pane.classList.contains('active')) {
+    playStagger();
+  }
+})();
+</script>
+{% endblock %}

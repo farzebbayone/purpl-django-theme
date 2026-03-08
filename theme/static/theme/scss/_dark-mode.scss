@@ -1,0 +1,46 @@
+// Surface overrides for both modes
+
+body {
+  background-color: var(--surface-0);
+}
+
+.card {
+  background-color: var(--surface-1);
+}
+
+// Dark mode overrides beyond Bootstrap defaults
+
+[data-bs-theme="dark"] {
+  body {
+    background-color: var(--surface-0);
+    color: var(--text-primary);
+  }
+
+  .card {
+    background-color: var(--surface-1);
+    border-color: var(--border-color);
+  }
+
+  .form-control,
+  .form-select {
+    background-color: var(--surface-2);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+  }
+
+  .table {
+    --bs-table-bg: transparent;
+    --bs-table-striped-bg: var(--surface-2);
+    --bs-table-hover-bg: var(--surface-2);
+    border-color: var(--border-color);
+  }
+
+  .dropdown-menu {
+    background-color: var(--surface-1);
+    border-color: var(--border-color);
+  }
+
+  hr {
+    border-color: var(--border-color);
+  }
+}

@@ -1,0 +1,197 @@
+// Steps (wizard) and Timeline components
+
+// Steps — horizontal wizard
+.steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  counter-reset: step;
+}
+
+.step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  text-align: center;
+
+  // Connector line
+  &::before {
+    content: "";
+    position: absolute;
+    top: 1rem;
+    left: calc(-50% + 1rem);
+    right: calc(50% + 1rem);
+    height: 2px;
+    background-color: var(--surface-3);
+  }
+
+  &:first-child::before { display: none; }
+
+  &__indicator {
+    counter-increment: step;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background-color: var(--surface-2);
+    color: var(--text-muted);
+    border: 2px solid var(--surface-3);
+    position: relative;
+    z-index: 1;
+    transition: all 0.2s ease;
+
+    &::after {
+      content: counter(step);
+    }
+  }
+
+  &__label {
+    margin-top: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  &__desc {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    margin-top: 0.125rem;
+  }
+
+  // Active
+  &--active {
+    .step__indicator {
+      background-color: $primary;
+      border-color: $primary;
+      color: #fff;
+    }
+    .step__label { color: $primary; font-weight: 600; }
+
+    &::before {
+      background-color: $primary;
+    }
+  }
+
+  // Completed
+  &--completed {
+    .step__indicator {
+      background-color: $success;
+      border-color: $success;
+      color: #fff;
+
+      &::after {
+        content: "\2713"; // checkmark
+      }
+    }
+    .step__label { color: var(--text-primary); }
+
+    &::before {
+      background-color: $success;
+    }
+  }
+
+  // Error
+  &--error {
+    .step__indicator {
+      background-color: $danger;
+      border-color: $danger;
+      color: #fff;
+
+      &::after {
+        content: "\2717"; // x mark
+      }
+    }
+    .step__label { color: $danger; }
+  }
+}
+
+// Timeline — vertical
+.timeline {
+  position: relative;
+  padding-left: 3rem;
+
+  // Vertical line — centered on dot (dot is 2rem wide, starts at -3rem, so center = -3rem + 1rem = left: 1rem)
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(1rem - 1px);
+    bottom: 0;
+    width: 2px;
+    background-color: var(--border-color);
+  }
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 1.5rem;
+
+  &:last-child { padding-bottom: 0; }
+
+  &__dot {
+    position: absolute;
+    left: -3rem;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: var(--surface-1);
+    border: 2px solid var(--border-color);
+    box-shadow: 0 0 0 5px var(--surface-1);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i, svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    // Colored dots — solid background to fully cover the line
+    @each $color, $value in (
+      "primary": $primary,
+      "success": $success,
+      "danger": $danger,
+      "warning": $warning,
+      "info": $info,
+      "ai": $ai,
+      "accent": $accent
+    ) {
+      &--#{$color} {
+        border-color: $value;
+        background-color: $value;
+        color: #fff;
+      }
+    }
+  }
+
+  &__time {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  &__title {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.125rem;
+  }
+
+  &__desc {
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  &__content {
+    margin-top: 0.5rem;
+  }
+}

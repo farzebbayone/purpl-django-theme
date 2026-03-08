@@ -1,0 +1,555 @@
+{% extends "demo/base.html" %}
+{% load theme_tags %}
+
+{% block title %}Forms & Tables — Bootstrap Theme{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-header__title">Forms & Tables</h1>
+  <p class="page-header__subtitle">Form layouts, validation states, and data tables.</p>
+</div>
+
+<nav class="nav nav-tabs-minimal mb-4">
+  <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#sec-forms">Forms</a>
+  <a class="nav-link" data-bs-toggle="tab" data-bs-target="#sec-validation">Validation</a>
+  <a class="nav-link" data-bs-toggle="tab" data-bs-target="#sec-tables">Tables</a>
+</nav>
+
+<div class="tab-content">
+
+  <!-- FORMS -->
+  <div class="tab-pane fade show active" id="sec-forms">
+    <div class="row g-4">
+      <!-- Vertical Form -->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Vertical Layout</h5>
+            <form>
+              {% for field in contact_form %}
+                {% render_field field layout="vertical" %}
+              {% endfor %}
+              <div class="d-flex gap-2 mt-3">
+                <button type="button" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-outline-secondary">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Horizontal Form -->
+      <div class="col-lg-6">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Horizontal Layout</h5>
+            <form>
+              {% for field in contact_form %}
+                {% render_field field layout="horizontal" %}
+              {% endfor %}
+              <div class="row">
+                <div class="col-sm-9 offset-sm-3">
+                  <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Date & Time Pickers -->
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Date Pickers</h5>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label class="form-label">Start Date</label>
+                <div class="datepicker datepicker--accent">
+                  <input type="text" class="datepicker__input" placeholder="Select date..." readonly>
+                  <span class="datepicker__input-icon"><i data-lucide="calendar" class="icon-xs"></i></span>
+                  <div class="datepicker__dropdown"></div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Due Date</label>
+                <div class="datepicker datepicker--ai">
+                  <input type="text" class="datepicker__input" placeholder="Select date..." readonly>
+                  <span class="datepicker__input-icon"><i data-lucide="calendar" class="icon-xs"></i></span>
+                  <div class="datepicker__dropdown"></div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Review Date</label>
+                <div class="datepicker datepicker--info">
+                  <input type="text" class="datepicker__input" placeholder="Select date..." readonly>
+                  <span class="datepicker__input-icon"><i data-lucide="calendar" class="icon-xs"></i></span>
+                  <div class="datepicker__dropdown"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Time Picker</h5>
+            <label class="form-label">Meeting Time</label>
+            <div class="timepicker timepicker--accent">
+              <input type="text" class="timepicker__input" placeholder="Select time..." readonly>
+              <span class="timepicker__input-icon"><i data-lucide="clock" class="icon-xs"></i></span>
+              <div class="timepicker__dropdown"></div>
+            </div>
+            <label class="form-label mt-3">Precise Time <span class="text-secondary fs-7">(1-min steps)</span></label>
+            <div class="timepicker timepicker--info" data-timepicker-precise>
+              <input type="text" class="timepicker__input" placeholder="Select time..." readonly>
+              <span class="timepicker__input-icon"><i data-lucide="clock" class="icon-xs"></i></span>
+              <div class="timepicker__dropdown"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3">DateTime Picker</h5>
+            <label class="form-label">Schedule Event</label>
+            <div class="datetimepicker datetimepicker--ai">
+              <input type="text" class="datetimepicker__input" placeholder="Select date & time..." readonly>
+              <span class="datetimepicker__input-icon"><i data-lucide="calendar" class="icon-xs"></i></span>
+              <div class="datetimepicker__dropdown">
+                <div class="datetimepicker__date-section"></div>
+                <div class="datetimepicker__time-section"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Date Range</h5>
+            <label class="form-label">Report Period</label>
+            <div class="datepicker datepicker--info" data-datepicker-range="true">
+              <input type="text" class="datepicker__input" placeholder="Select range..." readonly>
+              <span class="datepicker__input-icon"><i data-lucide="calendar" class="icon-xs"></i></span>
+              <div class="datepicker__dropdown"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typeable Pickers -->
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Typeable Pickers <span class="badge badge-soft-ai">Smart Input</span></h5>
+            <p class="text-secondary fs-7 mb-3">Type directly into segments. Use <kbd>&#8593;</kbd><kbd>&#8595;</kbd> to change values, <kbd>&#8592;</kbd><kbd>&#8594;</kbd> to navigate between parts.</p>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label class="form-label">Birth Date</label>
+                <div class="datepicker datepicker--accent" data-typeable-format="MM/DD/YYYY">
+                  <div class="input-group">
+                    <div class="picker-segments form-control"></div>
+                    <button type="button" class="btn btn-soft-accent" data-picker-trigger title="Open calendar">
+                      <i data-lucide="calendar" class="icon-xs"></i>
+                    </button>
+                  </div>
+                  <div class="datepicker__dropdown"></div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Birth Time <span class="text-secondary fs-7">(with seconds)</span></label>
+                <div class="timepicker timepicker--ai" data-typeable-format="HH:mm:ss A">
+                  <div class="input-group">
+                    <div class="picker-segments form-control"></div>
+                    <button type="button" class="btn btn-soft-ai" data-picker-trigger title="Open time picker">
+                      <i data-lucide="clock" class="icon-xs"></i>
+                    </button>
+                  </div>
+                  <div class="timepicker__dropdown"></div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Event DateTime</label>
+                <div class="datetimepicker datetimepicker--info" data-typeable-format="MM/DD/YYYY HH:mm A">
+                  <div class="input-group">
+                    <div class="picker-segments form-control"></div>
+                    <button type="button" class="btn btn-soft-info" data-picker-trigger title="Open date &amp; time picker">
+                      <i data-lucide="calendar-clock" class="icon-xs"></i>
+                    </button>
+                  </div>
+                  <div class="datetimepicker__dropdown">
+                    <div class="datetimepicker__date-section"></div>
+                    <div class="datetimepicker__time-section"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inline Form -->
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Inline / Search Layout</h5>
+            <form class="form-inline">
+              <div class="form-group">
+                <label class="form-label" for="id_query">Search</label>
+                {{ search_form.query }}
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="id_category">Category</label>
+                {{ search_form.category }}
+              </div>
+              <div class="form-group">
+                <div class="form-check mt-4">
+                  {{ search_form.active_only }}
+                  <label class="form-check-label" for="id_active_only">Active only</label>
+                </div>
+              </div>
+              <div>
+                <label class="form-label">&nbsp;</label>
+                <button type="button" class="btn btn-primary d-block">
+                  <i data-lucide="search" style="width:1rem;height:1rem" class="me-1"></i> Search
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compact Form -->
+      <div class="col-lg-5">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Compact Form</h5>
+            <form class="form-compact">
+              {% for field in login_form %}
+                {% render_field field layout="vertical" compact=True %}
+              {% endfor %}
+              <button type="button" class="btn btn-primary btn-sm w-100 mt-2">Sign In</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Variants -->
+      <div class="col-lg-7">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Input Variants</h5>
+
+            <div class="mb-3">
+              <label class="form-label">Input with icon (input group)</label>
+              <div class="input-group">
+                <span class="input-group-text"><i data-lucide="search" style="width:0.875rem;height:0.875rem"></i></span>
+                <input type="text" class="form-control" placeholder="Search users...">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Input with button</label>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Enter email...">
+                <button class="btn btn-primary" type="button">Subscribe</button>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Floating label</label>
+              <div class="form-floating">
+                <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+                <label for="floatingEmail">Email address</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Disabled input</label>
+              <input type="text" class="form-control" value="Read-only content" disabled>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">File input</label>
+              <input type="file" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Range</label>
+              <input type="range" class="form-range">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VALIDATION -->
+  <div class="tab-pane fade" id="sec-validation">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Validation States</h5>
+
+            <div class="mb-3">
+              <label class="form-label">Valid input</label>
+              <input type="text" class="form-control is-valid" value="Looks good!">
+              <div class="valid-feedback">This field is valid.</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Invalid input</label>
+              <input type="text" class="form-control is-invalid" value="">
+              <div class="invalid-feedback">This field is required.</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Valid select</label>
+              <select class="form-select is-valid">
+                <option selected>Option 1</option>
+                <option>Option 2</option>
+              </select>
+              <div class="valid-feedback">Good choice.</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Invalid select</label>
+              <select class="form-select is-invalid">
+                <option value="">Choose...</option>
+              </select>
+              <div class="invalid-feedback">Please select an option.</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Invalid textarea</label>
+              <textarea class="form-control is-invalid" rows="2"></textarea>
+              <div class="invalid-feedback">Please provide a description.</div>
+            </div>
+
+            <div class="form-check mb-2">
+              <input type="checkbox" class="form-check-input is-invalid" id="ckValid">
+              <label class="form-check-label" for="ckValid">You must agree to terms</label>
+              <div class="invalid-feedback">Required.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">htmx Form Pattern</h5>
+            <div class="alert alert-info alert-soft">
+              <i data-lucide="info" style="width:1rem;height:1rem" class="me-2"></i>
+              Forms can submit via htmx for inline validation without page reloads.
+            </div>
+            <pre class="bg-dark text-light p-3 rounded fs-8"><code>&lt;form hx-post="/api/contact/"
+      hx-target="#form-result"
+      hx-swap="innerHTML"&gt;
+  {&#37; csrf_token &#37;}
+  {&#37; render_form contact_form &#37;}
+&lt;/form&gt;
+&lt;div id="form-result"&gt;&lt;/div&gt;</code></pre>
+
+            <h5 class="card-title mb-3 mt-4">Template Tag Usage</h5>
+            <pre class="bg-dark text-light p-3 rounded fs-8"><code>{&#37; load theme_tags &#37;}
+
+{# Render full form #}
+{&#37; render_form my_form layout="vertical" &#37;}
+
+{# Render individual field #}
+{&#37; render_field my_form.email layout="horizontal" &#37;}
+
+{# Compact variant #}
+{&#37; render_form my_form compact=True &#37;}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLES -->
+  <div class="tab-pane fade" id="sec-tables">
+    <div class="row g-4">
+      <!-- Standard Table -->
+      <div class="col-12">
+        <div class="card table-card">
+          <div class="card-header d-flex align-items-center justify-content-between py-3">
+            <h5 class="card-title mb-0">Users</h5>
+            <div class="d-flex gap-2">
+              <div class="input-group" style="width: 14rem;">
+                <span class="input-group-text"><i data-lucide="search" style="width:0.875rem;height:0.875rem"></i></span>
+                <input type="text" class="form-control" placeholder="Search users...">
+              </div>
+              <button class="btn btn-primary btn-sm">
+                <i data-lucide="plus" style="width:0.875rem;height:0.875rem" class="me-1"></i> Add User
+              </button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-sortable mb-0">
+              <thead>
+                <tr>
+                  <th style="width: 2.5rem;">
+                    <input type="checkbox" class="form-check-input">
+                  </th>
+                  <th data-sort="name" class="sort-asc">Name</th>
+                  <th data-sort="email">Email</th>
+                  <th data-sort="role">Role</th>
+                  <th data-sort="status">Status</th>
+                  <th data-sort="active">Last Active</th>
+                  <th style="width: 3rem;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in table_data %}
+                <tr>
+                  <td>
+                    <input type="checkbox" class="form-check-input">
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <div class="topbar__avatar" style="width:1.5rem;height:1.5rem;font-size:0.625rem;">{{ row.name|truncatechars:2 }}</div>
+                      <span class="fw-medium">{{ row.name }}</span>
+                    </div>
+                  </td>
+                  <td class="text-secondary">{{ row.email }}</td>
+                  <td><span class="badge badge-soft-secondary">{{ row.role }}</span></td>
+                  <td>
+                    <span class="status-badge status-badge--{% if row.status == 'active' %}success{% elif row.status == 'busy' %}danger{% elif row.status == 'away' %}warning{% else %}{% endif %}">
+                      <span class="status-dot status-dot--{{ row.status }}"></span>
+                      {{ row.status|title }}
+                    </span>
+                  </td>
+                  <td class="text-secondary">{{ row.last_active }}</td>
+                  <td>
+                    <button class="btn btn-icon btn-sm btn-soft-secondary" style="width:1.5rem;height:1.5rem;">
+                      <i data-lucide="more-horizontal" style="width:0.875rem;height:0.875rem"></i>
+                    </button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="table-pagination">
+            <span class="table-pagination__info">Showing 1–8 of 24 users</span>
+            <nav>
+              <ul class="pagination pagination-sm">
+                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dense Table -->
+      <div class="col-lg-6">
+        <div class="card table-card">
+          <div class="card-header py-3">
+            <h6 class="card-title mb-0">Dense Table</h6>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-dense mb-0">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th class="text-end">Value</th>
+                  <th class="text-end">Change</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Page Views</td>
+                  <td class="text-end text-mono">142,847</td>
+                  <td class="text-end text-success">+12.5%</td>
+                </tr>
+                <tr>
+                  <td>Bounce Rate</td>
+                  <td class="text-end text-mono">34.2%</td>
+                  <td class="text-end text-danger">+2.1%</td>
+                </tr>
+                <tr>
+                  <td>Session Duration</td>
+                  <td class="text-end text-mono">4m 23s</td>
+                  <td class="text-end text-success">+8.7%</td>
+                </tr>
+                <tr>
+                  <td>Conversion Rate</td>
+                  <td class="text-end text-mono">3.14%</td>
+                  <td class="text-end text-success">+0.3%</td>
+                </tr>
+                <tr>
+                  <td>Avg. Load Time</td>
+                  <td class="text-end text-mono">1.2s</td>
+                  <td class="text-end text-success">-15%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Striped Table -->
+      <div class="col-lg-6">
+        <div class="card table-card">
+          <div class="card-header py-3">
+            <h6 class="card-title mb-0">Striped Table</h6>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped mb-0">
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Date</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>User signed up</td>
+                  <td class="text-secondary">Mar 7, 2026</td>
+                  <td><span class="badge badge-soft-success">Success</span></td>
+                </tr>
+                <tr>
+                  <td>Payment failed</td>
+                  <td class="text-secondary">Mar 6, 2026</td>
+                  <td><span class="badge badge-soft-danger">Error</span></td>
+                </tr>
+                <tr>
+                  <td>API rate limit hit</td>
+                  <td class="text-secondary">Mar 6, 2026</td>
+                  <td><span class="badge badge-soft-warning">Warning</span></td>
+                </tr>
+                <tr>
+                  <td>Deploy completed</td>
+                  <td class="text-secondary">Mar 5, 2026</td>
+                  <td><span class="badge badge-soft-info">Info</span></td>
+                </tr>
+                <tr>
+                  <td>AI model updated</td>
+                  <td class="text-secondary">Mar 5, 2026</td>
+                  <td><span class="badge badge-soft-ai">AI</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

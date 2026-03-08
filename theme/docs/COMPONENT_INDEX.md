@@ -1,0 +1,257 @@
+# Component Index
+
+> Quick-lookup index of all theme CSS classes. See linked docs for full usage details and HTML examples.
+
+## 1. Layout
+
+| Class | Description | Docs |
+|---|---|---|
+| `.layout` | Main layout wrapper with sidebar + content areas | LAYOUT.md |
+| `.layout--sidebar-collapsed` | Layout state with sidebar minimized to icons only | LAYOUT.md |
+| `.layout--no-sidebar` | Layout state with sidebar fully hidden | LAYOUT.md |
+| `.page-header` | Page-level header container with title and actions | LAYOUT.md |
+| `.page-header__title` | Primary heading within page header | LAYOUT.md |
+| `.page-header__subtitle` | Secondary text below page header title | LAYOUT.md |
+| `.topbar` | Fixed top navigation bar | LAYOUT.md |
+| `.topbar__brand` | Logo/brand area within topbar | LAYOUT.md |
+| `.topbar__btn` | Icon button in topbar actions area | LAYOUT.md |
+| `.topbar__badge` | Notification count badge on topbar buttons | LAYOUT.md |
+| `.topbar__dropdown-panel` | Dropdown panel triggered from topbar | LAYOUT.md |
+| `.topbar__notification` | Individual notification item in topbar dropdown | LAYOUT.md |
+| `.topbar__avatar` | User avatar image in topbar | LAYOUT.md |
+| `.sidebar` | Collapsible left navigation sidebar | LAYOUT.md |
+| `.sidebar--collapsed` | Sidebar in collapsed (icon-only) state | LAYOUT.md |
+| `.sidebar__link` | Navigation link inside sidebar | LAYOUT.md |
+| `.sidebar__link--active` | Active/current navigation link in sidebar | LAYOUT.md |
+| `.sidebar__section-title` | Section heading divider in sidebar nav | LAYOUT.md |
+
+## 2. Buttons
+
+| Class | Description | Docs |
+|---|---|---|
+| `.btn-soft-{color}` | Soft-fill button with tinted background for any theme color | COMPONENTS.md |
+| `.btn-tertiary` | Button using tertiary (purple) color | COMPONENTS.md |
+| `.btn-accent` | Button using accent (sky blue) color | COMPONENTS.md |
+| `.btn-ai` | Button using AI (electric orchid) color | COMPONENTS.md |
+| `.btn-outline-tertiary` | Outline button using tertiary color | COMPONENTS.md |
+| `.btn-outline-accent` | Outline button using accent color | COMPONENTS.md |
+| `.btn-outline-ai` | Outline button using AI color | COMPONENTS.md |
+| `.btn-icon` | Square icon-only button with equal padding | COMPONENTS.md |
+| `.btn-cta` | Call-to-action button with animated pulse/glow effect | COMPONENTS.md |
+| `.btn-gradient` | Button with gradient background fill | COMPONENTS.md |
+| `.btn-loading` | Button with spinner indicating loading state | COMPONENTS.md |
+
+## 3. Cards
+
+| Class | Description | Docs |
+|---|---|---|
+| `.card-stat` | Compact stat/metric card for dashboards | COMPONENTS.md |
+| `.card-chart` | Card sized and padded for chart content | COMPONENTS.md |
+| `.card-tint-{color}` | Card with subtle tinted background for any theme color | COMPONENTS.md |
+| `.card-horizontal` | Card with side-by-side image and body layout | COMPONENTS.md |
+| `.card-img-top` | Image positioned at top of card | COMPONENTS.md |
+| `.card-img-bottom` | Image positioned at bottom of card | COMPONENTS.md |
+
+## 4. Alerts & Badges
+
+| Class | Description | Docs |
+|---|---|---|
+| `.alert-soft` | Alert with soft/muted background tint | COMPONENTS.md |
+| `.notification` | Notification message component | COMPONENTS.md |
+| `.badge-soft-{color}` | Badge with soft tinted background for any theme color | COMPONENTS.md |
+| `.status-dot` | Small colored circle indicating status | COMPONENTS.md |
+| `.status-dot--online` | Green status dot for online/active | COMPONENTS.md |
+| `.status-dot--busy` | Red status dot for busy/do-not-disturb | COMPONENTS.md |
+| `.status-dot--away` | Yellow status dot for away/idle | COMPONENTS.md |
+| `.status-dot--offline` | Gray status dot for offline | COMPONENTS.md |
+| `.status-badge` | Status indicator as a labeled badge | COMPONENTS.md |
+
+## 5. Navigation
+
+| Class | Description | Docs |
+|---|---|---|
+| `.breadcrumb` | Breadcrumb navigation trail | COMPONENTS.md |
+| `.nav-tabs-minimal` | Tabs with minimal underline-only styling | COMPONENTS.md |
+| `.nav-pills-soft` | Pill navigation with soft tinted backgrounds | COMPONENTS.md |
+
+## 6. Modals & Drawers
+
+| Class | Description | Docs |
+|---|---|---|
+| `.drawer` | Slide-in panel from screen edge | COMPONENTS.md |
+| `.drawer--open` | Drawer in visible/open state | COMPONENTS.md |
+| `.drawer__header` | Header area of drawer with title and close | COMPONENTS.md |
+| `.drawer__body` | Scrollable content area of drawer | COMPONENTS.md |
+| `.drawer__footer` | Footer area of drawer with actions | COMPONENTS.md |
+| `.drawer-backdrop` | Semi-transparent overlay behind open drawer | COMPONENTS.md |
+
+## 7. Accordion
+
+| Class | Description | Docs |
+|---|---|---|
+| `.accordion--{color}` | Accordion with colored accent for any theme color | COMPONENTS.md |
+| `.accordion-flush` | Accordion without outer borders/background | COMPONENTS.md |
+
+## 8. List Group
+
+| Class | Description | Docs |
+|---|---|---|
+| `.list-group-item-soft-{color}` | List item with soft tinted background for any theme color | COMPONENTS.md |
+| `.list-group-item__icon` | Leading icon slot in list group item | COMPONENTS.md |
+| `.list-group-item__content` | Main content area in list group item | COMPONENTS.md |
+| `.list-group-item__trailing` | Trailing action/info slot in list group item | COMPONENTS.md |
+
+## 9. Dropdown
+
+| Class | Description | Docs |
+|---|---|---|
+| `.dropdown-item--danger` | Dropdown item styled as destructive action (red) | COMPONENTS.md |
+| `.dropdown-item__kbd` | Keyboard shortcut hint inside dropdown item | COMPONENTS.md |
+| `.dropdown-item__icon` | Leading icon inside dropdown item | COMPONENTS.md |
+
+## 10. Carousel
+
+| Class | Description | Docs |
+|---|---|---|
+| `.carousel--fixed-height` | Carousel with constrained fixed height | COMPONENTS.md |
+| `.carousel-caption` | Text overlay on carousel slides | COMPONENTS.md |
+
+## 11. Pagination
+
+| Class | Description | Docs |
+|---|---|---|
+| `.pagination--soft` | Pagination with soft tinted active state | COMPONENTS.md |
+| `.pagination--minimal` | Pagination with minimal/borderless styling | COMPONENTS.md |
+| `.pagination--{color}` | Pagination using a specific theme color | COMPONENTS.md |
+
+## 12. Forms
+
+| Class | Description | Docs |
+|---|---|---|
+| `.form-control` | Standard themed form input | FORMS_TABLES.md |
+| `.form-compact` | Compact form layout with reduced spacing | FORMS_TABLES.md |
+| `.form-inline` | Horizontal inline form layout | FORMS_TABLES.md |
+| `.form-horizontal` | Form with side-by-side labels and inputs | FORMS_TABLES.md |
+
+## 13. Date/Time Pickers
+
+| Class | Description | Docs |
+|---|---|---|
+| `.datepicker` | Date picker input component | FORMS_TABLES.md |
+| `.timepicker` | Time picker input component | FORMS_TABLES.md |
+| `.datetimepicker` | Combined date and time picker | FORMS_TABLES.md |
+| `.datepicker--accent` | Date picker using accent color | FORMS_TABLES.md |
+| `.datepicker--ai` | Date picker using AI color | FORMS_TABLES.md |
+| `.datepicker--info` | Date picker using info color | FORMS_TABLES.md |
+| `[data-datepicker-range]` | Attribute enabling date range selection | FORMS_TABLES.md |
+| `[data-timepicker-precise]` | Attribute enabling seconds in time picker | FORMS_TABLES.md |
+| `[data-typeable-format]` | Attribute enabling typed date/time input | FORMS_TABLES.md |
+| `.picker-segments` | Container for segmented picker controls | FORMS_TABLES.md |
+| `.picker-segment` | Individual segment within segmented picker | FORMS_TABLES.md |
+
+## 14. Tables
+
+| Class | Description | Docs |
+|---|---|---|
+| `.table-dense` | Table with reduced row height and padding | FORMS_TABLES.md |
+| `.table-sortable` | Table with sortable column headers | FORMS_TABLES.md |
+| `.table-card` | Table wrapped in card styling | FORMS_TABLES.md |
+| `.table-pagination` | Pagination controls for table data | FORMS_TABLES.md |
+
+## 15. Chat
+
+| Class | Description | Docs |
+|---|---|---|
+| `.message` | Base chat message row | CHAT_INTERFACE.md |
+| `.message--self` | Message sent by current user | CHAT_INTERFACE.md |
+| `.message--ai` | Message from AI/bot | CHAT_INTERFACE.md |
+| `.message--system` | System/info message | CHAT_INTERFACE.md |
+| `.composer` | Message input/compose area | CHAT_INTERFACE.md |
+| `.reactions` | Emoji reaction bar on a message | CHAT_INTERFACE.md |
+| `.thread` | Threaded reply container | CHAT_INTERFACE.md |
+| `.typing-indicator` | Animated typing/composing indicator | CHAT_INTERFACE.md |
+| `.channel-list` | List of chat channels/conversations | CHAT_INTERFACE.md |
+
+## 16. Charts
+
+| Class | Description | Docs |
+|---|---|---|
+| `.chart-container` | Responsive wrapper for chart elements | DATA_VIZ.md |
+| `.chart-card` | Card layout containing a chart | DATA_VIZ.md |
+| `.chart-legend` | Custom chart legend component | DATA_VIZ.md |
+| `.chart-period` | Time period selector for chart data | DATA_VIZ.md |
+
+## 17. KPI
+
+| Class | Description | Docs |
+|---|---|---|
+| `.kpi` | Key performance indicator card | DATA_VIZ.md |
+| `.kpi__value` | Large numeric value display in KPI | DATA_VIZ.md |
+| `.kpi__change` | Change/delta indicator (up/down arrow + percentage) | DATA_VIZ.md |
+| `.kpi__sparkline` | Inline mini chart within KPI card | DATA_VIZ.md |
+| `.kpi__progress` | Progress bar within KPI card | DATA_VIZ.md |
+| `.metric-row` | Horizontal row of KPI/metric cards | DATA_VIZ.md |
+
+## 18. UI Components
+
+| Class | Description | Docs |
+|---|---|---|
+| `.theme-toast` | Toast notification popup | UI_COMPONENTS.md |
+| `.toast-container` | Positioning container for toast stack | UI_COMPONENTS.md |
+| `.progress-tint-{color}` | Progress bar with tinted color for any theme color | UI_COMPONENTS.md |
+| `.progress-thin` | Slim/thin progress bar variant | UI_COMPONENTS.md |
+| `.progress-indeterminate` | Animated indeterminate progress bar | UI_COMPONENTS.md |
+| `.spinner-xs` | Extra-small loading spinner | UI_COMPONENTS.md |
+| `.spinner-lg` | Large loading spinner | UI_COMPONENTS.md |
+| `.skeleton` | Placeholder skeleton loading shape | UI_COMPONENTS.md |
+| `.avatar` | Circular user avatar image | UI_COMPONENTS.md |
+| `.avatar-group` | Overlapping stack of avatars | UI_COMPONENTS.md |
+| `.steps` | Multi-step progress/wizard container | UI_COMPONENTS.md |
+| `.step` | Individual step within steps component | UI_COMPONENTS.md |
+| `.timeline` | Vertical timeline component | UI_COMPONENTS.md |
+| `.cmd-palette` | Command palette overlay (Cmd+K style) | UI_COMPONENTS.md |
+| `.empty-state` | Placeholder for empty/no-data views | UI_COMPONENTS.md |
+
+## 19. Effects
+
+| Class | Description | Docs |
+|---|---|---|
+| `.hover-lift` | Lifts element up on hover via transform | ANIMATIONS.md |
+| `.hover-shadow` | Deepens box-shadow on hover | ANIMATIONS.md |
+| `.hover-glow` | Adds colored glow effect on hover | ANIMATIONS.md |
+| `.border-shimmer` | Animated shimmering border effect | ANIMATIONS.md |
+| `.border-glow-{color}` | Static glowing border for any theme color | ANIMATIONS.md |
+| `.border-gradient` | Gradient-colored border | ANIMATIONS.md |
+| `.focus-ring-{color}` | Custom focus ring color for any theme color | ANIMATIONS.md |
+| `.stagger-children` | Staggers animation delay across child elements | ANIMATIONS.md |
+| `.animate-{name}` | Named CSS animation (fadeIn, slideUp, etc.) | ANIMATIONS.md |
+
+## 20. Icons
+
+| Class | Description | Docs |
+|---|---|---|
+| `.icon-2xs` | Icon size: extra-extra-small | STYLE_GUIDE.md |
+| `.icon-xs` | Icon size: extra-small | STYLE_GUIDE.md |
+| `.icon-sm` | Icon size: small | STYLE_GUIDE.md |
+| `.icon-md` | Icon size: medium (default) | STYLE_GUIDE.md |
+| `.icon-lg` | Icon size: large | STYLE_GUIDE.md |
+| `.icon-xl` | Icon size: extra-large | STYLE_GUIDE.md |
+| `.icon-2xl` | Icon size: extra-extra-large | STYLE_GUIDE.md |
+| `.icon-{color}` | Icon color for any theme color | STYLE_GUIDE.md |
+
+## 21. Accessibility
+
+| Class | Description | Docs |
+|---|---|---|
+| `.skip-link` | Skip-to-content link for keyboard navigation | ACCESSIBILITY.md |
+| `.sr-only` | Visually hidden, screen-reader-only text | ACCESSIBILITY.md |
+| `.sr-only-focusable` | Hidden until focused (for skip links) | ACCESSIBILITY.md |
+
+## 22. Typography
+
+| Class | Description | Docs |
+|---|---|---|
+| `.text-mono` | Monospace font (JetBrains Mono) | STYLE_GUIDE.md |
+| `.fs-7` | Font size level 7 (smaller than Bootstrap's fs-6) | STYLE_GUIDE.md |
+| `.fs-8` | Font size level 8 (smallest) | STYLE_GUIDE.md |
+| `.doc-content` | Prose content container with comfortable reading width | STYLE_GUIDE.md |

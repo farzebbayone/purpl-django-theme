@@ -1,0 +1,46 @@
+{% if widget_type == "radioselect" or widget_type == "checkboxselectmultiple" %}
+<div class="mb-3{% if compact %} form-compact{% endif %}">
+  <label class="form-label">{{ field.label }}</label>
+  <div class="form-check-group">
+    {% for choice in field %}
+    <div class="form-check">
+      {{ choice.tag }}
+      <label class="form-check-label" for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+    </div>
+    {% endfor %}
+  </div>
+  {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+  {% if field.errors %}
+    {% for error in field.errors %}<div class="invalid-feedback d-block">{{ error }}</div>{% endfor %}
+  {% endif %}
+</div>
+{% elif is_check %}
+<div class="form-check{% if is_switch %} form-switch{% endif %}{% if compact %} form-compact{% endif %} mb-3">
+  {{ field }}
+  <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+  {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+  {% if field.errors %}
+    {% for error in field.errors %}<div class="invalid-feedback d-block">{{ error }}</div>{% endfor %}
+  {% endif %}
+</div>
+{% elif layout == "horizontal" %}
+<div class="row mb-3{% if compact %} form-compact{% endif %}">
+  <label class="col-sm-3 form-label form-horizontal" for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <div class="col-sm-9">
+    {{ field }}
+    {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+    {% if field.errors %}
+      {% for error in field.errors %}<div class="invalid-feedback d-block">{{ error }}</div>{% endfor %}
+    {% endif %}
+  </div>
+</div>
+{% else %}
+<div class="mb-3{% if compact %} form-compact{% endif %}">
+  <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+  {{ field }}
+  {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+  {% if field.errors %}
+    {% for error in field.errors %}<div class="invalid-feedback d-block">{{ error }}</div>{% endfor %}
+  {% endif %}
+</div>
+{% endif %}

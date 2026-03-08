@@ -1,0 +1,13 @@
+{
+  "name": "bootstrap-theme-django",
+  "private": true,
+  "scripts": {
+    "scss": "sass --load-path=node_modules theme/static/theme/scss/theme.scss theme/static/theme/css/theme.css",
+    "scss:watch": "sass --load-path=node_modules --watch theme/static/theme/scss/theme.scss theme/static/theme/css/theme.css",
+    "scss:min": "sass --load-path=node_modules --style=compressed theme/static/theme/scss/theme.scss theme/static/theme/css/theme.min.css"
+  },
+  "devDependencies": {
+    "bootstrap": "^5.3.3",
+    "sass": "^1.80.0"
+  }
+}
