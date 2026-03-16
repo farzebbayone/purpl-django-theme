@@ -1,0 +1,617 @@
+{% load static theme_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Synth — AI-Powered Analytics Platform</title>
+  <script>
+    (function() {
+      var t = localStorage.getItem('bs-theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-bs-theme', t);
+    })();
+  </script>
+  {% theme_css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Dashboard mockup — template-specific */
+    .dashboard-mockup { max-width: 900px; margin: 0 auto; }
+    .dashboard-mockup .kpi-value { font-size: 1.5rem; font-weight: 700; }
+    .dashboard-mockup .kpi-label { font-size: 0.75rem; color: var(--text-secondary); }
+    .dashboard-mockup .kpi-change { font-size: 0.75rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <!-- ================================================================== -->
+  <!-- NAVBAR                                                             -->
+  <!-- ================================================================== -->
+  <nav class="landing-nav" data-landing-nav>
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="#" class="landing-nav__brand">
+          <i data-lucide="hexagon" style="width:24px;height:24px;color:var(--bs-primary)"></i>
+          Synth
+        </a>
+        <ul class="landing-nav__links d-none d-md-flex">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#faq">Docs</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <button id="theme-toggle" class="btn btn-icon btn-sm btn-outline-secondary border-0" type="button" aria-label="Toggle theme">
+            <i class="bi bi-moon"></i>
+          </button>
+          <a href="#" class="btn btn-sm btn-link text-decoration-none d-none d-sm-inline-block">Sign in</a>
+          <a href="#" class="btn btn-sm btn-primary btn-cta">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================================================================== -->
+  <!-- HERO                                                               -->
+  <!-- ================================================================== -->
+  <section class="landing-hero">
+    <!-- Decorative orbs -->
+    <div class="landing-orb" style="width:500px;height:500px;top:-100px;left:-100px;background:var(--bs-primary)"></div>
+    <div class="landing-orb" style="width:400px;height:400px;bottom:-50px;right:-80px;background:#8B5CF6"></div>
+    <div class="landing-orb" style="width:300px;height:300px;top:40%;left:55%;background:#0EA5E9"></div>
+
+    <div class="container position-relative" style="z-index:1">
+      <div class="mb-4">
+        <span class="badge bg-primary-subtle text-primary-emphasis px-3 py-2 rounded-pill fw-semibold">
+          <i data-lucide="sparkles" style="width:14px;height:14px;vertical-align:-2px"></i>
+          Introducing Synth 1.0
+        </span>
+      </div>
+
+      <h1 class="landing-hero__title">Build smarter with<br>AI-powered analytics</h1>
+
+      <p class="landing-hero__subtitle">
+        Transform raw data into actionable insights. Synth combines real-time analytics
+        with AI to help teams make better decisions, faster.
+      </p>
+
+      <div class="d-flex justify-content-center gap-3 flex-wrap mb-5">
+        <a href="#" class="btn btn-primary btn-lg btn-cta px-4">Start free trial</a>
+        <a href="/analytics/" class="btn btn-outline-secondary btn-lg px-4">View demo</a>
+      </div>
+
+      <!-- Dashboard mockup -->
+      <div class="dashboard-mockup scroll-reveal">
+        <div class="card border-shimmer shadow-lg">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h6 class="mb-0 fw-semibold text-secondary">Dashboard Overview</h6>
+              <span class="badge bg-success-subtle text-success-emphasis">Live</span>
+            </div>
+            <div class="row g-3">
+              <div class="col-6 col-md-3">
+                <div class="card bg-body-tertiary border-0">
+                  <div class="card-body py-3 px-3 text-center">
+                    <div class="kpi-value text-primary">12.4K</div>
+                    <div class="kpi-label">Active Users</div>
+                    <div class="kpi-change text-success">+14.2%</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="card bg-body-tertiary border-0">
+                  <div class="card-body py-3 px-3 text-center">
+                    <div class="kpi-value" style="color:var(--bs-info)">$84.2K</div>
+                    <div class="kpi-label">Revenue</div>
+                    <div class="kpi-change text-success">+8.7%</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="card bg-body-tertiary border-0">
+                  <div class="card-body py-3 px-3 text-center">
+                    <div class="kpi-value" style="color:#8B5CF6">98.3%</div>
+                    <div class="kpi-label">Uptime</div>
+                    <div class="kpi-change text-success">+0.1%</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="card bg-body-tertiary border-0">
+                  <div class="card-body py-3 px-3 text-center">
+                    <div class="kpi-value" style="color:#D946EF">1.2M</div>
+                    <div class="kpi-label">Events/sec</div>
+                    <div class="kpi-change text-success">+22.5%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <!-- LOGO CLOUD                                                         -->
+  <!-- ================================================================== -->
+  <section class="landing-section" style="padding-top:3rem;padding-bottom:3rem;border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color)">
+    <div class="landing-section__inner">
+      <div class="landing-logos">
+        <div class="landing-logos__label">Trusted by innovative teams worldwide</div>
+        <div class="landing-logos__item">
+          <i data-lucide="hexagon" style="width:24px;height:24px"></i>
+          <span class="fw-semibold">Acme Corp</span>
+        </div>
+        <div class="landing-logos__item">
+          <i data-lucide="triangle" style="width:24px;height:24px"></i>
+          <span class="fw-semibold">Vertex AI</span>
+        </div>
+        <div class="landing-logos__item">
+          <i data-lucide="diamond" style="width:24px;height:24px"></i>
+          <span class="fw-semibold">Prism Labs</span>
+        </div>
+        <div class="landing-logos__item">
+          <i data-lucide="circle" style="width:24px;height:24px"></i>
+          <span class="fw-semibold">Orion Tech</span>
+        </div>
+        <div class="landing-logos__item">
+          <i data-lucide="octagon" style="width:24px;height:24px"></i>
+          <span class="fw-semibold">Nova Systems</span>
+        </div>
+        <div class="landing-logos__item">
+          <i data-lucide="pentagon" style="width:24px;height:24px"></i>
+          <span class="fw-semibold">Hexa Cloud</span>
+        </div>
+        <div class="landing-logos__item">
+          <i data-lucide="box" style="width:24px;height:24px"></i>
+          <span class="fw-semibold">CubeStack</span>
+        </div>
+        <div class="landing-logos__item">
+          <i data-lucide="zap" style="width:24px;height:24px"></i>
+          <span class="fw-semibold">Volterra</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <!-- FEATURES                                                           -->
+  <!-- ================================================================== -->
+  <section class="landing-section landing-features scroll-reveal" id="features">
+    <div class="container">
+      <h2 class="landing-section__title">Everything you need to understand your data</h2>
+      <p class="landing-section__subtitle">
+        Powerful features that help you collect, analyze, and act on your data in real-time.
+      </p>
+
+      <div class="row g-4 stagger-children">
+        <!-- Real-time Analytics -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card hover-lift h-100">
+            <div class="card-body p-4">
+              <div class="feature-icon" style="background:rgba(94,106,210,0.1)">
+                <i data-lucide="bar-chart-3" style="width:22px;height:22px;color:var(--bs-primary)"></i>
+              </div>
+              <h5 class="fw-semibold mb-2">Real-time Analytics</h5>
+              <p class="text-secondary mb-0">Monitor your metrics as they happen. Live dashboards update every second with zero configuration.</p>
+            </div>
+          </div>
+        </div>
+        <!-- AI Insights -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card hover-lift h-100">
+            <div class="card-body p-4">
+              <div class="feature-icon" style="background:rgba(217,70,239,0.1)">
+                <i data-lucide="sparkles" style="width:22px;height:22px;color:#D946EF"></i>
+              </div>
+              <h5 class="fw-semibold mb-2">AI Insights</h5>
+              <p class="text-secondary mb-0">Get automated analysis and anomaly detection. Our AI identifies trends before they become obvious.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Enterprise Security -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card hover-lift h-100">
+            <div class="card-body p-4">
+              <div class="feature-icon" style="background:rgba(16,185,129,0.1)">
+                <i data-lucide="shield-check" style="width:22px;height:22px;color:var(--bs-success)"></i>
+              </div>
+              <h5 class="fw-semibold mb-2">Enterprise Security</h5>
+              <p class="text-secondary mb-0">SOC 2 Type II certified. End-to-end encryption, SSO, and role-based access control.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Lightning Fast -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card hover-lift h-100">
+            <div class="card-body p-4">
+              <div class="feature-icon" style="background:rgba(245,158,11,0.1)">
+                <i data-lucide="zap" style="width:22px;height:22px;color:var(--bs-warning)"></i>
+              </div>
+              <h5 class="fw-semibold mb-2">Lightning Fast</h5>
+              <p class="text-secondary mb-0">Sub-100ms query response times. Built on a columnar database optimized for analytical workloads.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Version Control -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card hover-lift h-100">
+            <div class="card-body p-4">
+              <div class="feature-icon" style="background:rgba(14,165,233,0.1)">
+                <i data-lucide="git-branch" style="width:22px;height:22px;color:#0EA5E9"></i>
+              </div>
+              <h5 class="fw-semibold mb-2">Version Control</h5>
+              <p class="text-secondary mb-0">Track every change to your dashboards and queries. Roll back to any point with one click.</p>
+            </div>
+          </div>
+        </div>
+        <!-- 200+ Integrations -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card hover-lift h-100">
+            <div class="card-body p-4">
+              <div class="feature-icon" style="background:rgba(139,92,246,0.1)">
+                <i data-lucide="plug" style="width:22px;height:22px;color:#8B5CF6"></i>
+              </div>
+              <h5 class="fw-semibold mb-2">200+ Integrations</h5>
+              <p class="text-secondary mb-0">Connect to any data source. Native integrations with databases, warehouses, and SaaS tools.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <!-- STATS                                                              -->
+  <!-- ================================================================== -->
+  <section class="landing-section landing-stats scroll-reveal">
+    <div class="container">
+      <div class="row g-4 text-center">
+        <div class="col-6 col-md-3">
+          <div class="landing-stats__value">99.99%</div>
+          <div class="landing-stats__label">Uptime SLA</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="landing-stats__value">12M+</div>
+          <div class="landing-stats__label">Events per second</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="landing-stats__value">2,400+</div>
+          <div class="landing-stats__label">Companies</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="landing-stats__value">&lt;50ms</div>
+          <div class="landing-stats__label">Avg query time</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <!-- PRICING                                                            -->
+  <!-- ================================================================== -->
+  <section class="landing-section landing-pricing scroll-reveal" id="pricing">
+    <div class="container">
+      <h2 class="landing-section__title">Simple, transparent pricing</h2>
+      <p class="landing-section__subtitle">
+        Start free and scale as you grow. No hidden fees, no surprises.
+      </p>
+
+      <div class="row g-4 justify-content-center stagger-children">
+        <!-- Starter -->
+        <div class="col-md-4">
+          <div class="card landing-pricing__card hover-lift">
+            <div class="card-body p-4">
+              <h5 class="fw-semibold mb-1">Starter</h5>
+              <p class="text-secondary small mb-3">For individuals and small projects</p>
+              <div class="mb-3">
+                <span class="landing-pricing__price">$0</span>
+                <span class="landing-pricing__period">/month</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary w-100 mb-3">Get started</a>
+              <ul class="landing-pricing__features">
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> 10K events/month</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> 3 dashboards</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> 7-day retention</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> Community support</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> 1 team member</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pro (Featured) -->
+        <div class="col-md-4">
+          <div class="card landing-pricing__card landing-pricing__card--featured border-glow-primary hover-lift">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <h5 class="fw-semibold mb-0">Pro</h5>
+                <span class="badge bg-primary">Most Popular</span>
+              </div>
+              <p class="text-secondary small mb-3">For growing teams</p>
+              <div class="mb-3">
+                <span class="landing-pricing__price">$49</span>
+                <span class="landing-pricing__period">/month</span>
+              </div>
+              <a href="#" class="btn btn-primary btn-cta w-100 mb-3">Start free trial</a>
+              <ul class="landing-pricing__features">
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> 1M events/month</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> Unlimited dashboards</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> 90-day retention</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> Priority support</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> 10 team members</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> AI insights</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> Custom alerts</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="col-md-4">
+          <div class="card landing-pricing__card hover-lift">
+            <div class="card-body p-4">
+              <h5 class="fw-semibold mb-1">Enterprise</h5>
+              <p class="text-secondary small mb-3">For large organizations</p>
+              <div class="mb-3">
+                <span class="landing-pricing__price">Custom</span>
+              </div>
+              <a href="#" class="btn btn-outline-primary w-100 mb-3">Talk to sales</a>
+              <ul class="landing-pricing__features">
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> Unlimited events</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> Unlimited everything</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> Unlimited retention</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> Dedicated support</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> Unlimited team members</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> Advanced AI</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> SSO &amp; SAML</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> Custom integrations</li>
+                <li><i data-lucide="check-circle" style="width:16px;height:16px" class="text-success"></i> SLA guarantee</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <!-- TESTIMONIALS                                                       -->
+  <!-- ================================================================== -->
+  <section class="landing-section landing-testimonials scroll-reveal" id="testimonials">
+    <div class="container">
+      <h2 class="landing-section__title">Loved by data teams everywhere</h2>
+      <p class="landing-section__subtitle">
+        See what our customers have to say about Synth.
+      </p>
+
+      <div class="row g-4 stagger-children">
+        <div class="col-md-4">
+          <div class="card hover-lift h-100">
+            <div class="card-body p-4">
+              <blockquote class="mb-4">
+                "Synth completely transformed how we approach analytics. The AI insights alone saved us 20 hours per week of manual analysis."
+              </blockquote>
+              <div class="d-flex align-items-center gap-3">
+                <div class="avatar avatar--round avatar--primary">SC</div>
+                <div>
+                  <div class="fw-semibold" style="font-size:0.9rem">Sarah Chen</div>
+                  <div class="text-secondary" style="font-size:0.8rem">VP of Data, Vertex AI</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card hover-lift h-100">
+            <div class="card-body p-4">
+              <blockquote class="mb-4">
+                "The real-time dashboards are incredible. We went from daily reports to live monitoring in under a week."
+              </blockquote>
+              <div class="d-flex align-items-center gap-3">
+                <div class="avatar avatar--round avatar--accent">MR</div>
+                <div>
+                  <div class="fw-semibold" style="font-size:0.9rem">Marcus Rivera</div>
+                  <div class="text-secondary" style="font-size:0.8rem">CTO, Orion Tech</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card hover-lift h-100">
+            <div class="card-body p-4">
+              <blockquote class="mb-4">
+                "Best analytics platform we've used. The integrations just work, and the query performance is unmatched."
+              </blockquote>
+              <div class="d-flex align-items-center gap-3">
+                <div class="avatar avatar--round avatar--ai">AP</div>
+                <div>
+                  <div class="fw-semibold" style="font-size:0.9rem">Aisha Patel</div>
+                  <div class="text-secondary" style="font-size:0.8rem">Lead Engineer, Prism Labs</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <!-- FAQ                                                                -->
+  <!-- ================================================================== -->
+  <section class="landing-section landing-faq scroll-reveal" id="faq">
+    <div class="container">
+      <h2 class="landing-section__title">Frequently asked questions</h2>
+      <p class="landing-section__subtitle">
+        Everything you need to know about Synth.
+      </p>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                  How does the free plan work?
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-secondary">
+                  The Starter plan is completely free, forever. You get 10,000 events per month, 3 dashboards, and 7-day data retention. No credit card required to start.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                  Can I switch plans at any time?
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-secondary">
+                  Yes! You can upgrade or downgrade at any time. When upgrading, you'll be prorated for the remainder of the billing period. Downgrades take effect at the next billing cycle.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                  What kind of data sources do you support?
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-secondary">
+                  Synth integrates with 200+ data sources including PostgreSQL, MySQL, MongoDB, Snowflake, BigQuery, Redshift, and popular SaaS tools like Stripe, Salesforce, and HubSpot.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                  Is my data secure?
+                </button>
+              </h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-secondary">
+                  Absolutely. We're SOC 2 Type II certified, use AES-256 encryption at rest and TLS 1.3 in transit. We also support SSO, SAML, and role-based access control for enterprise customers.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                  Do you offer a self-hosted option?
+                </button>
+              </h2>
+              <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-secondary">
+                  Yes, our Enterprise plan includes an option for self-hosted deployment. Contact our sales team for details on on-premise and private cloud installations.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <!-- CTA                                                                -->
+  <!-- ================================================================== -->
+  <section class="landing-section landing-cta scroll-reveal">
+    <div class="container text-center">
+      <h2 class="landing-section__title">Ready to transform your analytics?</h2>
+      <p class="landing-section__subtitle" style="margin-bottom:2rem">
+        Join 2,400+ companies using Synth to make data-driven decisions.
+      </p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="#" class="btn btn-primary btn-lg btn-cta px-4">Start free trial</a>
+        <a href="#" class="btn btn-outline-secondary btn-lg px-4">Talk to sales</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================== -->
+  <!-- FOOTER                                                             -->
+  <!-- ================================================================== -->
+  <footer class="landing-footer">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Brand -->
+        <div class="col-lg-3 col-md-6">
+          <a href="#" class="landing-nav__brand mb-3 d-inline-flex">
+            <i data-lucide="hexagon" style="width:22px;height:22px;color:var(--bs-primary)"></i>
+            Synth
+          </a>
+          <p class="text-secondary mt-2" style="font-size:0.9rem;max-width:280px">
+            AI-powered analytics for modern teams.
+          </p>
+          <div class="landing-footer__social">
+            <a href="#" aria-label="GitHub"><i data-lucide="github" style="width:18px;height:18px"></i></a>
+            <a href="#" aria-label="Twitter"><i data-lucide="twitter" style="width:18px;height:18px"></i></a>
+            <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:18px;height:18px"></i></a>
+          </div>
+        </div>
+        <!-- Synth Demo -->
+        <div class="col-lg-2 col-md-6 col-6">
+          <div class="landing-footer__heading">Synth Demo</div>
+          <ul class="landing-footer__links">
+            <li><a href="/analytics/">Analytics</a></li>
+            <li><a href="/users/">Users</a></li>
+            <li><a href="/messages/">Messages</a></li>
+            <li><a href="/ai/">AI Assistant</a></li>
+            <li><a href="/settings/">Settings</a></li>
+          </ul>
+        </div>
+        <!-- Theme -->
+        <div class="col-lg-2 col-md-6 col-6">
+          <div class="landing-footer__heading">Theme</div>
+          <ul class="landing-footer__links">
+            <li><a href="/components/">Components</a></li>
+            <li><a href="/forms/">Forms & Tables</a></li>
+            <li><a href="/chat/">Chat</a></li>
+            <li><a href="/ui/">UI Components</a></li>
+            <li><a href="/docs/">Docs</a></li>
+          </ul>
+        </div>
+        <!-- Company -->
+        <div class="col-lg-1 col-md-6 col-6">
+          <div class="landing-footer__heading">Company</div>
+          <ul class="landing-footer__links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <!-- Legal -->
+        <div class="col-lg-1 col-md-6 col-6">
+          <div class="landing-footer__heading">Legal</div>
+          <ul class="landing-footer__links">
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Security</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="landing-footer__bottom">
+        <span>&copy; 2026 Synth. All rights reserved.</span>
+        <span>Built with the Synth Bootstrap Theme</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================================================================== -->
+  <!-- SCRIPTS                                                            -->
+  <!-- ================================================================== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  {% theme_js %}
+  <script>lucide.createIcons();</script>
+</body>
+</html>

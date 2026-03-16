@@ -251,7 +251,47 @@
 
 | Class | Description | Docs |
 |---|---|---|
-| `.text-mono` | Monospace font (JetBrains Mono) | STYLE_GUIDE.md |
-| `.fs-7` | Font size level 7 (smaller than Bootstrap's fs-6) | STYLE_GUIDE.md |
-| `.fs-8` | Font size level 8 (smallest) | STYLE_GUIDE.md |
+| `.text-mono` | Monospace font (JetBrains Mono) | COMPONENTS.md |
+| `.fs-7` | Font size level 7 (13px, secondary info) | COMPONENTS.md |
+| `.fs-8` | Font size level 8 (11px, timestamps/captions) | COMPONENTS.md |
 | `.doc-content` | Prose content container with comfortable reading width | STYLE_GUIDE.md |
+
+## 23. Colors
+
+| Class / Variable | Description | Docs |
+|---|---|---|
+| `--surface-0` | Page background color (auto-switches light/dark) | COMPONENTS.md |
+| `--surface-1` | Cards, panels, topbar, sidebar background | COMPONENTS.md |
+| `--surface-2` | Nested containers, hover states | COMPONENTS.md |
+| `--surface-3` | Borders, dividers | COMPONENTS.md |
+| `--text-primary` | Main body text color | COMPONENTS.md |
+| `--text-secondary` | Supporting/secondary text color | COMPONENTS.md |
+| `--text-muted` | De-emphasized text (timestamps, captions) | COMPONENTS.md |
+| `--border-color` | Standard border color | COMPONENTS.md |
+| `--border-color-light` | Subtle divider color | COMPONENTS.md |
+
+## 24. Landing Page
+
+| Class | Description | Docs |
+|---|---|---|
+| `.landing-nav` | Fixed transparent navbar, solid on scroll | LANDING_PAGE.md |
+| `.landing-nav--scrolled` | Navbar state when page is scrolled | LANDING_PAGE.md |
+| `.landing-hero` | Hero section with oversized typography | LANDING_PAGE.md |
+| `.landing-hero__title` | Large hero heading (clamp 2.5–4rem) | LANDING_PAGE.md |
+| `.landing-hero__subtitle` | Hero supporting text | LANDING_PAGE.md |
+| `.landing-hero__badge` | Pill badge above hero title | LANDING_PAGE.md |
+| `.landing-orb` | Decorative blurred gradient circle | LANDING_PAGE.md |
+| `.landing-logos` | Centered logo cloud row | LANDING_PAGE.md |
+| `.landing-feature-card` | Feature card with icon, title, description | LANDING_PAGE.md |
+| `.landing-stats` | Grid of social proof numbers | LANDING_PAGE.md |
+| `.landing-stat__value` | Large stat number (gradient option) | LANDING_PAGE.md |
+| `.landing-pricing__card` | Pricing tier card | LANDING_PAGE.md |
+| `.landing-pricing__card--featured` | Highlighted popular pricing tier | LANDING_PAGE.md |
+| `.landing-testimonial` | Testimonial quote card | LANDING_PAGE.md |
+| `.landing-cta` | Call-to-action section with gradient bg | LANDING_PAGE.md |
+| `.landing-footer` | Multi-column footer | LANDING_PAGE.md |
+| `.landing-section` | Standard section padding | LANDING_PAGE.md |
+| `.landing-gradient-bg` | Subtle gradient background for sections | LANDING_PAGE.md |
+| `.scroll-reveal` | Fade-in on scroll (IntersectionObserver) | LANDING_PAGE.md |
+| `.scroll-reveal-up` | Scroll reveal with upward slide | LANDING_PAGE.md |
+| `.scroll-reveal-delay-{n}` | Stagger delay (1–8, 100ms increments) | LANDING_PAGE.md |

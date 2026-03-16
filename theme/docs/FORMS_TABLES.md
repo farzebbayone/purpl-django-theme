@@ -302,3 +302,128 @@ Wrap table in `.card.table-card` for card-style container with no body padding.
   </nav>
 </div>
 ```
+
+## Rich Text Editor (Quill)
+
+The theme includes style overrides for [Quill v2](https://quilljs.com) that match surfaces, colors, typography, and dark mode.
+
+### CDN Setup
+
+Load Quill's CSS and JS on pages that need it (not globally):
+
+```html
+{% block extra_head %}
+<link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+<script>
+const quill = new Quill('#editor', {
+  theme: 'snow',
+  placeholder: 'Write something...',
+  modules: {
+    toolbar: [
+      [{ header: [2, 3, false] }],
+      ['bold', 'italic', 'underline'],
+      ['link', 'code-block'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      ['clean']
+    ]
+  }
+});
+</script>
+{% endblock %}
+```
+
+### Variants
+
+| Class | Description |
+|---|---|
+| *(default)* | Full toolbar, standard padding, 10rem min-height |
+| `.quill-compact` | Smaller toolbar, 6rem min-height, smaller font — for comments/notes |
+| `.quill-borderless` | No outer border, blends into parent card |
+
+Wrap the editor container div with the variant class:
+
+```html
+<div class="quill-compact">
+  <div id="editor"></div>
+</div>
+```
+
+### Django Form Sync
+
+Sync editor content to a hidden field for form submission:
+
+```html
+<form method="post">
+  {% csrf_token %}
+  <div id="editor"></div>
+  <input type="hidden" name="content" id="content-field">
+  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
+
+<script>
+const quill = new Quill('#editor', { theme: 'snow' });
+document.querySelector('form').addEventListener('submit', function() {
+  document.getElementById('content-field').value = quill.root.innerHTML;
+});
+</script>
+```
+
+### django-quill-editor Integration
+
+For deeper Django integration, use [django-quill-editor](https://github.com/LeeHanYeong/django-quill-editor):
+
+```bash
+pip install django-quill-editor
+```
+
+```python
+# settings.py
+INSTALLED_APPS = [..., 'django_quill']
+
+QUILL_CONFIGS = {
+    'default': {
+        'theme': 'snow',
+        'modules': {
+            'toolbar': [
+                [{'header': [2, 3, False]}],
+                ['bold', 'italic', 'underline'],
+                ['link', 'code-block'],
+                [{'list': 'ordered'}, {'list': 'bullet'}],
+                ['clean']
+            ]
+        }
+    }
+}
+```
+
+```python
+# models.py
+from django_quill.fields import QuillField
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = QuillField()
+```
+
+```python
+# forms.py
+from django import forms
+from .models import Post
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content']
+```
+
+```html
+<!-- template.html -->
+{{ form.media }}
+{% render_form form %}
+```
+
+The Synth theme overrides in `_quill.scss` apply automatically — no additional configuration needed. The django-quill-editor widget renders standard Quill markup that the theme styles will pick up.

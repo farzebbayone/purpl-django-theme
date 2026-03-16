@@ -12,6 +12,7 @@
 <nav class="nav nav-tabs-minimal mb-4">
   <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#sec-forms">Forms</a>
   <a class="nav-link" data-bs-toggle="tab" data-bs-target="#sec-validation">Validation</a>
+  <a class="nav-link" data-bs-toggle="tab" data-bs-target="#sec-richtext">Rich Text Editor</a>
   <a class="nav-link" data-bs-toggle="tab" data-bs-target="#sec-tables">Tables</a>
 </nav>
 
@@ -376,6 +377,127 @@
     </div>
   </div>
 
+  <!-- RICH TEXT EDITOR -->
+  <div class="tab-pane fade" id="sec-richtext">
+    <div class="row g-4">
+
+      <!-- Standard Editor -->
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-1">Standard Editor</h5>
+            <p class="text-secondary fs-7 mb-3">Full toolbar with headings, formatting, lists, links, code blocks, and images.</p>
+            <div id="quill-standard">
+              <div id="quill-editor-standard">
+                <h2>Welcome to Synth</h2>
+                <p>This is a <strong>rich text editor</strong> powered by <a href="https://quilljs.com">Quill</a>, styled to match the Synth theme. It supports:</p>
+                <ul>
+                  <li><strong>Bold</strong>, <em>italic</em>, and <u>underline</u> formatting</li>
+                  <li>Ordered and unordered lists</li>
+                  <li>Multiple heading levels</li>
+                  <li>Code blocks and inline <code>code</code></li>
+                  <li>Links and blockquotes</li>
+                </ul>
+                <blockquote>The editor automatically adapts to light and dark modes, matching your theme preference.</blockquote>
+                <p>Try editing this content or switching to dark mode to see the themed styling.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compact Editor -->
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title mb-1">Compact Editor</h5>
+            <p class="text-secondary fs-7 mb-3">Minimal toolbar for comments, notes, and short-form content.</p>
+            <div id="quill-compact" class="quill-compact">
+              <div id="quill-editor-compact">
+                <p>A compact editor for quick notes and comments. Minimal toolbar, smaller font.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Read-only Editor -->
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-1">Read-only</h5>
+            <p class="text-secondary fs-7 mb-3">Display rich content without editing. No toolbar shown.</p>
+            <div id="quill-readonly" class="quill-borderless">
+              <div id="quill-editor-readonly">
+                <p>This editor is in <strong>read-only mode</strong>. The toolbar is hidden and the content cannot be modified. Useful for displaying user-generated rich text.</p>
+                <p>Pre-rendered HTML can also be shown without initializing Quill at all.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Integration Guide -->
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Integration</h5>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <h6 class="mb-2">CDN Setup</h6>
+                <pre class="bg-dark text-light p-3 rounded fs-8"><code>&lt;!-- In your template's extra_head block --&gt;
+&lt;link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css"
+      rel="stylesheet"&gt;
+
+&lt;!-- In your template's extra_js block --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"&gt;
+&lt;/script&gt;
+
+&lt;script&gt;
+const quill = new Quill('#editor', {
+  theme: 'snow',
+  placeholder: 'Write something...',
+  modules: {
+    toolbar: [
+      [{ header: [2, 3, false] }],
+      ['bold', 'italic', 'underline'],
+      ['link', 'code-block'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      ['clean']
+    ]
+  }
+});
+&lt;/script&gt;</code></pre>
+              </div>
+              <div class="col-md-6">
+                <h6 class="mb-2">Django Form Sync</h6>
+                <pre class="bg-dark text-light p-3 rounded fs-8"><code>&lt;!-- Hidden textarea for form submission --&gt;
+&lt;form method="post"&gt;
+  {&#37; csrf_token &#37;}
+  &lt;div id="editor"&gt;&lt;/div&gt;
+  &lt;input type="hidden" name="content"
+         id="content-field"&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+const quill = new Quill('#editor', {
+  theme: 'snow'
+});
+
+// Sync editor content to hidden field
+const form = document.querySelector('form');
+form.addEventListener('submit', function() {
+  document.getElementById('content-field')
+    .value = quill.root.innerHTML;
+});
+&lt;/script&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- TABLES -->
   <div class="tab-pane fade" id="sec-tables">
     <div class="row g-4">
@@ -552,4 +674,58 @@
   </div>
 
 </div>
+{% endblock %}
+
+{% block extra_head %}
+<link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+<script>
+(function() {
+  // Standard editor — full toolbar
+  var stdEl = document.getElementById('quill-editor-standard');
+  if (stdEl) {
+    new Quill(stdEl, {
+      theme: 'snow',
+      modules: {
+        toolbar: [
+          [{ font: [] }, { header: [2, 3, false] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ color: [] }, { background: [] }],
+          ['link', 'blockquote', 'code-block'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          ['image', 'clean']
+        ]
+      }
+    });
+  }
+
+  // Compact editor — minimal toolbar
+  var compactEl = document.getElementById('quill-editor-compact');
+  if (compactEl) {
+    new Quill(compactEl, {
+      theme: 'snow',
+      placeholder: 'Write a comment...',
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'link'],
+          [{ list: 'bullet' }]
+        ]
+      }
+    });
+  }
+
+  // Read-only editor — no toolbar
+  var readonlyEl = document.getElementById('quill-editor-readonly');
+  if (readonlyEl) {
+    var q = new Quill(readonlyEl, {
+      theme: 'snow',
+      readOnly: true,
+      modules: { toolbar: false }
+    });
+  }
+})();
+</script>
 {% endblock %}

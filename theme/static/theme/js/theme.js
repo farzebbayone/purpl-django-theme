@@ -1370,6 +1370,54 @@
     document.querySelectorAll("[data-typeable-format]").forEach(setupTypeablePicker);
   }
 
+  // --- Scroll Reveal (IntersectionObserver) ---
+  function initScrollReveal() {
+    var els = document.querySelectorAll(".scroll-reveal");
+    if (!els.length) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("scroll-reveal--visible");
+          // Also trigger stagger animations on children
+          var stagger = entry.target.querySelector(".stagger-children");
+          if (stagger) stagger.classList.add("stagger-animate");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+
+    els.forEach(function (el) { observer.observe(el); });
+  }
+
+  // --- Landing Navbar Scroll ---
+  function initLandingNav() {
+    var nav = document.querySelector("[data-landing-nav]");
+    if (!nav) return;
+
+    function onScroll() {
+      if (window.scrollY > 40) {
+        nav.classList.add("landing-nav--scrolled");
+      } else {
+        nav.classList.remove("landing-nav--scrolled");
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // Smooth scroll for anchor links
+    nav.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        var target = document.querySelector(link.getAttribute("href"));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+  }
+
   // --- Init ---
   document.addEventListener("DOMContentLoaded", function () {
     initTheme();
@@ -1382,5 +1430,7 @@
     initTopbarDropdowns();
     initDatepickers();
     initTypeablePickers();
+    initScrollReveal();
+    initLandingNav();
   });
 })();

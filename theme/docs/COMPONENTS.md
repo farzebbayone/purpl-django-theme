@@ -396,3 +396,50 @@ Standard Bootstrap `.pagination` with theme overrides.
 - `.empty-state__icon` — Large muted icon
 - `.empty-state__title` — Heading
 - `.empty-state__description` — Explanation text (max-width: 24rem)
+
+## Colors
+
+### Theme Palette
+Nine named colors available as SCSS variables and CSS custom properties:
+- **Primary** `$primary` / `--primary` — #5E6AD2 (slate indigo)
+- **Secondary** `$secondary` / `--secondary` — #64748B
+- **Tertiary** `$tertiary` / `--tertiary` — #8B5CF6
+- **Accent** `$accent` / `--accent` — #0EA5E9
+- **AI** `$ai` / `--ai` — #D946EF (electric orchid)
+- **Success** `$success` / `--success` — #10B981
+- **Danger** `$danger` / `--danger` — #EF4444
+- **Warning** `$warning` / `--warning` — #F59E0B
+- **Info** `$info` / `--info` — #06B6D4
+
+### Surface Colors
+CSS custom properties that auto-switch between light and dark modes:
+- `--surface-0` — Page background
+- `--surface-1` — Cards, panels, topbar, sidebar
+- `--surface-2` — Nested containers, hover states
+- `--surface-3` — Borders, dividers
+
+### Text Colors
+- `--text-primary` — Main body text
+- `--text-secondary` — Secondary/supporting text
+- `--text-muted` — De-emphasized text (timestamps, captions)
+
+### Border Colors
+- `--border-color` — Standard borders
+- `--border-color-light` — Subtle dividers
+
+## Typography
+
+### Fonts
+- **Sans-serif:** Inter (variable weight, 100–900) — `$font-family-sans-serif`
+- **Monospace:** JetBrains Mono (400, 500, 700) — `$font-family-monospace`
+- Both locally bundled with `font-display: swap`
+
+### Size Scale
+- `$font-size-base: 0.9375rem` (15px) — body text
+- `.fs-7` — 13px, secondary information and labels
+- `.fs-8` — 11px, timestamps, badges, captions
+
+### Utility Classes
+- `.text-mono` — JetBrains Mono monospace font
+- `.fw-bold`, `.fw-semibold`, `.fw-medium`, `.fw-normal` — font weights
+- `.text-{color}` — text color using theme palette (primary, secondary, success, etc.)

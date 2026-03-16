@@ -116,17 +116,33 @@ $font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
 - [x] Final polish and MIGRATION.md
 - [x] DATA_VIZ.md docs
 
-### Phase 6: UI Polish & Advanced Components
-- [ ] **UI Essentials** — themed progress bars, spinners, tooltips, popovers
-- [ ] **Toast/Snackbar System** — auto-dismiss, stacking, tinted variants, JS API
-- [ ] **Animated Borders** — gradient shimmer, AI glow, accent pulse, focus rings
-- [ ] **Skeleton Loaders** — placeholder shimmer for cards, text, avatars
-- [ ] **Avatars** — initials/image, sizes, groups with overlap, status dot
-- [ ] **Steps & Timeline** — wizard steps, vertical activity timeline
-- [ ] **Command Palette** — Cmd+K search modal with fuzzy filtering
-- [ ] **Accessibility** — ARIA labels, focus management, reduced-motion, skip links, keyboard nav
-- [ ] **Demo page** — showcase all Phase 6 components
-- [ ] **UI_COMPONENTS.md docs**
+### Phase 6: UI Polish & Advanced Components [DONE]
+- [x] **UI Essentials** — themed progress bars, spinners, tooltips, popovers
+- [x] **Toast/Snackbar System** — auto-dismiss, stacking, tinted variants, JS API
+- [x] **Animated Borders** — gradient shimmer, AI glow, accent pulse, focus rings
+- [x] **Skeleton Loaders** — placeholder shimmer for cards, text, avatars
+- [x] **Avatars** — initials/image, sizes, groups with overlap, status dot
+- [x] **Steps & Timeline** — wizard steps, vertical activity timeline
+- [x] **Command Palette** — Cmd+K search modal with fuzzy filtering
+- [x] **Accessibility** — ARIA labels, focus management, reduced-motion, skip links, keyboard nav
+- [x] **Demo page** — showcase all Phase 6 components
+- [x] **UI_COMPONENTS.md docs**
+
+### Phase 7: SaaS Landing Page
+- [x] **Scroll Animations JS** — IntersectionObserver to trigger fade-in, stagger on scroll
+- [x] **Landing SCSS** (`_landing.scss`) — hero, pricing, testimonials, logo cloud, footer, gradient utilities
+- [x] **Landing Navbar** — transparent, sticky, scrolls with page (distinct from app topbar)
+- [x] **Hero Section** — large gradient background, oversized typography, CTA, decorative orbs
+- [x] **Feature Grid** — icon + title + description cards with hover effects
+- [x] **Pricing Cards** — tiered plans with highlighted "popular" tier
+- [x] **Testimonials** — quote + avatar + name + role cards
+- [x] **Logo Cloud** — row of grayscale partner logos
+- [x] **Stats / Social Proof** — large numbers with labels
+- [x] **FAQ Section** — accordion-based
+- [x] **Footer** — multi-column links, social icons, copyright
+- [x] **Move typography & color palette** — from dashboard to Components page as tabs
+- [x] **Landing page template + view** — replace current dashboard route
+- [ ] **LANDING_PAGE.md docs**
 
 ---
 
@@ -183,5 +199,5 @@ bootstrap_theme_django/
 ## Testing & Review
 
 - Django dev server on port 8999
-- Playwright MCP for visual verification (to be set up)
+- Visual QA completed manually
 - Each phase produces a working demo page

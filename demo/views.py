@@ -24,38 +24,21 @@ DOCS_PAGES = [
 ]
 
 
-def dashboard(request):
+def landing(request):
+    return render(request, "demo/landing.html")
+
+
+STATS = [
+    {"title": "Total Users", "value": "12,847", "change": "+12.5%", "trend": "up", "icon": "users"},
+    {"title": "Revenue", "value": "$48,352", "change": "+8.2%", "trend": "up", "icon": "dollar-sign"},
+    {"title": "Active Sessions", "value": "1,429", "change": "-3.1%", "trend": "down", "icon": "activity"},
+    {"title": "AI Queries", "value": "89,241", "change": "+24.7%", "trend": "up", "icon": "sparkles"},
+]
+
+
+def components(request):
     context = {
-        "stats": [
-            {
-                "title": "Total Users",
-                "value": "12,847",
-                "change": "+12.5%",
-                "trend": "up",
-                "icon": "users",
-            },
-            {
-                "title": "Revenue",
-                "value": "$48,352",
-                "change": "+8.2%",
-                "trend": "up",
-                "icon": "dollar-sign",
-            },
-            {
-                "title": "Active Sessions",
-                "value": "1,429",
-                "change": "-3.1%",
-                "trend": "down",
-                "icon": "activity",
-            },
-            {
-                "title": "AI Queries",
-                "value": "89,241",
-                "change": "+24.7%",
-                "trend": "up",
-                "icon": "sparkles",
-            },
-        ],
+        "stats": STATS,
         "colors": [
             {"name": "Primary", "var": "primary", "hex": "#5E6AD2"},
             {"name": "Secondary", "var": "secondary", "hex": "#64748B"},
@@ -68,19 +51,7 @@ def dashboard(request):
             {"name": "Info", "var": "info", "hex": "#06B6D4"},
         ],
     }
-    return render(request, "demo/index.html", context)
-
-
-STATS = [
-    {"title": "Total Users", "value": "12,847", "change": "+12.5%", "trend": "up", "icon": "users"},
-    {"title": "Revenue", "value": "$48,352", "change": "+8.2%", "trend": "up", "icon": "dollar-sign"},
-    {"title": "Active Sessions", "value": "1,429", "change": "-3.1%", "trend": "down", "icon": "activity"},
-    {"title": "AI Queries", "value": "89,241", "change": "+24.7%", "trend": "up", "icon": "sparkles"},
-]
-
-
-def components(request):
-    return render(request, "demo/components.html", {"stats": STATS})
+    return render(request, "demo/components.html", context)
 
 
 def forms_demo(request):

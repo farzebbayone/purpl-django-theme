@@ -1,0 +1,970 @@
+// Landing Page Styles
+// Comprehensive styles for SaaS marketing / landing pages.
+// Designed to work outside the app shell (no sidebar, no topbar).
+
+// ────────────────────────────────────────────────────────────
+// Custom properties
+// ────────────────────────────────────────────────────────────
+
+:root {
+  --landing-section-py: 5rem;
+  --landing-hero-py: 7rem;
+  --landing-nav-height: 4rem;
+  --landing-max-width: 1200px;
+  --landing-orb-opacity: 0.35;
+}
+
+[data-bs-theme="dark"] {
+  --landing-orb-opacity: 0.15;
+}
+
+// ────────────────────────────────────────────────────────────
+// Landing Navbar
+// ────────────────────────────────────────────────────────────
+
+.landing-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+  height: var(--landing-nav-height);
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  background: transparent;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+
+  &--scrolled {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--border-color);
+  }
+
+  [data-bs-theme="dark"] &--scrolled {
+    background: rgba(22, 32, 50, 0.85);
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--landing-max-width);
+    margin: 0 auto;
+  }
+
+  &__brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    img, svg {
+      height: 1.75rem;
+      width: auto;
+    }
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    a {
+      font-size: $font-size-sm;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover,
+      &.active {
+        color: var(--text-primary);
+      }
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__cta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// Hero Section
+// ────────────────────────────────────────────────────────────
+
+.landing-hero {
+  position: relative;
+  overflow: hidden;
+  padding: var(--landing-hero-py) 1.5rem;
+  padding-top: calc(var(--landing-hero-py) + var(--landing-nav-height));
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 1rem;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $primary;
+    background: rgba($primary, 0.08);
+    border: 1px solid rgba($primary, 0.15);
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+
+    [data-bs-theme="dark"] & {
+      background: rgba($primary, 0.15);
+      border-color: rgba($primary, 0.25);
+    }
+  }
+
+  &__title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    max-width: 48rem;
+    margin: 0 auto 1.25rem;
+
+    // Gradient text modifier
+    &--gradient {
+      background: linear-gradient(135deg, $primary 0%, $accent 50%, $tertiary 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__subtitle {
+    font-size: clamp(1.0625rem, 2vw, 1.25rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 36rem;
+    margin: 0 auto 2.5rem;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    .btn-lg {
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+    }
+  }
+
+  &__visual {
+    position: relative;
+    margin-top: 4rem;
+    max-width: var(--landing-max-width);
+    width: 100%;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: $border-radius-lg;
+      box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.04),
+        0 20px 40px rgba(0, 0, 0, 0.08),
+        0 0 0 1px var(--border-color);
+    }
+
+    // Reflection / glow under the visual
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -2rem;
+      left: 10%;
+      right: 10%;
+      height: 4rem;
+      background: linear-gradient(135deg, rgba($primary, 0.2), rgba($accent, 0.2));
+      filter: blur(40px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+  }
+}
+
+// Decorative gradient orbs
+.landing-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  opacity: var(--landing-orb-opacity);
+
+  &--primary {
+    background: $primary;
+    width: 30rem;
+    height: 30rem;
+  }
+
+  &--accent {
+    background: $accent;
+    width: 24rem;
+    height: 24rem;
+  }
+
+  &--ai {
+    background: $ai;
+    width: 20rem;
+    height: 20rem;
+  }
+
+  &--tertiary {
+    background: $tertiary;
+    width: 22rem;
+    height: 22rem;
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// Logo Cloud
+// ────────────────────────────────────────────────────────────
+
+.landing-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2.5rem 3rem;
+  padding: 1rem 0;
+
+  &__label {
+    width: 100%;
+    text-align: center;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    filter: grayscale(1);
+    opacity: 0.5;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+
+    &:hover {
+      filter: grayscale(0);
+      opacity: 1;
+    }
+
+    img, svg {
+      height: 1.75rem;
+      width: auto;
+      max-width: 8rem;
+    }
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// Feature Grid
+// ────────────────────────────────────────────────────────────
+
+.landing-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.5rem;
+}
+
+.landing-feature-card {
+  padding: 2rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-lg;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $box-shadow-lg;
+    border-color: rgba($primary, 0.2);
+  }
+
+  &__icon {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $border-radius;
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+
+    // Color variants
+    &--primary  { background: rgba($primary, 0.1);  color: $primary; }
+    &--accent   { background: rgba($accent, 0.1);   color: $accent; }
+    &--ai       { background: rgba($ai, 0.1);       color: $ai; }
+    &--tertiary { background: rgba($tertiary, 0.1);  color: $tertiary; }
+    &--success  { background: rgba($success, 0.1);  color: $success; }
+    &--info     { background: rgba($info, 0.1);     color: $info; }
+  }
+
+  &__title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  &__desc {
+    font-size: $font-size-sm;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// Stats / Social Proof
+// ────────────────────────────────────────────────────────────
+
+.landing-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.landing-stat {
+  &__value {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+
+    // Gradient number option
+    &--gradient {
+      background: linear-gradient(135deg, $primary, $accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  // Divider between stats (on larger screens)
+  & + & {
+    position: relative;
+
+    @media (min-width: 576px) {
+      &::before {
+        content: "";
+        position: absolute;
+        left: -1rem;
+        top: 15%;
+        bottom: 15%;
+        width: 1px;
+        background: var(--border-color);
+      }
+    }
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// Pricing
+// ────────────────────────────────────────────────────────────
+
+.landing-pricing {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+
+  &__card {
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    border-radius: $border-radius-lg;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $box-shadow-lg;
+    }
+
+    // Featured / popular tier
+    &--featured {
+      border-color: rgba($primary, 0.3);
+      box-shadow:
+        0 0 0 1px rgba($primary, 0.15),
+        0 8px 24px rgba($primary, 0.08);
+      position: relative;
+
+      // "Popular" ribbon
+      &::before {
+        content: attr(data-badge);
+        position: absolute;
+        top: -0.75rem;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.25rem 1rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(135deg, $primary, $tertiary);
+        border-radius: 2rem;
+        white-space: nowrap;
+      }
+
+      &:hover {
+        box-shadow:
+          0 0 0 1px rgba($primary, 0.25),
+          0 12px 32px rgba($primary, 0.12);
+      }
+    }
+  }
+
+  &__name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  &__desc {
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  &__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+
+    &-amount {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+    }
+
+    &-period {
+      font-size: $font-size-sm;
+      color: var(--text-muted);
+    }
+  }
+
+  &__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    flex: 1;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.625rem;
+      padding: 0.5rem 0;
+      font-size: $font-size-sm;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color-light);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      // Check icon (included)
+      &::before {
+        content: "\2713";
+        flex-shrink: 0;
+        font-weight: 700;
+        color: $success;
+      }
+
+      // Not included
+      &.excluded {
+        color: var(--text-muted);
+        text-decoration: line-through;
+
+        &::before {
+          content: "\2717";
+          color: var(--text-muted);
+        }
+      }
+    }
+  }
+
+  &__action {
+    margin-top: auto;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// Testimonials
+// ────────────────────────────────────────────────────────────
+
+.landing-testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.5rem;
+}
+
+.landing-testimonial {
+  background: var(--surface-1);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius-lg;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: $box-shadow;
+  }
+
+  // Star rating row
+  &__stars {
+    display: flex;
+    gap: 0.125rem;
+    margin-bottom: 1rem;
+    color: $warning;
+    font-size: 0.875rem;
+  }
+
+  &__quote {
+    font-size: $font-size-base;
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    flex: 1;
+
+    // Optional large decorative quote mark
+    &--decorated {
+      position: relative;
+      padding-top: 1rem;
+
+      &::before {
+        content: "\201C";
+        position: absolute;
+        top: -0.75rem;
+        left: -0.25rem;
+        font-size: 3.5rem;
+        font-weight: 700;
+        line-height: 1;
+        color: rgba($primary, 0.15);
+      }
+    }
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: auto;
+  }
+
+  &__avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--surface-2);
+    flex-shrink: 0;
+  }
+
+  &__name {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  &__role {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// CTA Section
+// ────────────────────────────────────────────────────────────
+
+.landing-cta {
+  position: relative;
+  text-align: center;
+  padding: var(--landing-section-py) 1.5rem;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+
+  // Default: subtle gradient bg
+  background:
+    linear-gradient(135deg, rgba($primary, 0.06) 0%, rgba($accent, 0.06) 50%, rgba($tertiary, 0.06) 100%);
+  border: 1px solid rgba($primary, 0.1);
+
+  [data-bs-theme="dark"] & {
+    background:
+      linear-gradient(135deg, rgba($primary, 0.12) 0%, rgba($accent, 0.08) 50%, rgba($tertiary, 0.1) 100%);
+    border-color: rgba($primary, 0.2);
+  }
+
+  // Bold variant with solid primary bg
+  &--bold {
+    background: linear-gradient(135deg, $primary 0%, darken($primary, 8%) 100%);
+    border: none;
+    color: #fff;
+
+    .landing-cta__title,
+    .landing-cta__subtitle {
+      color: #fff;
+    }
+
+    .landing-cta__subtitle {
+      opacity: 0.85;
+    }
+  }
+
+  &__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  &__subtitle {
+    font-size: 1.0625rem;
+    color: var(--text-secondary);
+    max-width: 32rem;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// Footer
+// ────────────────────────────────────────────────────────────
+
+.landing-footer {
+  padding: 4rem 1.5rem 2rem;
+  background: var(--surface-1);
+  border-top: 1px solid var(--border-color);
+
+  &__inner {
+    max-width: var(--landing-max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    gap: 3rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    img, svg {
+      height: 1.75rem;
+      width: auto;
+    }
+
+    &-name {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    &-tagline {
+      font-size: $font-size-sm;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 20rem;
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    &-title {
+      font-size: $font-size-sm;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    a {
+      font-size: $font-size-sm;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  &__bottom {
+    max-width: var(--landing-max-width);
+    margin: 3rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    &-copy {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    &-social {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      a {
+        color: var(--text-muted);
+        transition: color 0.2s ease;
+        font-size: 1.125rem;
+
+        &:hover {
+          color: var(--text-primary);
+        }
+      }
+    }
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// Scroll Reveal Animations
+// ────────────────────────────────────────────────────────────
+
+.scroll-reveal {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+
+  &--visible {
+    opacity: 1;
+    transform: none !important;
+  }
+}
+
+.scroll-reveal-up {
+  @extend .scroll-reveal;
+  transform: translateY(1.5rem);
+}
+
+.scroll-reveal-down {
+  @extend .scroll-reveal;
+  transform: translateY(-1.5rem);
+}
+
+.scroll-reveal-left {
+  @extend .scroll-reveal;
+  transform: translateX(-1.5rem);
+}
+
+.scroll-reveal-right {
+  @extend .scroll-reveal;
+  transform: translateX(1.5rem);
+}
+
+.scroll-reveal-scale {
+  @extend .scroll-reveal;
+  transform: scale(0.95);
+}
+
+// Stagger delay helpers for scroll reveals within a parent
+@for $i from 1 through 8 {
+  .scroll-reveal-delay-#{$i} {
+    transition-delay: #{$i * 0.1}s;
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// Section Utilities
+// ────────────────────────────────────────────────────────────
+
+.landing-section {
+  padding: var(--landing-section-py) 1.5rem;
+  position: relative;
+
+  &__inner {
+    max-width: var(--landing-max-width);
+    margin: 0 auto;
+  }
+
+  &__header {
+    text-align: center;
+    max-width: 40rem;
+    margin: 0 auto 3.5rem;
+  }
+
+  &__title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  &__subtitle {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $primary;
+    margin-bottom: 0.5rem;
+  }
+}
+
+// Gradient background for alternating sections
+.landing-gradient-bg {
+  background:
+    linear-gradient(
+      180deg,
+      var(--surface-0) 0%,
+      var(--surface-2) 50%,
+      var(--surface-0) 100%
+    );
+}
+
+// Subtle radial glow behind a section
+.landing-glow-bg {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(ellipse at center, rgba($primary, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+
+    [data-bs-theme="dark"] & {
+      background: radial-gradient(ellipse at center, rgba($primary, 0.1) 0%, transparent 70%);
+    }
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// Responsive adjustments
+// ────────────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  :root {
+    --landing-section-py: 3.5rem;
+    --landing-hero-py: 4.5rem;
+  }
+
+  .landing-hero__visual::after {
+    display: none;
+  }
+
+  .landing-pricing {
+    grid-template-columns: 1fr;
+    max-width: 24rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .landing-stats {
+    grid-template-columns: repeat(2, 1fr);
+
+    .landing-stat + .landing-stat::before {
+      display: none;
+    }
+  }
+
+  .landing-nav {
+    padding: 0 1rem;
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// Reduced motion
+// ────────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .scroll-reveal-up,
+  .scroll-reveal-down,
+  .scroll-reveal-left,
+  .scroll-reveal-right,
+  .scroll-reveal-scale {
+    transition-duration: 0.01s !important;
+  }
+
+  .landing-orb {
+    animation: none !important;
+  }
+}

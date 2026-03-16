@@ -22,6 +22,8 @@
   <a class="nav-link" href="#list-group" data-bs-toggle="tab" data-bs-target="#sec-list-group">List Group</a>
   <a class="nav-link" href="#dropdown" data-bs-toggle="tab" data-bs-target="#sec-dropdown">Dropdowns</a>
   <a class="nav-link" href="#carousel" data-bs-toggle="tab" data-bs-target="#sec-carousel">Carousel</a>
+  <a class="nav-link" href="#colors" data-bs-toggle="tab" data-bs-target="#sec-colors">Colors</a>
+  <a class="nav-link" href="#typography" data-bs-toggle="tab" data-bs-target="#sec-typography">Typography</a>
 </nav>
 
 <div class="tab-content">
@@ -903,6 +905,112 @@
           <div class="card-body">
             <h6 class="card-title">Product Gallery</h6>
             <p class="text-secondary fs-7 mb-0">Swipe or click to browse product images.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLORS -->
+  <div class="tab-pane fade" id="sec-colors">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Color Palette</h5>
+        <div class="row g-2">
+          {% for color in colors %}
+          <div class="col-auto">
+            <div class="d-flex align-items-center gap-2 p-2 rounded" style="min-width: 140px;">
+              <div style="width:2.5rem;height:2.5rem;border-radius:0.5rem;background:{{ color.hex }};"></div>
+              <div>
+                <div class="fs-7 fw-medium">{{ color.name }}</div>
+                <div class="fs-8 text-mono text-secondary">{{ color.hex }}</div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Surface Colors</h5>
+        <p class="text-secondary fs-7 mb-3">Surface colors auto-switch between light and dark modes via CSS custom properties.</p>
+        <div class="row g-2">
+          <div class="col-sm-6 col-lg-3">
+            <div class="p-3 rounded border" style="background: var(--surface-0); min-height: 5rem;">
+              <div class="fs-7 fw-medium">Surface 0</div>
+              <div class="fs-8 text-secondary">Page background</div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="p-3 rounded border" style="background: var(--surface-1); min-height: 5rem;">
+              <div class="fs-7 fw-medium">Surface 1</div>
+              <div class="fs-8 text-secondary">Cards, panels</div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="p-3 rounded border" style="background: var(--surface-2); min-height: 5rem;">
+              <div class="fs-7 fw-medium">Surface 2</div>
+              <div class="fs-8 text-secondary">Nested containers</div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <div class="p-3 rounded border" style="background: var(--surface-3); min-height: 5rem;">
+              <div class="fs-7 fw-medium">Surface 3</div>
+              <div class="fs-8 text-secondary">Borders, dividers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="tab-pane fade" id="sec-typography">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Headings</h5>
+        <h1>Heading 1 — Inter</h1>
+        <h2>Heading 2 — Inter</h2>
+        <h3>Heading 3 — Inter</h3>
+        <h4>Heading 4 — Inter</h4>
+        <h5>Heading 5 — Inter</h5>
+        <h6>Heading 6 — Inter</h6>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Body Text</h5>
+        <p>Body text at 15px base. The quick brown fox jumps over the lazy dog. This paragraph demonstrates the default reading experience with Inter font.</p>
+        <p class="text-mono">Monospace: JetBrains Mono for code and data. 0123456789</p>
+        <p class="fs-7">Small text (fs-7) — 13px for secondary information and labels.</p>
+        <p class="fs-8">Extra small text (fs-8) — 11px for timestamps, badges, and captions.</p>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Text Utilities</h5>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <p class="fw-bold mb-1">Bold (fw-bold)</p>
+            <p class="fw-semibold mb-1">Semibold (fw-semibold)</p>
+            <p class="fw-medium mb-1">Medium (fw-medium)</p>
+            <p class="fw-normal mb-0">Normal (fw-normal)</p>
+          </div>
+          <div class="col-md-4">
+            <p class="text-primary mb-1">Primary text</p>
+            <p class="text-secondary mb-1">Secondary text</p>
+            <p class="text-success mb-1">Success text</p>
+            <p class="text-danger mb-1">Danger text</p>
+            <p class="text-warning mb-1">Warning text</p>
+            <p class="text-info mb-0">Info text</p>
+          </div>
+          <div class="col-md-4">
+            <p class="text-mono fs-7 mb-1"><code>inline code snippet</code></p>
+            <p class="mb-0"><kbd>Ctrl</kbd> + <kbd>K</kbd> keyboard shortcut</p>
           </div>
         </div>
       </div>
