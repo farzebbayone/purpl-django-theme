@@ -14,6 +14,7 @@
   <a class="nav-link" data-bs-toggle="tab" data-bs-target="#sec-validation">Validation</a>
   <a class="nav-link" data-bs-toggle="tab" data-bs-target="#sec-richtext">Rich Text Editor</a>
   <a class="nav-link" data-bs-toggle="tab" data-bs-target="#sec-tables">Tables</a>
+  <a class="nav-link" data-bs-toggle="tab" data-bs-target="#sec-pagination">Pagination</a>
 </nav>
 
 <div class="tab-content">
@@ -500,173 +501,635 @@ form.addEventListener('submit', function() {
 
   <!-- TABLES -->
   <div class="tab-pane fade" id="sec-tables">
+
+    <!-- 1. Standard Table -->
+    <div class="card table-card mb-4">
+      <div class="card-header d-flex align-items-center justify-content-between py-3">
+        <div>
+          <h5 class="card-title mb-0">Standard Table</h5>
+          <span class="fs-8 text-muted">Sortable columns, avatars, status badges, action menu, pagination</span>
+        </div>
+        <div class="d-flex gap-2">
+          <div class="input-group" style="width: 14rem;">
+            <span class="input-group-text"><i data-lucide="search" style="width:0.875rem;height:0.875rem"></i></span>
+            <input type="text" class="form-control" placeholder="Search users...">
+          </div>
+          <button class="btn btn-primary btn-sm">
+            <i data-lucide="plus" style="width:0.875rem;height:0.875rem" class="me-1"></i> Add User
+          </button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-sortable mb-0">
+          <thead>
+            <tr>
+              <th style="width: 2.5rem;"><input type="checkbox" class="form-check-input"></th>
+              <th data-sort="name" class="sort-asc">Name</th>
+              <th data-sort="email">Email</th>
+              <th data-sort="role">Role</th>
+              <th data-sort="status">Status</th>
+              <th data-sort="active">Last Active</th>
+              <th style="width: 3rem;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in table_data %}
+            <tr>
+              <td><input type="checkbox" class="form-check-input"></td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <div class="avatar avatar--xs avatar--primary">{{ row.initials }}</div>
+                  <span class="fw-medium">{{ row.name }}</span>
+                </div>
+              </td>
+              <td class="text-secondary">{{ row.email }}</td>
+              <td><span class="badge badge-soft-secondary">{{ row.role }}</span></td>
+              <td>
+                <span class="status-badge status-badge--{% if row.status == 'active' %}success{% elif row.status == 'busy' %}danger{% elif row.status == 'away' %}warning{% else %}{% endif %}">
+                  <span class="status-dot status-dot--{{ row.status }}"></span>
+                  {{ row.status|title }}
+                </span>
+              </td>
+              <td class="text-secondary">{{ row.last_active }}</td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-icon btn-sm btn-soft-secondary" style="width:1.5rem;height:1.5rem;" data-bs-toggle="dropdown">
+                    <i data-lucide="more-horizontal" style="width:0.875rem;height:0.875rem"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="edit" class="icon-xs text-secondary"></i> Edit</a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="mail" class="icon-xs text-secondary"></i> Send email</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item dropdown-item--danger d-flex align-items-center gap-2" href="#"><i data-lucide="trash-2" class="icon-xs"></i> Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="table-pagination">
+        <span class="table-pagination__info">Showing 1–8 of 24 users</span>
+        <nav>
+          <ul class="pagination pagination--minimal pagination-sm">
+            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- 2. Dense Table -->
+    <div class="card table-card mb-4">
+      <div class="card-header d-flex align-items-center justify-content-between py-3">
+        <div>
+          <h5 class="card-title mb-0">Dense Table</h5>
+          <span class="fs-8 text-muted">Compact rows for monitoring, logs, and data-heavy views</span>
+        </div>
+        <div class="d-flex gap-2">
+          <div class="btn-group-segmented">
+            <input type="radio" class="btn-check" name="logRange" id="log1h" checked>
+            <label class="btn" for="log1h">1h</label>
+            <input type="radio" class="btn-check" name="logRange" id="log6h">
+            <label class="btn" for="log6h">6h</label>
+            <input type="radio" class="btn-check" name="logRange" id="log24h">
+            <label class="btn" for="log24h">24h</label>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-dense mb-0">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Method</th>
+              <th>Endpoint</th>
+              <th class="text-end">Status</th>
+              <th class="text-end">Latency</th>
+              <th class="text-end">Size</th>
+              <th>Region</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-mono text-muted">14:32:01.284</td>
+              <td><span class="badge badge-soft-success">GET</span></td>
+              <td class="text-mono">/api/v2/users</td>
+              <td class="text-end text-mono text-success">200</td>
+              <td class="text-end text-mono">42ms</td>
+              <td class="text-end text-mono">3.2KB</td>
+              <td class="text-muted">us-east-1</td>
+            </tr>
+            <tr>
+              <td class="text-mono text-muted">14:32:00.918</td>
+              <td><span class="badge badge-soft-primary">POST</span></td>
+              <td class="text-mono">/api/v2/auth/token</td>
+              <td class="text-end text-mono text-success">201</td>
+              <td class="text-end text-mono">128ms</td>
+              <td class="text-end text-mono">0.8KB</td>
+              <td class="text-muted">eu-west-1</td>
+            </tr>
+            <tr>
+              <td class="text-mono text-muted">14:31:59.442</td>
+              <td><span class="badge badge-soft-success">GET</span></td>
+              <td class="text-mono">/api/v2/analytics</td>
+              <td class="text-end text-mono text-success">200</td>
+              <td class="text-end text-mono">310ms</td>
+              <td class="text-end text-mono">48.1KB</td>
+              <td class="text-muted">us-west-2</td>
+            </tr>
+            <tr>
+              <td class="text-mono text-muted">14:31:58.107</td>
+              <td><span class="badge badge-soft-warning">PUT</span></td>
+              <td class="text-mono">/api/v2/settings</td>
+              <td class="text-end text-mono text-success">200</td>
+              <td class="text-end text-mono">86ms</td>
+              <td class="text-end text-mono">1.1KB</td>
+              <td class="text-muted">us-east-1</td>
+            </tr>
+            <tr>
+              <td class="text-mono text-muted">14:31:57.563</td>
+              <td><span class="badge badge-soft-success">GET</span></td>
+              <td class="text-mono">/api/v2/users/42</td>
+              <td class="text-end text-mono text-danger">404</td>
+              <td class="text-end text-mono">18ms</td>
+              <td class="text-end text-mono">0.2KB</td>
+              <td class="text-muted">ap-south-1</td>
+            </tr>
+            <tr>
+              <td class="text-mono text-muted">14:31:56.891</td>
+              <td><span class="badge badge-soft-danger">DELETE</span></td>
+              <td class="text-mono">/api/v2/tokens/exp</td>
+              <td class="text-end text-mono text-success">204</td>
+              <td class="text-end text-mono">52ms</td>
+              <td class="text-end text-mono">0KB</td>
+              <td class="text-muted">us-east-1</td>
+            </tr>
+            <tr>
+              <td class="text-mono text-muted">14:31:55.220</td>
+              <td><span class="badge badge-soft-success">GET</span></td>
+              <td class="text-mono">/api/v2/metrics</td>
+              <td class="text-end text-mono text-success">200</td>
+              <td class="text-end text-mono">245ms</td>
+              <td class="text-end text-mono">12.8KB</td>
+              <td class="text-muted">eu-west-1</td>
+            </tr>
+            <tr>
+              <td class="text-mono text-muted">14:31:54.001</td>
+              <td><span class="badge badge-soft-primary">POST</span></td>
+              <td class="text-mono">/api/v2/webhooks</td>
+              <td class="text-end text-mono text-danger">500</td>
+              <td class="text-end text-mono">1,240ms</td>
+              <td class="text-end text-mono">0.4KB</td>
+              <td class="text-muted">us-west-2</td>
+            </tr>
+            <tr>
+              <td class="text-mono text-muted">14:31:53.448</td>
+              <td><span class="badge badge-soft-success">GET</span></td>
+              <td class="text-mono">/api/v2/search</td>
+              <td class="text-end text-mono text-success">200</td>
+              <td class="text-end text-mono">189ms</td>
+              <td class="text-end text-mono">22.4KB</td>
+              <td class="text-muted">ap-south-1</td>
+            </tr>
+            <tr>
+              <td class="text-mono text-muted">14:31:52.110</td>
+              <td><span class="badge badge-soft-primary">POST</span></td>
+              <td class="text-mono">/api/v2/events</td>
+              <td class="text-end text-mono text-success">202</td>
+              <td class="text-end text-mono">34ms</td>
+              <td class="text-end text-mono">1.6KB</td>
+              <td class="text-muted">eu-west-1</td>
+            </tr>
+            <tr>
+              <td class="text-mono text-muted">14:31:51.302</td>
+              <td><span class="badge badge-soft-success">GET</span></td>
+              <td class="text-mono">/api/v2/health</td>
+              <td class="text-end text-mono text-success">200</td>
+              <td class="text-end text-mono">4ms</td>
+              <td class="text-end text-mono">0.1KB</td>
+              <td class="text-muted">us-east-1</td>
+            </tr>
+            <tr>
+              <td class="text-mono text-muted">14:31:50.887</td>
+              <td><span class="badge badge-soft-success">GET</span></td>
+              <td class="text-mono">/api/v2/dashboard</td>
+              <td class="text-end text-mono text-success">200</td>
+              <td class="text-end text-mono">156ms</td>
+              <td class="text-end text-mono">8.9KB</td>
+              <td class="text-muted">us-west-2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3. Detail Table -->
+    <div class="card table-card mb-4">
+      <div class="card-header d-flex align-items-center justify-content-between py-3">
+        <div>
+          <h5 class="card-title mb-0">Detail Table</h5>
+          <span class="fs-8 text-muted">Multi-line cells with rich content — ideal for HR, recruitment, CRM data</span>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-secondary btn-sm">
+            <i data-lucide="download" style="width:0.875rem;height:0.875rem" class="me-1"></i> Export
+          </button>
+          <button class="btn btn-primary btn-sm">
+            <i data-lucide="plus" style="width:0.875rem;height:0.875rem" class="me-1"></i> Add Candidate
+          </button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th style="min-width:12rem">Candidate</th>
+              <th style="min-width:10rem">Education</th>
+              <th style="min-width:10rem">Experience</th>
+              <th style="min-width:10rem">Skills</th>
+              <th>Status</th>
+              <th style="width:3rem"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <div class="avatar avatar--sm avatar--primary">AC</div>
+                  <div>
+                    <div class="fw-medium">Alice Chen</div>
+                    <div class="fs-8 text-muted">alice.chen@email.com</div>
+                    <div class="fs-8 text-muted">San Francisco, CA</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="fs-7 fw-medium">M.S. Computer Science</div>
+                <div class="fs-8 text-muted">Stanford University</div>
+                <div class="fs-8 text-muted">Palo Alto, CA</div>
+              </td>
+              <td>
+                <div class="fs-7 fw-medium">Senior Engineer</div>
+                <div class="fs-8 text-muted">Stripe, Inc.</div>
+                <div class="fs-8 text-muted">4 years • San Francisco</div>
+              </td>
+              <td>
+                <div class="d-flex flex-wrap gap-1">
+                  <span class="badge badge-soft-primary">Python</span>
+                  <span class="badge badge-soft-primary">Django</span>
+                  <span class="badge badge-soft-accent">React</span>
+                  <span class="badge badge-soft-secondary">AWS</span>
+                </div>
+              </td>
+              <td><span class="badge badge-soft-success">Offer Sent</span></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-icon btn-sm btn-soft-secondary" style="width:1.5rem;height:1.5rem;" data-bs-toggle="dropdown">
+                    <i data-lucide="more-horizontal" style="width:0.875rem;height:0.875rem"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="eye" class="icon-xs text-secondary"></i> View profile</a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="calendar" class="icon-xs text-secondary"></i> Schedule interview</a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="mail" class="icon-xs text-secondary"></i> Send email</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item dropdown-item--danger d-flex align-items-center gap-2" href="#"><i data-lucide="x-circle" class="icon-xs"></i> Reject</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <div class="avatar avatar--sm avatar--accent">MR</div>
+                  <div>
+                    <div class="fw-medium">Marcus Rivera</div>
+                    <div class="fs-8 text-muted">m.rivera@email.com</div>
+                    <div class="fs-8 text-muted">Austin, TX</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="fs-7 fw-medium">B.S. Software Engineering</div>
+                <div class="fs-8 text-muted">UT Austin</div>
+                <div class="fs-8 text-muted">Austin, TX</div>
+              </td>
+              <td>
+                <div class="fs-7 fw-medium">Tech Lead</div>
+                <div class="fs-8 text-muted">Datadog</div>
+                <div class="fs-8 text-muted">6 years • New York</div>
+              </td>
+              <td>
+                <div class="d-flex flex-wrap gap-1">
+                  <span class="badge badge-soft-primary">Go</span>
+                  <span class="badge badge-soft-primary">Kubernetes</span>
+                  <span class="badge badge-soft-accent">Terraform</span>
+                  <span class="badge badge-soft-secondary">GCP</span>
+                </div>
+              </td>
+              <td><span class="badge badge-soft-info">Interview</span></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-icon btn-sm btn-soft-secondary" style="width:1.5rem;height:1.5rem;" data-bs-toggle="dropdown">
+                    <i data-lucide="more-horizontal" style="width:0.875rem;height:0.875rem"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="eye" class="icon-xs text-secondary"></i> View profile</a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="calendar" class="icon-xs text-secondary"></i> Schedule interview</a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="mail" class="icon-xs text-secondary"></i> Send email</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item dropdown-item--danger d-flex align-items-center gap-2" href="#"><i data-lucide="x-circle" class="icon-xs"></i> Reject</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <div class="avatar avatar--sm avatar--ai">AP</div>
+                  <div>
+                    <div class="fw-medium">Aisha Patel</div>
+                    <div class="fs-8 text-muted">aisha.p@email.com</div>
+                    <div class="fs-8 text-muted">London, UK</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="fs-7 fw-medium">Ph.D. Machine Learning</div>
+                <div class="fs-8 text-muted">Imperial College London</div>
+                <div class="fs-8 text-muted">London, UK</div>
+              </td>
+              <td>
+                <div class="fs-7 fw-medium">ML Engineer</div>
+                <div class="fs-8 text-muted">DeepMind</div>
+                <div class="fs-8 text-muted">3 years • London</div>
+              </td>
+              <td>
+                <div class="d-flex flex-wrap gap-1">
+                  <span class="badge badge-soft-primary">PyTorch</span>
+                  <span class="badge badge-soft-ai">LLMs</span>
+                  <span class="badge badge-soft-accent">MLOps</span>
+                  <span class="badge badge-soft-secondary">Python</span>
+                </div>
+              </td>
+              <td><span class="badge badge-soft-warning">Screening</span></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-icon btn-sm btn-soft-secondary" style="width:1.5rem;height:1.5rem;" data-bs-toggle="dropdown">
+                    <i data-lucide="more-horizontal" style="width:0.875rem;height:0.875rem"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="eye" class="icon-xs text-secondary"></i> View profile</a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="calendar" class="icon-xs text-secondary"></i> Schedule interview</a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="mail" class="icon-xs text-secondary"></i> Send email</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item dropdown-item--danger d-flex align-items-center gap-2" href="#"><i data-lucide="x-circle" class="icon-xs"></i> Reject</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <div class="avatar avatar--sm avatar--success">JO</div>
+                  <div>
+                    <div class="fw-medium">James Okafor</div>
+                    <div class="fs-8 text-muted">j.okafor@email.com</div>
+                    <div class="fs-8 text-muted">Lagos, Nigeria</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="fs-7 fw-medium">B.Eng. Electrical Engineering</div>
+                <div class="fs-8 text-muted">University of Lagos</div>
+                <div class="fs-8 text-muted">Lagos, Nigeria</div>
+              </td>
+              <td>
+                <div class="fs-7 fw-medium">Full Stack Developer</div>
+                <div class="fs-8 text-muted">Andela</div>
+                <div class="fs-8 text-muted">5 years • Remote</div>
+              </td>
+              <td>
+                <div class="d-flex flex-wrap gap-1">
+                  <span class="badge badge-soft-primary">TypeScript</span>
+                  <span class="badge badge-soft-accent">Next.js</span>
+                  <span class="badge badge-soft-primary">PostgreSQL</span>
+                  <span class="badge badge-soft-secondary">Docker</span>
+                </div>
+              </td>
+              <td><span class="badge badge-soft-danger">Rejected</span></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-icon btn-sm btn-soft-secondary" style="width:1.5rem;height:1.5rem;" data-bs-toggle="dropdown">
+                    <i data-lucide="more-horizontal" style="width:0.875rem;height:0.875rem"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="eye" class="icon-xs text-secondary"></i> View profile</a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="mail" class="icon-xs text-secondary"></i> Send email</a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i data-lucide="rotate-ccw" class="icon-xs text-secondary"></i> Reconsider</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-pagination">
+        <span class="table-pagination__info">Showing 1–4 of 18 candidates</span>
+        <nav>
+          <ul class="pagination pagination--soft pagination-sm">
+            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- 4. Striped Table -->
+    <div class="card table-card">
+      <div class="card-header d-flex align-items-center justify-content-between py-3">
+        <div>
+          <h5 class="card-title mb-0">Striped Table</h5>
+          <span class="fs-8 text-muted">Alternating row backgrounds for easier scanning</span>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped table-hover mb-0">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Source</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th class="text-end">Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="fw-medium">User signed up</td>
+              <td class="text-secondary">auth-service</td>
+              <td class="text-secondary">Mar 7, 2026</td>
+              <td><span class="badge badge-soft-success">Success</span></td>
+              <td class="text-end text-mono">—</td>
+            </tr>
+            <tr>
+              <td class="fw-medium">Payment failed</td>
+              <td class="text-secondary">billing-api</td>
+              <td class="text-secondary">Mar 6, 2026</td>
+              <td><span class="badge badge-soft-danger">Error</span></td>
+              <td class="text-end text-mono text-danger">-$240</td>
+            </tr>
+            <tr>
+              <td class="fw-medium">API rate limit hit</td>
+              <td class="text-secondary">gateway</td>
+              <td class="text-secondary">Mar 6, 2026</td>
+              <td><span class="badge badge-soft-warning">Warning</span></td>
+              <td class="text-end text-mono">142 req</td>
+            </tr>
+            <tr>
+              <td class="fw-medium">Deploy completed</td>
+              <td class="text-secondary">ci-pipeline</td>
+              <td class="text-secondary">Mar 5, 2026</td>
+              <td><span class="badge badge-soft-info">Info</span></td>
+              <td class="text-end text-mono">v2.4.1</td>
+            </tr>
+            <tr>
+              <td class="fw-medium">AI model updated</td>
+              <td class="text-secondary">ml-platform</td>
+              <td class="text-secondary">Mar 5, 2026</td>
+              <td><span class="badge badge-soft-ai">AI</span></td>
+              <td class="text-end text-mono">+3.2% acc</td>
+            </tr>
+            <tr>
+              <td class="fw-medium">Cache invalidated</td>
+              <td class="text-secondary">cdn-edge</td>
+              <td class="text-secondary">Mar 4, 2026</td>
+              <td><span class="badge badge-soft-secondary">System</span></td>
+              <td class="text-end text-mono">1.2M keys</td>
+            </tr>
+            <tr>
+              <td class="fw-medium">SSL cert renewed</td>
+              <td class="text-secondary">cert-manager</td>
+              <td class="text-secondary">Mar 4, 2026</td>
+              <td><span class="badge badge-soft-success">Success</span></td>
+              <td class="text-end text-mono">90 days</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-pagination">
+        <span class="table-pagination__info">Showing 1–7 of 32 events</span>
+        <nav>
+          <ul class="pagination pagination--soft pagination--accent pagination-sm">
+            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="tab-pane fade" id="sec-pagination">
     <div class="row g-4">
-      <!-- Standard Table -->
-      <div class="col-12">
-        <div class="card table-card">
-          <div class="card-header d-flex align-items-center justify-content-between py-3">
-            <h5 class="card-title mb-0">Users</h5>
-            <div class="d-flex gap-2">
-              <div class="input-group" style="width: 14rem;">
-                <span class="input-group-text"><i data-lucide="search" style="width:0.875rem;height:0.875rem"></i></span>
-                <input type="text" class="form-control" placeholder="Search users...">
-              </div>
-              <button class="btn btn-primary btn-sm">
-                <i data-lucide="plus" style="width:0.875rem;height:0.875rem" class="me-1"></i> Add User
-              </button>
-            </div>
-          </div>
-          <div class="table-responsive">
-            <table class="table table-hover table-sortable mb-0">
-              <thead>
-                <tr>
-                  <th style="width: 2.5rem;">
-                    <input type="checkbox" class="form-check-input">
-                  </th>
-                  <th data-sort="name" class="sort-asc">Name</th>
-                  <th data-sort="email">Email</th>
-                  <th data-sort="role">Role</th>
-                  <th data-sort="status">Status</th>
-                  <th data-sort="active">Last Active</th>
-                  <th style="width: 3rem;"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for row in table_data %}
-                <tr>
-                  <td>
-                    <input type="checkbox" class="form-check-input">
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center gap-2">
-                      <div class="topbar__avatar" style="width:1.5rem;height:1.5rem;font-size:0.625rem;">{{ row.name|truncatechars:2 }}</div>
-                      <span class="fw-medium">{{ row.name }}</span>
-                    </div>
-                  </td>
-                  <td class="text-secondary">{{ row.email }}</td>
-                  <td><span class="badge badge-soft-secondary">{{ row.role }}</span></td>
-                  <td>
-                    <span class="status-badge status-badge--{% if row.status == 'active' %}success{% elif row.status == 'busy' %}danger{% elif row.status == 'away' %}warning{% else %}{% endif %}">
-                      <span class="status-dot status-dot--{{ row.status }}"></span>
-                      {{ row.status|title }}
-                    </span>
-                  </td>
-                  <td class="text-secondary">{{ row.last_active }}</td>
-                  <td>
-                    <button class="btn btn-icon btn-sm btn-soft-secondary" style="width:1.5rem;height:1.5rem;">
-                      <i data-lucide="more-horizontal" style="width:0.875rem;height:0.875rem"></i>
-                    </button>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-          <div class="table-pagination">
-            <span class="table-pagination__info">Showing 1–8 of 24 users</span>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Default</h5>
+            <p class="text-secondary fs-7 mb-3">Standard Bootstrap pagination with theme styling.</p>
             <nav>
-              <ul class="pagination pagination-sm">
-                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+              <ul class="pagination mb-3">
+                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
                 <li class="page-item active"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+              </ul>
+            </nav>
+            <span class="fs-7 text-secondary d-block mb-1">Small</span>
+            <nav>
+              <ul class="pagination pagination-sm mb-0">
+                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
               </ul>
             </nav>
           </div>
         </div>
       </div>
 
-      <!-- Dense Table -->
-      <div class="col-lg-6">
-        <div class="card table-card">
-          <div class="card-header py-3">
-            <h6 class="card-title mb-0">Dense Table</h6>
-          </div>
-          <div class="table-responsive">
-            <table class="table table-hover table-dense mb-0">
-              <thead>
-                <tr>
-                  <th>Metric</th>
-                  <th class="text-end">Value</th>
-                  <th class="text-end">Change</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Page Views</td>
-                  <td class="text-end text-mono">142,847</td>
-                  <td class="text-end text-success">+12.5%</td>
-                </tr>
-                <tr>
-                  <td>Bounce Rate</td>
-                  <td class="text-end text-mono">34.2%</td>
-                  <td class="text-end text-danger">+2.1%</td>
-                </tr>
-                <tr>
-                  <td>Session Duration</td>
-                  <td class="text-end text-mono">4m 23s</td>
-                  <td class="text-end text-success">+8.7%</td>
-                </tr>
-                <tr>
-                  <td>Conversion Rate</td>
-                  <td class="text-end text-mono">3.14%</td>
-                  <td class="text-end text-success">+0.3%</td>
-                </tr>
-                <tr>
-                  <td>Avg. Load Time</td>
-                  <td class="text-end text-mono">1.2s</td>
-                  <td class="text-end text-success">-15%</td>
-                </tr>
-              </tbody>
-            </table>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Soft</h5>
+            <p class="text-secondary fs-7 mb-3">Use <code>.pagination--soft</code> for a tinted active state.</p>
+            <nav>
+              <ul class="pagination pagination--soft mb-3">
+                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+              </ul>
+            </nav>
+            <span class="fs-7 text-secondary d-block mb-1">Accent tint</span>
+            <nav>
+              <ul class="pagination pagination--soft pagination--accent pagination-sm mb-0">
+                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
 
-      <!-- Striped Table -->
-      <div class="col-lg-6">
-        <div class="card table-card">
-          <div class="card-header py-3">
-            <h6 class="card-title mb-0">Striped Table</h6>
-          </div>
-          <div class="table-responsive">
-            <table class="table table-striped mb-0">
-              <thead>
-                <tr>
-                  <th>Event</th>
-                  <th>Date</th>
-                  <th>Type</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>User signed up</td>
-                  <td class="text-secondary">Mar 7, 2026</td>
-                  <td><span class="badge badge-soft-success">Success</span></td>
-                </tr>
-                <tr>
-                  <td>Payment failed</td>
-                  <td class="text-secondary">Mar 6, 2026</td>
-                  <td><span class="badge badge-soft-danger">Error</span></td>
-                </tr>
-                <tr>
-                  <td>API rate limit hit</td>
-                  <td class="text-secondary">Mar 6, 2026</td>
-                  <td><span class="badge badge-soft-warning">Warning</span></td>
-                </tr>
-                <tr>
-                  <td>Deploy completed</td>
-                  <td class="text-secondary">Mar 5, 2026</td>
-                  <td><span class="badge badge-soft-info">Info</span></td>
-                </tr>
-                <tr>
-                  <td>AI model updated</td>
-                  <td class="text-secondary">Mar 5, 2026</td>
-                  <td><span class="badge badge-soft-ai">AI</span></td>
-                </tr>
-              </tbody>
-            </table>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Minimal</h5>
+            <p class="text-secondary fs-7 mb-3">Use <code>.pagination--minimal</code> for borderless style.</p>
+            <nav>
+              <ul class="pagination pagination--minimal mb-3">
+                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+              </ul>
+            </nav>
+            <span class="fs-7 text-secondary d-block mb-1">With table</span>
+            <div class="table-pagination">
+              <span class="table-pagination__info">Showing 1–10 of 50</span>
+              <nav>
+                <ul class="pagination pagination--minimal pagination-sm mb-0">
+                  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+              </nav>
+            </div>
           </div>
         </div>
       </div>

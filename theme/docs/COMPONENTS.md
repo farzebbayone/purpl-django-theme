@@ -430,54 +430,6 @@ Card nesting: when `.carousel` is a direct child of `.card`, outer border-radius
 </div>
 ```
 
-## Pagination
-
-Standard Bootstrap `.pagination` with theme overrides.
-
-- `.page-link` — Uses `--surface-1` background, `--border-color`, small font, smooth transitions
-- `.page-item.active .page-link` — Solid primary background
-- `.page-item.disabled .page-link` — Muted text, surface-1 background
-
-### Variants
-- `.pagination--soft` — Active page uses translucent primary background instead of solid (tinted, not filled)
-- `.pagination--minimal` — Removes all borders, adds small border-radius and slight spacing between items; active page is tinted
-
-### Tint Variants
-`.pagination--{color}` — Changes the active page and focus ring color. Colors: accent, ai, info, success.
-
-**When to use:** Table and list pagination, search results, any paginated data set.
-
-```html
-<!-- Standard -->
-<nav>
-  <ul class="pagination">
-    <li class="page-item disabled"><a class="page-link" href="#">Prev</a></li>
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
-
-<!-- Soft variant -->
-<nav>
-  <ul class="pagination pagination--soft">
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-  </ul>
-</nav>
-
-<!-- Minimal with accent tint -->
-<nav>
-  <ul class="pagination pagination--minimal pagination--accent">
-    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-  </ul>
-</nav>
-```
-
 ## Empty States
 `.empty-state` — Centered vertical layout.
 - `.empty-state__icon` — Large muted icon

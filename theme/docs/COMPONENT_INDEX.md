@@ -123,9 +123,9 @@
 
 | Class | Description | Docs |
 |---|---|---|
-| `.pagination--soft` | Pagination with soft tinted active state | COMPONENTS.md |
-| `.pagination--minimal` | Pagination with minimal/borderless styling | COMPONENTS.md |
-| `.pagination--{color}` | Pagination using a specific theme color | COMPONENTS.md |
+| `.pagination--soft` | Pagination with soft tinted active state | FORMS_TABLES.md |
+| `.pagination--minimal` | Pagination with minimal/borderless styling | FORMS_TABLES.md |
+| `.pagination--{color}` | Pagination using a specific theme color | FORMS_TABLES.md |
 
 ## 12. Forms
 

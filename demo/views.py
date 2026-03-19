@@ -63,14 +63,14 @@ def forms_demo(request):
         "login_form": LoginForm(),
         "validation_form": ValidationDemoForm(),
         "table_data": [
-            {"id": 1, "name": "Alice Chen", "email": "alice@example.com", "role": "Engineer", "status": "active", "last_active": "2 min ago"},
-            {"id": 2, "name": "Bob Martinez", "email": "bob@example.com", "role": "Designer", "status": "active", "last_active": "15 min ago"},
-            {"id": 3, "name": "Carol White", "email": "carol@example.com", "role": "Manager", "status": "away", "last_active": "1 hour ago"},
-            {"id": 4, "name": "David Kim", "email": "david@example.com", "role": "Engineer", "status": "offline", "last_active": "3 hours ago"},
-            {"id": 5, "name": "Eva Patel", "email": "eva@example.com", "role": "Support", "status": "active", "last_active": "5 min ago"},
-            {"id": 6, "name": "Frank Liu", "email": "frank@example.com", "role": "Engineer", "status": "busy", "last_active": "30 min ago"},
-            {"id": 7, "name": "Grace Obi", "email": "grace@example.com", "role": "Designer", "status": "active", "last_active": "Just now"},
-            {"id": 8, "name": "Henry Ross", "email": "henry@example.com", "role": "Sales", "status": "offline", "last_active": "1 day ago"},
+            {"id": 1, "name": "Alice Chen", "initials": "AC", "email": "alice@example.com", "role": "Engineer", "status": "active", "last_active": "2 min ago"},
+            {"id": 2, "name": "Bob Martinez", "initials": "BM", "email": "bob@example.com", "role": "Designer", "status": "active", "last_active": "15 min ago"},
+            {"id": 3, "name": "Carol White", "initials": "CW", "email": "carol@example.com", "role": "Manager", "status": "away", "last_active": "1 hour ago"},
+            {"id": 4, "name": "David Kim", "initials": "DK", "email": "david@example.com", "role": "Engineer", "status": "offline", "last_active": "3 hours ago"},
+            {"id": 5, "name": "Eva Patel", "initials": "EP", "email": "eva@example.com", "role": "Support", "status": "active", "last_active": "5 min ago"},
+            {"id": 6, "name": "Frank Liu", "initials": "FL", "email": "frank@example.com", "role": "Engineer", "status": "busy", "last_active": "30 min ago"},
+            {"id": 7, "name": "Grace Obi", "initials": "GO", "email": "grace@example.com", "role": "Designer", "status": "active", "last_active": "Just now"},
+            {"id": 8, "name": "Henry Ross", "initials": "HR", "email": "henry@example.com", "role": "Sales", "status": "offline", "last_active": "1 day ago"},
         ],
     }
     return render(request, "demo/forms_tables.html", context)
