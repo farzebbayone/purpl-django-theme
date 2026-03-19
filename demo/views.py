@@ -742,6 +742,14 @@ def ai_assistant(request):
     return render(request, "demo/ai_assistant.html", context)
 
 
+def calendar_demo(request):
+    return render(request, "demo/calendar.html")
+
+
+def email_demo(request):
+    return render(request, "demo/email.html")
+
+
 def docs_index(request):
     """Redirect to first doc page."""
     return docs_page(request, DOCS_PAGES[0]["slug"])

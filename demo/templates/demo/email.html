@@ -1,0 +1,501 @@
+{% extends "demo/base.html" %}
+{% load static %}
+
+{% block title %}Email — Synth{% endblock %}
+
+{% block extra_head %}
+<link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-header__title">Email</h1>
+  <p class="page-header__subtitle">Inbox, compose, and manage your messages.</p>
+</div>
+
+<div class="card p-0 overflow-hidden">
+  <div class="email-layout">
+
+    <!-- ── Email Sidebar ── -->
+    <div class="email-sidebar">
+      <button class="btn btn-primary btn-sm email-sidebar__compose-btn" data-bs-toggle="modal" data-bs-target="#composeModal">
+        <i data-lucide="plus" class="icon-xs me-1"></i> Compose
+      </button>
+
+      <div class="email-sidebar__section-label">Folders</div>
+      <a class="email-sidebar__folder email-sidebar__folder--active" href="#">
+        <i data-lucide="inbox" class="email-sidebar__folder-icon"></i>
+        <span class="email-sidebar__folder-label">Inbox</span>
+        <span class="email-sidebar__folder-count">3</span>
+      </a>
+      <a class="email-sidebar__folder" href="#">
+        <i data-lucide="star" class="email-sidebar__folder-icon"></i>
+        <span class="email-sidebar__folder-label">Starred</span>
+      </a>
+      <a class="email-sidebar__folder" href="#">
+        <i data-lucide="send" class="email-sidebar__folder-icon"></i>
+        <span class="email-sidebar__folder-label">Sent</span>
+      </a>
+      <a class="email-sidebar__folder" href="#">
+        <i data-lucide="file-edit" class="email-sidebar__folder-icon"></i>
+        <span class="email-sidebar__folder-label">Drafts</span>
+        <span class="email-sidebar__folder-count">1</span>
+      </a>
+      <a class="email-sidebar__folder" href="#">
+        <i data-lucide="archive" class="email-sidebar__folder-icon"></i>
+        <span class="email-sidebar__folder-label">Archive</span>
+      </a>
+      <a class="email-sidebar__folder" href="#">
+        <i data-lucide="shield-alert" class="email-sidebar__folder-icon"></i>
+        <span class="email-sidebar__folder-label">Spam</span>
+      </a>
+      <a class="email-sidebar__folder" href="#">
+        <i data-lucide="trash-2" class="email-sidebar__folder-icon"></i>
+        <span class="email-sidebar__folder-label">Trash</span>
+      </a>
+
+      <div class="email-sidebar__section-label mt-3">Labels</div>
+      <a class="email-sidebar__folder" href="#">
+        <span style="width:8px;height:8px;border-radius:50%;background:#5E6AD2;flex-shrink:0;"></span>
+        <span class="email-sidebar__folder-label">Work</span>
+      </a>
+      <a class="email-sidebar__folder" href="#">
+        <span style="width:8px;height:8px;border-radius:50%;background:#10B981;flex-shrink:0;"></span>
+        <span class="email-sidebar__folder-label">Personal</span>
+      </a>
+      <a class="email-sidebar__folder" href="#">
+        <span style="width:8px;height:8px;border-radius:50%;background:#D946EF;flex-shrink:0;"></span>
+        <span class="email-sidebar__folder-label">AI / Automation</span>
+      </a>
+    </div>
+
+    <!-- ── Email List Panel ── -->
+    <div class="email-list-panel">
+      <!-- Toolbar -->
+      <div class="email-list-toolbar">
+        <div class="input-group input-group-sm flex-grow-1">
+          <span class="input-group-text bg-transparent border-end-0">
+            <i data-lucide="search" style="width:0.875rem;height:0.875rem" class="text-muted"></i>
+          </span>
+          <input type="text" class="form-control form-control-sm border-start-0" placeholder="Search mail...">
+        </div>
+        <select class="form-select form-select-sm" style="width:auto;min-width:5.5rem;">
+          <option>All</option>
+          <option>Unread</option>
+          <option>Starred</option>
+        </select>
+      </div>
+
+      <!-- Email List -->
+      <div class="email-list">
+        <!-- 1. Selected + Unread -->
+        <div class="email-list__item email-list__item--unread email-list__item--selected" data-email="1">
+          <div class="email-list__unread-dot"></div>
+          <div class="avatar avatar--sm avatar--success">SC</div>
+          <div class="email-list__content">
+            <div class="email-list__sender">Sarah Chen</div>
+            <div class="email-list__subject">Q1 Revenue Report</div>
+            <div class="email-list__preview">Final numbers are in. We exceeded targets by 12% across all regions, with APAC showing the strongest...</div>
+          </div>
+          <div class="email-list__meta">
+            <span class="email-list__time">2m ago</span>
+            <i data-lucide="paperclip" class="email-list__attachment-icon"></i>
+          </div>
+        </div>
+
+        <!-- 2. Unread -->
+        <div class="email-list__item email-list__item--unread" data-email="2">
+          <div class="email-list__unread-dot"></div>
+          <div class="avatar avatar--sm avatar--info">DB</div>
+          <div class="email-list__content">
+            <div class="email-list__sender">DevOps Bot</div>
+            <div class="email-list__subject">Deployment v2.5 scheduled</div>
+            <div class="email-list__preview">Production deployment for v2.5 is scheduled for tonight at 11:00 PM UTC. All pre-flight checks passed...</div>
+          </div>
+          <div class="email-list__meta">
+            <span class="email-list__time">18m ago</span>
+          </div>
+        </div>
+
+        <!-- 3. Unread + Starred -->
+        <div class="email-list__item email-list__item--unread email-list__item--starred" data-email="3">
+          <div class="email-list__unread-dot"></div>
+          <div class="avatar avatar--sm avatar--tertiary">MR</div>
+          <div class="email-list__content">
+            <div class="email-list__sender">Marcus Rivera</div>
+            <div class="email-list__subject">Re: API Rate Limiting</div>
+            <div class="email-list__preview">I've reviewed the proposed limits and I think we should increase the burst allowance for enterprise...</div>
+          </div>
+          <div class="email-list__meta">
+            <span class="email-list__time">1h ago</span>
+            <i data-lucide="star" class="email-list__star" fill="currentColor"></i>
+          </div>
+        </div>
+
+        <!-- 4. Read -->
+        <div class="email-list__item" data-email="4">
+          <div style="width:7px;flex-shrink:0;"></div>
+          <div class="avatar avatar--sm avatar--warning">AP</div>
+          <div class="email-list__content">
+            <div class="email-list__sender">Aisha Patel</div>
+            <div class="email-list__subject">Weekly Design Review Notes</div>
+            <div class="email-list__preview">Attached are the notes from today's design review. Key decisions: new navigation pattern approved, color...</div>
+          </div>
+          <div class="email-list__meta">
+            <span class="email-list__time">3h ago</span>
+            <i data-lucide="paperclip" class="email-list__attachment-icon"></i>
+          </div>
+        </div>
+
+        <!-- 5. Read + AI -->
+        <div class="email-list__item" data-email="5">
+          <div style="width:7px;flex-shrink:0;"></div>
+          <div class="avatar avatar--sm avatar--ai">AI</div>
+          <div class="email-list__content">
+            <div class="email-list__sender">AI Assistant</div>
+            <div class="email-list__subject">AI Model Performance Update</div>
+            <div class="email-list__preview">Weekly performance report: Model accuracy improved to 94.7%, latency reduced by 15ms. Anomaly detection...</div>
+          </div>
+          <div class="email-list__meta">
+            <span class="email-list__time">5h ago</span>
+          </div>
+        </div>
+
+        <!-- 6. Read + Starred -->
+        <div class="email-list__item email-list__item--starred" data-email="6">
+          <div style="width:7px;flex-shrink:0;"></div>
+          <div class="avatar avatar--sm avatar--primary">JK</div>
+          <div class="email-list__content">
+            <div class="email-list__sender">James Kim</div>
+            <div class="email-list__subject">Board Deck — Final Review</div>
+            <div class="email-list__preview">Please review the attached board deck by EOD. I've incorporated feedback from the exec team on slides 12-18...</div>
+          </div>
+          <div class="email-list__meta">
+            <span class="email-list__time">Yesterday</span>
+            <i data-lucide="star" class="email-list__star" fill="currentColor"></i>
+          </div>
+        </div>
+
+        <!-- 7. Read -->
+        <div class="email-list__item" data-email="7">
+          <div style="width:7px;flex-shrink:0;"></div>
+          <div class="avatar avatar--sm avatar--danger">LW</div>
+          <div class="email-list__content">
+            <div class="email-list__sender">Lisa Wang</div>
+            <div class="email-list__subject">Security Audit Results</div>
+            <div class="email-list__preview">The Q1 security audit is complete. No critical vulnerabilities found. Two medium-severity items flagged...</div>
+          </div>
+          <div class="email-list__meta">
+            <span class="email-list__time">Yesterday</span>
+          </div>
+        </div>
+
+        <!-- 8. Read -->
+        <div class="email-list__item" data-email="8">
+          <div style="width:7px;flex-shrink:0;"></div>
+          <div class="avatar avatar--sm avatar--accent">TN</div>
+          <div class="email-list__content">
+            <div class="email-list__sender">Tom Nguyen</div>
+            <div class="email-list__subject">Re: Customer onboarding flow</div>
+            <div class="email-list__preview">Great points on the onboarding funnel. I think we can reduce the drop-off at step 3 by simplifying the...</div>
+          </div>
+          <div class="email-list__meta">
+            <span class="email-list__time">Mar 14</span>
+          </div>
+        </div>
+
+        <!-- 9. Read -->
+        <div class="email-list__item" data-email="9">
+          <div style="width:7px;flex-shrink:0;"></div>
+          <div class="avatar avatar--sm avatar--secondary">HR</div>
+          <div class="email-list__content">
+            <div class="email-list__sender">HR Team</div>
+            <div class="email-list__subject">Updated PTO Policy</div>
+            <div class="email-list__preview">Please review the updated PTO policy effective April 1st. Key changes include increased rollover days and...</div>
+          </div>
+          <div class="email-list__meta">
+            <span class="email-list__time">Mar 13</span>
+          </div>
+        </div>
+
+        <!-- 10. Read -->
+        <div class="email-list__item" data-email="10">
+          <div style="width:7px;flex-shrink:0;"></div>
+          <div class="avatar avatar--sm avatar--success">RM</div>
+          <div class="email-list__content">
+            <div class="email-list__sender">Rachel Martinez</div>
+            <div class="email-list__subject">Data Pipeline Optimization</div>
+            <div class="email-list__preview">The new Spark cluster configuration reduced processing time by 40%. Detailed benchmarks attached for your...</div>
+          </div>
+          <div class="email-list__meta">
+            <span class="email-list__time">Mar 12</span>
+            <i data-lucide="paperclip" class="email-list__attachment-icon"></i>
+          </div>
+        </div>
+
+        <!-- 11. Read -->
+        <div class="email-list__item" data-email="11">
+          <div style="width:7px;flex-shrink:0;"></div>
+          <div class="avatar avatar--sm avatar--tertiary">EO</div>
+          <div class="email-list__content">
+            <div class="email-list__sender">Elena Ortiz</div>
+            <div class="email-list__subject">Re: Brand Guidelines v3</div>
+            <div class="email-list__preview">Love the new direction for the brand refresh. The moodboard captures exactly what we discussed in the...</div>
+          </div>
+          <div class="email-list__meta">
+            <span class="email-list__time">Mar 11</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Email Detail Panel ── -->
+    <div class="email-detail-panel">
+      <!-- Action Bar -->
+      <div class="email-detail__actions">
+        <button class="email-detail__action-btn">
+          <i data-lucide="reply" style="width:0.875rem;height:0.875rem"></i> Reply
+        </button>
+        <button class="email-detail__action-btn">
+          <i data-lucide="reply-all" style="width:0.875rem;height:0.875rem"></i> Reply All
+        </button>
+        <button class="email-detail__action-btn">
+          <i data-lucide="forward" style="width:0.875rem;height:0.875rem"></i> Forward
+        </button>
+        <div class="vr mx-1" style="opacity:0.2;"></div>
+        <button class="email-detail__action-btn">
+          <i data-lucide="archive" style="width:0.875rem;height:0.875rem"></i> Archive
+        </button>
+        <button class="email-detail__action-btn email-detail__action-btn--danger">
+          <i data-lucide="trash-2" style="width:0.875rem;height:0.875rem"></i> Delete
+        </button>
+        <div class="ms-auto d-flex align-items-center gap-1">
+          <button class="email-detail__action-btn">
+            <i data-lucide="printer" style="width:0.875rem;height:0.875rem"></i>
+          </button>
+          <button class="email-detail__action-btn">
+            <i data-lucide="more-horizontal" style="width:0.875rem;height:0.875rem"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Email Content -->
+      <div class="email-detail">
+        <div class="email-detail__header">
+          <div class="avatar avatar--success">SC</div>
+          <div class="email-detail__header-content">
+            <div class="email-detail__subject">Q1 Revenue Report</div>
+            <div>
+              <span class="email-detail__sender-name">Sarah Chen</span>
+              <span class="email-detail__sender-email">&lt;sarah.chen@synth.io&gt;</span>
+            </div>
+            <div class="email-detail__recipient">To: alice@synth.io, finance-team@synth.io</div>
+          </div>
+          <div class="email-detail__date">
+            Today at 10:34 AM
+          </div>
+        </div>
+
+        <div class="email-detail__body">
+          <p>Hi Alice,</p>
+
+          <p>The final Q1 revenue numbers are in, and I'm happy to report that we exceeded our targets by <strong>12%</strong> across all regions. Here's a quick breakdown:</p>
+
+          <table class="table table-sm table-bordered mt-3 mb-3" style="max-width:28rem;">
+            <thead>
+              <tr>
+                <th>Region</th>
+                <th class="text-end">Target</th>
+                <th class="text-end">Actual</th>
+                <th class="text-end">Variance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>North America</td>
+                <td class="text-end">$2.4M</td>
+                <td class="text-end">$2.7M</td>
+                <td class="text-end text-success">+12.5%</td>
+              </tr>
+              <tr>
+                <td>EMEA</td>
+                <td class="text-end">$1.8M</td>
+                <td class="text-end">$1.95M</td>
+                <td class="text-end text-success">+8.3%</td>
+              </tr>
+              <tr>
+                <td>APAC</td>
+                <td class="text-end">$1.2M</td>
+                <td class="text-end">$1.45M</td>
+                <td class="text-end text-success">+20.8%</td>
+              </tr>
+              <tr class="fw-semibold">
+                <td>Total</td>
+                <td class="text-end">$5.4M</td>
+                <td class="text-end">$6.1M</td>
+                <td class="text-end text-success">+13.0%</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>APAC showed the strongest growth, driven by our new enterprise partnerships in Japan and Australia. The detailed breakdown by product line and account is in the attached spreadsheet.</p>
+
+          <p>I'd like to schedule a 30-minute review with the leadership team this Thursday to walk through the highlights and discuss Q2 projections. Let me know what time works best.</p>
+
+          <p>Best,<br>Sarah</p>
+        </div>
+
+        <!-- Attachments -->
+        <div class="email-detail__attachments">
+          <div class="email-detail__attachments-label">
+            <i data-lucide="paperclip" style="width:0.75rem;height:0.75rem;display:inline;vertical-align:middle;margin-right:0.25rem;"></i>
+            2 Attachments
+          </div>
+          <a class="email-detail__attachment" href="#">
+            <i data-lucide="file-text" class="email-detail__attachment-icon text-danger"></i>
+            <div class="email-detail__attachment-info">
+              <span class="email-detail__attachment-name">Q1_Revenue_Report.pdf</span>
+              <span class="email-detail__attachment-size">2.4 MB</span>
+            </div>
+          </a>
+          <a class="email-detail__attachment" href="#">
+            <i data-lucide="file-spreadsheet" class="email-detail__attachment-icon text-success"></i>
+            <div class="email-detail__attachment-info">
+              <span class="email-detail__attachment-name">Q1_Breakdown_by_Region.xlsx</span>
+              <span class="email-detail__attachment-size">845 KB</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Reply -->
+      <div class="email-quick-reply">
+        <div class="d-flex gap-2">
+          <textarea class="email-quick-reply__input" rows="2" placeholder="Reply to Sarah Chen..."></textarea>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-2">
+          <div class="d-flex gap-1">
+            <button class="btn btn-sm btn-icon btn-ghost-secondary" title="Attach file">
+              <i data-lucide="paperclip" class="icon-xs"></i>
+            </button>
+            <button class="btn btn-sm btn-icon btn-ghost-secondary" title="Insert emoji">
+              <i data-lucide="smile" class="icon-xs"></i>
+            </button>
+          </div>
+          <button class="btn btn-sm btn-primary">
+            <i data-lucide="send" class="icon-xs me-1"></i> Send
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Compose Modal ── -->
+<div class="modal fade" id="composeModal" tabindex="-1" aria-labelledby="composeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header py-2">
+        <h6 class="modal-title" id="composeModalLabel">New Message</h6>
+        <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="email-compose__field">
+          <label>To</label>
+          <input type="text" placeholder="Recipients...">
+          <button class="btn btn-sm btn-link text-muted p-0" id="toggleCcBtn" style="font-size:0.75rem;">Cc/Bcc</button>
+        </div>
+        <div class="email-compose__field d-none" id="ccField">
+          <label>Cc</label>
+          <input type="text" placeholder="Cc recipients...">
+        </div>
+        <div class="email-compose__field d-none" id="bccField">
+          <label>Bcc</label>
+          <input type="text" placeholder="Bcc recipients...">
+        </div>
+        <div class="email-compose__field">
+          <label>Subject</label>
+          <input type="text" placeholder="Subject...">
+        </div>
+        <div class="email-compose__editor">
+          <div id="compose-editor"></div>
+        </div>
+      </div>
+      <div class="modal-footer py-2">
+        <div class="d-flex align-items-center gap-2 w-100">
+          <button class="btn btn-primary btn-sm">
+            <i data-lucide="send" class="icon-xs me-1"></i> Send
+          </button>
+          <button class="btn btn-sm btn-ghost-secondary" title="Attach file">
+            <i data-lucide="paperclip" class="icon-xs"></i>
+          </button>
+          <div class="ms-auto">
+            <button class="btn btn-sm btn-ghost-secondary" data-bs-dismiss="modal">
+              <i data-lucide="trash-2" class="icon-xs me-1"></i> Discard
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+<script>
+(function() {
+  // ── Quill editor for compose modal ──
+  var composeModal = document.getElementById('composeModal');
+  var quillInstance = null;
+
+  composeModal.addEventListener('shown.bs.modal', function() {
+    if (!quillInstance) {
+      quillInstance = new Quill('#compose-editor', {
+        theme: 'snow',
+        placeholder: 'Write your message...',
+        modules: {
+          toolbar: [
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['link', 'blockquote', 'code-block'],
+            ['clean']
+          ]
+        }
+      });
+    }
+  });
+
+  // ── Cc/Bcc toggle ──
+  var toggleBtn = document.getElementById('toggleCcBtn');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function() {
+      document.getElementById('ccField').classList.toggle('d-none');
+      document.getElementById('bccField').classList.toggle('d-none');
+    });
+  }
+
+  // ── Email list item selection ──
+  var emailItems = document.querySelectorAll('.email-list__item');
+  emailItems.forEach(function(item) {
+    item.addEventListener('click', function() {
+      emailItems.forEach(function(el) {
+        el.classList.remove('email-list__item--selected');
+      });
+      item.classList.add('email-list__item--selected');
+    });
+  });
+
+  // ── Star toggle ──
+  var stars = document.querySelectorAll('.email-list__star');
+  stars.forEach(function(star) {
+    star.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var parentItem = star.closest('.email-list__item');
+      parentItem.classList.toggle('email-list__item--starred');
+    });
+  });
+})();
+</script>
+{% endblock %}

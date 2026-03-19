@@ -65,6 +65,9 @@
 | `.status-dot--away` | Yellow status dot for away/idle | COMPONENTS.md |
 | `.status-dot--offline` | Gray status dot for offline | COMPONENTS.md |
 | `.status-badge` | Status indicator as a labeled badge | COMPONENTS.md |
+| `.badge-ai-generated` | Animated gradient badge for AI content (solid) | COMPONENTS.md |
+| `.badge-ai-generated-soft` | Animated tinted badge for AI content (soft) | COMPONENTS.md |
+| `.badge-ai-generated-outline` | Animated border+text badge for AI content (outline) | COMPONENTS.md |
 
 ## 5. Navigation
 
@@ -295,3 +298,53 @@
 | `.scroll-reveal` | Fade-in on scroll (IntersectionObserver) | LANDING_PAGE.md |
 | `.scroll-reveal-up` | Scroll reveal with upward slide | LANDING_PAGE.md |
 | `.scroll-reveal-delay-{n}` | Stagger delay (1–8, 100ms increments) | LANDING_PAGE.md |
+
+## 25. Expandable Cards
+
+| Class | Description | Docs |
+|---|---|---|
+| `.card-expandable` | Base expandable card with summary/detail pattern | COMPONENTS.md |
+| `.card-expandable--expanded` | Expanded state (detail visible) | COMPONENTS.md |
+| `.card-expandable--expand-wide` | Spans 2 grid columns when expanded | COMPONENTS.md |
+| `.card-expandable--expand-full` | Spans full grid width when expanded | COMPONENTS.md |
+| `.card-expandable--{color}` | Top border accent color | COMPONENTS.md |
+| `.card-expandable__header` | Slim clickable header (title + toggle) | COMPONENTS.md |
+| `.card-expandable__body` | Always-visible body area (key metrics) | COMPONENTS.md |
+| `.card-expandable__detail` | Collapsible detail area (height transition) | COMPONENTS.md |
+| `.card-expandable__change--up` | Green positive change pill | COMPONENTS.md |
+| `.card-expandable__change--down` | Red negative change pill | COMPONENTS.md |
+| `.expandable-grid` | Grid container for width-expanding cards | COMPONENTS.md |
+| `.expandable-detail-tabs` | Tab navigation inside expanded area | COMPONENTS.md |
+| `.expandable-stat-row` | Horizontal stat row inside expanded area | COMPONENTS.md |
+
+## 26. Bootstrap Extras
+
+| Class | Description | Docs |
+|---|---|---|
+| `.offcanvas` | Themed slide-in panel (surface colors, borders, dark mode) | COMPONENTS.md |
+| `.btn-group-segmented` | Modern segmented control / toggle group | COMPONENTS.md |
+| `.btn-close` | Themed close button with focus ring and dark mode | COMPONENTS.md |
+| `.spinner-border-xs` | Extra-small spinner size variant | COMPONENTS.md |
+| `.spinner-{color}` | Spinner using theme color (primary, accent, ai, etc.) | COMPONENTS.md |
+
+## 26. Calendar (FullCalendar)
+
+| Class | Description | Docs |
+|---|---|---|
+| `.fc` | FullCalendar root — themed fonts, colors, responsive overflow | COMPONENTS.md |
+| `.fc-event-{color}` | Event color variant (primary, success, danger, warning, info, ai, accent, tertiary) | COMPONENTS.md |
+| `.fc-day-today` | Today cell highlight (primary tint) | COMPONENTS.md |
+
+## 27. Email
+
+| Class | Description | Docs |
+|---|---|---|
+| `.email-layout` | Flex container for email client (sidebar + list + detail) | COMPONENTS.md |
+| `.email-sidebar` | Left folder navigation panel | COMPONENTS.md |
+| `.email-sidebar__folder` | Folder link with icon and unread count | COMPONENTS.md |
+| `.email-list__item` | Email row in inbox list | COMPONENTS.md |
+| `.email-list__item--unread` | Unread email styling (bold + indicator) | COMPONENTS.md |
+| `.email-list__item--selected` | Selected/active email row | COMPONENTS.md |
+| `.email-detail` | Full email detail view | COMPONENTS.md |
+| `.email-detail__attachment` | Attachment item with icon, name, size | COMPONENTS.md |
+| `.email-compose` | Compose form fields and editor area | COMPONENTS.md |

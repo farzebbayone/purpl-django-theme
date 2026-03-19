@@ -51,5 +51,10 @@
 // 6. Phase 7 — Landing Page
 @import "landing";
 
-// 7. Third-party integrations
+@import "expandable-cards";
+
+// 7. Bootstrap extras & third-party integrations
+@import "bootstrap-extras";
 @import "quill";
+@import "fullcalendar";
+@import "email";

@@ -1,0 +1,298 @@
+// Expandable Cards (Summary/Detail)
+// Three-layer structure: header (clickable) → body (key stats) → detail (expanded content).
+// Supports both height and width expansion with smooth transitions.
+
+// ── Grid Container ────────────────────────────────────────
+
+.expandable-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+// ── Expandable Card ───────────────────────────────────────
+
+.card-expandable {
+  position: relative;
+  overflow: hidden;
+  transition: grid-column 0.3s ease, box-shadow 0.3s ease;
+
+  // ── Header (clickable, always slim) ───────────────────
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--border-color-light);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: var(--surface-2);
+    }
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  &__subtitle {
+    font-size: $font-size-sm;
+    color: var(--text-muted);
+  }
+
+  // Toggle icon
+  &__toggle {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition: transform 0.3s ease, color 0.15s ease;
+
+    svg, i {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  // ── Body (always visible, key stats) ──────────────────
+  &__body {
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  &__metrics {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  &__metric {
+    &-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums;
+    }
+
+    &-label {
+      font-size: 0.6875rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 0.125rem;
+    }
+  }
+
+  &__change {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    padding: 0.1875rem 0.625rem;
+    border-radius: 9999px;
+
+    &--up {
+      color: $success;
+      background: rgba($success, 0.1);
+    }
+
+    &--down {
+      color: $danger;
+      background: rgba($danger, 0.1);
+    }
+  }
+
+  &__sparkline {
+    flex-shrink: 0;
+    width: 6rem;
+    height: 2.5rem;
+  }
+
+  // ── Detail (expandable) ───────────────────────────────
+  &__detail {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s ease;
+
+    > .card-expandable__detail-inner {
+      overflow: hidden;
+    }
+  }
+
+  &__detail-inner {
+    border-top: 1px solid var(--border-color-light);
+  }
+
+  &__detail-body {
+    padding: 1.25rem;
+  }
+
+  // ── Expanded State ────────────────────────────────────
+  &--expanded {
+    box-shadow: $box-shadow-lg;
+    z-index: 2;
+
+    .card-expandable__detail {
+      grid-template-rows: 1fr;
+    }
+
+    .card-expandable__toggle {
+      transform: rotate(180deg);
+      color: $primary;
+    }
+  }
+
+  // ── Width Expansion ───────────────────────────────────
+  &--expand-wide.card-expandable--expanded {
+    grid-column: span 2;
+  }
+
+  &--expand-full.card-expandable--expanded {
+    grid-column: 1 / -1;
+  }
+
+  // ── Color Variants (tinted, matches card-tint-* style) ─
+  @each $name, $color in (
+    "primary": $primary,
+    "success": $success,
+    "danger": $danger,
+    "warning": $warning,
+    "info": $info,
+    "ai": $ai,
+    "accent": $accent,
+    "tertiary": $tertiary
+  ) {
+    &--#{$name} {
+      .card-expandable__metric-value {
+        color: $color;
+      }
+
+      .card-expandable__header {
+        background: rgba($color, 0.06);
+        border-bottom-color: rgba($color, 0.12);
+      }
+
+      [data-bs-theme="dark"] & .card-expandable__header {
+        background: rgba($color, 0.1);
+        border-bottom-color: rgba($color, 0.2);
+      }
+    }
+  }
+}
+
+// ── Detail Sections ───────────────────────────────────────
+
+.expandable-detail-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-color-light);
+  padding: 0 1.25rem;
+
+  .expandable-detail-tab {
+    padding: 0.625rem 1rem;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+    &:hover {
+      color: var(--text-primary);
+    }
+
+    &--active {
+      color: $primary;
+      border-bottom-color: $primary;
+    }
+  }
+}
+
+.expandable-stat-row {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-color-light);
+  flex-wrap: wrap;
+
+  &__item {
+    text-align: center;
+    min-width: 5rem;
+
+    &-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    &-label {
+      font-size: 0.6875rem;
+      color: var(--text-muted);
+    }
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────
+
+@media (max-width: 768px) {
+  .expandable-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-expandable--expand-wide.card-expandable--expanded,
+  .card-expandable--expand-full.card-expandable--expanded {
+    grid-column: span 1;
+  }
+
+  .card-expandable__metrics {
+    gap: 1rem;
+  }
+
+  .card-expandable__sparkline {
+    display: none;
+  }
+
+  .card-expandable__body {
+    flex-wrap: wrap;
+  }
+}
+
+// ── Reduced Motion ────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  .card-expandable__detail {
+    transition-duration: 0.01s;
+  }
+
+  .card-expandable__toggle {
+    transition-duration: 0.01s;
+  }
+}

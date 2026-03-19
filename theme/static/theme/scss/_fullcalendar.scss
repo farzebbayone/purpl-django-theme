@@ -1,0 +1,515 @@
+// FullCalendar v6 — Synth Theme Overrides
+// Styles FullCalendar (loaded via CDN) to match the Synth design system.
+
+// ---------------------------------------------------------------------------
+// Root & Typography
+// ---------------------------------------------------------------------------
+.fc {
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base;
+  color: var(--text-primary);
+  // Prevent calendar from being clipped when sidebar expands
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+// ---------------------------------------------------------------------------
+// Toolbar (header with nav, title, view buttons)
+// ---------------------------------------------------------------------------
+.fc .fc-toolbar {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  &-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Buttons (prev / next / today / view toggles)
+// ---------------------------------------------------------------------------
+.fc .fc-button {
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  border-radius: $border-radius-sm;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--surface-1);
+  color: var(--text-primary);
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background-color: var(--surface-2);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 $focus-ring-width rgba($primary, $focus-ring-opacity);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.fc .fc-button-primary {
+  background-color: var(--surface-1);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+
+  &:not(:disabled):active,
+  &:not(:disabled).fc-button-active {
+    background-color: $primary;
+    border-color: $primary;
+    color: #fff;
+    box-shadow: none;
+  }
+
+  &:hover {
+    background-color: var(--surface-2);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 $focus-ring-width rgba($primary, $focus-ring-opacity);
+  }
+}
+
+// Button group (view toggle)
+.fc .fc-button-group {
+  border-radius: $border-radius-sm;
+
+  > .fc-button {
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: $border-radius-sm;
+      border-bottom-left-radius: $border-radius-sm;
+    }
+
+    &:last-child {
+      border-top-right-radius: $border-radius-sm;
+      border-bottom-right-radius: $border-radius-sm;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Column Headers (day names: Mon, Tue, etc.)
+// ---------------------------------------------------------------------------
+.fc .fc-col-header-cell {
+  background-color: var(--surface-2);
+  border-color: var(--border-color);
+  padding: 0.5rem 0;
+
+  .fc-col-header-cell-cushion {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+  }
+}
+
+// Week/Day view: current day column header
+.fc .fc-col-header-cell.fc-day-today {
+  background-color: rgba($primary, 0.08);
+
+  .fc-col-header-cell-cushion {
+    color: $primary;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Day Grid — Month View
+// ---------------------------------------------------------------------------
+.fc .fc-daygrid-day {
+  border-color: var(--border-color-light);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: rgba($primary, 0.02);
+  }
+}
+
+.fc .fc-daygrid-day-number {
+  font-size: $font-size-sm;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.375rem 0.5rem;
+}
+
+.fc .fc-daygrid-day-top {
+  flex-direction: row;
+}
+
+// Today highlight
+.fc .fc-day-today {
+  background-color: rgba($primary, 0.04) !important;
+
+  .fc-daygrid-day-number {
+    color: $primary;
+    font-weight: 700;
+  }
+}
+
+// Other-month days
+.fc .fc-day-other {
+  .fc-daygrid-day-number {
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Events
+// ---------------------------------------------------------------------------
+.fc .fc-event {
+  border-radius: $border-radius-sm;
+  border: none;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  padding: 0.125rem 0.375rem;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.85;
+    box-shadow: $box-shadow-sm;
+  }
+}
+
+// Default event colors (primary)
+.fc .fc-daygrid-event,
+.fc .fc-timegrid-event {
+  background-color: $primary;
+  color: #fff;
+}
+
+.fc .fc-daygrid-block-event .fc-event-main {
+  color: #fff;
+}
+
+.fc .fc-daygrid-dot-event {
+  background-color: transparent;
+  color: var(--text-primary);
+
+  &:hover {
+    background-color: var(--surface-2);
+  }
+
+  .fc-daygrid-event-dot {
+    border-color: $primary;
+  }
+}
+
+// Event dot
+.fc .fc-daygrid-event-dot {
+  border-color: $primary;
+}
+
+// ---------------------------------------------------------------------------
+// Event Color Variants
+// ---------------------------------------------------------------------------
+@mixin fc-event-variant($color) {
+  background-color: $color;
+  border-color: $color;
+
+  .fc-daygrid-event-dot {
+    border-color: $color;
+  }
+
+  &.fc-daygrid-dot-event {
+    background-color: transparent;
+    color: var(--text-primary);
+
+    &:hover {
+      background-color: rgba($color, 0.08);
+    }
+
+    .fc-daygrid-event-dot {
+      border-color: $color;
+    }
+  }
+}
+
+.fc-event-primary   { @include fc-event-variant($primary); }
+.fc-event-success   { @include fc-event-variant($success); }
+.fc-event-danger    { @include fc-event-variant($danger); }
+.fc-event-warning   { @include fc-event-variant($warning); color: #1a1a1a; }
+.fc-event-info      { @include fc-event-variant($info); }
+.fc-event-ai        { @include fc-event-variant($ai); }
+.fc-event-accent    { @include fc-event-variant($accent); }
+.fc-event-tertiary  { @include fc-event-variant($tertiary); }
+
+// ---------------------------------------------------------------------------
+// "More" Events Popover
+// ---------------------------------------------------------------------------
+.fc .fc-popover {
+  background-color: var(--surface-1);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-lg;
+
+  .fc-popover-header {
+    background-color: var(--surface-2);
+    border-bottom: 1px solid var(--border-color-light);
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 0.5rem 0.75rem;
+    border-radius: $border-radius $border-radius 0 0;
+  }
+
+  .fc-popover-body {
+    padding: 0.5rem;
+  }
+}
+
+// More-link
+.fc .fc-daygrid-more-link {
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    color: darken($primary, 10%);
+    text-decoration: underline;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Time Grid — Week / Day Views
+// ---------------------------------------------------------------------------
+.fc .fc-timegrid-slot {
+  height: 3rem;
+  border-color: var(--border-color-light);
+}
+
+.fc .fc-timegrid-slot-label-cushion {
+  font-size: $font-size-sm;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.fc .fc-timegrid-axis-cushion {
+  font-size: $font-size-sm;
+  color: var(--text-muted);
+}
+
+.fc .fc-timegrid-col {
+  border-color: var(--border-color-light);
+}
+
+// Now indicator
+.fc .fc-timegrid-now-indicator-line {
+  border-color: $danger;
+  border-width: 2px;
+}
+
+.fc .fc-timegrid-now-indicator-arrow {
+  border-color: $danger;
+}
+
+// Time grid events
+.fc .fc-timegrid-event {
+  border-radius: $border-radius-sm;
+  border: none;
+  margin-bottom: 0;
+
+  .fc-event-main {
+    padding: 0.125rem 0.3rem;
+    font-size: 0.6875rem;
+    line-height: 1.3;
+    overflow: hidden;
+  }
+
+  .fc-event-time {
+    font-size: 0.6875rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// List View — tinted card style (not solid bright colors)
+// ---------------------------------------------------------------------------
+.fc .fc-list {
+  border-color: var(--border-color);
+  border-radius: $border-radius;
+}
+
+.fc .fc-list-day-cushion {
+  background-color: var(--surface-2);
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.fc .fc-list-event {
+  cursor: pointer;
+  background-color: transparent;
+
+  td {
+    border-color: var(--border-color-light);
+    background-color: transparent;
+  }
+
+  &:hover td {
+    background-color: var(--surface-2);
+  }
+}
+
+// Override FullCalendar's default bright event backgrounds in list view
+.fc .fc-list-event td {
+  background-color: transparent !important;
+}
+
+.fc .fc-list-event-dot {
+  border-color: $primary;
+  border-width: 6px;
+}
+
+.fc .fc-list-event-title a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.fc .fc-list-event-time {
+  color: var(--text-secondary);
+  font-size: $font-size-sm;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+// No-events placeholder
+.fc .fc-list-empty-cushion {
+  color: var(--text-muted);
+  font-size: $font-size-sm;
+}
+
+// List view event color variants — tinted dot only, no row background
+@each $name, $color in (
+  "primary": $primary,
+  "success": $success,
+  "danger": $danger,
+  "warning": $warning,
+  "info": $info,
+  "ai": $ai,
+  "accent": $accent,
+  "tertiary": $tertiary
+) {
+  .fc .fc-list-event.fc-event-#{$name} {
+    td { background-color: transparent !important; }
+
+    .fc-list-event-dot {
+      border-color: $color;
+    }
+
+    // Subtle left border tint like tinted cards
+    td:first-child {
+      border-left: 3px solid $color;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Scrollbar & Table borders
+// ---------------------------------------------------------------------------
+.fc .fc-scrollgrid {
+  border-color: var(--border-color) !important;
+  border-radius: $border-radius;
+  overflow: hidden;
+}
+
+.fc td,
+.fc th {
+  border-color: var(--border-color) !important;
+}
+
+// Fix stray header/corner backgrounds
+.fc .fc-scrollgrid-section > *,
+.fc .fc-scrollgrid-section-header > *,
+.fc .fc-scrollgrid-sync-table,
+.fc .fc-timegrid-axis {
+  background-color: transparent;
+}
+
+.fc thead,
+.fc .fc-scrollgrid-section-header {
+  background-color: var(--surface-2);
+}
+
+// ---------------------------------------------------------------------------
+// Dark Mode
+// ---------------------------------------------------------------------------
+[data-bs-theme="dark"] {
+  .fc .fc-button {
+    background-color: var(--surface-1);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+
+    &:hover {
+      background-color: var(--surface-2);
+    }
+  }
+
+  .fc .fc-button-primary {
+    &:not(:disabled):active,
+    &:not(:disabled).fc-button-active {
+      background-color: $primary;
+      border-color: $primary;
+      color: #fff;
+    }
+  }
+
+  .fc .fc-day-today {
+    background-color: rgba($primary, 0.08) !important;
+  }
+
+  .fc .fc-col-header-cell {
+    background-color: var(--surface-2);
+  }
+
+  .fc .fc-col-header-cell.fc-day-today {
+    background-color: rgba($primary, 0.12);
+  }
+
+  .fc thead,
+  .fc .fc-scrollgrid-section-header {
+    background-color: var(--surface-2);
+  }
+
+  .fc .fc-popover {
+    background-color: var(--surface-1);
+    border-color: var(--border-color);
+
+    .fc-popover-header {
+      background-color: var(--surface-2);
+    }
+  }
+
+  .fc .fc-list-day-cushion {
+    background-color: var(--surface-2);
+  }
+
+  .fc .fc-list-event:hover td {
+    background-color: var(--surface-2) !important;
+  }
+
+  .fc-event-warning {
+    color: #1a1a1a;
+  }
+
+  .fc .fc-daygrid-day:hover {
+    background-color: rgba($primary, 0.04);
+  }
+}

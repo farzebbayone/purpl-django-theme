@@ -16,7 +16,7 @@
   <a class="nav-link" href="#alerts" data-bs-toggle="tab" data-bs-target="#sec-alerts">Alerts</a>
   <a class="nav-link" href="#badges" data-bs-toggle="tab" data-bs-target="#sec-badges">Badges</a>
   <a class="nav-link" href="#nav" data-bs-toggle="tab" data-bs-target="#sec-nav">Navigation</a>
-  <a class="nav-link" href="#modals" data-bs-toggle="tab" data-bs-target="#sec-modals">Modals & Drawers</a>
+  <a class="nav-link" href="#modals" data-bs-toggle="tab" data-bs-target="#sec-modals">Modals & Panels</a>
   <a class="nav-link" href="#empty" data-bs-toggle="tab" data-bs-target="#sec-empty">Empty States</a>
   <a class="nav-link" href="#accordion" data-bs-toggle="tab" data-bs-target="#sec-accordion">Accordion</a>
   <a class="nav-link" href="#list-group" data-bs-toggle="tab" data-bs-target="#sec-list-group">List Group</a>
@@ -104,6 +104,86 @@
             <span class="btn-loading__spinner"></span>
             Loading...
           </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button Groups & Segmented Controls -->
+    <div class="row g-4 mt-2">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Button Groups</h5>
+            <div class="mb-3">
+              <span class="fs-7 text-secondary d-block mb-2">Default</span>
+              <div class="btn-group">
+                <button class="btn btn-outline-secondary">Left</button>
+                <button class="btn btn-outline-secondary active">Middle</button>
+                <button class="btn btn-outline-secondary">Right</button>
+              </div>
+            </div>
+            <div class="mb-3">
+              <span class="fs-7 text-secondary d-block mb-2">Primary</span>
+              <div class="btn-group">
+                <button class="btn btn-primary">Bold</button>
+                <button class="btn btn-primary">Italic</button>
+                <button class="btn btn-primary">Underline</button>
+              </div>
+            </div>
+            <div>
+              <span class="fs-7 text-secondary d-block mb-2">Small with icons</span>
+              <div class="btn-group btn-group-sm">
+                <button class="btn btn-outline-secondary"><i data-lucide="align-left" class="icon-xs"></i></button>
+                <button class="btn btn-outline-secondary active"><i data-lucide="align-center" class="icon-xs"></i></button>
+                <button class="btn btn-outline-secondary"><i data-lucide="align-right" class="icon-xs"></i></button>
+                <button class="btn btn-outline-secondary"><i data-lucide="align-justify" class="icon-xs"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Segmented Control</h5>
+            <p class="text-secondary fs-7 mb-3">Use <code>.btn-group-segmented</code> for a modern toggle control.</p>
+            <div class="mb-3">
+              <span class="fs-7 text-secondary d-block mb-2">View mode</span>
+              <div class="btn-group-segmented">
+                <input type="radio" class="btn-check" name="viewMode" id="viewGrid" checked>
+                <label class="btn" for="viewGrid"><i data-lucide="layout-grid" class="icon-xs me-1"></i> Grid</label>
+                <input type="radio" class="btn-check" name="viewMode" id="viewList">
+                <label class="btn" for="viewList"><i data-lucide="list" class="icon-xs me-1"></i> List</label>
+                <input type="radio" class="btn-check" name="viewMode" id="viewBoard">
+                <label class="btn" for="viewBoard"><i data-lucide="columns" class="icon-xs me-1"></i> Board</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <span class="fs-7 text-secondary d-block mb-2">Time range</span>
+              <div class="btn-group-segmented">
+                <input type="radio" class="btn-check" name="timeRange" id="tr24h">
+                <label class="btn" for="tr24h">24h</label>
+                <input type="radio" class="btn-check" name="timeRange" id="tr7d" checked>
+                <label class="btn" for="tr7d">7d</label>
+                <input type="radio" class="btn-check" name="timeRange" id="tr30d">
+                <label class="btn" for="tr30d">30d</label>
+                <input type="radio" class="btn-check" name="timeRange" id="tr90d">
+                <label class="btn" for="tr90d">90d</label>
+              </div>
+            </div>
+            <div>
+              <span class="fs-7 text-secondary d-block mb-2">Status filter</span>
+              <div class="btn-group-segmented">
+                <input type="radio" class="btn-check" name="statusFilter" id="sfAll" checked>
+                <label class="btn" for="sfAll">All</label>
+                <input type="radio" class="btn-check" name="statusFilter" id="sfActive">
+                <label class="btn" for="sfActive">Active</label>
+                <input type="radio" class="btn-check" name="statusFilter" id="sfArchived">
+                <label class="btn" for="sfArchived">Archived</label>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -277,6 +357,265 @@
     </div>
   </div>
 
+    <!-- Expandable Cards -->
+    <h5 class="card-title mt-4 mb-3">Expandable Cards</h5>
+    <p class="text-secondary fs-7 mb-3">Three-layer cards: header (clickable) → body (key stats, always visible) → detail (expanded content). Supports height-only or height+width expansion.</p>
+
+    <div class="expandable-grid mb-4">
+
+      <!-- Stock Ticker Card (expand wide) -->
+      <div class="card card-expandable card-expandable--success card-expandable--expand-wide" data-expandable>
+        <div class="card-expandable__header">
+          <div class="card-expandable__title">S&P 500</div>
+          <div class="card-expandable__header-right">
+            <span class="card-expandable__subtitle">SPX • Index</span>
+            <div class="card-expandable__toggle">
+              <i data-lucide="chevron-down"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-expandable__body">
+          <div class="card-expandable__metrics">
+            <div class="card-expandable__metric">
+              <div class="card-expandable__metric-value">5,218.42</div>
+              <div class="card-expandable__metric-label">Last Price</div>
+            </div>
+            <span class="card-expandable__change card-expandable__change--up">+1.24%</span>
+          </div>
+        </div>
+        <div class="card-expandable__detail">
+          <div class="card-expandable__detail-inner">
+            <div class="expandable-stat-row">
+              <div class="expandable-stat-row__item">
+                <div class="expandable-stat-row__item-value">5,154.20</div>
+                <div class="expandable-stat-row__item-label">Open</div>
+              </div>
+              <div class="expandable-stat-row__item">
+                <div class="expandable-stat-row__item-value">5,228.90</div>
+                <div class="expandable-stat-row__item-label">High</div>
+              </div>
+              <div class="expandable-stat-row__item">
+                <div class="expandable-stat-row__item-value">5,140.15</div>
+                <div class="expandable-stat-row__item-label">Low</div>
+              </div>
+              <div class="expandable-stat-row__item">
+                <div class="expandable-stat-row__item-value">3.28B</div>
+                <div class="expandable-stat-row__item-label">Volume</div>
+              </div>
+              <div class="expandable-stat-row__item">
+                <div class="expandable-stat-row__item-value">23.4</div>
+                <div class="expandable-stat-row__item-label">P/E Ratio</div>
+              </div>
+              <div class="expandable-stat-row__item">
+                <div class="expandable-stat-row__item-value">1.42%</div>
+                <div class="expandable-stat-row__item-label">Div Yield</div>
+              </div>
+            </div>
+            <div class="card-expandable__detail-body">
+              <div style="height:10rem;background:var(--surface-2);border-radius:0.5rem;display:flex;align-items:center;justify-content:center" class="text-muted fs-7">
+                <i data-lucide="trending-up" class="me-2" style="width:1.25rem;height:1.25rem"></i>
+                Chart area — integrate with ECharts
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Revenue Card (expand wide) -->
+      <div class="card card-expandable card-expandable--primary card-expandable--expand-wide" data-expandable>
+        <div class="card-expandable__header">
+          <div class="card-expandable__title">Revenue</div>
+          <div class="card-expandable__header-right">
+            <span class="card-expandable__subtitle">Q1 2026 • YTD</span>
+            <div class="card-expandable__toggle">
+              <i data-lucide="chevron-down"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-expandable__body">
+          <div class="card-expandable__metrics">
+            <div class="card-expandable__metric">
+              <div class="card-expandable__metric-value">$2.4M</div>
+              <div class="card-expandable__metric-label">Total Revenue</div>
+            </div>
+            <div class="card-expandable__metric">
+              <div class="card-expandable__metric-value">$2.03M</div>
+              <div class="card-expandable__metric-label">Target</div>
+            </div>
+            <span class="card-expandable__change card-expandable__change--up">+18.3%</span>
+          </div>
+        </div>
+        <div class="card-expandable__detail">
+          <div class="card-expandable__detail-inner">
+            <div class="expandable-detail-tabs">
+              <button class="expandable-detail-tab expandable-detail-tab--active">Overview</button>
+              <button class="expandable-detail-tab">By Region</button>
+              <button class="expandable-detail-tab">By Product</button>
+            </div>
+            <div class="expandable-stat-row">
+              <div class="expandable-stat-row__item">
+                <div class="expandable-stat-row__item-value">$842K</div>
+                <div class="expandable-stat-row__item-label">Jan</div>
+              </div>
+              <div class="expandable-stat-row__item">
+                <div class="expandable-stat-row__item-value">$780K</div>
+                <div class="expandable-stat-row__item-label">Feb</div>
+              </div>
+              <div class="expandable-stat-row__item">
+                <div class="expandable-stat-row__item-value">$818K</div>
+                <div class="expandable-stat-row__item-label">Mar</div>
+              </div>
+              <div class="expandable-stat-row__item">
+                <div class="expandable-stat-row__item-value text-success">118%</div>
+                <div class="expandable-stat-row__item-label">Attainment</div>
+              </div>
+            </div>
+            <div class="card-expandable__detail-body">
+              <table class="table table-dense mb-0">
+                <thead>
+                  <tr>
+                    <th>Region</th>
+                    <th class="text-end">Revenue</th>
+                    <th class="text-end">Change</th>
+                    <th class="text-end">% of Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>North America</td>
+                    <td class="text-end text-mono">$1.28M</td>
+                    <td class="text-end text-success">+22.1%</td>
+                    <td class="text-end">53%</td>
+                  </tr>
+                  <tr>
+                    <td>EMEA</td>
+                    <td class="text-end text-mono">$680K</td>
+                    <td class="text-end text-success">+14.8%</td>
+                    <td class="text-end">28%</td>
+                  </tr>
+                  <tr>
+                    <td>APAC</td>
+                    <td class="text-end text-mono">$440K</td>
+                    <td class="text-end text-success">+31.2%</td>
+                    <td class="text-end">19%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Incident Card (height only) -->
+      <div class="card card-expandable card-expandable--danger" data-expandable>
+        <div class="card-expandable__header">
+          <div class="card-expandable__title">API Latency Spike</div>
+          <div class="card-expandable__header-right">
+            <span class="badge badge-soft-danger">Active</span>
+            <div class="card-expandable__toggle">
+              <i data-lucide="chevron-down"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-expandable__body">
+          <div class="card-expandable__metrics">
+            <div class="card-expandable__metric">
+              <div class="card-expandable__metric-value">1,240ms</div>
+              <div class="card-expandable__metric-label">P99 Latency</div>
+            </div>
+            <div class="card-expandable__metric">
+              <div class="card-expandable__metric-value">2h 14m</div>
+              <div class="card-expandable__metric-label">Duration</div>
+            </div>
+            <span class="card-expandable__change card-expandable__change--down">+520%</span>
+          </div>
+        </div>
+        <div class="card-expandable__detail">
+          <div class="card-expandable__detail-inner">
+            <div class="card-expandable__detail-body">
+              <div class="fs-7 text-muted mb-2">Incident #1042 • Started 2h ago</div>
+              <div class="d-flex align-items-start gap-2 mb-3">
+                <span class="status-dot status-dot--busy status-dot--pulse mt-1"></span>
+                <div>
+                  <div class="fw-semibold fs-7">Threshold breached: 500ms</div>
+                  <div class="text-muted fs-8">Normal baseline: &lt;200ms</div>
+                </div>
+              </div>
+              <div class="d-flex align-items-start gap-2 mb-3">
+                <i data-lucide="users" class="text-muted mt-1" style="width:0.75rem;height:0.75rem"></i>
+                <div class="fs-7">
+                  <span class="fw-medium">Assigned:</span>
+                  <span class="text-secondary">Alice Chen, Bob Martinez</span>
+                </div>
+              </div>
+              <div class="d-flex align-items-start gap-2">
+                <i data-lucide="git-branch" class="text-muted mt-1" style="width:0.75rem;height:0.75rem"></i>
+                <div class="fs-7">
+                  <span class="fw-medium">Root cause:</span>
+                  <span class="text-secondary">Token table growth — cleanup job pending</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Card (height only) -->
+      <div class="card card-expandable card-expandable--accent" data-expandable>
+        <div class="card-expandable__header">
+          <div class="d-flex align-items-center gap-2">
+            <div class="avatar avatar--sm avatar--accent">SC</div>
+            <div class="card-expandable__title">Sarah Chen</div>
+          </div>
+          <div class="card-expandable__header-right">
+            <span class="status-badge status-badge--success">
+              <span class="status-dot status-dot--online"></span> Online
+            </span>
+            <div class="card-expandable__toggle">
+              <i data-lucide="chevron-down"></i>
+            </div>
+          </div>
+        </div>
+        <div class="card-expandable__body">
+          <div class="card-expandable__metrics">
+            <div class="card-expandable__metric">
+              <div class="card-expandable__metric-value" style="font-size:1rem">VP of Engineering</div>
+              <div class="card-expandable__metric-label">Role</div>
+            </div>
+            <div class="card-expandable__metric">
+              <div class="card-expandable__metric-value" style="font-size:1rem">Platform</div>
+              <div class="card-expandable__metric-label">Team</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-expandable__detail">
+          <div class="card-expandable__detail-inner">
+            <div class="card-expandable__detail-body">
+              <div class="row g-3 fs-7">
+                <div class="col-6">
+                  <div class="text-muted mb-1">Email</div>
+                  <div class="fw-medium">sarah@synth.io</div>
+                </div>
+                <div class="col-6">
+                  <div class="text-muted mb-1">Location</div>
+                  <div class="fw-medium">San Francisco, CA</div>
+                </div>
+                <div class="col-6">
+                  <div class="text-muted mb-1">Reports to</div>
+                  <div class="fw-medium">James Okafor</div>
+                </div>
+                <div class="col-6">
+                  <div class="text-muted mb-1">Joined</div>
+                  <div class="fw-medium">Jan 2024</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   <!-- ALERTS -->
   <div class="tab-pane fade" id="sec-alerts">
     <div class="card mb-4">
@@ -372,6 +711,9 @@
           <span class="badge bg-tertiary">Tertiary</span>
           <span class="badge bg-accent">Accent</span>
           <span class="badge bg-ai">AI</span>
+          <span class="badge badge-ai-generated d-inline-flex align-items-center gap-1">
+            <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+          </span>
         </div>
 
         <h5 class="card-title mb-3">Pill Badges</h5>
@@ -385,6 +727,9 @@
           <span class="badge rounded-pill bg-tertiary">Tertiary</span>
           <span class="badge rounded-pill bg-accent">Accent</span>
           <span class="badge rounded-pill bg-ai">AI</span>
+          <span class="badge rounded-pill badge-ai-generated d-inline-flex align-items-center gap-1">
+            <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+          </span>
         </div>
 
         <h5 class="card-title mb-3">Soft Badges</h5>
@@ -398,6 +743,9 @@
           <span class="badge rounded-pill badge-soft-tertiary">Tertiary</span>
           <span class="badge rounded-pill badge-soft-accent">Accent</span>
           <span class="badge rounded-pill badge-soft-ai">AI</span>
+          <span class="badge rounded-pill badge-ai-generated-soft d-inline-flex align-items-center gap-1">
+            <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+          </span>
         </div>
 
         <h5 class="card-title mb-3">Badges with Icons</h5>
@@ -411,9 +759,50 @@
           <span class="badge badge-soft-danger d-inline-flex align-items-center gap-1">
             <i data-lucide="x" class="icon-2xs"></i> Rejected
           </span>
-          <span class="badge badge-soft-ai d-inline-flex align-items-center gap-1">
+          <span class="badge badge-ai-generated-outline d-inline-flex align-items-center gap-1">
             <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
           </span>
+        </div>
+
+        <h5 class="card-title mb-3">AI-Generated Badge Variants</h5>
+        <p class="text-muted small mb-2">Animated gradient badges for identifying AI-generated content. Three variants: solid, soft, and outline.</p>
+        <div class="d-flex flex-wrap gap-3 align-items-center mb-4">
+          <div class="text-center">
+            <span class="badge badge-ai-generated d-inline-flex align-items-center gap-1 mb-1">
+              <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+            </span>
+            <div class="fs-8 text-muted">Solid</div>
+          </div>
+          <div class="text-center">
+            <span class="badge rounded-pill badge-ai-generated d-inline-flex align-items-center gap-1 mb-1">
+              <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+            </span>
+            <div class="fs-8 text-muted">Solid pill</div>
+          </div>
+          <div class="text-center">
+            <span class="badge badge-ai-generated-soft d-inline-flex align-items-center gap-1 mb-1">
+              <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+            </span>
+            <div class="fs-8 text-muted">Soft</div>
+          </div>
+          <div class="text-center">
+            <span class="badge rounded-pill badge-ai-generated-soft d-inline-flex align-items-center gap-1 mb-1">
+              <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+            </span>
+            <div class="fs-8 text-muted">Soft pill</div>
+          </div>
+          <div class="text-center">
+            <span class="badge badge-ai-generated-outline d-inline-flex align-items-center gap-1 mb-1">
+              <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+            </span>
+            <div class="fs-8 text-muted">Outline</div>
+          </div>
+          <div class="text-center">
+            <span class="badge rounded-pill badge-ai-generated-outline d-inline-flex align-items-center gap-1 mb-1">
+              <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+            </span>
+            <div class="fs-8 text-muted">Outline pill</div>
+          </div>
         </div>
 
         <h5 class="card-title mb-3">Status Indicators</h5>
@@ -485,17 +874,47 @@
 
   <!-- MODALS & DRAWERS -->
   <div class="tab-pane fade" id="sec-modals">
-    <div class="card mb-4">
-      <div class="card-body">
-        <h5 class="card-title mb-3">Modal</h5>
-        <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#demoModal">
-          Open Modal
-        </button>
-
-        <h5 class="card-title mb-3">Drawer</h5>
-        <button class="btn btn-outline-primary" id="open-drawer">
-          Open Right Drawer
-        </button>
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Modal</h5>
+            <p class="text-secondary fs-7 mb-3">Centered dialog for confirmations, forms, and alerts.</p>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#demoModal">
+              Open Modal
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Drawer</h5>
+            <p class="text-secondary fs-7 mb-3">Custom right-slide panel for detail views and settings.</p>
+            <button class="btn btn-outline-primary" id="open-drawer">
+              Open Right Drawer
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Offcanvas</h5>
+            <p class="text-secondary fs-7 mb-3">Bootstrap's native slide-in panels for navigation, filters, and detail views.</p>
+            <div class="d-flex flex-wrap gap-2">
+              <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+                <i data-lucide="panel-right" class="icon-xs me-1"></i> Right
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasStart">
+                <i data-lucide="panel-left" class="icon-xs me-1"></i> Left
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom">
+                <i data-lucide="panel-bottom" class="icon-xs me-1"></i> Bottom
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1019,6 +1438,65 @@
 
 </div><!-- /tab-content -->
 
+<!-- Offcanvas instances -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Detail Panel</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p class="text-secondary">Right-side offcanvas panel using Synth theme surfaces and borders.</p>
+    <div class="mb-3">
+      <label class="form-label fs-7">Filter by status</label>
+      <select class="form-select form-select-sm">
+        <option>All</option>
+        <option>Active</option>
+        <option>Archived</option>
+      </select>
+    </div>
+    <div class="list-group list-group-flush">
+      <div class="list-group-item d-flex align-items-center gap-2">
+        <span class="status-dot status-dot--online"></span>
+        <span class="fs-7">Online users: 42</span>
+      </div>
+      <div class="list-group-item d-flex align-items-center gap-2">
+        <span class="status-dot status-dot--away"></span>
+        <span class="fs-7">Away: 8</span>
+      </div>
+      <div class="list-group-item d-flex align-items-center gap-2">
+        <span class="status-dot status-dot--offline"></span>
+        <span class="fs-7">Offline: 15</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasStart">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Navigation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p class="text-secondary fs-7">Left offcanvas — ideal for mobile navigation menus.</p>
+    <nav class="nav flex-column gap-1">
+      <a class="nav-link px-2 py-1 rounded active" href="#">Dashboard</a>
+      <a class="nav-link px-2 py-1 rounded" href="#">Analytics</a>
+      <a class="nav-link px-2 py-1 rounded" href="#">Users</a>
+      <a class="nav-link px-2 py-1 rounded" href="#">Settings</a>
+    </nav>
+  </div>
+</div>
+
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" style="height:40vh">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Bottom Sheet</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p class="text-secondary">Bottom offcanvas — useful for mobile action sheets and filters.</p>
+  </div>
+</div>
+
 <!-- Demo Modal -->
 <div class="modal fade" id="demoModal" tabindex="-1">
   <div class="modal-dialog">
@@ -1128,6 +1606,20 @@
     if (openBtn) openBtn.addEventListener('click', open);
     if (closeBtn) closeBtn.addEventListener('click', close);
     if (backdrop) backdrop.addEventListener('click', close);
+  })();
+
+  // Expandable cards toggle
+  (function() {
+    document.querySelectorAll('[data-expandable]').forEach(function(card) {
+      var header = card.querySelector('.card-expandable__header');
+      if (!header) return;
+
+      header.addEventListener('click', function() {
+        card.classList.toggle('card-expandable--expanded');
+        // Re-init Lucide icons for newly revealed content
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      });
+    });
   })();
 
 </script>

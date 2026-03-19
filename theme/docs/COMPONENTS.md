@@ -74,6 +74,65 @@ Responsive: stacks vertically on small screens (image becomes full-width at 10re
 </div>
 ```
 
+## Expandable Cards
+
+Summary/detail cards that expand to reveal charts, tables, and detailed content. Supports both height and width expansion.
+
+### Structure
+
+Three layers: **header** (clickable, slim) → **body** (always visible, key stats) → **detail** (expandable).
+
+```html
+<div class="card card-expandable card-expandable--primary" data-expandable>
+  <!-- Header: clickable, always slim -->
+  <div class="card-expandable__header">
+    <div class="card-expandable__title">Revenue</div>
+    <div class="card-expandable__header-right">
+      <span class="card-expandable__subtitle">Q1 2026</span>
+      <div class="card-expandable__toggle">
+        <i data-lucide="chevron-down"></i>
+      </div>
+    </div>
+  </div>
+  <!-- Body: always visible, key metrics -->
+  <div class="card-expandable__body">
+    <div class="card-expandable__metrics">
+      <div class="card-expandable__metric">
+        <div class="card-expandable__metric-value">$2.4M</div>
+        <div class="card-expandable__metric-label">Total Revenue</div>
+      </div>
+      <span class="card-expandable__change card-expandable__change--up">+18.3%</span>
+    </div>
+  </div>
+  <!-- Detail: expandable -->
+  <div class="card-expandable__detail">
+    <div class="card-expandable__detail-inner">
+      <div class="card-expandable__detail-body">
+        <!-- Charts, tables, etc. -->
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+Toggle `.card-expandable--expanded` class on click (via JS).
+
+### Width Expansion
+
+Wrap cards in `.expandable-grid` and add width modifier:
+- `.card-expandable--expand-wide` — spans 2 columns when expanded
+- `.card-expandable--expand-full` — spans full width when expanded
+
+### Color Accents
+
+`.card-expandable--{color}` — adds a top border accent. Colors: primary, success, danger, warning, info, ai, accent, tertiary.
+
+### Detail Sections
+
+- `.expandable-detail-tabs` — tab bar inside expanded area
+- `.expandable-stat-row` — horizontal row of stat items
+- `.card-expandable__change--up` / `--down` — green/red change indicator pill
+
 ## Alerts
 
 ### Standard
@@ -97,6 +156,34 @@ Bootstrap `.badge .bg-{color}` and `.badge .rounded-pill .bg-{color}`.
 
 ### Soft Badges
 `.badge .badge-soft-{color}` — Translucent background. Colors: primary, secondary, success, danger, warning, info, ai.
+
+### AI-Generated Badges
+Animated gradient badges for identifying AI-generated content.
+
+| Class | Description |
+|---|---|
+| `.badge-ai-generated` | Solid gradient cycling primary → ai → tertiary → accent (4s loop) |
+| `.badge-ai-generated-soft` | Animated tinted background with ai-colored text and subtle border |
+| `.badge-ai-generated-outline` | Animated border + text color cycling through theme colors |
+
+All variants work with `.rounded-pill` for pill shape. Respects `prefers-reduced-motion`.
+
+```html
+<!-- Solid -->
+<span class="badge badge-ai-generated d-inline-flex align-items-center gap-1">
+  <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+</span>
+
+<!-- Soft -->
+<span class="badge rounded-pill badge-ai-generated-soft d-inline-flex align-items-center gap-1">
+  <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+</span>
+
+<!-- Outline -->
+<span class="badge badge-ai-generated-outline d-inline-flex align-items-center gap-1">
+  <i data-lucide="sparkles" class="icon-2xs"></i> AI Generated
+</span>
+```
 
 ### Status Dot
 `.status-dot` — Small colored circle.
@@ -443,3 +530,64 @@ CSS custom properties that auto-switch between light and dark modes:
 - `.text-mono` — JetBrains Mono monospace font
 - `.fw-bold`, `.fw-semibold`, `.fw-medium`, `.fw-normal` — font weights
 - `.text-{color}` — text color using theme palette (primary, secondary, success, etc.)
+
+## Offcanvas
+
+Bootstrap's native Offcanvas with Synth theme overrides:
+- Background uses `--surface-1`, borders use `--border-color`
+- Header gets a bottom border divider
+- Close button styled for dark mode (inverted filter)
+- Use `.offcanvas-end`, `.offcanvas-start`, `.offcanvas-bottom` for direction
+
+## Button Groups
+
+### Standard
+Bootstrap `.btn-group` with themed border colors and active states.
+
+### Segmented Control
+`.btn-group-segmented` — Modern toggle control with pill-shaped background.
+
+```html
+<div class="btn-group-segmented">
+  <input type="radio" class="btn-check" name="view" id="grid" checked>
+  <label class="btn" for="grid">Grid</label>
+  <input type="radio" class="btn-check" name="view" id="list">
+  <label class="btn" for="list">List</label>
+</div>
+```
+
+Uses `--surface-2` background, `--surface-1` for active pill, with subtle shadow.
+
+## Calendar (FullCalendar)
+
+Theme overrides for [FullCalendar v6](https://fullcalendar.io). Load via CDN:
+
+```html
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+```
+
+### Event Color Variants
+Apply via `className` on events: `fc-event-primary`, `fc-event-success`, `fc-event-danger`, `fc-event-warning`, `fc-event-info`, `fc-event-ai`, `fc-event-accent`, `fc-event-tertiary`.
+
+List view uses tinted style (colored left border + dot) instead of solid backgrounds.
+
+## Email
+
+Full email client layout components.
+
+### Layout Structure
+
+```html
+<div class="email-layout">
+  <div class="email-sidebar">...</div>
+  <div class="email-list-panel">...</div>
+  <div class="email-detail-panel">...</div>
+</div>
+```
+
+### Components
+- `.email-sidebar` — Folder navigation with `.email-sidebar__folder` links and `.email-sidebar__folder-count` badges
+- `.email-list__item` — Email row. Modifiers: `--unread` (bold + dot), `--selected` (primary highlight), `--starred`
+- `.email-detail` — Full email view with `__header`, `__actions`, `__body`, `__attachments`
+- `.email-compose` — Compose form with `__field` inputs and `__editor` area (integrates with Quill)

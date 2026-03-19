@@ -86,3 +86,83 @@
     color: darken($warning, 15%);
   }
 }
+
+// ── AI-Generated Badge ────────────────────────────────────
+// Animated gradient badge for identifying AI-generated content.
+// Works with .badge, .badge.rounded-pill, .badge-soft-*, etc.
+
+@keyframes ai-gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// Solid animated variant
+.badge-ai-generated {
+  background: linear-gradient(
+    135deg,
+    $primary,
+    $ai,
+    $tertiary,
+    $accent,
+    $primary
+  );
+  background-size: 300% 300%;
+  animation: ai-gradient-shift 4s ease infinite;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+}
+
+// Soft animated variant — tinted background with gradient text
+.badge-ai-generated-soft {
+  background: linear-gradient(
+    135deg,
+    rgba($primary, 0.1),
+    rgba($ai, 0.12),
+    rgba($tertiary, 0.1),
+    rgba($accent, 0.1),
+    rgba($primary, 0.1)
+  );
+  background-size: 300% 300%;
+  animation: ai-gradient-shift 4s ease infinite;
+  color: $ai;
+  font-weight: 600;
+  border: 1px solid rgba($ai, 0.2);
+
+  [data-bs-theme="dark"] & {
+    border-color: rgba($ai, 0.3);
+  }
+}
+
+// Outline animated variant — gradient border with gradient text
+.badge-ai-generated-outline {
+  background: transparent;
+  border: 1.5px solid $ai;
+  color: $ai;
+  font-weight: 600;
+  position: relative;
+  animation: ai-border-glow 4s ease infinite;
+}
+
+@keyframes ai-border-glow {
+  0%, 100% { border-color: $primary; color: $primary; }
+  25%      { border-color: $ai; color: $ai; }
+  50%      { border-color: $tertiary; color: $tertiary; }
+  75%      { border-color: $accent; color: $accent; }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .badge-ai-generated,
+  .badge-ai-generated-soft {
+    animation: none;
+    background-size: 100% 100%;
+  }
+
+  .badge-ai-generated-outline {
+    animation: none;
+    border-color: $ai;
+    color: $ai;
+  }
+}

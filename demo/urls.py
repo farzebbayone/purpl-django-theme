@@ -12,6 +12,8 @@ urlpatterns = [
     path("messages/", views.messages_demo, name="messages"),
     path("settings/", views.settings_page, name="settings"),
     path("ai/", views.ai_assistant, name="ai_assistant"),
+    path("calendar/", views.calendar_demo, name="calendar"),
+    path("email/", views.email_demo, name="email"),
     path("docs/", views.docs_index, name="docs"),
     path("docs/<str:slug>/", views.docs_page, name="docs_page"),
 ]

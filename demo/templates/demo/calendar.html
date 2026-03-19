@@ -1,0 +1,339 @@
+{% extends "demo/base.html" %}
+{% load static %}
+
+{% block title %}Calendar — Synth{% endblock %}
+
+{% block extra_head %}
+<!-- FullCalendar v6 CDN -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-header__title">Calendar</h1>
+  <p class="page-header__subtitle">Schedule, events, and deadlines — powered by FullCalendar.</p>
+</div>
+
+<div class="row g-4">
+  <!-- Calendar Card -->
+  <div class="col-lg-9">
+    <div class="card">
+      <div class="card-body">
+        <div id="calendar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar Panel -->
+  <div class="col-lg-3">
+    <!-- Upcoming Events -->
+    <div class="card mb-3">
+      <div class="card-body">
+        <h6 class="fw-semibold mb-3" style="font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-secondary);">
+          Upcoming Events
+        </h6>
+        <ul class="list-unstyled mb-0 d-flex flex-column gap-3">
+          <li class="d-flex align-items-start gap-2">
+            <span class="rounded-circle mt-1 flex-shrink-0" style="width: 8px; height: 8px; background-color: #5E6AD2;"></span>
+            <div>
+              <div class="fw-medium" style="font-size: 0.875rem; color: var(--text-primary);">Sprint Planning</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Tomorrow &middot; 10:00 AM</div>
+            </div>
+          </li>
+          <li class="d-flex align-items-start gap-2">
+            <span class="rounded-circle mt-1 flex-shrink-0" style="width: 8px; height: 8px; background-color: #EF4444;"></span>
+            <div>
+              <div class="fw-medium" style="font-size: 0.875rem; color: var(--text-primary);">API v3 Deadline</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">In 3 days &middot; All day</div>
+            </div>
+          </li>
+          <li class="d-flex align-items-start gap-2">
+            <span class="rounded-circle mt-1 flex-shrink-0" style="width: 8px; height: 8px; background-color: #D946EF;"></span>
+            <div>
+              <div class="fw-medium" style="font-size: 0.875rem; color: var(--text-primary);">ML Model Review</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">In 4 days &middot; 2:00 PM</div>
+            </div>
+          </li>
+          <li class="d-flex align-items-start gap-2">
+            <span class="rounded-circle mt-1 flex-shrink-0" style="width: 8px; height: 8px; background-color: #10B981;"></span>
+            <div>
+              <div class="fw-medium" style="font-size: 0.875rem; color: var(--text-primary);">Product Launch</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">In 6 days &middot; All day</div>
+            </div>
+          </li>
+          <li class="d-flex align-items-start gap-2">
+            <span class="rounded-circle mt-1 flex-shrink-0" style="width: 8px; height: 8px; background-color: #0EA5E9;"></span>
+            <div>
+              <div class="fw-medium" style="font-size: 0.875rem; color: var(--text-primary);">Design Review</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">In 7 days &middot; 11:00 AM</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Color Legend -->
+    <div class="card">
+      <div class="card-body">
+        <h6 class="fw-semibold mb-3" style="font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-secondary);">
+          Categories
+        </h6>
+        <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+          <li class="d-flex align-items-center gap-2">
+            <span class="rounded" style="width: 12px; height: 12px; background-color: #5E6AD2; flex-shrink: 0; border-radius: 3px;"></span>
+            <span style="font-size: 0.8125rem; color: var(--text-primary);">Team Meetings</span>
+          </li>
+          <li class="d-flex align-items-center gap-2">
+            <span class="rounded" style="width: 12px; height: 12px; background-color: #EF4444; flex-shrink: 0; border-radius: 3px;"></span>
+            <span style="font-size: 0.8125rem; color: var(--text-primary);">Deadlines</span>
+          </li>
+          <li class="d-flex align-items-center gap-2">
+            <span class="rounded" style="width: 12px; height: 12px; background-color: #10B981; flex-shrink: 0; border-radius: 3px;"></span>
+            <span style="font-size: 0.8125rem; color: var(--text-primary);">Launches</span>
+          </li>
+          <li class="d-flex align-items-center gap-2">
+            <span class="rounded" style="width: 12px; height: 12px; background-color: #D946EF; flex-shrink: 0; border-radius: 3px;"></span>
+            <span style="font-size: 0.8125rem; color: var(--text-primary);">AI / ML</span>
+          </li>
+          <li class="d-flex align-items-center gap-2">
+            <span class="rounded" style="width: 12px; height: 12px; background-color: #0EA5E9; flex-shrink: 0; border-radius: 3px;"></span>
+            <span style="font-size: 0.8125rem; color: var(--text-primary);">Design</span>
+          </li>
+          <li class="d-flex align-items-center gap-2">
+            <span class="rounded" style="width: 12px; height: 12px; background-color: #F59E0B; flex-shrink: 0; border-radius: 3px;"></span>
+            <span style="font-size: 0.8125rem; color: var(--text-primary);">Reminders</span>
+          </li>
+          <li class="d-flex align-items-center gap-2">
+            <span class="rounded" style="width: 12px; height: 12px; background-color: #8B5CF6; flex-shrink: 0; border-radius: 3px;"></span>
+            <span style="font-size: 0.8125rem; color: var(--text-primary);">Workshops</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Event Detail Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventModalLabel">Event Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <div class="fw-semibold mb-1" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted);">Title</div>
+          <div id="eventModalTitle" class="fw-medium" style="font-size: 1rem;"></div>
+        </div>
+        <div class="mb-3">
+          <div class="fw-semibold mb-1" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted);">Time</div>
+          <div id="eventModalTime" style="font-size: 0.9375rem;"></div>
+        </div>
+        <div>
+          <div class="fw-semibold mb-1" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted);">Description</div>
+          <div id="eventModalDesc" style="font-size: 0.9375rem; color: var(--text-secondary);"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Helper: offset a date by N days from today
+  function dayOffset(n) {
+    var d = new Date();
+    d.setDate(d.getDate() + n);
+    return d.toISOString().split('T')[0];
+  }
+
+  // Helper: offset with time
+  function dayOffsetTime(n, hours, minutes) {
+    var d = new Date();
+    d.setDate(d.getDate() + n);
+    d.setHours(hours, minutes || 0, 0, 0);
+    return d;
+  }
+
+  // Format a Date for FullCalendar (ISO string)
+  function toISO(d) {
+    return d.toISOString();
+  }
+
+  var events = [
+    // Team meetings (primary)
+    {
+      title: 'Sprint Planning',
+      start: toISO(dayOffsetTime(1, 10, 0)),
+      end: toISO(dayOffsetTime(1, 11, 30)),
+      className: 'fc-event-primary',
+      extendedProps: { description: 'Bi-weekly sprint planning session with the product and engineering teams.' }
+    },
+    {
+      title: 'Team Standup',
+      start: toISO(dayOffsetTime(0, 9, 15)),
+      end: toISO(dayOffsetTime(0, 9, 30)),
+      className: 'fc-event-primary',
+      extendedProps: { description: 'Daily standup — blockers, progress, and priorities.' }
+    },
+    {
+      title: '1:1 with Manager',
+      start: toISO(dayOffsetTime(2, 14, 0)),
+      end: toISO(dayOffsetTime(2, 14, 45)),
+      className: 'fc-event-primary',
+      extendedProps: { description: 'Weekly check-in to discuss career growth and project updates.' }
+    },
+
+    // Deadlines (danger)
+    {
+      title: 'API v3 Deadline',
+      start: dayOffset(3),
+      allDay: true,
+      className: 'fc-event-danger',
+      extendedProps: { description: 'Final deadline for the API v3 migration. All endpoints must be tested and documented.' }
+    },
+    {
+      title: 'Security Audit Due',
+      start: dayOffset(8),
+      allDay: true,
+      className: 'fc-event-danger',
+      extendedProps: { description: 'Complete the quarterly security audit report and submit findings.' }
+    },
+
+    // Product launches (success)
+    {
+      title: 'Product Launch: Synth 2.0',
+      start: dayOffset(6),
+      end: dayOffset(7),
+      allDay: true,
+      className: 'fc-event-success',
+      extendedProps: { description: 'Official launch of Synth 2.0 with new dashboard features and API improvements.' }
+    },
+    {
+      title: 'Feature Flag Rollout',
+      start: toISO(dayOffsetTime(10, 9, 0)),
+      end: toISO(dayOffsetTime(10, 10, 0)),
+      className: 'fc-event-success',
+      extendedProps: { description: 'Gradual rollout of the new onboarding flow to 50% of users.' }
+    },
+
+    // AI / ML (ai)
+    {
+      title: 'ML Model Review',
+      start: toISO(dayOffsetTime(4, 14, 0)),
+      end: toISO(dayOffsetTime(4, 15, 30)),
+      className: 'fc-event-ai',
+      extendedProps: { description: 'Review accuracy metrics and bias analysis for the recommendation model.' }
+    },
+    {
+      title: 'AI Ethics Workshop',
+      start: dayOffset(12),
+      allDay: true,
+      className: 'fc-event-ai',
+      extendedProps: { description: 'Company-wide workshop on responsible AI practices and governance frameworks.' }
+    },
+
+    // Design reviews (accent)
+    {
+      title: 'Design Review: Dashboard',
+      start: toISO(dayOffsetTime(7, 11, 0)),
+      end: toISO(dayOffsetTime(7, 12, 0)),
+      className: 'fc-event-accent',
+      extendedProps: { description: 'Review the updated dashboard mockups and gather feedback from stakeholders.' }
+    },
+    {
+      title: 'UX Research Debrief',
+      start: toISO(dayOffsetTime(5, 15, 0)),
+      end: toISO(dayOffsetTime(5, 16, 0)),
+      className: 'fc-event-accent',
+      extendedProps: { description: 'Share findings from last week\'s user interviews on navigation patterns.' }
+    },
+
+    // Reminders (warning)
+    {
+      title: 'Expense Reports Due',
+      start: dayOffset(-1),
+      allDay: true,
+      className: 'fc-event-warning',
+      extendedProps: { description: 'Submit Q1 expense reports to finance before end of day.' }
+    },
+
+    // Workshops (tertiary)
+    {
+      title: 'GraphQL Workshop',
+      start: toISO(dayOffsetTime(9, 13, 0)),
+      end: toISO(dayOffsetTime(9, 16, 0)),
+      className: 'fc-event-tertiary',
+      extendedProps: { description: 'Hands-on workshop covering GraphQL schema design and resolver patterns.' }
+    },
+
+    // Past event
+    {
+      title: 'Retrospective',
+      start: toISO(dayOffsetTime(-2, 16, 0)),
+      end: toISO(dayOffsetTime(-2, 17, 0)),
+      className: 'fc-event-primary',
+      extendedProps: { description: 'End-of-sprint retrospective. What went well, what to improve.' }
+    }
+  ];
+
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    initialDate: new Date(),
+    nowIndicator: true,
+    height: 'auto',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+    },
+    buttonText: {
+      today: 'Today',
+      month: 'Month',
+      week: 'Week',
+      day: 'Day',
+      list: 'List'
+    },
+    events: events,
+    eventClick: function (info) {
+      info.jsEvent.preventDefault();
+      var event = info.event;
+
+      document.getElementById('eventModalTitle').textContent = event.title;
+
+      // Format time
+      var timeStr = '';
+      if (event.allDay) {
+        timeStr = 'All day';
+        if (event.start) {
+          timeStr += ' — ' + event.start.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+        }
+      } else if (event.start) {
+        var opts = { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' };
+        timeStr = event.start.toLocaleString(undefined, opts);
+        if (event.end) {
+          timeStr += ' — ' + event.end.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+        }
+      }
+      document.getElementById('eventModalTime').textContent = timeStr;
+
+      var desc = (event.extendedProps && event.extendedProps.description) ? event.extendedProps.description : 'No description available.';
+      document.getElementById('eventModalDesc').textContent = desc;
+
+      var modal = new bootstrap.Modal(document.getElementById('eventModal'));
+      modal.show();
+    }
+  });
+
+  calendar.render();
+});
+</script>
+{% endblock %}

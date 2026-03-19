@@ -144,6 +144,12 @@ $font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
 - [x] **Landing page template + view** — replace current dashboard route
 - [ ] **LANDING_PAGE.md docs**
 
+### Phase 8: Advanced Features & Bootstrap Extras [DONE]
+- [x] **Bootstrap extras** — Offcanvas, button groups (segmented control), close button, figures, spinner variants
+- [x] **Calendar** — FullCalendar v6 CDN integration with theme overrides, demo page with events
+- [x] **Email** — Email client layout (sidebar, list, detail, compose), demo page with Quill compose
+- [x] **Docs update** — COMPONENT_INDEX.md entries for Calendar, Email, Bootstrap extras
+
 ---
 
 ## Project Structure
