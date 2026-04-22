@@ -15012,6 +15012,7 @@ body {
 }
 
 .carousel-caption {
+  color: #fff;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 0.375rem;
   padding: 0.75rem 1rem;

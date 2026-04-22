@@ -2,20 +2,90 @@
 
 How to adopt this theme in a Django project.
 
-## Quick Start
+## Important: Theme is Read-Only
 
-### 1. Install the theme app
+The `theme/` directory in your consuming project is **managed by the install script** and should be treated as read-only. Do not edit files inside `theme/` directly — your changes will be overwritten on the next update.
 
-Copy the `theme/` directory into your Django project and add it to `INSTALLED_APPS`:
+**Where to customize:**
+- Your app's `base.html` (extends `theme/base.html`) — brand, navigation, user identity
+- Your own SCSS/CSS — additional styles layered on top
+- Your own templates — extend theme templates via blocks
+
+**What is protected:**
+- A `.theme-lock` file tracks checksums of all installed files
+- Django system check (`theme.W002`) warns on startup if any theme files have been modified
+- The install script warns before overwriting local modifications
+
+## Installation
+
+### Using the install script (recommended)
+
+From the **theme repository**, run:
+
+```bash
+python manage.py install_theme --dest /path/to/your/django/project
+```
+
+This copies all necessary theme files (CSS, JS, fonts, templates, template tags, docs) to the destination project's `theme/` directory and creates a `.theme-lock` integrity file.
+
+Then in your consuming project:
 
 ```python
+# settings.py
 INSTALLED_APPS = [
     "theme",
     # your apps...
 ]
 ```
 
-### 2. Create your app's base template
+### Manual installation
+
+If you prefer not to use the script, copy the `theme/` directory manually. Note that you won't get integrity checking or update warnings.
+
+```bash
+cp -r /path/to/theme-repo/theme /path/to/your-project/theme
+```
+
+## Updating the Theme
+
+Run the same install command again:
+
+```bash
+python manage.py install_theme --dest /path/to/your/django/project
+```
+
+The script will:
+1. Detect the existing `.theme-lock` file
+2. Compare checksums to find any locally modified files
+3. Warn you about modifications and ask for confirmation
+4. Overwrite all theme files with the latest version
+5. Remove files that no longer exist in the source
+6. Update `.theme-lock` with new checksums
+
+Use `--force` to skip the confirmation prompt:
+
+```bash
+python manage.py install_theme --dest /path/to/your/project --force
+```
+
+## Checking Integrity
+
+Verify that no theme files have been modified without making changes:
+
+```bash
+python manage.py install_theme --dest /path/to/your/project --check
+```
+
+This reports:
+- Theme version and install date
+- Any files modified since installation
+- Any files missing from the expected set
+
+Django also runs an automatic system check on startup. If theme files have drifted, you'll see warning `theme.W002` in the console.
+
+## Setup After Installation
+
+### 1. Create your app's base template
 
 Copy `theme/templates/theme/sample_base.html` to your app:
 
@@ -25,7 +95,7 @@ cp theme/templates/theme/sample_base.html myapp/templates/myapp/base.html
 
 Edit it to set your brand name, navigation, and user identity. See the comments in the file — every block is documented.
 
-### 3. Extend your base in page templates
+### 2. Extend your base in page templates
 
 ```html
 {% extends "myapp/base.html" %}
@@ -38,7 +108,7 @@ Edit it to set your brand name, navigation, and user identity. See the comments 
 
 **Important:** Page templates extend *your* base, not `theme/base.html`. This keeps all project-specific customization in one place.
 
-### 4. Run collectstatic
+### 3. Run collectstatic
 
 ```bash
 python manage.py collectstatic
@@ -88,14 +158,16 @@ python manage.py collectstatic
 
 ## What You Do NOT Touch
 
-These are theme infrastructure — they stay in `theme/` and work automatically:
+The `theme/` directory is managed infrastructure. These work automatically and must not be edited directly:
 
+- CSS, JS, fonts, and templates inside `theme/`
 - Dark/light mode toggle + persistence
 - Sidebar collapse/expand + persistence
 - Command palette (Cmd+K) search + keyboard navigation
 - Active sidebar link highlighting (matches URL automatically)
-- CSS, fonts, icons
 - Toast API, typewriter effect, form rendering
+
+If you need to override theme styles, add your own CSS file loaded after the theme CSS — do not edit `theme.css`.
 
 ## Migrating From django-bootstrap5
 
@@ -130,6 +202,7 @@ All standard Bootstrap 5.3 classes work unchanged: `row`, `col-*`, `btn`, `card`
 | `.btn-gradient` | Animated gradient CTA button |
 | `.card-tint-*` | Tinted background cards |
 | `.badge-soft-*` | Soft/tinted badges |
+| `.badge-ai-generated` | Animated AI content badge |
 
 ## Layout Options
 
@@ -179,9 +252,10 @@ No code needed. The theme handles it automatically via `data-bs-theme` on `<html
 
 ## Checklist
 
-- [ ] Copy `theme/` app to your project
+### First install
+- [ ] Run `python manage.py install_theme --dest /path/to/project`
 - [ ] Add `"theme"` to `INSTALLED_APPS`
-- [ ] Copy `sample_base.html` → `myapp/templates/myapp/base.html`
+- [ ] Copy `sample_base.html` to your app's `base.html`
 - [ ] Set brand name, user identity, navigation in your base.html
 - [ ] All page templates extend your base, not `theme/base.html`
 - [ ] Remove old Bootstrap CSS/JS includes
@@ -189,3 +263,9 @@ No code needed. The theme handles it automatically via `data-bs-theme` on `<html
 - [ ] Run `python manage.py collectstatic`
 - [ ] Test dark mode toggle
 - [ ] Test sidebar collapse/expand
+
+### Updates
+- [ ] Run `python manage.py install_theme --dest /path/to/project`
+- [ ] Review any warnings about local modifications
+- [ ] Run `python manage.py collectstatic`
+- [ ] Test affected pages
