@@ -1,0 +1,200 @@
+/* ══ fig-tokens.css ══ */
+/* Generated from Figma Variables, then hand-maintained. First mode = :root default.
+   Spacing & radius float tokens carry explicit px units (authored).
+   NOTE for regeneration: all tokens carry a `--bds-` namespace prefix, the old
+   `--semantic-*` status colors are renamed to hue-scale primitives (red/green/
+   amber/blue), and the "Authored additions" block at the bottom is not part of
+   the Figma export — re-apply all three when regenerating from Figma. */
+
+:root {
+  /* ── Primitives ── */
+  --bds-neutral-0: rgb(255,255,255); /* @kind color */
+  --bds-neutral-100: rgb(245,245,245); /* @kind color */
+  --bds-neutral-200: rgb(229,229,229); /* @kind color */
+  --bds-neutral-300: rgb(212,212,212); /* @kind color */
+  --bds-neutral-400: rgb(163,163,163); /* @kind color */
+  --bds-neutral-500: rgb(115,115,115); /* @kind color */
+  --bds-neutral-600: rgb(82,82,82); /* @kind color */
+  --bds-neutral-700: rgb(64,64,64); /* @kind color */
+  --bds-neutral-800: rgb(38,38,38); /* @kind color */
+  --bds-neutral-900: rgb(23,23,23); /* @kind color */
+  --bds-neutral-1000: rgb(0,0,0); /* @kind color */
+  --bds-primary-100: rgb(252,228,240); /* @kind color */
+  --bds-primary-200: rgb(247,189,218); /* @kind color */
+  --bds-primary-300: rgb(240,147,193); /* @kind color */
+  --bds-primary-400: rgb(232,94,168); /* @kind color */
+  --bds-primary-500: rgb(220,61,141); /* @kind color */
+  --bds-primary-600: rgb(204,41,122); /* @kind color */
+  --bds-primary-700: rgb(160,30,97); /* @kind color */
+  --bds-secondary-100: rgb(240,229,242); /* @kind color */
+  --bds-secondary-200: rgb(220,191,226); /* @kind color */
+  --bds-secondary-300: rgb(196,148,209); /* @kind color */
+  --bds-secondary-400: rgb(171,104,191); /* @kind color */
+  --bds-secondary-500: rgb(151,81,172); /* @kind color */
+  --bds-secondary-600: rgb(132,65,144); /* @kind color */
+  --bds-secondary-700: rgb(99,48,107); /* @kind color */
+  --bds-red-100: rgb(254,226,226); /* @kind color */
+  --bds-red-600: rgb(220,38,38); /* @kind color */
+  --bds-red-700: rgb(184,38,38); /* @kind color */
+  --bds-green-100: rgb(220,252,231); /* @kind color */
+  --bds-green-600: rgb(22,163,74); /* @kind color */
+  --bds-green-700: rgb(21,128,61); /* @kind color */
+  --bds-amber-100: rgb(254,243,199); /* @kind color */
+  --bds-amber-600: rgb(217,119,6); /* @kind color */
+  --bds-amber-700: rgb(180,83,9); /* @kind color */
+  --bds-amber-800: rgb(146,64,14); /* @kind color */
+  --bds-blue-100: rgb(219,234,254); /* @kind color */
+  --bds-blue-600: rgb(37,99,235); /* @kind color */
+  --bds-blue-700: rgb(29,78,216); /* @kind color */
+  --bds-radius-sm: 4px;
+  --bds-radius-md: 8px;
+  --bds-radius-full: 9999px;
+  --bds-spacing-1: 4px;
+  --bds-spacing-2: 8px;
+  --bds-spacing-3: 12px;
+  --bds-spacing-4: 16px;
+  --bds-spacing-5: 20px;
+  --bds-spacing-6: 24px;
+  --bds-spacing-8: 32px;
+  --bds-spacing-10: 40px;
+  --bds-spacing-12: 48px;
+  --bds-spacing-16: 64px;
+
+  /* ── Semantic aliases ── */
+  --bds-color-bg-danger-subtle: var(--bds-red-100); /* @kind color */
+  --bds-color-bg-danger: var(--bds-red-600); /* @kind color */
+  --bds-color-bg-default: var(--bds-neutral-0); /* @kind color */
+  --bds-color-bg-info-subtle: var(--bds-blue-100); /* @kind color */
+  --bds-color-bg-primary-hover: var(--bds-primary-700); /* @kind color */
+  --bds-color-bg-primary-subtle: var(--bds-primary-100); /* @kind color */
+  --bds-color-bg-primary: var(--bds-primary-600); /* @kind color */
+  --bds-color-bg-secondary-hover: var(--bds-secondary-700); /* @kind color */
+  --bds-color-bg-secondary-subtle: var(--bds-secondary-100); /* @kind color */
+  --bds-color-bg-secondary: var(--bds-secondary-600); /* @kind color */
+  --bds-color-bg-subtle: var(--bds-neutral-100); /* @kind color */
+  --bds-color-bg-success-subtle: var(--bds-green-100); /* @kind color */
+  --bds-color-bg-warning-subtle: var(--bds-amber-100); /* @kind color */
+  --bds-color-border-danger: var(--bds-red-600); /* @kind color */
+  --bds-color-border-default: var(--bds-neutral-300); /* @kind color */
+  --bds-color-border-focus: var(--bds-primary-600); /* @kind color */
+  --bds-color-border-primary: var(--bds-primary-600); /* @kind color */
+  --bds-color-border-strong: var(--bds-neutral-400); /* @kind color */
+  --bds-color-icon-brand: var(--bds-primary-600); /* @kind color */
+  --bds-color-icon-default: var(--bds-neutral-700); /* @kind color */
+  --bds-color-icon-disabled: var(--bds-neutral-400); /* @kind color */
+  --bds-color-icon-on-primary: var(--bds-neutral-0); /* @kind color */
+  --bds-color-icon-secondary: var(--bds-neutral-500); /* @kind color */
+  --bds-color-text-brand: var(--bds-primary-700); /* @kind color */
+  --bds-color-text-danger: var(--bds-red-700); /* @kind color */
+  --bds-color-text-default: var(--bds-neutral-900); /* @kind color */
+  --bds-color-text-disabled: var(--bds-neutral-400); /* @kind color */
+  --bds-color-text-info: var(--bds-blue-700); /* @kind color */
+  --bds-color-text-on-primary: var(--bds-neutral-0); /* @kind color */
+  --bds-color-text-on-secondary: var(--bds-neutral-0); /* @kind color */
+  --bds-color-text-placeholder: var(--bds-neutral-500); /* @kind color */
+  --bds-color-text-secondary: var(--bds-neutral-600); /* @kind color */
+  --bds-color-text-success: var(--bds-green-700); /* @kind color */
+  --bds-color-text-warning: var(--bds-amber-800); /* @kind color */
+
+  /* ── Authored additions (not from the Figma export) ── */
+  --bds-color-bg-danger-hover: var(--bds-red-700); /* @kind color */
+  --bds-color-bg-info: var(--bds-blue-600); /* @kind color */
+  --bds-color-border-info: var(--bds-blue-600); /* @kind color */
+  --bds-color-border-success: var(--bds-green-600); /* @kind color */
+  --bds-color-border-warning: var(--bds-amber-600); /* @kind color */
+  --bds-color-bg-neutral: var(--bds-neutral-600); /* @kind color */
+  --bds-color-bg-success: var(--bds-green-700); /* @kind color */
+  --bds-color-bg-warning: var(--bds-amber-700); /* @kind color */
+  --bds-color-text-brand-secondary: var(--bds-secondary-600); /* @kind color */
+  --bds-color-text-neutral: var(--bds-neutral-700); /* @kind color */
+  --bds-control-height-sm: 32px;
+  --bds-control-height-md: 40px;
+  --bds-control-height-lg: 48px;
+  --bds-icon-size-sm: 16px;
+  --bds-icon-size-md: 20px;
+  --bds-icon-size-lg: 24px;
+}
+
+/* ══ typography.css ══ */
+/* ── Bayone Purpl · Typography tokens ─────────────────────────────────
+   Figtree (headings/display) + Nunito Sans (body/UI).
+   Fonts are self-hosted as variable woff2 files (see ./fonts/) instead
+   of loading from the Google Fonts CDN — see fonts/README.md for the
+   latin-only subset caveat. */
+
+@font-face {
+  font-family: 'Figtree';
+  src: url('./fonts/Figtree-Variable.woff2') format('woff2-variations');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('./fonts/NunitoSans-Variable.woff2') format('woff2-variations');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Families */
+  --bds-font-display: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --bds-font-body: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Weights */
+  --bds-weight-regular: 400;
+  --bds-weight-medium: 500;
+  --bds-weight-semibold: 600;
+  --bds-weight-bold: 700;
+  --bds-weight-extrabold: 800;
+
+  /* Display scale — Figtree. size / line-height / weight */
+  --bds-display-2xl-size: 64px;   --bds-display-2xl-line: 78px;  --bds-display-2xl-weight: var(--bds-weight-semibold);  --bds-display-2xl-tracking: -0.028em;
+  --bds-display-xl-size: 52px;    --bds-display-xl-line: 62px;   --bds-display-xl-weight: var(--bds-weight-semibold);   --bds-display-xl-tracking: -0.025em;
+  --bds-display-lg-size: 42px;    --bds-display-lg-line: 52px;   --bds-display-lg-weight: var(--bds-weight-semibold);   --bds-display-lg-tracking: -0.022em;
+  --bds-display-md-size: 32px;    --bds-display-md-line: 40px;   --bds-display-md-weight: var(--bds-weight-semibold);   --bds-display-md-tracking: -0.018em;
+  --bds-display-sm-size: 27px;    --bds-display-sm-line: 35px;   --bds-display-sm-weight: var(--bds-weight-medium);     --bds-display-sm-tracking: -0.014em;
+  --bds-display-xs-size: 22px;    --bds-display-xs-line: 30px;   --bds-display-xs-weight: var(--bds-weight-medium);     --bds-display-xs-tracking: -0.01em;
+
+  /* Text scale — Nunito Sans. size / line-height */
+  --bds-text-xl-size: 20px;   --bds-text-xl-line: 30px;
+  --bds-text-lg-size: 18px;   --bds-text-lg-line: 28px;
+  --bds-text-md-size: 16px;   --bds-text-md-line: 24px;
+  --bds-text-sm-size: 14px;   --bds-text-sm-line: 20px;
+  --bds-text-xs-size: 12px;   --bds-text-xs-line: 18px;
+}
+
+/* Optional ready-made classes consumers can use directly */
+.ds-display-2xl { font-family: var(--bds-font-display); font-weight: var(--bds-display-2xl-weight); font-size: var(--bds-display-2xl-size); line-height: var(--bds-display-2xl-line); letter-spacing: var(--bds-display-2xl-tracking); }
+.ds-display-xl  { font-family: var(--bds-font-display); font-weight: var(--bds-display-xl-weight);  font-size: var(--bds-display-xl-size);  line-height: var(--bds-display-xl-line);  letter-spacing: var(--bds-display-xl-tracking); }
+.ds-display-lg  { font-family: var(--bds-font-display); font-weight: var(--bds-display-lg-weight);  font-size: var(--bds-display-lg-size);  line-height: var(--bds-display-lg-line);  letter-spacing: var(--bds-display-lg-tracking); }
+.ds-display-md  { font-family: var(--bds-font-display); font-weight: var(--bds-display-md-weight);  font-size: var(--bds-display-md-size);  line-height: var(--bds-display-md-line);  letter-spacing: var(--bds-display-md-tracking); }
+.ds-display-sm  { font-family: var(--bds-font-display); font-weight: var(--bds-display-sm-weight);  font-size: var(--bds-display-sm-size);  line-height: var(--bds-display-sm-line);  letter-spacing: var(--bds-display-sm-tracking); }
+.ds-display-xs  { font-family: var(--bds-font-display); font-weight: var(--bds-display-xs-weight);  font-size: var(--bds-display-xs-size);  line-height: var(--bds-display-xs-line);  letter-spacing: var(--bds-display-xs-tracking); }
+.ds-text-xl { font-family: var(--bds-font-body); font-size: var(--bds-text-xl-size); line-height: var(--bds-text-xl-line); }
+.ds-text-lg { font-family: var(--bds-font-body); font-size: var(--bds-text-lg-size); line-height: var(--bds-text-lg-line); }
+.ds-text-md { font-family: var(--bds-font-body); font-size: var(--bds-text-md-size); line-height: var(--bds-text-md-line); }
+.ds-text-sm { font-family: var(--bds-font-body); font-size: var(--bds-text-sm-size); line-height: var(--bds-text-sm-line); }
+.ds-text-xs { font-family: var(--bds-font-body); font-size: var(--bds-text-xs-size); line-height: var(--bds-text-xs-line); }
+
+/* ══ elevation.css ══ */
+/* ── Bayone Purpl · Elevation tokens ──────────────────────────────────
+   Six-step shadow scale. Use elevation to communicate hierarchy:
+   XS/SM for resting surfaces, MD/LG for raised cards & popovers,
+   XL/2XL for dialogs and overlays. Shadows are warm-neutral black. */
+
+:root {
+  --bds-shadow-xs:  0 1px 2px rgba(0,0,0,0.06);
+  --bds-shadow-sm:  0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --bds-shadow-md:  0 4px 8px -2px rgba(0,0,0,0.10), 0 2px 4px -2px rgba(0,0,0,0.06);
+  --bds-shadow-lg:  0 12px 16px -4px rgba(0,0,0,0.10), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --bds-shadow-xl:  0 20px 24px -4px rgba(0,0,0,0.10), 0 8px 8px -4px rgba(0,0,0,0.04);
+  --bds-shadow-2xl: 0 24px 48px -12px rgba(0,0,0,0.20);
+
+  /* Focus rings — derived from brand/status primitives so a palette change
+     propagates automatically (previously hand-transcribed rgba values). */
+  --bds-ring-focus:  0 0 0 3px color-mix(in srgb, var(--bds-primary-600) 25%, transparent);
+  --bds-ring-danger: 0 0 0 3px color-mix(in srgb, var(--bds-red-600) 20%, transparent);
+}

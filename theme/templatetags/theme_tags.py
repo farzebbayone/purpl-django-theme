@@ -20,7 +20,14 @@ def markdown_filter(value):
 
 @register.simple_tag
 def theme_css():
-    return mark_safe(f'<link rel="stylesheet" href="{static("theme/css/theme.css")}">')
+    tokens = static("theme/bayone-purpl/tokens.css")
+    components = static("theme/bayone-purpl/components.css")
+    compiled = static("theme/css/theme.css")
+    return mark_safe(
+        f'<link rel="stylesheet" href="{tokens}">\n'
+        f'  <link rel="stylesheet" href="{components}">\n'
+        f'  <link rel="stylesheet" href="{compiled}">'
+    )
 
 
 @register.simple_tag

@@ -8,6 +8,10 @@
   },
   "devDependencies": {
     "bootstrap": "^5.3.3",
+    "playwright": "^1.44.0",
     "sass": "^1.80.0"
+  },
+  "dependencies": {
+    "@bayone-solutions/purpl": "github:BayOne-Solutions/purpl#v0.11.0"
   }
 }

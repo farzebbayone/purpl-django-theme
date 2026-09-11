@@ -469,4 +469,4 @@ class PostForm(forms.ModelForm):
 {% render_form form %}
 ```
 
-The Synth theme overrides in `_quill.scss` apply automatically — no additional configuration needed. The django-quill-editor widget renders standard Quill markup that the theme styles will pick up.
+The Purpl theme overrides in `_quill.scss` apply automatically — no additional configuration needed. The django-quill-editor widget renders standard Quill markup that the theme styles will pick up.

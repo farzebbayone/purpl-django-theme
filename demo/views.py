@@ -331,7 +331,7 @@ def users(request):
         "users": [
             {
                 "name": "Alice Chen",
-                "email": "alice@synth.io",
+                "email": "alice@purpl.io",
                 "initials": "AC",
                 "avatar_color": "primary",
                 "presence": "online",
@@ -343,7 +343,7 @@ def users(request):
             },
             {
                 "name": "Marcus Johnson",
-                "email": "marcus@synth.io",
+                "email": "marcus@purpl.io",
                 "initials": "MJ",
                 "avatar_color": "accent",
                 "presence": "online",
@@ -355,7 +355,7 @@ def users(request):
             },
             {
                 "name": "Priya Sharma",
-                "email": "priya@synth.io",
+                "email": "priya@purpl.io",
                 "initials": "PS",
                 "avatar_color": "ai",
                 "presence": "away",
@@ -367,7 +367,7 @@ def users(request):
             },
             {
                 "name": "David Kim",
-                "email": "david@synth.io",
+                "email": "david@purpl.io",
                 "initials": "DK",
                 "avatar_color": "success",
                 "presence": "busy",
@@ -379,7 +379,7 @@ def users(request):
             },
             {
                 "name": "Sofia Rodriguez",
-                "email": "sofia@synth.io",
+                "email": "sofia@purpl.io",
                 "initials": "SR",
                 "avatar_color": "warning",
                 "presence": "online",
@@ -391,7 +391,7 @@ def users(request):
             },
             {
                 "name": "James Okafor",
-                "email": "james@synth.io",
+                "email": "james@purpl.io",
                 "initials": "JO",
                 "avatar_color": "tertiary",
                 "presence": "offline",
@@ -403,7 +403,7 @@ def users(request):
             },
             {
                 "name": "Lina Tanaka",
-                "email": "lina@synth.io",
+                "email": "lina@purpl.io",
                 "initials": "LT",
                 "avatar_color": "danger",
                 "presence": "online",
@@ -415,7 +415,7 @@ def users(request):
             },
             {
                 "name": "Erik Lindqvist",
-                "email": "erik@synth.io",
+                "email": "erik@purpl.io",
                 "initials": "EL",
                 "avatar_color": "info",
                 "presence": "offline",
@@ -552,7 +552,7 @@ def settings_page(request):
         "user_profile": {
             "name": "Alice Chen",
             "initials": "AC",
-            "email": "alice.chen@synth.io",
+            "email": "alice.chen@purpl.io",
             "role": "Senior Engineer",
             "bio": "Full-stack engineer focused on AI-driven applications and distributed systems.",
         },

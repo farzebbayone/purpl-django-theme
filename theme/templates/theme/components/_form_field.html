@@ -1,46 +1,110 @@
-{% if widget_type == "radioselect" or widget_type == "checkboxselectmultiple" %}
-<div class="mb-3{% if compact %} form-compact{% endif %}">
-  <label class="form-label">{{ field.label }}</label>
-  <div class="form-check-group">
-    {% for choice in field %}
-    <div class="form-check">
-      {{ choice.tag }}
-      <label class="form-check-label" for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
-    </div>
-    {% endfor %}
-  </div>
-  {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+{% if widget_type == "radioselect" %}
+<div class="bds-radiogroup{% if field.errors %} bds-radiogroup--error{% endif %}">
+  <span class="bds-radiogroup__label">{{ field.label }}</span>
+  {% for choice in field %}
+    <label class="bds-radio{% if choice.data.attrs.disabled %} bds-radio--disabled{% endif %}">
+      <span class="bds-radio__control">
+        {{ choice.tag }}
+        <span class="bds-radio__circle"></span>
+      </span>
+      <span class="bds-radio__label">{{ choice.choice_label }}</span>
+    </label>
+  {% endfor %}
+  {% if field.help_text %}<span class="bds-radiogroup__helper">{{ field.help_text }}</span>{% endif %}
   {% if field.errors %}
-    {% for error in field.errors %}<div class="invalid-feedback d-block">{{ error }}</div>{% endfor %}
+    {% for error in field.errors %}<span class="bds-radiogroup__helper">{{ error }}</span>{% endfor %}
+  {% endif %}
+</div>
+{% elif widget_type == "checkboxselectmultiple" %}
+<div class="bds-field bds-field--md{% if field.errors %} bds-field--error{% endif %}">
+  <span class="bds-field__label">{{ field.label }}</span>
+  {% for choice in field %}
+    <label class="bds-check__row">
+      <span class="bds-check__control">
+        {{ choice.tag }}
+        <span class="bds-check__box"><i data-lucide="check" style="width:12px;height:12px"></i></span>
+      </span>
+      <span class="bds-check__label">{{ choice.choice_label }}</span>
+    </label>
+  {% endfor %}
+  {% if field.help_text %}<span class="bds-field__helper">{{ field.help_text }}</span>{% endif %}
+  {% if field.errors %}
+    {% for error in field.errors %}<span class="bds-field__helper">{{ error }}</span>{% endfor %}
+  {% endif %}
+</div>
+{% elif is_switch %}
+<div class="bds-switch-field{% if field.errors %} bds-switch-field--error{% endif %}">
+  <label class="bds-switch bds-switch--md{% if field.field.disabled %} bds-switch--disabled{% endif %}">
+    <span class="bds-switch__control">
+      {{ field }}
+      <span class="bds-switch__track"><span class="bds-switch__thumb"></span></span>
+    </span>
+    <span class="bds-switch__label">{{ field.label }}</span>
+  </label>
+  {% if field.help_text %}<span class="bds-switch-field__helper">{{ field.help_text }}</span>{% endif %}
+  {% if field.errors %}
+    {% for error in field.errors %}<span class="bds-switch-field__helper">{{ error }}</span>{% endfor %}
   {% endif %}
 </div>
 {% elif is_check %}
-<div class="form-check{% if is_switch %} form-switch{% endif %}{% if compact %} form-compact{% endif %} mb-3">
-  {{ field }}
-  <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
-  {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+<div class="bds-check{% if field.errors %} bds-check--error{% endif %}{% if field.field.disabled %} bds-check--disabled{% endif %}">
+  <label class="bds-check__row">
+    <span class="bds-check__control">
+      {{ field }}
+      <span class="bds-check__box"><i data-lucide="check" style="width:12px;height:12px"></i></span>
+    </span>
+    <span class="bds-check__label">{{ field.label }}</span>
+  </label>
+  {% if field.help_text %}<span class="bds-check__helper">{{ field.help_text }}</span>{% endif %}
   {% if field.errors %}
-    {% for error in field.errors %}<div class="invalid-feedback d-block">{{ error }}</div>{% endfor %}
+    {% for error in field.errors %}<span class="bds-check__helper">{{ error }}</span>{% endfor %}
+  {% endif %}
+</div>
+{% elif is_select %}
+<div class="bds-field bds-field--md{% if compact %} form-compact{% endif %}{% if field.errors %} bds-field--error{% endif %}">
+  <label class="bds-field__label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <div class="bds-field__box bds-field__box--select">
+    {{ field }}
+    <span class="bds-field__chevron"><i data-lucide="chevron-down" style="width:16px;height:16px"></i></span>
+  </div>
+  {% if field.help_text %}<span class="bds-field__helper">{{ field.help_text }}</span>{% endif %}
+  {% if field.errors %}
+    {% for error in field.errors %}<span class="bds-field__helper">{{ error }}</span>{% endfor %}
+  {% endif %}
+</div>
+{% elif widget_type == "textarea" %}
+<div class="bds-field bds-field--md{% if compact %} form-compact{% endif %}{% if field.errors %} bds-field--error{% endif %}">
+  <label class="bds-field__label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <div class="bds-field__box bds-field__box--multiline">
+    {{ field }}
+  </div>
+  {% if field.help_text %}<span class="bds-field__helper">{{ field.help_text }}</span>{% endif %}
+  {% if field.errors %}
+    {% for error in field.errors %}<span class="bds-field__helper">{{ error }}</span>{% endfor %}
   {% endif %}
 </div>
 {% elif layout == "horizontal" %}
 <div class="row mb-3{% if compact %} form-compact{% endif %}">
-  <label class="col-sm-3 form-label form-horizontal" for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <label class="col-sm-3 bds-field__label form-horizontal" for="{{ field.id_for_label }}">{{ field.label }}</label>
   <div class="col-sm-9">
-    {{ field }}
-    {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
-    {% if field.errors %}
-      {% for error in field.errors %}<div class="invalid-feedback d-block">{{ error }}</div>{% endfor %}
-    {% endif %}
+    <div class="bds-field bds-field--md{% if field.errors %} bds-field--error{% endif %}">
+      <div class="bds-field__box">{{ field }}</div>
+      {% if field.help_text %}<span class="bds-field__helper">{{ field.help_text }}</span>{% endif %}
+      {% if field.errors %}
+        {% for error in field.errors %}<span class="bds-field__helper">{{ error }}</span>{% endfor %}
+      {% endif %}
+    </div>
   </div>
 </div>
 {% else %}
-<div class="mb-3{% if compact %} form-compact{% endif %}">
-  <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
-  {{ field }}
-  {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+<div class="bds-field bds-field--md{% if compact %} form-compact{% endif %}{% if field.errors %} bds-field--error{% endif %}">
+  <label class="bds-field__label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <div class="bds-field__box">
+    {{ field }}
+  </div>
+  {% if field.help_text %}<span class="bds-field__helper">{{ field.help_text }}</span>{% endif %}
   {% if field.errors %}
-    {% for error in field.errors %}<div class="invalid-feedback d-block">{{ error }}</div>{% endfor %}
+    {% for error in field.errors %}<span class="bds-field__helper">{{ error }}</span>{% endfor %}
   {% endif %}
 </div>
 {% endif %}

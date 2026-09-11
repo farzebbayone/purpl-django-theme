@@ -485,7 +485,7 @@ CSS custom properties that auto-switch between light and dark modes:
 
 ## Offcanvas
 
-Bootstrap's native Offcanvas with Synth theme overrides:
+Bootstrap's native Offcanvas with Purpl theme overrides:
 - Background uses `--surface-1`, borders use `--border-color`
 - Header gets a bottom border divider
 - Close button styled for dark mode (inverted filter)

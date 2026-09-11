@@ -1,4 +1,4 @@
-# Synth — Bootstrap 5 Theme for Django
+# Purpl — Bootstrap 5 Theme for Django
 
 A modern, elegant Bootstrap 5 theme for Django. Designed for data-rich and AI-first applications.
 
@@ -15,7 +15,7 @@ A modern, elegant Bootstrap 5 theme for Django. Designed for data-rich and AI-fi
 - **Expandable cards** — summary/detail cards with height + width expansion
 - **AI badges** — animated gradient badges for AI-generated content
 - **Command palette** — Cmd+K search with fuzzy filtering
-- **Fonts** — Inter + JetBrains Mono, locally bundled
+- **Fonts** — Figtree + Nunito Sans (Purpl's font pair) + JetBrains Mono, locally bundled
 - **Icons** — Lucide + Bootstrap Icons
 - **Accessibility** — ARIA labels, skip links, focus management, reduced motion
 - **14 demo pages** showcasing every component
@@ -118,17 +118,19 @@ The installed `theme/` directory is managed by the install script. Do not edit f
 
 ## Color Palette
 
-| Color | Hex | Usage |
-|-------|-----|-------|
-| Primary | `#5E6AD2` | Main actions, active states |
-| Secondary | `#64748B` | Neutral/supporting |
-| Tertiary | `#8B5CF6` | Depth, secondary accent |
-| Accent | `#0EA5E9` | Alternate highlight |
-| AI | `#D946EF` | AI-generated content |
-| Success | `#10B981` | Positive states |
-| Danger | `#EF4444` | Errors, destructive |
-| Warning | `#F59E0B` | Caution states |
-| Info | `#06B6D4` | Informational |
+Mirrors Purpl's semantic tokens (`node_modules/@bayone-solutions/purpl/docs/tokens.md`) so Bootstrap's palette and Purpl's own components share one source of truth.
+
+| Color | Hex | Purpl token | Usage |
+|-------|-----|-------------|-------|
+| Primary | `#CC297A` | `--bds-primary-600` | Main actions, active states |
+| Secondary | `#844190` | `--bds-secondary-600` | Neutral/supporting |
+| Tertiary | `#AB68BF` | `--bds-secondary-400` | Depth, secondary accent |
+| Accent | `#1D4ED8` | `--bds-blue-700` | Alternate highlight |
+| AI | `#E85EA8` | `--bds-primary-400` | AI-generated content |
+| Success | `#15803D` | `--bds-green-700` | Positive states |
+| Danger | `#DC2626` | `--bds-red-600` | Errors, destructive |
+| Warning | `#B45309` | `--bds-amber-700` | Caution states |
+| Info | `#2563EB` | `--bds-blue-600` | Informational |
 
 ## Project Structure
 
@@ -139,7 +141,7 @@ bootstrap_theme_django/
 │   │   ├── scss/             # SCSS source (30+ partials)
 │   │   ├── css/              # Compiled CSS
 │   │   ├── js/               # Vanilla JS
-│   │   └── fonts/            # Inter, JetBrains Mono
+│   │   └── fonts/            # Figtree, Nunito Sans, JetBrains Mono
 │   ├── templates/theme/      # Base templates, layouts, partials
 │   ├── templatetags/         # Django template tags
 │   ├── management/commands/  # install_theme command
@@ -188,7 +190,7 @@ Comprehensive docs in `theme/docs/`:
 
 - **Python** — Django 5.1, Poetry
 - **SCSS** — Bootstrap 5.3.3, Sass
-- **Fonts** — Inter (variable), JetBrains Mono (locally bundled)
+- **Fonts** — Figtree + Nunito Sans (variable, self-hosted by Purpl), JetBrains Mono (locally bundled)
 - **Icons** — Lucide + Bootstrap Icons (CDN)
 - **Charts** — ECharts (CDN)
 - **Rich Text** — Quill v2 (CDN)

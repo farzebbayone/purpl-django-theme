@@ -39,7 +39,7 @@ The brand element sits on the left side of the topbar and links to the home page
 ```html
 <a href="/" class="topbar__brand" aria-label="Home">
   <i data-lucide="hexagon" class="icon-sm"></i>
-  <span>{% block brand_name %}Synth{% endblock %}</span>
+  <span>{% block brand_name %}Purpl{% endblock %}</span>
 </a>
 ```
 

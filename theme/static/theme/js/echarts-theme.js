@@ -36,7 +36,7 @@
       color: PALETTE,
       backgroundColor: "transparent",
       textStyle: {
-        fontFamily: "'Inter', system-ui, sans-serif",
+        fontFamily: "'Nunito Sans', system-ui, sans-serif",
         color: dark ? "#94a3b8" : "#64748b",
       },
       title: {

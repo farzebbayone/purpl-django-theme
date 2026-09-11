@@ -1,5 +1,5 @@
 """
-Install or update the Synth theme into a consuming Django project.
+Install or update the Purpl theme into a consuming Django project.
 
 Usage:
     python manage.py install_theme --dest /path/to/myproject
@@ -24,10 +24,10 @@ EXCLUDE_FILES = {"theme.css.map"}
 
 # Header markers injected into copied files
 MARKERS = {
-    ".css": "/* DO NOT EDIT — managed by Synth theme. Changes will be overwritten on update. */\n",
-    ".js": "/* DO NOT EDIT — managed by Synth theme. Changes will be overwritten on update. */\n",
-    ".html": "{# DO NOT EDIT — managed by Synth theme. Changes will be overwritten on update. #}\n",
-    ".py": "# DO NOT EDIT — managed by Synth theme. Changes will be overwritten on update.\n",
+    ".css": "/* DO NOT EDIT — managed by Purpl theme. Changes will be overwritten on update. */\n",
+    ".js": "/* DO NOT EDIT — managed by Purpl theme. Changes will be overwritten on update. */\n",
+    ".html": "{# DO NOT EDIT — managed by Purpl theme. Changes will be overwritten on update. #}\n",
+    ".py": "# DO NOT EDIT — managed by Purpl theme. Changes will be overwritten on update.\n",
 }
 
 LOCK_FILE = ".theme-lock"
@@ -136,7 +136,7 @@ def check_drift(dest_theme, lock_data):
 
 
 class Command(BaseCommand):
-    help = "Install or update the Synth theme into a consuming Django project."
+    help = "Install or update the Purpl theme into a consuming Django project."
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -178,7 +178,7 @@ class Command(BaseCommand):
 
     def _install(self, dest_theme):
         """Fresh install — copy all theme files to destination."""
-        self.stdout.write(self.style.MIGRATE_HEADING("Installing Synth theme..."))
+        self.stdout.write(self.style.MIGRATE_HEADING("Installing Purpl theme..."))
         self.stdout.write(f"  Destination: {dest_theme}")
 
         files = collect_files(THEME_DIR)
@@ -217,7 +217,7 @@ class Command(BaseCommand):
 
     def _update(self, dest_theme, lock_data, force):
         """Update — check for drift, warn, then overwrite."""
-        self.stdout.write(self.style.MIGRATE_HEADING("Updating Synth theme..."))
+        self.stdout.write(self.style.MIGRATE_HEADING("Updating Purpl theme..."))
 
         prev_version = lock_data.get("version", "unknown")
         installed_at = lock_data.get("installed_at", "unknown")

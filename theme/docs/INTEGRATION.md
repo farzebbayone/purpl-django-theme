@@ -1,6 +1,6 @@
 # Integration Reference
 
-Complete reference for integrating the Synth theme into a Django project. The theme is a self-contained Django app — you should never need to edit files inside `theme/`.
+Complete reference for integrating the Purpl theme into a Django project. The theme is a self-contained Django app — you should never need to edit files inside `theme/`.
 
 ## Architecture
 
@@ -44,7 +44,7 @@ yourapp/                        ← Your project
 
 | Block | Default | Purpose |
 |-------|---------|---------|
-| `brand_name` | `Synth` | Topbar brand text |
+| `brand_name` | `Purpl` | Topbar brand text |
 | `user_initials` | empty | Avatar button text |
 | `user_avatar_initials` | empty | Avatar in dropdown header |
 | `user_name` | empty | Display name in user menu |

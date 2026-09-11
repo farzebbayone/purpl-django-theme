@@ -1,20 +1,27 @@
 // Bootstrap variable overrides — must be set BEFORE importing Bootstrap
+//
+// Colors mirror Purpl's semantic tokens (node_modules/@bayone-solutions/purpl/docs/tokens.md).
+// Sass compiles ahead of time, so these can't reference the --bds-* custom
+// properties directly — each value is a literal copy of the primitive it
+// mirrors; re-sync by hand if Purpl's palette changes.
 
 // Colors
-$primary:   #5E6AD2;
-$secondary: #64748B;
-$success:   #10B981;
-$danger:    #EF4444;
-$warning:   #F59E0B;
-$info:      #06B6D4;
+$primary:   #CC297A; // --bds-primary-600   (bg-primary)
+$secondary: #844190; // --bds-secondary-600 (bg-secondary)
+$success:   #15803D; // --bds-green-700     (bg-success)
+$danger:    #DC2626; // --bds-red-600       (bg-danger)
+$warning:   #B45309; // --bds-amber-700     (bg-warning)
+$info:      #2563EB; // --bds-blue-600      (bg-info)
 
-// Custom colors (not Bootstrap standard)
-$tertiary:  #8B5CF6;
-$accent:    #0EA5E9;
-$ai:        #D946EF;
+// Custom colors (not Bootstrap standard) — built from Purpl primitives that
+// have no direct Bootstrap slot
+$tertiary:  #AB68BF; // --bds-secondary-400 (lighter purple, depth accent)
+$accent:    #1D4ED8; // --bds-blue-700      (deeper blue, alternate highlight)
+$ai:        #E85EA8; // --bds-primary-400   (lighter magenta, AI content marker)
 
-// Typography
-$font-family-sans-serif: "Inter", system-ui, -apple-system, sans-serif;
+// Typography — Figtree (display/headings) + Nunito Sans (body), Purpl's font pair
+$font-family-sans-serif: "Nunito Sans", system-ui, -apple-system, sans-serif;
+$headings-font-family:   "Figtree", system-ui, -apple-system, sans-serif;
 $font-family-monospace:  "JetBrains Mono", ui-monospace, monospace;
 $font-size-base: 0.9375rem; // 15px
 $font-size-sm: 0.8125rem;
