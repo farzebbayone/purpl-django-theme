@@ -199,8 +199,8 @@
 
 | Class | Description | Docs |
 |---|---|---|
-| `.theme-toast` | Toast notification popup | UI_COMPONENTS.md |
-| `.toast-container` | Positioning container for toast stack | UI_COMPONENTS.md |
+| `.bds-toast` | Toast notification popup (Purpl) | UI_COMPONENTS.md |
+| `.bds-toast-viewport` | Fixed container for the toast stack (Purpl) | UI_COMPONENTS.md |
 | `.progress-tint-{color}` | Progress bar with tinted color for any theme color | UI_COMPONENTS.md |
 | `.progress-thin` | Slim/thin progress bar variant | UI_COMPONENTS.md |
 | `.progress-indeterminate` | Animated indeterminate progress bar | UI_COMPONENTS.md |

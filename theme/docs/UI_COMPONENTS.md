@@ -2,7 +2,8 @@
 
 ## Toasts
 
-Notification system with auto-dismiss, timer bar, and stacking.
+Notification system with auto-dismiss and stacking, rendered with Purpl's
+`.bds-toast`. The JS builds the markup for you — you never write toast HTML.
 
 ### JS API
 
@@ -17,27 +18,36 @@ ThemeToast.ai("Analysis complete.", { title: "AI Assistant" });
 ThemeToast.show({
   message: "Custom message",
   title: "Title",
-  type: "primary",    // success, danger, warning, info, ai, primary
-  duration: 5000,     // ms, 0 = no auto-dismiss
-  position: "top-right" // top-right, top-left, top-center, bottom-right, bottom-left, bottom-center
+  type: "primary",  // success, danger/error, warning, info, ai, primary
+  duration: 5000,   // ms, 0 = no auto-dismiss
 });
 ```
 
-### CSS Classes
+`show()` returns `{ dismiss, el }` so you can close a toast programmatically.
 
-| Class | Usage |
-|-------|-------|
-| `.toast-container` | Fixed positioning wrapper |
-| `.toast-container--top-right` | Position variant (also top-left, bottom-*, top/bottom-center) |
-| `.theme-toast` | Base toast element |
-| `.theme-toast--success` | Color variant (also danger, warning, info, ai, primary) |
-| `.theme-toast--exiting` | Exit animation state |
-| `.theme-toast__icon` | Left icon |
-| `.theme-toast__content` | Text wrapper |
-| `.theme-toast__title` | Bold title |
-| `.theme-toast__message` | Description text |
-| `.theme-toast__close` | Dismiss button |
-| `.theme-toast__timer` | Auto-dismiss progress bar |
+### Variants
+
+Purpl's Toast has three variants. Its unmodified base is info-accented, so
+`info`, `ai`, and `primary` all render as that neutral base:
+
+| `type` | Renders as | `role` |
+|--------|-----------|--------|
+| `success` | `.bds-toast--success` | `status` |
+| `warning` | `.bds-toast--warning` | `status` |
+| `danger` / `error` | `.bds-toast--error` | `alert` |
+| `info` / `ai` / `primary` | `.bds-toast` (neutral base) | `status` |
+
+Only errors use `role="alert"` (interrupts the screen reader); everything else
+is announced politely by the viewport's `aria-live="polite"`.
+
+### Notes
+
+- **Position is fixed.** Purpl's viewport is bottom-right and has no position
+  variants, so the old `position` option is accepted but ignored.
+- **No timer bar.** Purpl's toast has no progress-bar element; auto-dismiss
+  still works, it just isn't visualised.
+- Toasts are appended to an inner wrapper inside `.bds-toast-viewport`, because
+  Purpl styles the stack via `.bds-toast-viewport > div`.
 
 ## Progress Bars
 

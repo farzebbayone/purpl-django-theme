@@ -1,0 +1,13 @@
+// Purpl integration
+//
+// Rules this app needs so Purpl's components sit correctly inside Synth's
+// layout — stacking order, mainly. This is NOT a place to restyle Purpl or
+// copy rules out of components.css (see docs/MIGRATION.md); components.css
+// stays vendor-managed and is refreshed by `npx bayone-purpl init`.
+
+// Purpl ships no z-index on its toast viewport, so it would otherwise paint
+// underneath Synth's fixed topbar/sidebar chrome. Slot it into this app's
+// existing z-index scale.
+.bds-toast-viewport {
+  z-index: $zindex-toast;
+}

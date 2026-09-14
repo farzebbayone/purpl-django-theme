@@ -29,15 +29,14 @@
     <div class="card-body">
       <h5 class="card-title mb-3">Toast Notifications</h5>
       <p class="text-secondary fs-7 mb-3">Use for non-blocking feedback after user actions — save confirmations, error alerts, background task completions.</p>
-      <p class="text-secondary fs-7 mb-3">Click to trigger toasts. Auto-dismiss with progress timer. JS API: <code>ThemeToast.success("message")</code></p>
+      <p class="text-secondary fs-7 mb-3">Rendered with Purpl's <code>.bds-toast</code>, which has three variants — success, warning, error. Its unmodified base is info-accented, so <code>ThemeToast.info()</code> and <code>.ai()</code> render as that neutral base. JS API: <code>ThemeToast.success("message")</code></p>
       <div class="d-flex flex-wrap gap-2">
-        <button class="btn btn-sm btn-success" onclick="ThemeToast.success('Changes saved successfully.', {title:'Success'})">Success Toast</button>
-        <button class="btn btn-sm btn-danger" onclick="ThemeToast.error('Failed to save changes.', {title:'Error'})">Error Toast</button>
-        <button class="btn btn-sm btn-warning" onclick="ThemeToast.warning('Your session expires in 5 minutes.', {title:'Warning'})">Warning Toast</button>
-        <button class="btn btn-sm btn-info" onclick="ThemeToast.info('New version available.', {title:'Info'})">Info Toast</button>
-        <button class="btn btn-sm btn-soft-ai" onclick="ThemeToast.ai('Analysis complete. 3 insights found.', {title:'AI Assistant'})">AI Toast</button>
-        <button class="btn btn-sm btn-primary" onclick="ThemeToast.show({message:'Custom toast with 10s duration.',title:'Custom',type:'primary',duration:10000})">10s Duration</button>
-        <button class="btn btn-sm btn-outline-secondary" onclick="ThemeToast.show({message:'This toast stays until dismissed.',title:'Persistent',type:'info',duration:0})">No Auto-Dismiss</button>
+        <button class="btn btn-sm btn-success" onclick="ThemeToast.success('Changes saved successfully.', {title:'Success'})">Success</button>
+        <button class="btn btn-sm btn-warning" onclick="ThemeToast.warning('Your session expires in 5 minutes.', {title:'Warning'})">Warning</button>
+        <button class="btn btn-sm btn-danger" onclick="ThemeToast.error('Failed to save changes.', {title:'Error'})">Error</button>
+        <button class="btn btn-sm btn-outline-secondary" onclick="ThemeToast.info('New version available.', {title:'Heads up'})">Neutral (info)</button>
+        <button class="btn btn-sm btn-primary" onclick="ThemeToast.show({message:'Custom toast with 10s duration.',title:'Custom',duration:10000})">10s Duration</button>
+        <button class="btn btn-sm btn-outline-secondary" onclick="ThemeToast.show({message:'This toast stays until dismissed.',title:'Persistent',duration:0})">No Auto-Dismiss</button>
       </div>
     </div>
   </div>

@@ -250,19 +250,24 @@
   // --- Toast System ---
   var _toastContainer = null;
 
-  function getToastContainer(position) {
-    position = position || "top-right";
-    var id = "toast-container-" + position;
-    var el = document.getElementById(id);
-    if (!el) {
-      el = document.createElement("div");
-      el.id = id;
-      el.className = "toast-container toast-container--" + position;
-      el.setAttribute("aria-live", "polite");
-      el.setAttribute("aria-atomic", "true");
-      document.body.appendChild(el);
+  // Purpl's toast viewport is fixed bottom-right; it has no position variants,
+  // so the legacy `position` option is accepted but ignored.
+  //
+  // Toasts go in an inner wrapper, not the viewport itself: Purpl styles the
+  // stack with `.bds-toast-viewport > div { flex-direction: column }`, which
+  // would otherwise land on each toast and flip its own row layout.
+  function getToastContainer() {
+    var vp = document.getElementById("bds-toast-viewport");
+    if (!vp) {
+      vp = document.createElement("div");
+      vp.id = "bds-toast-viewport";
+      vp.className = "bds-toast-viewport";
+      vp.setAttribute("aria-live", "polite");
+      vp.setAttribute("aria-atomic", "false");
+      vp.appendChild(document.createElement("div"));
+      document.body.appendChild(vp);
     }
-    return el;
+    return vp.firstElementChild;
   }
 
   function showToast(opts) {
@@ -271,7 +276,6 @@
     var title = opts.title || "";
     var type = opts.type || "primary";
     var duration = opts.duration !== undefined ? opts.duration : 5000;
-    var position = opts.position || "top-right";
     var icon = opts.icon || "";
 
     var iconMap = {
@@ -284,47 +288,43 @@
     };
     if (!icon) icon = iconMap[type] || "bell";
 
-    var container = getToastContainer(position);
+    // Purpl's Toast has three variants; its unmodified base is info-accented,
+    // so info/ai/primary all render as the neutral base toast.
+    var variantMap = { success: "success", danger: "error", error: "error", warning: "warning" };
+    var variant = variantMap[type];
+
+    var container = getToastContainer();
 
     var toast = document.createElement("div");
-    toast.className = "theme-toast theme-toast--" + type;
-    toast.setAttribute("role", "alert");
+    toast.className = "bds-toast" + (variant ? " bds-toast--" + variant : "");
+    // Errors interrupt; everything else is announced politely by the viewport.
+    toast.setAttribute("role", variant === "error" ? "alert" : "status");
     toast.innerHTML =
-      '<i data-lucide="' + icon + '" class="theme-toast__icon"></i>' +
-      '<div class="theme-toast__content">' +
-        (title ? '<div class="theme-toast__title">' + title + '</div>' : '') +
-        '<div class="theme-toast__message">' + message + '</div>' +
+      '<span class="bds-toast__icon"><i data-lucide="' + icon + '" style="width:1rem;height:1rem"></i></span>' +
+      '<div class="bds-toast__body">' +
+        (title ? '<strong>' + title + '</strong><br>' : '') +
+        message +
       '</div>' +
-      '<button class="theme-toast__close" aria-label="Close">' +
+      '<button type="button" class="bds-toast__close" aria-label="Close">' +
         '<i data-lucide="x" style="width:0.875rem;height:0.875rem"></i>' +
-      '</button>' +
-      (duration > 0 ? '<div class="theme-toast__timer" style="width:100%"></div>' : '');
+      '</button>';
 
     container.appendChild(toast);
 
     // Re-init lucide icons for the new toast
     if (typeof lucide !== "undefined") lucide.createIcons({ nodes: [toast] });
 
-    // Close handler
-    var closeBtn = toast.querySelector(".theme-toast__close");
+    var dismissed = false;
     function dismiss() {
-      toast.classList.add("theme-toast--exiting");
+      if (dismissed) return;
+      dismissed = true;
+      toast.classList.add("bds-toast--leaving");
       setTimeout(function () { toast.remove(); }, 200);
     }
-    closeBtn.addEventListener("click", dismiss);
 
-    // Auto-dismiss with timer
-    if (duration > 0) {
-      var timer = toast.querySelector(".theme-toast__timer");
-      if (timer) {
-        // Start animation on next frame
-        requestAnimationFrame(function () {
-          timer.style.transitionDuration = duration + "ms";
-          timer.style.width = "0%";
-        });
-      }
-      setTimeout(dismiss, duration);
-    }
+    toast.querySelector(".bds-toast__close").addEventListener("click", dismiss);
+
+    if (duration > 0) setTimeout(dismiss, duration);
 
     return { dismiss: dismiss, el: toast };
   }

@@ -247,6 +247,8 @@ ThemeToast.info("Processing...");
 ThemeToast.ai("Analysis complete");
 ```
 
+Toasts render with Purpl's `.bds-toast`, which has three variants (success / warning / error). `info`, `ai` and `primary` render as its neutral, info-accented base. See `theme/docs/UI_COMPONENTS.md`.
+
 ### Typewriter effect
 
 ```html
