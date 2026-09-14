@@ -1,20 +1,10 @@
 // Font face declarations
-
-@font-face {
-  font-family: "Figtree";
-  src: url("../fonts/Figtree-Variable.woff2") format("woff2-variations");
-  font-weight: 400 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nunito Sans";
-  src: url("../fonts/NunitoSans-Variable.woff2") format("woff2-variations");
-  font-weight: 400 800;
-  font-style: normal;
-  font-display: swap;
-}
+//
+// Figtree and Nunito Sans are declared by Purpl's own bayone-purpl/tokens.css,
+// which ships and versions those files. Redeclaring them here would mean two
+// copies of each font, and `npx bayone-purpl init` on a Purpl upgrade would
+// refresh only Purpl's copy — leaving a stale duplicate as the one actually
+// used. JetBrains Mono has no Purpl equivalent, so it stays ours.
 
 @font-face {
   font-family: "JetBrains Mono";

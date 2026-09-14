@@ -135,13 +135,14 @@ Mirrors Purpl's semantic tokens (`node_modules/@bayone-solutions/purpl/docs/toke
 ## Project Structure
 
 ```
-bootstrap_theme_django/
+purpl_django_theme/
 ├── theme/                    # The reusable theme app
 │   ├── static/theme/
 │   │   ├── scss/             # SCSS source (30+ partials)
 │   │   ├── css/              # Compiled CSS
 │   │   ├── js/               # Vanilla JS
-│   │   └── fonts/            # Figtree, Nunito Sans, JetBrains Mono
+│   │   ├── bayone-purpl/     # Vendored Purpl tokens, components.css, fonts
+│   │   └── fonts/            # JetBrains Mono (Purpl ships Figtree + Nunito Sans)
 │   ├── templates/theme/      # Base templates, layouts, partials
 │   ├── templatetags/         # Django template tags
 │   ├── management/commands/  # install_theme command

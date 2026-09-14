@@ -175,7 +175,8 @@ bootstrap_theme_django/
 │   │   ├── scss/                     # Source SCSS
 │   │   ├── css/                      # Compiled CSS
 │   │   ├── js/                       # Minimal JS
-│   │   ├── fonts/                    # Figtree, Nunito Sans, JetBrains Mono
+│   │   ├── bayone-purpl/             # Vendored Purpl tokens, components.css, fonts
+│   │   ├── fonts/                    # JetBrains Mono (Purpl ships Figtree + Nunito Sans)
 │   │   └── img/
 │   ├── templates/theme/
 │   │   ├── base.html

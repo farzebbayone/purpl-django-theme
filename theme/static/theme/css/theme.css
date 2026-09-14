@@ -11916,20 +11916,6 @@ textarea.form-control-lg {
 }
 
 @font-face {
-  font-family: "Figtree";
-  src: url("../fonts/Figtree-Variable.woff2") format("woff2-variations");
-  font-weight: 400 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Nunito Sans";
-  src: url("../fonts/NunitoSans-Variable.woff2") format("woff2-variations");
-  font-weight: 400 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
   font-family: "JetBrains Mono";
   src: url("../fonts/JetBrainsMono-Regular.woff2") format("woff2");
   font-weight: 400;
