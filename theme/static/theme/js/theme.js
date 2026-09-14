@@ -338,6 +338,61 @@
     ai: function (msg, opts) { return showToast(Object.assign({ message: msg, type: "ai" }, opts)); },
   };
 
+  window.ThemeModal = { open: openModal, close: closeModal };
+
+  // --- Modal (Purpl .bds-modal on native <dialog>) ---
+  //
+  // showModal() is what makes this work without React: the browser supplies
+  // the focus trap, Escape handling, top-layer stacking, background inerting
+  // and focus restore. We only wire the open/close triggers.
+  //
+  //   <button data-bds-modal-open="#confirm">…</button>
+  //   <dialog class="bds-modal" id="confirm">
+  //     <div class="bds-modal__inner">… <button data-bds-modal-close>…</button></div>
+  //   </dialog>
+
+  // Fires `bds:modal:open` once the dialog is on screen — the replacement for
+  // Bootstrap's `shown.bs.modal`, for content that can only measure itself when
+  // visible (rich-text editors, charts, maps). For the close side, <dialog>
+  // already fires a native `close` event.
+  function openModal(target) {
+    var dlg = typeof target === "string" ? document.querySelector(target) : target;
+    if (!dlg || typeof dlg.showModal !== "function" || dlg.open) return null;
+    dlg.showModal();
+    dlg.dispatchEvent(new CustomEvent("bds:modal:open", { bubbles: true }));
+    return dlg;
+  }
+
+  function closeModal(target) {
+    var dlg = typeof target === "string" ? document.querySelector(target) : target;
+    if (dlg && dlg.open) dlg.close();
+    return dlg;
+  }
+
+  function initModals() {
+    document.addEventListener("click", function (e) {
+      var opener = e.target.closest("[data-bds-modal-open]");
+      if (opener) {
+        e.preventDefault();
+        openModal(opener.getAttribute("data-bds-modal-open"));
+        return;
+      }
+      var closer = e.target.closest("[data-bds-modal-close]");
+      if (closer) {
+        e.preventDefault();
+        closeModal(closer.closest("dialog"));
+      }
+    });
+
+    // Backdrop click. Clicks on ::backdrop are dispatched with the <dialog>
+    // itself as target; anything inside targets .bds-modal__inner or deeper.
+    document.addEventListener("click", function (e) {
+      if (e.target instanceof HTMLDialogElement && e.target.classList.contains("bds-modal")) {
+        e.target.close();
+      }
+    });
+  }
+
   // --- Command Palette ---
   var _cmdPalette = null;
   var _cmdItems = [];
@@ -1427,6 +1482,7 @@
     initThreads();
     initComposer();
     initCommandPalette();
+    initModals();
     initTopbarDropdowns();
     initDatepickers();
     initTypeablePickers();

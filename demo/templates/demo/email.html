@@ -18,7 +18,7 @@
 
     <!-- ── Email Sidebar ── -->
     <div class="email-sidebar">
-      <button class="btn btn-primary btn-sm email-sidebar__compose-btn" data-bs-toggle="modal" data-bs-target="#composeModal">
+      <button class="btn btn-primary btn-sm email-sidebar__compose-btn" data-bds-modal-open="#composeModal">
         <i data-lucide="plus" class="icon-xs me-1"></i> Compose
       </button>
 
@@ -393,14 +393,15 @@
 </div>
 
 <!-- ── Compose Modal ── -->
-<div class="modal fade" id="composeModal" tabindex="-1" aria-labelledby="composeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header py-2">
-        <h6 class="modal-title" id="composeModalLabel">New Message</h6>
-        <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+<dialog class="bds-modal bds-modal--lg" id="composeModal" aria-labelledby="composeModalLabel">
+  <div class="bds-modal__inner">
+      <div class="bds-modal__header">
+        <h2 class="bds-modal__title" id="composeModalLabel">New Message</h2>
+        <button type="button" class="bds-modal__close" data-bds-modal-close aria-label="Close">
+          <i data-lucide="x" class="icon-xs"></i>
+        </button>
       </div>
-      <div class="modal-body p-0">
+      <div>
         <div class="email-compose__field">
           <label>To</label>
           <input type="text" placeholder="Recipients...">
@@ -422,7 +423,7 @@
           <div id="compose-editor"></div>
         </div>
       </div>
-      <div class="modal-footer py-2">
+      <div class="bds-modal__footer">
         <div class="d-flex align-items-center gap-2 w-100">
           <button class="btn btn-primary btn-sm">
             <i data-lucide="send" class="icon-xs me-1"></i> Send
@@ -431,15 +432,14 @@
             <i data-lucide="paperclip" class="icon-xs"></i>
           </button>
           <div class="ms-auto">
-            <button class="btn btn-sm btn-ghost-secondary" data-bs-dismiss="modal">
+            <button class="btn btn-sm btn-ghost-secondary" data-bds-modal-close>
               <i data-lucide="trash-2" class="icon-xs me-1"></i> Discard
             </button>
           </div>
         </div>
       </div>
-    </div>
   </div>
-</div>
+</dialog>
 {% endblock %}
 
 {% block extra_js %}
@@ -450,7 +450,7 @@
   var composeModal = document.getElementById('composeModal');
   var quillInstance = null;
 
-  composeModal.addEventListener('shown.bs.modal', function() {
+  composeModal.addEventListener('bds:modal:open', function() {
     if (!quillInstance) {
       quillInstance = new Quill('#compose-editor', {
         theme: 'snow',

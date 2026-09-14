@@ -197,7 +197,47 @@ All variants work with `.rounded-pill` for pill shape. Respects `prefers-reduced
 ## Modals & Drawers
 
 ### Modals
-Standard Bootstrap modals with theme styling (borders, shadows match dark mode). `.modal-content` uses themed border and shadow. `.modal-header` and `.modal-footer` use `--border-color`.
+Purpl's `.bds-modal` on the native `<dialog>` element. Opening with
+`showModal()` is what makes this work without React — the browser supplies the
+focus trap, Escape handling, top-layer stacking, background inerting and focus
+restore, so there is no JS reimplementation of any of it.
+
+```html
+<button data-bds-modal-open="#confirm">Delete</button>
+
+<dialog class="bds-modal bds-modal--sm" id="confirm" aria-labelledby="confirmTitle">
+  <div class="bds-modal__inner">
+    <div class="bds-modal__header">
+      <h2 class="bds-modal__title" id="confirmTitle">Confirm action</h2>
+      <button type="button" class="bds-modal__close" data-bds-modal-close aria-label="Close">
+        <i data-lucide="x" class="icon-xs"></i>
+      </button>
+    </div>
+    <p class="mb-0">This cannot be undone.</p>
+    <div class="bds-modal__footer">
+      <button class="btn btn-outline-secondary" data-bds-modal-close>Cancel</button>
+      <button class="btn btn-danger" data-bds-modal-close>Delete</button>
+    </div>
+  </div>
+</dialog>
+```
+
+| Hook | Purpose |
+|------|---------|
+| `data-bds-modal-open="#id"` | Opens that dialog |
+| `data-bds-modal-close` | Closes the dialog it sits inside |
+| `ThemeModal.open(sel)` / `.close(sel)` | Programmatic control |
+| `bds:modal:open` event | Fires once visible — the replacement for `shown.bs.modal` |
+| native `close` event | Fires on close; `<dialog>` provides it |
+
+Sizes: `.bds-modal--sm` (400px), default (560px), `.bds-modal--lg` (720px).
+Clicking the backdrop closes the dialog. Keep Cancel before the confirming
+action, and make destructive confirms `.btn-danger`.
+
+**Use `bds:modal:open` for anything that must measure itself when visible** —
+rich-text editors, charts, maps. The email compose editor does exactly this.
+
+Requires a browser with `<dialog>` support (Safari 15.4+, March 2022).
 
 ### Drawers
 `.drawer` — Right-side slide-in panel (fixed position, 28rem wide, max 90vw). Slides in from the right edge with a 0.25s transition.

@@ -114,33 +114,31 @@
 </div>
 
 <!-- Event Detail Modal -->
-<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="eventModalLabel">Event Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <div class="fw-semibold mb-1" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted);">Title</div>
-          <div id="eventModalTitle" class="fw-medium" style="font-size: 1rem;"></div>
-        </div>
-        <div class="mb-3">
-          <div class="fw-semibold mb-1" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted);">Time</div>
-          <div id="eventModalTime" style="font-size: 0.9375rem;"></div>
-        </div>
-        <div>
-          <div class="fw-semibold mb-1" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted);">Description</div>
-          <div id="eventModalDesc" style="font-size: 0.9375rem; color: var(--text-secondary);"></div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
+<dialog class="bds-modal" id="eventModal" aria-labelledby="eventModalLabel">
+  <div class="bds-modal__inner">
+    <div class="bds-modal__header">
+      <h2 class="bds-modal__title" id="eventModalLabel">Event Details</h2>
+      <button type="button" class="bds-modal__close" data-bds-modal-close aria-label="Close">
+        <i data-lucide="x" class="icon-xs"></i>
+      </button>
+    </div>
+    <div class="mb-3">
+      <div class="fw-semibold mb-1" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted);">Title</div>
+      <div id="eventModalTitle" class="fw-medium" style="font-size: 1rem;"></div>
+    </div>
+    <div class="mb-3">
+      <div class="fw-semibold mb-1" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted);">Time</div>
+      <div id="eventModalTime" style="font-size: 0.9375rem;"></div>
+    </div>
+    <div>
+      <div class="fw-semibold mb-1" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted);">Description</div>
+      <div id="eventModalDesc" style="font-size: 0.9375rem; color: var(--text-secondary);"></div>
+    </div>
+    <div class="bds-modal__footer">
+      <button type="button" class="btn btn-sm btn-secondary" data-bds-modal-close>Close</button>
     </div>
   </div>
-</div>
+</dialog>
 {% endblock %}
 
 {% block extra_js %}
@@ -328,8 +326,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var desc = (event.extendedProps && event.extendedProps.description) ? event.extendedProps.description : 'No description available.';
       document.getElementById('eventModalDesc').textContent = desc;
 
-      var modal = new bootstrap.Modal(document.getElementById('eventModal'));
-      modal.show();
+      ThemeModal.open('#eventModal');
     }
   });
 

@@ -189,7 +189,19 @@ The theme bundles Bootstrap 5.3, Bootstrap Icons, Lucide, and htmx. Remove any C
 
 ### CSS classes work as-is
 
-All standard Bootstrap 5.3 classes work unchanged: `row`, `col-*`, `btn`, `card`, `alert`, `badge`, `table`, `modal`, etc.
+All standard Bootstrap 5.3 classes work unchanged: `row`, `col-*`, `btn`, `card`, `alert`, `badge`, `table`, etc.
+
+**Exceptions — these moved to Purpl and no longer use Bootstrap's JS:**
+
+| Was | Now |
+|-----|-----|
+| `<div class="modal">` + `data-bs-toggle="modal"` | `<dialog class="bds-modal">` + `data-bds-modal-open` (see COMPONENTS.md) |
+| `shown.bs.modal` event | `bds:modal:open` event |
+| `new bootstrap.Modal(el).show()` | `ThemeModal.open("#id")` |
+| toast markup / `.theme-toast` | `ThemeToast` JS API, renders `.bds-toast` (see UI_COMPONENTS.md) |
+
+Bootstrap's JS bundle is still required — collapse, dropdown, tooltip, popover,
+offcanvas and tabs all continue to use it.
 
 ### New utility classes
 
