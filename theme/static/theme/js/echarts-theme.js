@@ -4,15 +4,15 @@
   "use strict";
 
   var COLORS = {
-    primary:   "#5E6AD2",
-    secondary: "#64748B",
-    tertiary:  "#8B5CF6",
-    accent:    "#0EA5E9",
-    ai:        "#D946EF",
-    success:   "#10B981",
-    danger:    "#EF4444",
-    warning:   "#F59E0B",
-    info:      "#06B6D4",
+    primary:   "#CC297A",
+    secondary: "#844190",
+    tertiary:  "#AB68BF",
+    accent:    "#1D4ED8",
+    ai:        "#E85EA8",
+    success:   "#15803D",
+    danger:    "#DC2626",
+    warning:   "#B45309",
+    info:      "#2563EB",
   };
 
   var PALETTE = [
@@ -37,35 +37,35 @@
       backgroundColor: "transparent",
       textStyle: {
         fontFamily: "'Nunito Sans', system-ui, sans-serif",
-        color: dark ? "#94a3b8" : "#64748b",
+        color: dark ? "#a3a3a3" : "#525252",
       },
       title: {
-        textStyle: { color: dark ? "#e2e8f0" : "#1e293b", fontWeight: 600 },
-        subtextStyle: { color: dark ? "#64748b" : "#94a3b8" },
+        textStyle: { color: dark ? "#f5f5f5" : "#171717", fontWeight: 600 },
+        subtextStyle: { color: dark ? "#737373" : "#a3a3a3" },
       },
       legend: {
-        textStyle: { color: dark ? "#94a3b8" : "#64748b" },
+        textStyle: { color: dark ? "#a3a3a3" : "#525252" },
       },
       tooltip: {
-        backgroundColor: dark ? "#1e293b" : "#ffffff",
-        borderColor: dark ? "#334155" : "#e2e8f0",
-        textStyle: { color: dark ? "#e2e8f0" : "#1e293b", fontSize: 12 },
+        backgroundColor: dark ? "#262626" : "#ffffff",
+        borderColor: dark ? "#404040" : "#d4d4d4",
+        textStyle: { color: dark ? "#f5f5f5" : "#171717", fontSize: 12 },
         extraCssText: "border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15);",
       },
       grid: {
-        borderColor: dark ? "#1e293b" : "#f1f5f9",
+        borderColor: dark ? "#262626" : "#e5e5e5",
       },
       categoryAxis: {
-        axisLine: { lineStyle: { color: dark ? "#334155" : "#e2e8f0" } },
-        axisTick: { lineStyle: { color: dark ? "#334155" : "#e2e8f0" } },
-        axisLabel: { color: dark ? "#64748b" : "#94a3b8" },
-        splitLine: { lineStyle: { color: dark ? "#1e293b" : "#f1f5f9" } },
+        axisLine: { lineStyle: { color: dark ? "#404040" : "#d4d4d4" } },
+        axisTick: { lineStyle: { color: dark ? "#404040" : "#d4d4d4" } },
+        axisLabel: { color: dark ? "#737373" : "#a3a3a3" },
+        splitLine: { lineStyle: { color: dark ? "#262626" : "#e5e5e5" } },
       },
       valueAxis: {
         axisLine: { show: false },
         axisTick: { show: false },
-        axisLabel: { color: dark ? "#64748b" : "#94a3b8" },
-        splitLine: { lineStyle: { color: dark ? "#1e293b" : "#f1f5f9" } },
+        axisLabel: { color: dark ? "#737373" : "#a3a3a3" },
+        splitLine: { lineStyle: { color: dark ? "#262626" : "#e5e5e5" } },
       },
     };
   }

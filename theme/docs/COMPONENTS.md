@@ -439,16 +439,16 @@ Card nesting: when `.carousel` is a direct child of `.card`, outer border-radius
 ## Colors
 
 ### Theme Palette
-Nine named colors available as SCSS variables and CSS custom properties:
-- **Primary** `$primary` / `--primary` — #5E6AD2 (slate indigo)
-- **Secondary** `$secondary` / `--secondary` — #64748B
-- **Tertiary** `$tertiary` / `--tertiary` — #8B5CF6
-- **Accent** `$accent` / `--accent` — #0EA5E9
-- **AI** `$ai` / `--ai` — #D946EF (electric orchid)
-- **Success** `$success` / `--success` — #10B981
-- **Danger** `$danger` / `--danger` — #EF4444
-- **Warning** `$warning` / `--warning` — #F59E0B
-- **Info** `$info` / `--info` — #06B6D4
+Nine named colors available as SCSS variables and CSS custom properties, mirroring Purpl's tokens (see `theme/docs/STYLE_GUIDE.md`):
+- **Primary** `$primary` / `--primary` — #CC297A (Purpl magenta)
+- **Secondary** `$secondary` / `--secondary` — #844190 (Purpl purple)
+- **Tertiary** `$tertiary` / `--tertiary` — #AB68BF
+- **Accent** `$accent` / `--accent` — #1D4ED8
+- **AI** `$ai` / `--ai` — #E85EA8 (lighter magenta)
+- **Success** `$success` / `--success` — #15803D
+- **Danger** `$danger` / `--danger` — #DC2626
+- **Warning** `$warning` / `--warning` — #B45309
+- **Info** `$info` / `--info` — #2563EB
 
 ### Surface Colors
 CSS custom properties that auto-switch between light and dark modes:
@@ -469,9 +469,10 @@ CSS custom properties that auto-switch between light and dark modes:
 ## Typography
 
 ### Fonts
-- **Sans-serif:** Inter (variable weight, 100–900) — `$font-family-sans-serif`
+- **Display/headings:** Figtree (variable weight, 400–800) — `$headings-font-family`
+- **Body/sans-serif:** Nunito Sans (variable weight, 400–800) — `$font-family-sans-serif`
 - **Monospace:** JetBrains Mono (400, 500, 700) — `$font-family-monospace`
-- Both locally bundled with `font-display: swap`
+- All locally bundled with `font-display: swap`
 
 ### Size Scale
 - `$font-size-base: 0.9375rem` (15px) — body text

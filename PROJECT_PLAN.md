@@ -1,8 +1,8 @@
-# Bootstrap Theme for Django - Project Plan
+# Purpl Theme for Django - Project Plan
 
 ## Project Overview
 
-A modern, elegant Bootstrap 5 theme for Django with native dark mode, Slack-style chat interface, and rich component library. Designed for data-rich and AI-first applications.
+A modern, elegant Bootstrap 5 theme for Django with native dark mode, Slack-style chat interface, and rich component library. Designed for data-rich and AI-first applications. Palette and typography are repainted with Bayone's Purpl design tokens (`node_modules/@bayone-solutions/purpl`) while keeping Bootstrap for layout/grid/utilities and Synth's own component variety (soft/outline/tertiary/accent buttons, badges, alerts) — see `theme/docs/MIGRATION.md`.
 
 **Package management**: Poetry (Python), npm (SCSS compilation only)
 **Server**: Django dev server on port 8999
@@ -14,12 +14,12 @@ A modern, elegant Bootstrap 5 theme for Django with native dark mode, Slack-styl
 | Decision | Choice | Rationale |
 |----------|--------|-----------|
 | Styling | SCSS (compiled to CSS) | Native Bootstrap 5 customization pipeline |
-| Fonts | Inter + JetBrains Mono (local) | Professional, readable at small sizes |
+| Fonts | Figtree + Nunito Sans + JetBrains Mono (local) | Purpl's font pair for display/body, JetBrains Mono kept for code (Purpl has no mono opinion) |
 | Icons | Lucide + Bootstrap Icons | Wide coverage, both SVG-based, no conflicts |
 | Charts | ECharts | Rich viz for data-dense apps, astrology charts |
 | htmx | Not bundled (CDN) | Project provides it |
 | Dark mode | Bootstrap 5.3 `data-bs-theme` | Native, no flash |
-| CSS framework | Bootstrap 5.3 | Drop-in for existing django-bootstrap projects |
+| CSS framework | Bootstrap 5.3 | Drop-in for existing django-bootstrap projects; Purpl has no grid/utility system of its own |
 | Demo data | Hardcoded context | Portable, AI-readable |
 | Chat style | Full-width, thin-line separated | No bubbles, supports embedded HTML components |
 
@@ -27,29 +27,32 @@ A modern, elegant Bootstrap 5 theme for Django with native dark mode, Slack-styl
 
 ## Color System
 
-```scss
-$primary:    #4F46E5;   // Indigo - professional, modern
-$secondary:  #64748B;   // Slate - neutral companion
-$tertiary:   #8B5CF6;   // Violet - for depth
-$accent:     #0EA5E9;   // Sky blue - alternate primary
-$success:    #10B981;   // Emerald
-$danger:     #EF4444;   // Red
-$warning:    #F59E0B;   // Amber
-$info:       #06B6D4;   // Cyan
-$ai:         #A78BFA;   // Soft violet - AI content marker
+Mirrors Purpl's semantic tokens (`node_modules/@bayone-solutions/purpl/docs/tokens.md`) — see `theme/docs/STYLE_GUIDE.md` for the full table with Purpl token names.
 
-// Surface colors (auto-switch for dark mode)
-$surface-0:  #FFFFFF;   // Page background
-$surface-1:  #F8FAFC;   // Cards, panels
-$surface-2:  #F1F5F9;   // Nested containers
-$surface-3:  #E2E8F0;   // Borders, dividers
+```scss
+$primary:    #CC297A;   // Purpl magenta (--bds-primary-600)
+$secondary:  #844190;   // Purpl purple (--bds-secondary-600)
+$tertiary:   #AB68BF;   // Lighter purple - for depth
+$accent:     #1D4ED8;   // Deeper blue - alternate highlight
+$success:    #15803D;
+$danger:     #DC2626;
+$warning:    #B45309;
+$info:       #2563EB;
+$ai:         #E85EA8;   // Lighter magenta - AI content marker
+
+// Surface colors (auto-switch for dark mode), built from Purpl's neutral scale
+$surface-0:  #F5F5F5;   // Page background
+$surface-1:  #FFFFFF;   // Cards, panels
+$surface-2:  #F5F5F5;   // Nested containers
+$surface-3:  #E5E5E5;   // Borders, dividers
 ```
 
 ## Typography
 
 ```scss
 $font-size-base: 0.9375rem;  // 15px - comfortable for data-dense UIs
-$font-family-base: 'Inter', system-ui, sans-serif;
+$font-family-base: 'Nunito Sans', system-ui, sans-serif;   // Purpl body font
+$headings-font-family: 'Figtree', system-ui, sans-serif;   // Purpl display font
 $font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
 ```
 
@@ -172,7 +175,7 @@ bootstrap_theme_django/
 │   │   ├── scss/                     # Source SCSS
 │   │   ├── css/                      # Compiled CSS
 │   │   ├── js/                       # Minimal JS
-│   │   ├── fonts/                    # Inter, JetBrains Mono
+│   │   ├── fonts/                    # Figtree, Nunito Sans, JetBrains Mono
 │   │   └── img/
 │   ├── templates/theme/
 │   │   ├── base.html

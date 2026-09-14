@@ -1,5 +1,5 @@
 {
-  "name": "bootstrap-theme-django",
+  "name": "purpl-django-theme",
   "private": true,
   "scripts": {
     "scss": "sass --load-path=node_modules theme/static/theme/scss/theme.scss theme/static/theme/css/theme.css",

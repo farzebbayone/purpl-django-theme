@@ -2,35 +2,40 @@
 
 ## Colors
 
-| Name      | Hex       | CSS Variable    | Usage                          |
-|-----------|-----------|-----------------|--------------------------------|
-| Primary   | `#4F46E5` | `--bs-primary`  | CTAs, links, active states     |
-| Secondary | `#64748B` | `--bs-secondary`| Supporting elements, labels    |
-| Tertiary  | `#8B5CF6` | `--tertiary`    | Accents, highlights            |
-| Accent    | `#0EA5E9` | `--accent`      | Info highlights, badges        |
-| AI        | `#A78BFA` | `--ai`          | AI-related features            |
-| Success   | `#10B981` | `--bs-success`  | Positive states, confirmations |
-| Danger    | `#EF4444` | `--bs-danger`   | Errors, destructive actions    |
-| Warning   | `#F59E0B` | `--bs-warning`  | Caution, warnings              |
-| Info      | `#06B6D4` | `--bs-info`     | Informational messages         |
+Mirrors Purpl's semantic tokens (`node_modules/@bayone-solutions/purpl/docs/tokens.md`) so Bootstrap's palette and Purpl's own `.bds-*` components share one source of truth. Sass compiles ahead of time, so `_variables.scss` holds a literal copy of each primitive rather than referencing the `--bds-*` custom property directly — re-sync by hand if Purpl's palette changes.
+
+| Name      | Hex       | CSS Variable    | Purpl token           | Usage                          |
+|-----------|-----------|-----------------|------------------------|---------------------------------|
+| Primary   | `#CC297A` | `--bs-primary`  | `--bds-primary-600`    | CTAs, links, active states     |
+| Secondary | `#844190` | `--bs-secondary`| `--bds-secondary-600`  | Supporting elements, labels    |
+| Tertiary  | `#AB68BF` | `--tertiary`    | `--bds-secondary-400`  | Accents, highlights            |
+| Accent    | `#1D4ED8` | `--accent`      | `--bds-blue-700`       | Info highlights, badges        |
+| AI        | `#E85EA8` | `--ai`          | `--bds-primary-400`    | AI-related features            |
+| Success   | `#15803D` | `--bs-success`  | `--bds-green-700`      | Positive states, confirmations |
+| Danger    | `#DC2626` | `--bs-danger`   | `--bds-red-600`        | Errors, destructive actions    |
+| Warning   | `#B45309` | `--bs-warning`  | `--bds-amber-700`      | Caution, warnings              |
+| Info      | `#2563EB` | `--bs-info`     | `--bds-blue-600`       | Informational messages         |
 
 ### Surface Colors (CSS Custom Properties)
 
+Built from Purpl's neutral primitive scale (`--bds-neutral-0…1000`), not hand-picked slate values, so the theme's surfaces share one palette with the Purpl components layer.
+
 | Variable             | Light       | Dark        | Usage              |
 |----------------------|-------------|-------------|--------------------|
-| `--surface-0`        | `#ffffff`   | `#0f172a`   | Page background    |
-| `--surface-1`        | `#f8fafc`   | `#1e293b`   | Cards, topbar      |
-| `--surface-2`        | `#f1f5f9`   | `#334155`   | Hover states       |
-| `--surface-3`        | `#e2e8f0`   | `#475569`   | Active states      |
-| `--text-primary`     | `#0f172a`   | `#f1f5f9`   | Headings, body     |
-| `--text-secondary`   | `#475569`   | `#94a3b8`   | Labels, captions   |
-| `--text-muted`       | `#94a3b8`   | `#64748b`   | Disabled, hints    |
-| `--border-color`     | `#e2e8f0`   | `#334155`   | Borders            |
+| `--surface-0`        | `#f5f5f5`   | `#171717`   | Page background    |
+| `--surface-1`        | `#ffffff`   | `#262626`   | Cards, topbar      |
+| `--surface-2`        | `#f5f5f5`   | `#404040`   | Hover states       |
+| `--surface-3`        | `#e5e5e5`   | `#525252`   | Active states      |
+| `--text-primary`     | `#171717`   | `#f5f5f5`   | Headings, body     |
+| `--text-secondary`   | `#525252`   | `#a3a3a3`   | Labels, captions   |
+| `--text-muted`       | `#a3a3a3`   | `#737373`   | Disabled, hints    |
+| `--border-color`     | `#d4d4d4`   | `#404040`   | Borders            |
 
 ## Typography
 
-- **Sans-serif**: Inter (variable, 100–900)
-- **Monospace**: JetBrains Mono (400, 500, 700)
+- **Display/headings**: Figtree (variable, 400–800) — Purpl's display font
+- **Body/sans-serif**: Nunito Sans (variable, 400–800) — Purpl's body font
+- **Monospace**: JetBrains Mono (400, 500, 700) — code and data, no Purpl equivalent so this stays a Synth addition
 - **Base size**: 15px (`$font-size-base: 0.9375rem`)
 - **Line height**: 1.6
 - **Heading weight**: 600
@@ -80,23 +85,24 @@ The customization entry point is `_variables.scss`. All theme tokens are defined
 
 ### Colors
 
-| Variable       | Default     | Description                  |
-|----------------|-------------|------------------------------|
-| `$primary`     | `#5E6AD2`   | Slate indigo — CTAs, links   |
-| `$secondary`   | `#64748B`   | Supporting elements, labels  |
-| `$success`     | `#10B981`   | Positive states              |
-| `$danger`      | `#EF4444`   | Errors, destructive actions  |
-| `$warning`     | `#F59E0B`   | Caution states               |
-| `$info`        | `#06B6D4`   | Informational messages       |
-| `$tertiary`    | `#8B5CF6`   | Accents, highlights          |
-| `$accent`      | `#0EA5E9`   | Info highlights, badges      |
-| `$ai`          | `#D946EF`   | Electric orchid — AI features|
+| Variable       | Default     | Description                              |
+|----------------|-------------|-------------------------------------------|
+| `$primary`     | `#CC297A`   | Purpl magenta (`--bds-primary-600`) — CTAs, links |
+| `$secondary`   | `#844190`   | Purpl purple (`--bds-secondary-600`) — supporting elements |
+| `$success`     | `#15803D`   | Positive states                          |
+| `$danger`      | `#DC2626`   | Errors, destructive actions              |
+| `$warning`     | `#B45309`   | Caution states                           |
+| `$info`        | `#2563EB`   | Informational messages                   |
+| `$tertiary`    | `#AB68BF`   | Accents, highlights                      |
+| `$accent`      | `#1D4ED8`   | Info highlights, badges                  |
+| `$ai`          | `#E85EA8`   | Lighter magenta — AI features            |
 
 ### Typography
 
 | Variable                    | Default          | Description              |
 |-----------------------------|------------------|--------------------------|
-| `$font-family-sans-serif`   | Inter            | Primary body font        |
+| `$font-family-sans-serif`   | Nunito Sans      | Primary body font        |
+| `$headings-font-family`     | Figtree          | Headings/display font    |
 | `$font-family-monospace`    | JetBrains Mono   | Code and data font       |
 | `$font-size-base`           | `0.9375rem`      | 15px — data-dense default|
 | `$font-size-sm`             | smaller step     | Labels, captions         |
@@ -123,7 +129,7 @@ The customization entry point is `_variables.scss`. All theme tokens are defined
 ### Layout
 
 | Variable                  | Default    | Description             |
-|---------------------------|------------|-------------------------|
+|---------------------------|------------|--------------------------|
 | `$topbar-height`          | `3.25rem`  | Fixed top bar height    |
 | `$sidebar-width`          | `16rem`    | Expanded sidebar width  |
 | `$sidebar-collapsed-width`| `3.5rem`   | Icon-only sidebar width |

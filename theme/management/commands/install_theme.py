@@ -31,7 +31,7 @@ MARKERS = {
 }
 
 LOCK_FILE = ".theme-lock"
-THEME_VERSION = "1.0.0"
+THEME_VERSION = "2.0.0"
 
 
 def file_hash(path):

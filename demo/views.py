@@ -40,15 +40,15 @@ def components(request):
     context = {
         "stats": STATS,
         "colors": [
-            {"name": "Primary", "var": "primary", "hex": "#5E6AD2"},
-            {"name": "Secondary", "var": "secondary", "hex": "#64748B"},
-            {"name": "Tertiary", "var": "tertiary", "hex": "#8B5CF6"},
-            {"name": "Accent", "var": "accent", "hex": "#0EA5E9"},
-            {"name": "AI", "var": "ai", "hex": "#D946EF"},
-            {"name": "Success", "var": "success", "hex": "#10B981"},
-            {"name": "Danger", "var": "danger", "hex": "#EF4444"},
-            {"name": "Warning", "var": "warning", "hex": "#F59E0B"},
-            {"name": "Info", "var": "info", "hex": "#06B6D4"},
+            {"name": "Primary", "var": "primary", "hex": "#CC297A"},
+            {"name": "Secondary", "var": "secondary", "hex": "#844190"},
+            {"name": "Tertiary", "var": "tertiary", "hex": "#AB68BF"},
+            {"name": "Accent", "var": "accent", "hex": "#1D4ED8"},
+            {"name": "AI", "var": "ai", "hex": "#E85EA8"},
+            {"name": "Success", "var": "success", "hex": "#15803D"},
+            {"name": "Danger", "var": "danger", "hex": "#DC2626"},
+            {"name": "Warning", "var": "warning", "hex": "#B45309"},
+            {"name": "Info", "var": "info", "hex": "#2563EB"},
         ],
     }
     return render(request, "demo/components.html", context)
@@ -202,26 +202,26 @@ def analytics(request):
     activity_data = [1240, 1580, 1420, 1680, 1520, 890, 720]
 
     sources_chart = [
-        {"value": 42, "name": "Direct", "itemStyle": {"color": "#5E6AD2"}},
-        {"value": 28, "name": "Search", "itemStyle": {"color": "#0EA5E9"}},
-        {"value": 18, "name": "Social", "itemStyle": {"color": "#D946EF"}},
-        {"value": 8, "name": "Referral", "itemStyle": {"color": "#10B981"}},
-        {"value": 4, "name": "Email", "itemStyle": {"color": "#F59E0B"}},
+        {"value": 42, "name": "Direct", "itemStyle": {"color": "#CC297A"}},
+        {"value": 28, "name": "Search", "itemStyle": {"color": "#1D4ED8"}},
+        {"value": 18, "name": "Social", "itemStyle": {"color": "#E85EA8"}},
+        {"value": 8, "name": "Referral", "itemStyle": {"color": "#15803D"}},
+        {"value": 4, "name": "Email", "itemStyle": {"color": "#B45309"}},
     ]
 
     traffic_sources = [
-        {"name": "Direct", "pct": 42, "color": "#5E6AD2"},
-        {"name": "Search", "pct": 28, "color": "#0EA5E9"},
-        {"name": "Social", "pct": 18, "color": "#D946EF"},
-        {"name": "Referral", "pct": 8, "color": "#10B981"},
-        {"name": "Email", "pct": 4, "color": "#F59E0B"},
+        {"name": "Direct", "pct": 42, "color": "#CC297A"},
+        {"name": "Search", "pct": 28, "color": "#1D4ED8"},
+        {"name": "Social", "pct": 18, "color": "#E85EA8"},
+        {"name": "Referral", "pct": 8, "color": "#15803D"},
+        {"name": "Email", "pct": 4, "color": "#B45309"},
     ]
 
     sparkline_data = [
-        {"x": months[-7:], "y": [32, 35, 42, 38, 48, 52, 58], "color": "#5E6AD2"},
-        {"x": months[-7:], "y": [8200, 8500, 8900, 9200, 9800, 10400, 12847], "color": "#0EA5E9"},
-        {"x": months[-7:], "y": [92, 94, 91, 95, 93, 96, 94], "color": "#10B981"},
-        {"x": months[-7:], "y": [45000, 52000, 58000, 64000, 72000, 80000, 89241], "color": "#D946EF"},
+        {"x": months[-7:], "y": [32, 35, 42, 38, 48, 52, 58], "color": "#CC297A"},
+        {"x": months[-7:], "y": [8200, 8500, 8900, 9200, 9800, 10400, 12847], "color": "#1D4ED8"},
+        {"x": months[-7:], "y": [92, 94, 91, 95, 93, 96, 94], "color": "#15803D"},
+        {"x": months[-7:], "y": [45000, 52000, 58000, 64000, 72000, 80000, 89241], "color": "#E85EA8"},
     ]
 
     context = {
@@ -285,11 +285,11 @@ def analytics(request):
         "ai_data": json.dumps(ai_data),
         "sparkline_data": json.dumps(sparkline_data),
         "perf_metrics": [
-            {"name": "Avg Response", "value": "142ms", "color": "#5E6AD2"},
-            {"name": "Error Rate", "value": "0.06%", "color": "#10B981"},
-            {"name": "Throughput", "value": "2.4K/s", "color": "#0EA5E9"},
-            {"name": "P99 Latency", "value": "380ms", "color": "#F59E0B"},
-            {"name": "Cache Hit", "value": "96.2%", "color": "#8B5CF6"},
+            {"name": "Avg Response", "value": "142ms", "color": "#CC297A"},
+            {"name": "Error Rate", "value": "0.06%", "color": "#15803D"},
+            {"name": "Throughput", "value": "2.4K/s", "color": "#1D4ED8"},
+            {"name": "P99 Latency", "value": "380ms", "color": "#B45309"},
+            {"name": "Cache Hit", "value": "96.2%", "color": "#AB68BF"},
         ],
         "top_pages": [
             {"path": "/dashboard", "visitors": "4,281", "bounce": 32, "avg_time": "3m 42s", "trend": "up", "change": "+12%"},
@@ -578,12 +578,12 @@ def settings_page(request):
             {"value": "system", "label": "System", "icon": "monitor", "selected": False},
         ],
         "accent_colors": [
-            {"name": "Indigo", "value": "primary", "hex": "#5E6AD2", "selected": True},
-            {"name": "Sky", "value": "accent", "hex": "#0EA5E9", "selected": False},
-            {"name": "Violet", "value": "tertiary", "hex": "#8B5CF6", "selected": False},
-            {"name": "Orchid", "value": "ai", "hex": "#D946EF", "selected": False},
-            {"name": "Emerald", "value": "success", "hex": "#10B981", "selected": False},
-            {"name": "Amber", "value": "warning", "hex": "#F59E0B", "selected": False},
+            {"name": "Magenta", "value": "primary", "hex": "#CC297A", "selected": True},
+            {"name": "Blue", "value": "accent", "hex": "#1D4ED8", "selected": False},
+            {"name": "Orchid", "value": "tertiary", "hex": "#AB68BF", "selected": False},
+            {"name": "Pink", "value": "ai", "hex": "#E85EA8", "selected": False},
+            {"name": "Emerald", "value": "success", "hex": "#15803D", "selected": False},
+            {"name": "Amber", "value": "warning", "hex": "#B45309", "selected": False},
         ],
         "font_sizes": [
             {"value": "compact", "label": "Compact", "description": "13px base — fits more content on screen.", "selected": False},

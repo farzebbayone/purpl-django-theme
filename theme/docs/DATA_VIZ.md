@@ -34,15 +34,15 @@ var chart = ThemeCharts.create(document.getElementById("my-chart"), {
 Named color object matching the theme palette:
 
 ```js
-ThemeCharts.colors.primary   // "#5E6AD2"
-ThemeCharts.colors.accent    // "#0EA5E9"
-ThemeCharts.colors.success   // "#10B981"
-ThemeCharts.colors.ai        // "#D946EF"
-ThemeCharts.colors.danger    // "#EF4444"
-ThemeCharts.colors.warning   // "#F59E0B"
-ThemeCharts.colors.info      // "#06B6D4"
-ThemeCharts.colors.tertiary  // "#8B5CF6"
-ThemeCharts.colors.secondary // "#64748B"
+ThemeCharts.colors.primary   // "#CC297A"
+ThemeCharts.colors.accent    // "#1D4ED8"
+ThemeCharts.colors.success   // "#15803D"
+ThemeCharts.colors.ai        // "#E85EA8"
+ThemeCharts.colors.danger    // "#DC2626"
+ThemeCharts.colors.warning   // "#B45309"
+ThemeCharts.colors.info      // "#2563EB"
+ThemeCharts.colors.tertiary  // "#AB68BF"
+ThemeCharts.colors.secondary // "#844190"
 ```
 
 ### `ThemeCharts.palette`
@@ -51,7 +51,7 @@ Array of colors in recommended order for multi-series charts:
 
 ```js
 ThemeCharts.palette
-// ["#5E6AD2", "#0EA5E9", "#10B981", "#D946EF", "#F59E0B", "#8B5CF6", "#EF4444", "#06B6D4"]
+// ["#CC297A", "#1D4ED8", "#15803D", "#E85EA8", "#B45309", "#AB68BF", "#DC2626", "#2563EB"]
 ```
 
 ### `ThemeCharts.isDark()`
@@ -92,7 +92,7 @@ Full card with header, chart body, and optional footer:
   <div class="chart-card__footer">
     <ul class="chart-legend">
       <li class="chart-legend__item">
-        <span class="chart-legend__dot" style="background:#5E6AD2"></span>
+        <span class="chart-legend__dot" style="background:#CC297A"></span>
         Series A
         <span class="chart-legend__value">$584K</span>
       </li>
@@ -191,11 +191,11 @@ Compact horizontal metrics for sidebar panels or card bodies:
 ```html
 <div class="metric-row">
   <div class="metric-row__label">
-    <span class="metric-row__dot" style="background:#5E6AD2"></span>
+    <span class="metric-row__dot" style="background:#CC297A"></span>
     Direct
   </div>
   <div class="metric-row__bar">
-    <div class="metric-row__bar-fill" style="width:42%;background:#5E6AD2"></div>
+    <div class="metric-row__bar-fill" style="width:42%;background:#CC297A"></div>
   </div>
   <span class="metric-row__value">42%</span>
 </div>
@@ -208,12 +208,12 @@ Custom inline legend (alternative to ECharts built-in):
 ```html
 <ul class="chart-legend">
   <li class="chart-legend__item">
-    <span class="chart-legend__dot" style="background:#5E6AD2"></span>
+    <span class="chart-legend__dot" style="background:#CC297A"></span>
     Revenue
     <span class="chart-legend__value">$584K</span>
   </li>
   <li class="chart-legend__item">
-    <span class="chart-legend__dot" style="background:#0EA5E9"></span>
+    <span class="chart-legend__dot" style="background:#1D4ED8"></span>
     Expenses
     <span class="chart-legend__value">$312K</span>
   </li>

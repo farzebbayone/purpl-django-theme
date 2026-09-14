@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "bootstrap-theme-django"
+name = "purpl-django-theme"
 version = "0.1.0"
-description = "Modern Bootstrap 5 theme for Django"
+description = "Bootstrap 5 Django theme repainted with Bayone's Purpl design tokens"
 authors = []
 package-mode = false
 
