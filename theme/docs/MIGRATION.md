@@ -201,6 +201,8 @@ All standard Bootstrap 5.3 classes work unchanged: `row`, `col-*`, `btn`, `card`
 | toast markup / `.theme-toast` | `ThemeToast` JS API, renders `.bds-toast` (see UI_COMPONENTS.md) |
 | `.nav-tabs-minimal` + `data-bs-toggle="tab"` | `.bds-tabs` + `data-bds-tab-target` (see COMPONENTS.md) |
 | `.nav-pills-soft` | `.bds-tabs .bds-tabs--contained` |
+| `.avatar` / `.avatar--{size}` | `.bds-avatar` + explicit shape and size (see UI_COMPONENTS.md) |
+| `.avatar__status--busy` | kept as a Synth addition; Purpl has online/away/offline only |
 
 Bootstrap's JS bundle is still required — collapse, dropdown, tooltip, popover,
 offcanvas and carousel all continue to use it.

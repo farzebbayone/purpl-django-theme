@@ -87,10 +87,10 @@
       {% for thread in inbox %}
       <a href="#" class="inbox-item{% if thread.active %} inbox-item--active{% endif %}" onclick="return false;">
         <div class="d-flex align-items-start gap-2">
-          <div class="avatar-wrapper flex-shrink-0">
-            <div class="avatar avatar--sm avatar--{{ thread.color }}">{{ thread.initials }}</div>
+          <div class="avatar-wrapper flex-shrink-0 bds-avatar--sm">
+            <div class="bds-avatar bds-avatar--square bds-avatar--sm bds-avatar--{{ thread.color }} avatar--{{ thread.color }}">{{ thread.initials }}</div>
             {% if thread.status %}
-            <span class="avatar__status avatar__status--{{ thread.status }}"></span>
+            <span class="bds-avatar__status bds-avatar__status--{{ thread.status }} avatar__status--{{ thread.status }}"></span>
             {% endif %}
           </div>
           <div class="flex-grow-1 min-width-0" style="min-width: 0;">
@@ -116,9 +116,9 @@
     <!-- Header -->
     <div class="d-flex align-items-center justify-content-between p-3 border-bottom" style="background: var(--surface-1);">
       <div class="d-flex align-items-center gap-2">
-        <div class="avatar-wrapper">
-          <div class="avatar avatar--sm avatar--{{ active_thread.color }}">{{ active_thread.initials }}</div>
-          <span class="avatar__status avatar__status--{{ active_thread.status }}"></span>
+        <div class="avatar-wrapper bds-avatar--sm">
+          <div class="bds-avatar bds-avatar--square bds-avatar--sm bds-avatar--{{ active_thread.color }} avatar--{{ active_thread.color }}">{{ active_thread.initials }}</div>
+          <span class="bds-avatar__status bds-avatar__status--{{ active_thread.status }} avatar__status--{{ active_thread.status }}"></span>
         </div>
         <div>
           <div class="fw-semibold" style="font-size: 0.9rem;">{{ active_thread.name }}</div>
@@ -146,7 +146,7 @@
       {% for msg in conversation %}
       <div class="message-bubble{% if msg.is_self %} message-bubble--self{% endif %}">
         <div class="d-flex align-items-start gap-2">
-          <div class="avatar avatar--xs avatar--{{ msg.color }} flex-shrink-0 mt-1">{{ msg.initials }}</div>
+          <div class="bds-avatar bds-avatar--square bds-avatar--xs bds-avatar--{{ msg.color }} avatar--{{ msg.color }} flex-shrink-0 mt-1">{{ msg.initials }}</div>
           <div class="flex-grow-1">
             <div class="d-flex align-items-center gap-2 mb-1">
               <span class="fw-semibold" style="font-size: 0.875rem;">{% if msg.is_self %}You{% else %}{{ msg.author }}{% endif %}</span>

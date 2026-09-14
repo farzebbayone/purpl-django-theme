@@ -104,39 +104,72 @@ Respects `prefers-reduced-motion` — animation disabled when user prefers reduc
 
 ## Avatars
 
+Purpl's `.bds-avatar` supplies the base, sizes, shapes and six colours. Both a
+size and a shape class are required — neither has a default.
+
+```html
+<span class="bds-avatar bds-avatar--square bds-avatar--md bds-avatar--primary">AC</span>
+```
+
 ### Sizes
 
 | Class | Size |
 |-------|------|
-| `.avatar--xs` | 1.5rem |
-| `.avatar--sm` | 2rem |
-| (default) | 2.5rem |
-| `.avatar--lg` | 3rem |
-| `.avatar--xl` | 3.5rem |
+| `.bds-avatar--xs` | 20px |
+| `.bds-avatar--sm` | 28px |
+| `.bds-avatar--md` | 36px |
+| `.bds-avatar--lg` | 48px |
+| `.bds-avatar--xl` | 64px |
 
-### Colors
-`.avatar--{color}` — primary, success, danger, warning, info, ai, accent, tertiary, secondary.
+### Shape
+`.bds-avatar--square` (rounded square) or `.bds-avatar--circle`.
 
-### Round
-`.avatar--round` — Fully circular (default is slightly rounded square).
+### Colours
 
-### Status Indicators
-Wrap avatar in `.avatar-wrapper`, add a status dot:
+Purpl owns six; Synth adds the rest as `.avatar--{colour}`, the same way
+`.btn-ai` extends Purpl's Button. They set Purpl's own custom properties, so
+every other avatar rule still applies.
+
+| Colour | Class |
+|--------|-------|
+| primary, secondary, success, warning, neutral | `.bds-avatar--{colour}` |
+| error | `.bds-avatar--error` |
+| ai, accent, tertiary, info | `.avatar--{colour}` (Synth) |
+| danger | `.avatar--danger` (Synth; aliases Purpl's error tokens) |
+
+**For a colour coming from view data, emit both shapes:**
 
 ```html
-<div class="avatar-wrapper">
-  <span class="avatar avatar--primary">AC</span>
-  <span class="avatar__status avatar__status--online"></span>
+<span class="bds-avatar bds-avatar--square bds-avatar--sm
+             bds-avatar--{{ user.colour }} avatar--{{ user.colour }}">AC</span>
+```
+
+Exactly one of the two is ever defined for a given value, so the other is a
+no-op. This keeps dynamic values working without rewriting them in the view.
+
+### Status Indicators
+
+The dot lives *outside* `.bds-avatar` — the avatar sets `overflow:hidden` to
+clip images to its shape, which would swallow a dot positioned at its edge.
+Purpl sizes the dot with a descendant selector, so the wrapper repeats the
+avatar's size class to keep it in scope:
+
+```html
+<div class="avatar-wrapper bds-avatar--md">
+  <span class="bds-avatar bds-avatar--circle bds-avatar--md bds-avatar--primary">AC</span>
+  <span class="bds-avatar__status bds-avatar__status--online"></span>
 </div>
 ```
 
-Status values: `--online` (green), `--away` (yellow), `--busy` (red), `--offline` (gray).
+Status values: `bds-avatar__status--online` (green), `--away` (amber),
+`--offline` (grey), and Synth's `avatar__status--busy` (red), which Purpl has
+no equivalent for.
 
 ### Avatar Groups
 ```html
 <div class="avatar-group">
-  <span class="avatar avatar--primary">AC</span>
-  <span class="avatar avatar--success">BM</span>
+  <span class="bds-avatar bds-avatar--square bds-avatar--md bds-avatar--primary">AC</span>
+  <span class="bds-avatar bds-avatar--square bds-avatar--md bds-avatar--success">BM</span>
   <span class="avatar-group__more">+5</span>
 </div>
 ```

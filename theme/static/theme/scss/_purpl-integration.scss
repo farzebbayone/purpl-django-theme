@@ -11,3 +11,11 @@
 .bds-toast-viewport {
   z-index: $zindex-toast;
 }
+
+// The avatar status dot is ringed in `--bds-color-bg-default` to separate it
+// from the surface behind. Purpl ships no dark-mode tokens, so that stays
+// white and leaves a halo on dark surfaces. Ring it in this theme's own
+// surface colour, which does follow the mode.
+.bds-avatar__status {
+  box-shadow: 0 0 0 2px var(--surface-1);
+}

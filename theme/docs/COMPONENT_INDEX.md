@@ -207,7 +207,7 @@
 | `.spinner-xs` | Extra-small loading spinner | UI_COMPONENTS.md |
 | `.spinner-lg` | Large loading spinner | UI_COMPONENTS.md |
 | `.skeleton` | Placeholder skeleton loading shape | UI_COMPONENTS.md |
-| `.avatar` | Circular user avatar image | UI_COMPONENTS.md |
+| `.bds-avatar` | Circular user avatar image | UI_COMPONENTS.md |
 | `.avatar-group` | Overlapping stack of avatars | UI_COMPONENTS.md |
 | `.steps` | Multi-step progress/wizard container | UI_COMPONENTS.md |
 | `.step` | Individual step within steps component | UI_COMPONENTS.md |
