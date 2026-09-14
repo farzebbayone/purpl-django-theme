@@ -199,9 +199,11 @@ All standard Bootstrap 5.3 classes work unchanged: `row`, `col-*`, `btn`, `card`
 | `shown.bs.modal` event | `bds:modal:open` event |
 | `new bootstrap.Modal(el).show()` | `ThemeModal.open("#id")` |
 | toast markup / `.theme-toast` | `ThemeToast` JS API, renders `.bds-toast` (see UI_COMPONENTS.md) |
+| `.nav-tabs-minimal` + `data-bs-toggle="tab"` | `.bds-tabs` + `data-bds-tab-target` (see COMPONENTS.md) |
+| `.nav-pills-soft` | `.bds-tabs .bds-tabs--contained` |
 
 Bootstrap's JS bundle is still required — collapse, dropdown, tooltip, popover,
-offcanvas and tabs all continue to use it.
+offcanvas and carousel all continue to use it.
 
 ### New utility classes
 

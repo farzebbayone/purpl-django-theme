@@ -10,20 +10,20 @@
 </div>
 
 <!-- Navigation tabs for sections -->
-<nav class="nav nav-tabs-minimal mb-4">
-  <a class="nav-link active" href="#buttons" data-bs-toggle="tab" data-bs-target="#sec-buttons">Buttons</a>
-  <a class="nav-link" href="#cards" data-bs-toggle="tab" data-bs-target="#sec-cards">Cards</a>
-  <a class="nav-link" href="#alerts" data-bs-toggle="tab" data-bs-target="#sec-alerts">Alerts</a>
-  <a class="nav-link" href="#badges" data-bs-toggle="tab" data-bs-target="#sec-badges">Badges</a>
-  <a class="nav-link" href="#nav" data-bs-toggle="tab" data-bs-target="#sec-nav">Navigation</a>
-  <a class="nav-link" href="#modals" data-bs-toggle="tab" data-bs-target="#sec-modals">Modals & Panels</a>
-  <a class="nav-link" href="#empty" data-bs-toggle="tab" data-bs-target="#sec-empty">Empty States</a>
-  <a class="nav-link" href="#accordion" data-bs-toggle="tab" data-bs-target="#sec-accordion">Accordion</a>
-  <a class="nav-link" href="#list-group" data-bs-toggle="tab" data-bs-target="#sec-list-group">List Group</a>
-  <a class="nav-link" href="#dropdown" data-bs-toggle="tab" data-bs-target="#sec-dropdown">Dropdowns</a>
-  <a class="nav-link" href="#carousel" data-bs-toggle="tab" data-bs-target="#sec-carousel">Carousel</a>
-  <a class="nav-link" href="#colors" data-bs-toggle="tab" data-bs-target="#sec-colors">Colors</a>
-  <a class="nav-link" href="#typography" data-bs-toggle="tab" data-bs-target="#sec-typography">Typography</a>
+<nav class="bds-tabs bds-tabs--underline mb-4" data-bds-tabs>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-buttons" aria-selected="true">Buttons</button>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-cards" aria-selected="false">Cards</button>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-alerts" aria-selected="false">Alerts</button>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-badges" aria-selected="false">Badges</button>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-nav" aria-selected="false">Navigation</button>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-modals" aria-selected="false">Modals & Panels</button>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-empty" aria-selected="false">Empty States</button>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-accordion" aria-selected="false">Accordion</button>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-list-group" aria-selected="false">List Group</button>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-dropdown" aria-selected="false">Dropdowns</button>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-carousel" aria-selected="false">Carousel</button>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-colors" aria-selected="false">Colors</button>
+  <button type="button" class="bds-tab bds-tab--md" data-bds-tab-target="#sec-typography" aria-selected="false">Typography</button>
 </nav>
 
 <div class="tab-content">
@@ -285,10 +285,10 @@
       <div class="card-body">
         <div class="card-chart__header">
           <h6 class="card-chart__title">Chart Container</h6>
-          <div class="nav nav-pills-soft">
-            <a class="nav-link active" href="#">7D</a>
-            <a class="nav-link" href="#">30D</a>
-            <a class="nav-link" href="#">90D</a>
+          <div class="bds-tabs bds-tabs--contained" data-bds-tabs>
+            <button type="button" class="bds-tab bds-tab--md" aria-selected="true">7D</button>
+            <button type="button" class="bds-tab bds-tab--md" aria-selected="false">30D</button>
+            <button type="button" class="bds-tab bds-tab--md" aria-selected="false">90D</button>
           </div>
         </div>
         <div id="card-demo-chart" class="chart-container" style="height:250px;"></div>
@@ -854,19 +854,19 @@
         </nav>
 
         <h5 class="card-title mb-3">Minimal Tabs</h5>
-        <nav class="nav nav-tabs-minimal mb-4">
-          <a class="nav-link active" href="#">Overview</a>
-          <a class="nav-link" href="#">Activity</a>
-          <a class="nav-link" href="#">Settings</a>
-          <a class="nav-link" href="#">Members</a>
+        <nav class="bds-tabs bds-tabs--underline mb-4" data-bds-tabs>
+          <button type="button" class="bds-tab bds-tab--md" aria-selected="true">Overview</button>
+          <button type="button" class="bds-tab bds-tab--md" aria-selected="false">Activity</button>
+          <button type="button" class="bds-tab bds-tab--md" aria-selected="false">Settings</button>
+          <button type="button" class="bds-tab bds-tab--md" aria-selected="false">Members</button>
         </nav>
 
         <h5 class="card-title mb-3">Soft Pills</h5>
-        <nav class="nav nav-pills-soft">
-          <a class="nav-link active" href="#">All</a>
-          <a class="nav-link" href="#">Active</a>
-          <a class="nav-link" href="#">Archived</a>
-          <a class="nav-link" href="#">Draft</a>
+        <nav class="bds-tabs bds-tabs--contained" data-bds-tabs>
+          <button type="button" class="bds-tab bds-tab--md" aria-selected="true">All</button>
+          <button type="button" class="bds-tab bds-tab--md" aria-selected="false">Active</button>
+          <button type="button" class="bds-tab bds-tab--md" aria-selected="false">Archived</button>
+          <button type="button" class="bds-tab bds-tab--md" aria-selected="false">Draft</button>
         </nav>
       </div>
     </div>
@@ -1450,10 +1450,10 @@
   <div class="offcanvas-body">
     <p class="text-secondary fs-7">Left offcanvas — ideal for mobile navigation menus.</p>
     <nav class="nav flex-column gap-1">
-      <a class="nav-link px-2 py-1 rounded active" href="#">Dashboard</a>
-      <a class="nav-link px-2 py-1 rounded" href="#">Analytics</a>
-      <a class="nav-link px-2 py-1 rounded" href="#">Users</a>
-      <a class="nav-link px-2 py-1 rounded" href="#">Settings</a>
+      <button type="button" class="bds-tab bds-tab--md" aria-selected="true">Dashboard</button>
+      <button type="button" class="bds-tab bds-tab--md" aria-selected="false">Analytics</button>
+      <button type="button" class="bds-tab bds-tab--md" aria-selected="false">Users</button>
+      <button type="button" class="bds-tab bds-tab--md" aria-selected="false">Settings</button>
     </nav>
   </div>
 </div>

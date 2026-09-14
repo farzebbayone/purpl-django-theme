@@ -393,6 +393,79 @@
     });
   }
 
+  // --- Tabs (Purpl .bds-tabs) ---
+  //
+  // Purpl's CSS keys the selected tab off `aria-selected="true"`, not a class,
+  // so the attribute must be maintained or nothing highlights. This also adds
+  // the WAI-ARIA roving tabindex (arrow keys / Home / End) that Purpl's React
+  // Tabs implements and Bootstrap's tab plugin does not.
+  //
+  //   <nav class="bds-tabs bds-tabs--underline" data-bds-tabs>
+  //     <button class="bds-tab bds-tab--md" data-bds-tab-target="#pane-a">A</button>
+  //   </nav>
+  //   <div class="tab-content"><div class="tab-pane" id="pane-a">…</div></div>
+
+  function selectTab(tab, tabs, opts) {
+    opts = opts || {};
+    tabs.forEach(function (t) {
+      var selected = t === tab;
+      t.setAttribute("aria-selected", selected ? "true" : "false");
+      t.tabIndex = selected ? 0 : -1;
+
+      // Display-only tab groups (showcase navs) carry no target and just
+      // move the selected state.
+      var target = t.getAttribute("data-bds-tab-target");
+      var pane = target && document.querySelector(target);
+      if (!pane) return;
+      // Reuses Bootstrap's .tab-pane CSS for show/hide and the fade transition.
+      pane.classList.toggle("active", selected);
+      pane.classList.toggle("show", selected);
+    });
+    if (opts.focus) tab.focus();
+  }
+
+  function initTabs() {
+    document.querySelectorAll("[data-bds-tabs]").forEach(function (list) {
+      var tabs = Array.prototype.slice.call(list.querySelectorAll(".bds-tab"));
+      if (!tabs.length) return;
+
+      list.setAttribute("role", "tablist");
+      tabs.forEach(function (tab) {
+        tab.setAttribute("role", "tab");
+        var target = tab.getAttribute("data-bds-tab-target");
+        var pane = target && document.querySelector(target);
+        if (pane) {
+          pane.setAttribute("role", "tabpanel");
+          if (!tab.id) tab.id = pane.id + "-tab";
+          pane.setAttribute("aria-labelledby", tab.id);
+        }
+        tab.addEventListener("click", function (e) {
+          e.preventDefault();
+          selectTab(tab, tabs);
+        });
+      });
+
+      list.addEventListener("keydown", function (e) {
+        var i = tabs.indexOf(document.activeElement);
+        if (i === -1) return;
+        var next = null;
+        if (e.key === "ArrowRight") next = tabs[(i + 1) % tabs.length];
+        else if (e.key === "ArrowLeft") next = tabs[(i - 1 + tabs.length) % tabs.length];
+        else if (e.key === "Home") next = tabs[0];
+        else if (e.key === "End") next = tabs[tabs.length - 1];
+        if (!next) return;
+        e.preventDefault();
+        selectTab(next, tabs, { focus: true });
+      });
+
+      // Honour whichever tab the markup marked selected; default to the first.
+      var initial = tabs.filter(function (t) {
+        return t.getAttribute("aria-selected") === "true";
+      })[0] || tabs[0];
+      selectTab(initial, tabs);
+    });
+  }
+
   // --- Command Palette ---
   var _cmdPalette = null;
   var _cmdItems = [];
@@ -1483,6 +1556,7 @@
     initComposer();
     initCommandPalette();
     initModals();
+    initTabs();
     initTopbarDropdowns();
     initDatepickers();
     initTypeablePickers();

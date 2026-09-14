@@ -74,8 +74,8 @@
 | Class | Description | Docs |
 |---|---|---|
 | `.breadcrumb` | Breadcrumb navigation trail | COMPONENTS.md |
-| `.nav-tabs-minimal` | Tabs with minimal underline-only styling | COMPONENTS.md |
-| `.nav-pills-soft` | Pill navigation with soft tinted backgrounds | COMPONENTS.md |
+| `.bds-tabs--underline` | Underline tab bar (Purpl) | COMPONENTS.md |
+| `.bds-tabs--contained` | Pill/contained tab bar (Purpl) | COMPONENTS.md |
 
 ## 6. Modals & Drawers
 

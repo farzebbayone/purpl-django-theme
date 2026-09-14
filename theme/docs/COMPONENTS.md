@@ -279,11 +279,39 @@ Requires a browser with `<dialog>` support (Safari 15.4+, March 2022).
 ### Breadcrumbs
 Standard Bootstrap `.breadcrumb` with theme styling.
 
-### Minimal Tabs
-`.nav .nav-tabs-minimal` — Underline-style tabs, no box borders.
+### Tabs
+Purpl's `.bds-tabs`, driven by the theme's own controller — Bootstrap's tab
+plugin is no longer used here. Two variants: `.bds-tabs--underline` (was
+`.nav-tabs-minimal`) and `.bds-tabs--contained` (pills, was `.nav-pills-soft`).
 
-### Soft Pills
-`.nav .nav-pills-soft` — Subtle pill navigation.
+```html
+<nav class="bds-tabs bds-tabs--underline mb-4" data-bds-tabs>
+  <button type="button" class="bds-tab bds-tab--md"
+          data-bds-tab-target="#pane-a" aria-selected="true">Overview</button>
+  <button type="button" class="bds-tab bds-tab--md"
+          data-bds-tab-target="#pane-b" aria-selected="false">Activity</button>
+</nav>
+
+<div class="tab-content">
+  <div class="tab-pane fade" id="pane-a">…</div>
+  <div class="tab-pane fade" id="pane-b">…</div>
+</div>
+```
+
+**`aria-selected` is load-bearing, not decorative** — Purpl styles the active
+tab with `.bds-tab[aria-selected="true"]`, so a tab list that only toggles an
+`.active` class will render with nothing highlighted. The controller maintains
+it for you; just set it correctly in the initial markup.
+
+Keyboard: ← / → move between tabs (wrapping), Home / End jump to first / last,
+and roving `tabindex` means the group is a single tab stop. The controller sets
+`role="tablist"` / `"tab"` / `"tabpanel"` and wires `aria-labelledby` itself.
+
+Sizes: `.bds-tab--sm`, `--md`, `--lg`. Panes reuse Bootstrap's `.tab-pane`
+classes for show/hide and the fade transition.
+
+Omit `data-bds-tab-target` for a display-only tab group — selection still
+moves on click, but no panes are switched.
 
 ## Accordion
 
