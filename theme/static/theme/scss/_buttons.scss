@@ -48,22 +48,6 @@
     }
   }
 
-  .btn-outline-#{$name} {
-    color: $value;
-    border-color: $value;
-    background-color: transparent;
-
-    &:hover {
-      color: #fff;
-      background-color: $value;
-      border-color: $value;
-    }
-
-    &:focus-visible {
-      box-shadow: 0 0 0 0.25rem rgba($value, 0.25);
-    }
-  }
-
   .btn-soft-#{$name} {
     color: $value;
     background-color: rgba($value, 0.1);
@@ -77,6 +61,71 @@
     &:focus-visible {
       box-shadow: 0 0 0 0.25rem rgba($value, 0.25);
     }
+  }
+}
+
+// ── Outlined buttons ──────────────────────────────────────
+// Purpl draws a low-emphasis button as a lighter ring with a darker label
+// (`--bds-color-border-*` vs `--bds-color-text-*`) rather than one colour for
+// both — its own `.bds-btn--ghost` is ring primary-600 + label primary-700.
+// Mirroring that split keeps Synth's nine colours while making them read as
+// Purpl-native. Ring/label pairs below come straight from Purpl's tokens
+// where it defines them.
+//
+// Dark mode is Synth's own call: Purpl ships no dark tokens, and the
+// light-mode label is unreadable on a dark surface — measured as low as
+// 2.26:1 before this — so ring and label both lift to one lightened tone.
+// 20% is the smallest step that clears 4.5:1 for every variant.
+//
+// `solid` is the fill on hover/active, kept equal to the matching solid
+// button so `.btn-outline-x:hover` and `.btn-x` agree.
+
+$btn-outline-variants: (
+  //             ring (600)  label (700/800)  solid fill
+  "primary":   ($primary,    #A01E61,         $primary),   // primary-600 / primary-700
+  "secondary": ($secondary,  $secondary,      $secondary), // text-brand-secondary is 600; no border token
+  "success":   (#16A34A,     $success,        $success),   // green-600 / green-700
+  "danger":    ($danger,     #B82626,         $danger),    // red-600 / red-700
+  "warning":   (#D97706,     #92400E,         $warning),   // amber-600 / amber-800
+  "info":      ($info,       #1D4ED8,         $info),      // blue-600 / blue-700
+  "tertiary":  ($tertiary,   $secondary,      $tertiary),  // Synth: ring kept, label darkened to pass AA
+  "accent":    ($accent,     $accent,         $accent),    // Synth: already passes
+  "ai":        ($ai,         $primary,        $ai),        // Synth: ring kept, label darkened to pass AA
+);
+
+@each $name, $parts in $btn-outline-variants {
+  $ring:  nth($parts, 1);
+  $label: nth($parts, 2);
+  $solid: nth($parts, 3);
+
+  .btn-outline-#{$name} {
+    --bs-btn-color: #{$label};
+    --bs-btn-border-color: #{$ring};
+    --bs-btn-bg: transparent;
+    --bs-btn-hover-color: #{color-contrast($solid)};
+    --bs-btn-hover-bg: #{$solid};
+    --bs-btn-hover-border-color: #{$solid};
+    --bs-btn-active-color: #{color-contrast($solid)};
+    --bs-btn-active-bg: #{$solid};
+    --bs-btn-active-border-color: #{$solid};
+    --bs-btn-disabled-color: #{$label};
+    --bs-btn-disabled-border-color: #{$ring};
+    --bs-btn-focus-shadow-rgb: #{to-rgb($ring)};
+  }
+
+  [data-bs-theme="dark"] .btn-outline-#{$name} {
+    $lift: lighten($ring, 20%);
+    --bs-btn-color: #{$lift};
+    --bs-btn-border-color: #{$lift};
+    --bs-btn-hover-color: #{color-contrast($lift)};
+    --bs-btn-hover-bg: #{$lift};
+    --bs-btn-hover-border-color: #{$lift};
+    --bs-btn-active-color: #{color-contrast($lift)};
+    --bs-btn-active-bg: #{$lift};
+    --bs-btn-active-border-color: #{$lift};
+    --bs-btn-disabled-color: #{$lift};
+    --bs-btn-disabled-border-color: #{$lift};
+    --bs-btn-focus-shadow-rgb: #{to-rgb($lift)};
   }
 }
 
